@@ -57,7 +57,7 @@
 <script src="//cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 
 <!--icons-->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/c8cf4d3921.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
