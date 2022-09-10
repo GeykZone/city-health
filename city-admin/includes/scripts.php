@@ -1,0 +1,36 @@
+</div>
+    
+    <!-- CoreUI and necessary plugins-->
+    <script src="../resourcess/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+    <script src="../resourcess/vendors/simplebar/js/simplebar.min.js"></script>
+    <!-- Plugins and scripts required by this view-->
+    <script src="../resourcess/vendors/chart.js/js/chart.min.js"></script>
+    <script src="../resourcess/vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
+    <script src="../resourcess/vendors/@coreui/utils/js/coreui-utils.js"></script>
+    <script src="../resourcess/js/main.js"></script>
+   
+    <script>
+      if ( window.history.replaceState ){window.history.replaceState( null, null, window.location.href );} // stop resubmission
+
+      //changing the page tittle
+      $(window).on('load', function() {
+
+        //remove passed cookies
+        Cookies.remove('var');
+      });       
+      //changing the page tittle end
+
+      //remove invalid class
+      $('div').bind('focus blur', function() {
+        $("select").removeClass("is-invalid");
+        $("input").removeClass("is-invalid");
+      });
+      $('input').bind('focus blur', function() {
+        $("input").removeClass("is-invalid");
+      });
+       //remove invalid class
+      </script>
+
+
+  </body>
+</html>
