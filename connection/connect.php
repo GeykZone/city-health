@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$hostname = "127.0.0.1";
+$hostname = "localhost";
 $database = "hpcs_data";
 $username = "root";
 $password = "";
