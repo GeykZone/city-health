@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$database = "hpcs_data";
-$hostname = "localhost";
-$username = "root";
-$password = "";
+$hostname = "sql6.freesqldatabase.com";
+$database = "sql6518544";
+$username = "sql6518544";
+$password = "YlWC7MT72R";
 
 
 $conn = new mysqli($hostname, $username, $password, $database);
