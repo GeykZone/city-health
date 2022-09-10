@@ -7,6 +7,11 @@
  * --------------------------------------------------------------------------
  */
 // Disable the on-canvas tooltip
+
+$(window).on("load", function (e) {
+  $('.material-icons').css('opacity','1');
+});
+
 Chart.defaults.pointHitDetectionRadius = 1;
 Chart.defaults.plugins.tooltip.enabled = false;
 Chart.defaults.plugins.tooltip.mode = 'index';

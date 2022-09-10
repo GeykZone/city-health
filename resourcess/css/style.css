@@ -8,6 +8,8 @@
  * Copyright (c) 2022 creativeLabs Łukasz Holeczek
  * License MIT  (https://coreui.io/license/)
  */
+
+
 :root {
   --cui-blue: #0d6efd;
   --cui-indigo: #6610f2;
@@ -76,6 +78,10 @@
   --cui-link-hover-color: #2819af;
   --cui-code-color: #d63384;
   --cui-highlight-bg: #fff3cd;
+}
+
+.material-icons{
+  opacity:0;
 }
 
 .selectize-input.focus {

@@ -1,4 +1,4 @@
-var admin_id = ""; 
+var admin_id = "";
 
 $(document).ready(function () {
   
@@ -10,6 +10,7 @@ $(document).ready(function () {
 
   loading_table();     
 });
+
 
 //set do some stuff when confiramtion variable is changed
 var confirmation = {
