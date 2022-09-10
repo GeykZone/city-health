@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
           }
           else
           {
-            ?><i class="edit_barangay_value btn_icon fas fa-lock" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button"></i><?php
+            ?><i class="edit_barangay_value btn_icon fas fa-lock" href="#deactivate_barangay_admin" data-coreui-toggle="modal" id="deactivate_barangay_value" role="button"></i><?php
           }
           ?>
           <i class="admin_table_is_loading spinner-border spinner-border-sm mt-2 d-none" style="color:#3b7ddd;"  id="admin_table_is_loading" role="button" disable></i>

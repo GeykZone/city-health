@@ -37,8 +37,12 @@ include('includes/sidebar.php');
 <?php include('delete-barangay-admin.php'); ?>
 <!--delete barangay admin modal end-->
 
-<!--delete barangay admin modal-->
+<!--activate barangay admin modal-->
 <?php include('activate-barangay-admin.php'); ?>
+<!--activate barangay admin modal end-->
+
+<!--delete barangay admin modal-->
+<?php include('deactivate-barangay-admin.php'); ?>
 <!--delete barangay admin modal end-->
 
 <div class="body flex-grow-1 px-3">
