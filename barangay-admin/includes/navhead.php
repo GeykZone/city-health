@@ -22,7 +22,7 @@
                   <div class="fw-semibold">Account</div>
                 </div>
 
-                <a class="dropdown-item" href="../index.php">
+                <a class="dropdown-item"  href="../logout.php">
                   <svg class="icon me-2">
                     <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
                   </svg>Logout
