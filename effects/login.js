@@ -84,37 +84,47 @@ $(this).removeClass("is-invalid");
 function alert_message()
 {
 var toastMixin = Swal.mixin({
-toast: true,
-icon: 'success',
-title: 'General Title',
-animation: false,
-position: 'top-right',
-showConfirmButton: false,
-timer: 3000,
-timerProgressBar: true,
-didOpen: (toast) => {
-toast.addEventListener('mouseenter', Swal.stopTimer)
-toast.addEventListener('mouseleave', Swal.resumeTimer) 
+    toast: true,
+    icon: 'success',
+    title: 'General Title',
+    animation: false,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer) 
 }
 });
 
 if(confirmation.a == 1)
 {
-window.location.replace("city-admin/index.php");
+    window.location.replace("city-admin/index.php");
 }
 else if(confirmation.a == 2)
 {
-window.location.replace("barangay-admin/index.php");
+    window.location.replace("barangay-admin/index.php");
+}
+else if(confirmation.a == 0)
+{
+    toastMixin.fire({
+    animation: true,
+    title: 'The barangay admin is not activated please contact the city admin.',
+    icon: 'error'
+    });
+    setTimeout(function(){
+    },3000);
 }
 else
 {
-toastMixin.fire({
-animation: true,
-title: 'The username or password is not identified.',
-icon: 'error'
-});
-setTimeout(function(){
-},3000);
+    toastMixin.fire({
+    animation: true,
+    title:'The username or password is not identified. ',
+    icon: 'error'
+    });
+    setTimeout(function(){
+    },3000);
 }
 }
 //trigger error messages

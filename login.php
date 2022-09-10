@@ -82,6 +82,7 @@ if ($result->num_rows > 0)
         //check for checkbox end
 
         $role = $row['role'];
+        $validate = $row['activated'];
 
         if ($role == 1)
         {
@@ -90,7 +91,25 @@ if ($result->num_rows > 0)
         }
         else
         {
-            echo $role;
+            if ($validate == 1)
+            {
+              echo $role;
+            }
+            else
+            {
+              unset($_COOKIE['id']);
+              setcookie('id', null, -1, '/');
+        
+              unset($_COOKIE['role']);
+              setcookie('role', null, -1, '/');
+
+              unset($_COOKIE['tokken']);
+              setcookie('tokken', null, -1, '/');
+        
+              return true;
+
+              echo $validate;
+            }  
         }
       }
       else
