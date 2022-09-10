@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
           
           if($admin_status == 0)
           {
-            ?> <i class="edit_barangay_value btn_icon fas fa-unlock" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button"></i><?php
+            ?> <i class="edit_barangay_value btn_icon fas fa-unlock" href="#activate_barangay_admin" data-coreui-toggle="modal" id="activate_barangay_value" role="button"></i><?php
           }
           else
           {
