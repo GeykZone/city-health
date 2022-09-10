@@ -86,19 +86,21 @@
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
 			<div class="icon-box">
-					<i class="material-icons"><span class="material-symbols-outlined">
-                    restart_alt
-                    </span></i>
+					<i class="material-icons">
+                    <span class="material-symbols-outlined">
+                    lock_open
+                    </span>
+                    </i>
 				</div>					
 				<h4 class="modal-title w-100">Are you sure?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<h5>Do you truly want to restore the default username and password for this record?</h5> 
+				<h5>When the admin privileges are enabled, the user will be able to login and alter some records in this application.</h5> 
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="btn btn-danger fw-bolder" id="activate_admin" data-coreui-dismiss="modal" aria-label="Close">Activate</button>
+				<button class="btn btn-danger fw-bolder" id="activate_barangay_admin_btn" data-coreui-dismiss="modal" aria-label="Close">Activate</button>
 			</div>
 		</div>
 	</div>
