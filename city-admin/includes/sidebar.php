@@ -1,6 +1,6 @@
 <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
       <div class="sidebar-brand d-none d-md-flex">
-          <div class= "sidebar-brand-full " ><img class="avatar-img avatar rounded-0 avatar-xxl" src="../resourcess/assets/img/avatars/City.png" alt="brand"></div>
+          <div class= "sidebar-brand-full " ><img class="avatar-img avatar rounded-0 avatar-xxl" src="../resourcess/assets/img/avatars/city.png" alt="brand"></div>
 
           <div class="sidebar-brand-narrow" width="46" height="46" ><img class="avatar-img avatar rounded-0 avatar-md" src="../resourcess/assets/img/avatars/profile.png" alt="brand"></div>
       </div>
