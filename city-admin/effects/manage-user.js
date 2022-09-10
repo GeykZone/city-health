@@ -138,6 +138,22 @@ $("#delete_barangay_admin_record").click(function()
 })
 //delete a barangay admin record end
 
+//activate a barangay admin record
+$("#activate_barangay_admin_record").click(function()
+{
+
+  $.post("functions/activate-barangay-admin.php",
+  {
+    admin_id: admin_id
+  },
+  function(data, status){
+   confirmation.a = data;
+    
+  });
+
+})
+//activate a barangay admin record end
+
 //erese input fields when x button is pressed
 //add barangay
 $("#close_add_barangay_admin").click(function()
@@ -229,6 +245,23 @@ else if(confirmation.a == 4)
   toastMixin.fire({
     animation: true,
     title: 'A barangay admin record has been deleted.'
+  });
+  setTimeout(function(){
+    $("#admin_table").addClass("d-none");
+    $("#first_load_barangay_admin_table").removeClass("d-none");
+    destroy_admin_table();
+    load_table_admin();
+  
+
+  },3000);
+}
+else if(confirmation.a == 5)
+{
+  $(".admin_table_is_loading").removeClass("d-none");
+  $(".edit_barangay_value").addClass("d-none");
+  toastMixin.fire({
+    animation: true,
+    title: 'A barangay admin record has been activated.'
   });
   setTimeout(function(){
     $("#admin_table").addClass("d-none");
@@ -380,5 +413,16 @@ function get_admin_table_cell_value()
       admin_id = col1;
 
   });
+
+//activating
+$("#admin_table").on('click','#activate_barangay_admin_value',function(){
+  // get the current row
+  var currentRow=$(this).closest("tr");
+
+  var col1=currentRow.find("td:eq(0)").text().trim($(this).text()); // get current row 1st TD value
+
+  admin_id = col1;
+
+});
 }
 //get the table cell value when selected end

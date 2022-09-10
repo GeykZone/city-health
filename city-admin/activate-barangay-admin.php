@@ -100,7 +100,7 @@
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="btn btn-danger fw-bolder" id="activate_barangay_admin_btn" data-coreui-dismiss="modal" aria-label="Close">Activate</button>
+				<button class="btn btn-danger fw-bolder" id="activate_barangay_admin_record" data-coreui-dismiss="modal" aria-label="Close">Activate</button>
 			</div>
 		</div>
 	</div>
