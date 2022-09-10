@@ -33,7 +33,7 @@ if(isset($_COOKIE['active']) || isset($_SESSION['admin_log'])){
   if($role == 1)
   {
     header("Location: city-admin/index.php");
-    exit();
+    exit(); 
 
   }
   else if($role == 2)

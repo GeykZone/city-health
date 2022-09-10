@@ -1,4 +1,5 @@
 <?php   include('../route.php'); ?>
+<?php   include('functions/role.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
