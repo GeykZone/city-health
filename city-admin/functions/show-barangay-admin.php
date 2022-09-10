@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
         </td>
         <td>
           <i class="edit_barangay_value btn_icon fas fa-undo-alt" data-coreui-toggle="modal" href="#reset_barangay" id="update_barangay_value" role="button"></i>
-          <i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button"></i>
+          <i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay_admin" data-coreui-toggle="modal" id="delete_barangay_value" role="button"></i>
           <?php
           
           if($admin_status == 0)

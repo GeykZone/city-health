@@ -1,41 +1,41 @@
 
 <!-- Modal HTML -->
 <style>
-.modal-confirm .modal-content {
+#delete_barangay_admin .modal-confirm .modal-content {
 	padding: 20px;
 	border-radius: 5px;
 	border: none;
 	text-align: center;
 	font-size: 14px;
 }
-.modal-confirm .modal-header {
+#delete_barangay_admin .modal-confirm .modal-header {
 	border-bottom: none;   
 	position: relative;
 }
-.modal-confirm h4 {
+#delete_barangay_admin .modal-confirm h4 {
 	text-align: center;
 	font-size: 26px;
 	margin: 30px 0 -10px;
 }
-.modal-confirm .close {
+#delete_barangay_admin .modal-confirm .close {
 	position: absolute;
 	top: -5px;
 	right: -2px;
 }
-.modal-confirm .modal-body {
+#delete_barangay_admin .modal-confirm .modal-body {
 	color: #999;
 }
-.modal-confirm .modal-footer {
+#delete_barangay_admin .modal-confirm .modal-footer {
 	border: none;
 	text-align: center;		
 	border-radius: 5px;
 	font-size: 13px;
 	padding: 10px 15px 25px;
 }
-.modal-confirm .modal-footer a {
+#delete_barangay_admin .modal-confirm .modal-footer a {
 	color: #999;
 }		
-.modal-confirm .icon-box {
+#delete_barangay_admin .modal-confirm .icon-box {
 	width: 80px; 
 	height: 80px;
 	margin: 0 auto;
@@ -44,13 +44,13 @@
 	text-align: center;
 	border: 3px solid #f15e5e;
 }
-.modal-confirm .icon-box i {
+#delete_barangay_admin .modal-confirm .icon-box i {
 	color: #f15e5e;
 	font-size: 46px;
 	display: inline-block;
 	margin-top: 13px;
 }
-.modal-confirm .btn, .modal-confirm .btn:active {
+#delete_barangay_admin .modal-confirm .btn, .modal-confirm .btn:active {
 	color: #fff;
 	border-radius: 4px;
 	background: #60c7c1;
@@ -63,16 +63,16 @@
 	border-radius: 3px;
 	margin: 0 5px;
 }
-.modal-confirm .btn-secondary {
+#delete_barangay_admin .modal-confirm .btn-secondary {
 	background: #c1c1c1;
 }
-.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+#delete_barangay_admin .modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
 	background: #a8a8a8;
 }
-.modal-confirm .btn-danger {
+#delete_barangay_admin .modal-confirm .btn-danger {
 	background: #f15e5e;
 }
-.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+#delete_barangay_admin .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
 	background: #ee3535;
 }
 
@@ -81,7 +81,7 @@
 }
 </style>
 
-<div id="delete_barangay" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="delete_barangay_admin" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog  modal-md modal-dialog-centered modal-confirm modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
@@ -96,7 +96,7 @@
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="btn btn-danger fw-bolder" id="delete-barangay" data-coreui-dismiss="modal" aria-label="Close">Delete</button>
+				<button class="btn btn-danger fw-bolder" id="delete_barangay_admin_record" data-coreui-dismiss="modal" aria-label="Close">Delete</button>
 			</div>
 		</div>
 	</div>
