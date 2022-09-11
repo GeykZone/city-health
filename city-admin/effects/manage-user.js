@@ -182,7 +182,7 @@ $("#deactivate_barangay_admin_record").click(function()
 })
 //deactivate a barangay admin record end
 
-//erese input fields when x button is pressed
+//erase input fields when x button is pressed
 //add barangay
 $("#close_add_barangay_admin").click(function()
 { 
@@ -193,7 +193,7 @@ $("#close_add_barangay_admin").click(function()
   var control = $select[0].selectize;
   control.clear();
 })
-//erese input fields when x button is pressed
+//erase input fields when x button is pressed
 
 //trigger error messages
 function alert_message()
