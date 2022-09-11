@@ -11,6 +11,17 @@ $(document).ready(function () {
   loading_table();     
 });
 
+//add a delay in loading the material icon
+function modal_open()
+{
+  $('.material-icons').css('opacity','0');
+setTimeout(function(){
+  $('.material-icons').css('opacity','1');
+
+  },260);
+}
+//add a delay in loading the material icon
+
 
 //set do some stuff when confiramtion variable is changed
 var confirmation = {

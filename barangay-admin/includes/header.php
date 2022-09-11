@@ -1,5 +1,6 @@
 <?php   include('../route.php'); ?>
 <?php   include('functions/role.php'); ?>
+<?php   include('functions/barangay-admin-location.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">

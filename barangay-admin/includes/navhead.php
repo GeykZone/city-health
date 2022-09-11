@@ -7,7 +7,7 @@
           </button>
           
           <ul class="header-nav">
-            <li class="nav-title"><a style="font-weight: bold;">CITY HEALTH OFFICE</a></li>
+            <li class="nav-title"><a style="font-weight: bold;">BARANGAY <?php echo $admin_location; ?></a></li>
           </ul>
 
           <ul class="header-nav ms-auto">
@@ -41,3 +41,11 @@
             </li>
           </ul>
         </div>
+
+        <div class="header-divider"></div>
+        <div class="container-fluid">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb my-0 ms-2">
+              <li class="breadcrumb-item">
+                <!-- if breadcrumb is single--><span>Barangay Admin</span>
+              </li>

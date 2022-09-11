@@ -80,10 +80,6 @@
   --cui-highlight-bg: #fff3cd;
 }
 
-.material-icons{
-  opacity:0;
-}
-
 .selectize-input.focus {
   color: var(--cui-input-focus-color, rgba(44, 56, 74, 0.95)) !important;
   background-color: var(--cui-input-focus-bg, #fff) !important;
