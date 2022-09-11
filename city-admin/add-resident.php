@@ -96,7 +96,7 @@
     <label for="email" class="form-label">Email Address</label>
     <input type="email" name="contact" class="form-control barangay-form" id="email" placeholder="Email Address.">
     <div class="invalid-feedback">
-    Please don't leave this area empty.
+      Please don't leave this area empty.
     </div>
   </div>
   <div class="mb-3">

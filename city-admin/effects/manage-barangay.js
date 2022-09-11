@@ -14,11 +14,10 @@ $(document).ready(function()
 //add a delay in loading the material icon
 function modal_open()
 {
-  $('.material-icons').css('opacity','0');
 setTimeout(function(){
   $('.material-icons').css('opacity','1');
 
-  },260);
+  },350);
 }
 //add a delay in loading the material icon
 

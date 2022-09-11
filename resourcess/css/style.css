@@ -79,6 +79,12 @@
   --cui-code-color: #d63384;
   --cui-highlight-bg: #fff3cd;
 }
+
+.material-icons
+{
+  opacity: 0;
+}
+
 .gender .selectize-input.disabled { 
   background-color: #d8dbe0 !important;
   border-color: #b1b7c1 !important;
