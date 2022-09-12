@@ -1,8 +1,32 @@
+var $resident_age = "";
+
 $(document).ready(function () {
 $(document).attr("title", "HPCS | Manage Residents"); 
 select_with_search_box(); 
 enable_form();  
+generate_age();
 });
+
+//set do some stuff when confiramtion variable is changed
+var confirmation = {
+  aInternal: 10,
+  aListener: function(val) {},
+  set a(val) {
+    this.aInternal = val;
+    this.aListener(val);
+  },
+  get a() {
+    return this.aInternal;
+  },
+  registerListener: function(listener) {
+    this.aListener = listener;
+  }
+}
+
+confirmation.registerListener(function(val) {
+  alert_message();
+});
+//set do some stuff when confiramtion variable is changed end
 
 // for select
 function select_with_search_box()
@@ -19,8 +43,6 @@ function enable_form()
 {
     $("#select_barangay").change(function(){ 
     var barangay_name = $("#select_barangay").text();
-    barangay_name = barangay_name.replace(/ /g,"_");
-    barangay_name = barangay_name.toLowerCase();
 
 if(barangay_name.trim().length != 0)
 {
@@ -43,11 +65,27 @@ else
     $('fieldset').attr("disabled", true);
     $('#gender')[0].selectize.disable(); 
     $('#civil_status')[0].selectize.disable(); 
+   
 }
 
 });
 }
 //enable the form when a barangay is picked end 
+
+//generate an age base on the birthdate
+function generate_age()
+{
+  $("#birthdate").datepicker({
+    onSelect: function(value, ui) {
+        var today = new Date(),
+            age = today.getFullYear() - ui.selectedYear;
+            resident_age = age;
+    },
+    dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+  });
+  $( "#birthdate" ).val("0000-00-00");
+}
+//generate an age base on the birthdate
 
 //submit new barangay
 $("#add_barangay_admin_btn").click(function () {
@@ -56,14 +94,9 @@ $("#add_barangay_admin_btn").click(function () {
     var firstname = $("#firstname").val();
     var middlename = $("#middlename").val();
     var lastname = $("#lastname").val();
-    var age = $("#age").val();
     var gender = $("#gender").val();
 
-    var birthdate = new Date($('#birthdate').val());
-    day = birthdate.getDate();
-    month = birthdate.getMonth() + 1;
-    year = birthdate.getFullYear();
-    birthdate = [day, month, year].join('/');
+    var birthdate = $('#birthdate').val();
 
     var contact = $("#contact").val();
     var thisemail = $("#email").val();
@@ -85,17 +118,13 @@ $("#add_barangay_admin_btn").click(function () {
     {
       $("#lastname").addClass("is-invalid");
     }
-    else if (age.trim().length === 0) //check if value is empty
+    else if (birthdate === "0000-00-00") //check if value is empty
     {
-      $("#age").addClass("is-invalid");
+      $("#birthdate").addClass("is-invalid");
     }
     else if (gender.trim().length === 0) //check if value is empty
     {
       $("#gender").addClass("is-invalid");
-    }
-    else if (birthdate === "NaN/NaN/NaN") //check if value is empty
-    {
-      $("#birthdate").addClass("is-invalid");
     }
     else if (contact.trim().length === 0) //check if value is empty
     {
@@ -103,6 +132,29 @@ $("#add_barangay_admin_btn").click(function () {
     }
     else
     {
+
+        function submit_new_resident()
+        {
+          $.post("functions/add-resident.php", {
+
+            barangay_id: barangay_id,
+            firstname: firstname,
+            middlename: middlename,
+            lastname: lastname,
+            age: resident_age,
+            gender: gender,
+            birthdate: birthdate,
+            contact: contact,
+            thisemail: thisemail,
+            civil_status: civil_status
+
+          },
+          function (data, status) {
+            confirmation.a = data;
+    
+          });
+        }
+
         if (thisemail.trim().length != 0) //check if value is empty
         {
             function isEmail(email) {
@@ -115,17 +167,102 @@ $("#add_barangay_admin_btn").click(function () {
             }
             else
             {
-                alert("Ok");
+              submit_new_resident();
             }
         }
         else
         {
-            alert("Ok");
+          submit_new_resident();
         }
   
     }
 
-
-
   });
   //submit new barangay end
+
+//trigger error messages
+function alert_message()
+{
+  var toastMixin = Swal.mixin({
+    toast: true,
+    icon: 'success',
+    title: 'General Title',
+    animation: false,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer) 
+    }
+  });
+
+if(confirmation.a == 1)
+{
+  $('#add-barangay-resident').modal('toggle');
+
+  $("#select_barangay").val("");
+  var $select = $('#select_barangay').selectize();
+  var control = $select[0].selectize;
+  control.clear();
+  $("#firstname").val("");
+  $("#middlename").val("");
+  $("#lastname").val("");
+  $("#gender").val("");
+  $select = $('#gender').selectize();
+  control = $select[0].selectize;
+  control.clear();
+  $( "#birthdate" ).val("0000-00-00");
+  $("#contact").val("");
+  $("#email").val("");
+  $("#civil_status").val("");
+  $select = $('#civil_status').selectize();
+  control = $select[0].selectize;
+  control.clear();
+
+  toastMixin.fire({
+    animation: true,
+    title: 'A new resident has been added in the list.'
+  });
+  setTimeout(function(){  
+
+  },3000);
+}
+else if(confirmation.a == 2)
+{
+  toastMixin.fire({
+    animation: true,
+    title: 'An admin is already assigned in the barangay.',
+    icon: 'error'
+  });
+  setTimeout(function(){
+  },3000);
+}
+}
+//trigger error messages
+
+//erese input fields when x button is pressed
+//add resident
+$("#close_add_resident").click(function()
+{
+    $("#select_barangay").val("");
+    var $select = $('#select_barangay').selectize();
+    var control = $select[0].selectize;
+    control.clear();
+    $("#firstname").val("");
+    $("#middlename").val("");
+    $("#lastname").val("");
+    $("#gender").val("");
+    $select = $('#gender').selectize();
+    control = $select[0].selectize;
+    control.clear();
+    $( "#birthdate" ).val("0000-00-00");
+    $("#contact").val("");
+    $("#email").val("");
+    $("#civil_status").val("");
+    $select = $('#civil_status').selectize();
+    control = $select[0].selectize;
+    control.clear();
+})
+//erese input fields when x button is pressed

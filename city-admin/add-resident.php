@@ -6,7 +6,7 @@
   <svg class="c-icon" style="width: 20px; height:20px; margin-left: 10px; color:#ffff;">
   <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-layers"></use>
   </svg>
-  <button type="button" id="close_add_barangay_admin" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+  <button type="button" id="close_add_resident" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
 
@@ -61,10 +61,10 @@
     </div>
   </div>
   <div class="mb-3">
-    <label for="age" class="form-label">Age*</label>
-    <input type="number" name="age" class="form-control barangay-form" id="age" placeholder="Age.">
+  <label for="birthdate" class="form-label">Date of Birth*</label>
+    <input type="button" class="birthdate form-control barangay-form text-sm-start" id="birthdate" name="birthdate" placeholder="Date of Birth">
     <div class="invalid-feedback">
-    Please don't leave this area empty.
+      Please don't leave this area empty.
     </div>
   </div>
   <div class="mb-3">
@@ -74,13 +74,6 @@
     <option value="Male">Male</option>
     <option value="Female">Female</option>
     </select>
-    <div class="invalid-feedback">
-      Please don't leave this area empty.
-    </div>
-  </div>
-  <div class="mb-3">
-  <label for="birthdate" class="form-label">Birthdate*</label>
-    <input type="date" class="birthdate form-control barangay-form" id="birthdate" name="birthdate" placeholder="date">
     <div class="invalid-feedback">
       Please don't leave this area empty.
     </div>
@@ -96,7 +89,7 @@
     <label for="email" class="form-label">Email Address</label>
     <input type="email" name="contact" class="form-control barangay-form" id="email" placeholder="Email Address.">
     <div class="invalid-feedback">
-      Please don't leave this area empty.
+      Invalid email address.
     </div>
   </div>
   <div class="mb-3">
