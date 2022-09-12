@@ -8,6 +8,9 @@ $(document).attr("title", "HPCS | Manage Residents");
 select_with_search_box(); 
 enable_form();  
 generate_age();
+load_table_resident()
+
+loading_table();
 });
 
 //set do some stuff when confiramtion variable is changed
@@ -40,6 +43,128 @@ sortField: 'text'
 });
 }
 // for select  end
+
+// show loading animation when page is load
+function loading_table()
+{
+  $("#first_load_barangay_admin_table").removeClass("d-none");
+  setTimeout(function(){
+  $("#resident_table").removeClass("d-none");
+  },3000);
+}
+// show loading animation when page is load is load
+
+//show the barangay resident table ajax
+function load_table_resident()
+{
+  $("#barangay_resident_table").load("functions/show-resident.php", {
+  });
+}
+//show the barangay resident table ajax
+
+//destroy data table
+function destroy_resident_table()
+{
+  $('#resident_table').dataTable().fnDestroy();
+}
+//destroy data table
+
+//show data tables
+function load_data_tables() {
+
+  if ( ! $.fn.DataTable.isDataTable( '#resident_table' ) ) { // check if data table is already exist
+
+    var table = $('#resident_table').DataTable({
+      
+      //"dom": 'Blfrtip',      
+
+      "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+
+      //disable the sorting of colomn
+      "columnDefs": [ {
+        "targets": 3,
+        "orderable": false
+        } ],
+  
+      "buttons": [
+        {
+            extend: 'copy',
+            text: ' COPY',
+  
+            title: 'Health Profile Clustering System',
+  
+            messageTop: 'List of Barangay Admins',
+            //className: 'fa fa-solid fa-clipboard',
+            
+  
+            exportOptions: {
+            modifier: {
+               page: 'current'
+            },
+             //columns: [0, 1] //r.broj kolone koja se stampa u PDF
+              columns: [0,1,2],
+              // optional space between columns
+              columnGap: 1
+            }
+  
+        },
+        { 
+            extend: 'excel',
+            text: ' EXCEL',
+  
+            title: 'Health Profile Clustering System',
+  
+            messageTop: 'List of Barangay Admins',
+            //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
+            
+  
+            exportOptions: {
+            modifier: {
+               page: 'current'
+            },
+             //columns: [0, 1] //r.broj kolone koja se stampa u PDF
+              columns: [0,1,2],
+              // optional space between columns
+              columnGap: 1
+            }
+  
+        },
+        {
+            extend: 'print',
+            text: ' PDF',
+  
+            title: 'Health Profile Clustering System',
+  
+            messageTop: 'List of Barangay Admins',
+            //className: 'fa fa-print',
+            
+  
+            exportOptions: {
+            modifier: {
+               page: 'current'
+            },
+             //columns: [0, 1] //r.broj kolone koja se stampa u PDF
+              columns: [0,1,2],
+              // optional space between columns
+              columnGap: 1
+            },
+  
+            customize: function (win) {
+               $(win.document.body)
+                   .css('text-align', 'center')
+  
+               $(win.document.body).find('table')
+                   .css('font-size', '12pt');
+           }
+        }],
+    });
+    table.buttons().container().appendTo('#resident_table_wrapper .col-md-6:eq(0)');
+
+  }
+
+  
+};
+//show data tables end
 
 //enable the form when a barangay is picked
 function enable_form()

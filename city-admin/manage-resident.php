@@ -93,9 +93,14 @@ include('includes/sidebar.php');
       <table class="table  mb-0 d-none " id="resident_table" > 
         <thead class="table-info fw-semibold">
           <tr class="align-middle">
+            <th>Full Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Date of Birth</th>
+            <th>Civil Status</th>
             <th>Barangay</th>
-            <th>Username</th>
-            <th>Status</th>
+            <th>Contact No.</th>
+            <th>Email Address</th>
             <th>Settings</th>
           </tr>
         </thead>
