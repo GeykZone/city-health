@@ -79,21 +79,7 @@
     </div>
   </div>
   <div class="mb-3">
-    <label for="contact" class="form-label">Contact No.*</label>
-    <input type="number" name="contact" class="form-control barangay-form" id="contact" placeholder="Contact No.">
-    <div class="invalid-feedback">
-    Please don't leave this area empty.
-    </div>
-  </div>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email Address</label>
-    <input type="email" name="contact" class="form-control barangay-form" id="email" placeholder="Email Address.">
-    <div class="invalid-feedback">
-      Invalid email address.
-    </div>
-  </div>
-  <div class="mb-3">
-    <label for="civil_status" class="form-label">Civil Status</label>
+    <label for="civil_status" class="form-label">Civil Status*</label>
     <select name="civil_status" id="civil_status" class="form-control gender barangay-form" >
     <option value="">Pick a civil status.</option>
     <option value="Single">Single</option>
@@ -103,6 +89,22 @@
     </select>
     <div class="invalid-feedback">
       Please don't leave this area empty.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="contact" class="form-label">Contact No.*</label>
+    <input type="number" name="contact" class="form-control barangay-form" id="contact"
+     onkeypress='return event.charCode>=48 && event.charCode<=57' ondrop="return false;" onpaste="return false;"
+     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="Contact No.">
+    <div class="invalid-feedback" id="phno_validator_label">
+    Please don't leave this area empty.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email Address</label>
+    <input type="email" name="contact" class="form-control barangay-form" id="email" placeholder="Email Address.">
+    <div class="invalid-feedback">
+      Invalid email address, email address must look like this (e.g. freed@email.com).
     </div>
   </div>
   </fieldset>

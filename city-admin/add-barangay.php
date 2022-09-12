@@ -14,21 +14,21 @@
       <form action="" id="add_barangay_form" name="add_barangay_form" method="post">
         <div class="mb-3">
           <label for="barangay" class="form-label">Barangay*</label>
-          <input type="text" name="barangay" class="form-control barangay-form" id="barangay">
+          <input type="text" name="barangay" class="form-control barangay-form" id="barangay" placeholder="Barangay">
           <div class="invalid-feedback">
             Please don't leave this area empty.
           </div>
         </div>
         <div class="mb-3">
           <label for="Latitude" class="form-label">Latitude*</label>
-          <input type="number" name="Latitude" class="form-control barangay-form" id="Latitude">
+          <input type="number" name="Latitude" class="form-control barangay-form" id="Latitude" placeholder="Latitude">
           <div class="invalid-feedback">
             Please don't leave this area empty.
           </div>
         </div>
         <div class="mb-3">
           <label for="Longitude" class="form-label">Longitude*</label>
-          <input type="number" name="Longitude" class="form-control barangay-form" id="Longitude">
+          <input type="number" name="Longitude" class="form-control barangay-form" id="Longitude" placeholder="Longitude">
           <div class="invalid-feedback">
             Please don't leave this area empty.
           </div>

@@ -1,4 +1,7 @@
 var $resident_age = "";
+var validation_link = "https://phonevalidation.abstractapi.com/v1/";
+var mobile_number_validation_api_key = "1adfab67d9d3468f932b8af2d70efbc9";
+var phone_number_is_valid = "";
 
 $(document).ready(function () {
 $(document).attr("title", "HPCS | Manage Residents"); 
@@ -126,33 +129,52 @@ $("#add_barangay_admin_btn").click(function () {
     {
       $("#gender").addClass("is-invalid");
     }
+    else if (civil_status.trim().length === 0) //check if value is empty
+    {
+      $("#civil_status").addClass("is-invalid");
+    }
     else if (contact.trim().length === 0) //check if value is empty
     {
       $("#contact").addClass("is-invalid");
+      $("#phno_validator_label").text("Please don't leave this area empty.")
     }
     else
     {
 
         function submit_new_resident()
         {
-          $.post("functions/add-resident.php", {
+          contact = "63"+contact;
+          $.getJSON(validation_link+"?api_key="+mobile_number_validation_api_key+"&phone="+contact, function(data) {
+            phone_number_is_valid = data.valid;
 
-            barangay_id: barangay_id,
-            firstname: firstname,
-            middlename: middlename,
-            lastname: lastname,
-            age: resident_age,
-            gender: gender,
-            birthdate: birthdate,
-            contact: contact,
-            thisemail: thisemail,
-            civil_status: civil_status
+            if(phone_number_is_valid)
+            {
+              $.post("functions/add-resident.php", {
 
-          },
-          function (data, status) {
-            confirmation.a = data;
+                barangay_id: barangay_id,
+                firstname: firstname,
+                middlename: middlename,
+                lastname: lastname,
+                age: resident_age,
+                gender: gender,
+                birthdate: birthdate,
+                contact: contact,
+                thisemail: thisemail,
+                civil_status: civil_status
     
-          });
+              },
+              function (data, status) {
+                confirmation.a = data;
+        
+              });
+            }
+            else
+            {
+              $("#contact").addClass("is-invalid");
+              $("#phno_validator_label").text("Invalid phone number, please enter a 10-digit phone number and the phone number must start with a 9 (e.g. 9123456789).");
+            }
+          })
+
         }
 
         if (thisemail.trim().length != 0) //check if value is empty
@@ -167,12 +189,12 @@ $("#add_barangay_admin_btn").click(function () {
             }
             else
             {
-              submit_new_resident();
+             submit_new_resident();
             }
         }
         else
         {
-          submit_new_resident();
+         submit_new_resident();
         }
   
     }

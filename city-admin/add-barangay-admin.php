@@ -13,6 +13,7 @@
   
 <form action="" id="add_barangay_admin_form" name="add_barangay_admin_form" method="post">
   <div class="mb-3">
+  <label for="select_barangay" class="form-label">Barangay*</label>
   <select id="select_barangay"  name="select_barangay" class="form-control barangay-form">
       <option value="">Pick a barangay...</option>
 
@@ -39,11 +40,11 @@
 
   <fieldset disabled >
   <div class="mb-3">
-    <label for="default_username" class="form-label">Default username</label>
+    <label for="default_username" class="form-label">Default username*</label>
     <input type="text" name="default_username" class="form-control barangay-form" id="default_username" value="Please select a barangay.">
   </div>
   <div class="mb-3">
-    <label for="default_password" class="form-label">Default Password</label>
+    <label for="default_password" class="form-label">Default Password*</label>
     <input type="text" name="default_password" class="form-control barangay-form" id="default_password" value="Please select a barangay.">
   </div>
   </fieldset>
