@@ -8,9 +8,7 @@ $(document).attr("title", "HPCS | Manage Residents");
 select_with_search_box(); 
 enable_form();  
 generate_age();
-load_table_resident()
-
-loading_table();
+load_table_resident();
 });
 
 //set do some stuff when confiramtion variable is changed
@@ -44,15 +42,6 @@ sortField: 'text'
 }
 // for select  end
 
-// show loading animation when page is load
-function loading_table()
-{
-  $("#first_load_barangay_admin_table").removeClass("d-none");
-  setTimeout(function(){
-  $("#resident_table").removeClass("d-none");
-  },3000);
-}
-// show loading animation when page is load is load
 
 //show the barangay resident table ajax
 function load_table_resident()
@@ -69,12 +58,15 @@ function destroy_resident_table()
 }
 //destroy data table
 
+
 //show data tables
 function load_data_tables() {
 
   if ( ! $.fn.DataTable.isDataTable( '#resident_table' ) ) { // check if data table is already exist
 
     var table = $('#resident_table').DataTable({
+
+     
       
       //"dom": 'Blfrtip',      
 
@@ -82,7 +74,7 @@ function load_data_tables() {
 
       //disable the sorting of colomn
       "columnDefs": [ {
-        "targets": 3,
+        "targets": 8,
         "orderable": false
         } ],
   
@@ -93,7 +85,7 @@ function load_data_tables() {
   
             title: 'Health Profile Clustering System',
   
-            messageTop: 'List of Barangay Admins',
+            messageTop: 'List of Residents in Oroquieta City',
             //className: 'fa fa-solid fa-clipboard',
             
   
@@ -102,7 +94,7 @@ function load_data_tables() {
                page: 'current'
             },
              //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-              columns: [0,1,2],
+              columns: [0,1,2,3,4,5,6,7],
               // optional space between columns
               columnGap: 1
             }
@@ -114,7 +106,7 @@ function load_data_tables() {
   
             title: 'Health Profile Clustering System',
   
-            messageTop: 'List of Barangay Admins',
+            messageTop: 'List of Residents in Oroquieta City',
             //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
             
   
@@ -123,7 +115,7 @@ function load_data_tables() {
                page: 'current'
             },
              //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-              columns: [0,1,2],
+             columns: [0,1,2,3,4,5,6,7],
               // optional space between columns
               columnGap: 1
             }
@@ -135,7 +127,7 @@ function load_data_tables() {
   
             title: 'Health Profile Clustering System',
   
-            messageTop: 'List of Barangay Admins',
+            messageTop: 'List of Residents in Oroquieta City',
             //className: 'fa fa-print',
             
   
@@ -144,7 +136,7 @@ function load_data_tables() {
                page: 'current'
             },
              //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-              columns: [0,1,2],
+             columns: [0,1,2,3,4,5,6,7],
               // optional space between columns
               columnGap: 1
             },
@@ -368,11 +360,17 @@ if(confirmation.a == 1)
   control = $select[0].selectize;
   control.clear();
 
+  $(".barangay_table_is_loading").removeClass("d-none");
+  $(".edit_barangay_value").addClass("d-none");
   toastMixin.fire({
     animation: true,
     title: 'A new resident has been added in the list.'
   });
   setTimeout(function(){  
+    $("#resident_table").addClass("d-none");
+    $("#first_load_barangay_admin_table").removeClass("d-none");
+    destroy_resident_table();
+    load_table_resident();
 
   },3000);
 }

@@ -6,9 +6,7 @@ $(document).ready(function () {
   select_with_search_box();
   generate_default_username_password();
   load_table_admin();
-  get_admin_table_cell_value();
-
-  loading_table();     
+  get_admin_table_cell_value();   
 });
 
 //add a delay in loading the material icon
@@ -42,16 +40,6 @@ confirmation.registerListener(function(val) {
   alert_message();
 });
 //set do some stuff when confiramtion variable is changed end
-
-// show loading animation when page is load
-function loading_table()
-{
-  $("#first_load_barangay_admin_table").removeClass("d-none");
-  setTimeout(function(){
-  $("#admin_table").removeClass("d-none");
-  },3000);
-}
-// show loading animation when page is load is load
 
 // for select
 function select_with_search_box()

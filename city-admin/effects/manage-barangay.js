@@ -5,10 +5,6 @@ $(document).ready(function()
   $(document).attr("title", "HPCS | Manage Barangays");
   load_table_barangay();
   get_barangay_table_cell_value();
-
-
-  loading_table();
-
 });
 
 //add a delay in loading the material icon
@@ -43,16 +39,6 @@ confirmation.registerListener(function(val) {
 });
 //set do some stuff when confiramtion variable is changed end
 
-
-// show loading animation when page is load
-function loading_table()
-{
-  $("#first_load_barangay_admin_table").removeClass("d-none");
-  setTimeout(function(){
-  $("#barangay_table").removeClass("d-none");
-  },3000);
-}
-// show loading animation when page is load is load
 
 //submit new barangay
 $("#add_barangay_btn").click(function () {
