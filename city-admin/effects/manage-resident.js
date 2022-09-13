@@ -23,6 +23,18 @@ $("#resident_table_filter").addClass("mb-3");
 $(".dt-buttons").addClass("col-sm-1");
 });
 
+
+
+//add a delay in loading the material icon
+function modal_open()
+{
+setTimeout(function(){
+  $('.material-icons').css('opacity','1');
+
+  },350);
+}
+//add a delay in loading the material icon
+
 //set do some stuff when confiramtion variable is changed
 var confirmation = {
   aInternal: 10,
@@ -77,11 +89,8 @@ function load_data_tables() {
   if ( ! $.fn.DataTable.isDataTable( '#resident_table' ) ) { // check if data table is already exist
 
     var table = $('#resident_table').DataTable({
-//<i class="edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" onclick="modal_open();"></i>
-//<i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" onclick="modal_open();"></i>
-//<i class="barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>
       
-        "processing": true,
+        //"processing": true,
         "serverSide": true,
         "ajax": "functions/show-resident.php",   
         
@@ -98,7 +107,7 @@ function load_data_tables() {
           null,
           {
             "defaultContent": "<i class='edit_barangay_value update btn_icon fas fa-edit' data-coreui-toggle='modal' href='#update-barangay' id='edit_barangay_value' role='button' onclick='modal_open();'></i> "+
-            "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_barangay' data-coreui-toggle='modal' id='edit_barangay_value' role='button' onclick='modal_open();'></i>"+
+            "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_resident' data-coreui-toggle='modal' id='edit_barangay_value' role='button' onclick='modal_open();'></i>"+
             "<i class='barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
             
           }
@@ -106,11 +115,11 @@ function load_data_tables() {
       
         "dom": 'lfBrtip',      
 
-      "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+      "lengthMenu": [[10, 20, 50, 100], [10, 20, 50, 100]],
 
       //disable the sorting of colomn
       "columnDefs": [ {
-        "targets": 8,
+        "targets": 10,
         "orderable": false
         } ],
   
@@ -130,7 +139,7 @@ function load_data_tables() {
                page: 'current'
             },
              //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-              columns: [0,1,2,3,4,5,6,7],
+              columns: [0,1,2,3,4,5,6,7,9],
               // optional space between columns
               columnGap: 1
             }
@@ -151,7 +160,7 @@ function load_data_tables() {
                page: 'current'
             },
              //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-             columns: [0,1,2,3,4,5,6,7],
+             columns: [0,1,2,3,4,5,6,7,9],
               // optional space between columns
               columnGap: 1
             }
@@ -172,7 +181,7 @@ function load_data_tables() {
                page: 'current'
             },
              //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-             columns: [0,1,2,3,4,5,6,7],
+             columns: [0,1,2,3,4,5,6,7,9],
               // optional space between columns
               columnGap: 1
             },

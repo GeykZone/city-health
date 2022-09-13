@@ -1,10 +1,12 @@
+<?php   include('../../route.php'); ?>
+
 <?php 
 // Database connection info 
 $dbDetails = array( 
-    'host' => 'localhost', 
-    'user' => 'root', 
-    'pass' => '', 
-    'db'   => 'hpcs_data' 
+    'host' => $hostname, 
+    'user' => $username , 
+    'pass' => $password, 
+    'db'   => $database
 ); 
  
 // DB table to use 
@@ -19,14 +21,14 @@ $primaryKey = 'id';
 // The `dt` parameter represents the DataTables column identifier. 
 
 $columns = array( 
-    array( 'db' => 'first_name', 'dt' => 0, 'field' => 'first_name' ), 
-    array( 'db' => 'middle_name',  'dt' => 1, 'field' => 'middle_name' ), 
-    array( 'db' => 'last_name',      'dt' => 2, 'field' => 'last_name' ), 
-    array( 'db' => 'age',     'dt' => 3, 'field' => 'age' ), 
-    array( 'db' => 'gender',    'dt' => 4, 'field' => 'gender' ),
-    array( 'db' => 'birthdate',      'dt' => 5, 'field' => 'birthdate' ), 
-    array( 'db' => 'civil',    'dt' => 6, 'field' => 'civil'),
-    array( 'db' => 'barangay_name',    'dt' => 7, 'field' => 'barangay_name'),
+    array( 'db' => 'barangay_name',    'dt' => 0, 'field' => 'barangay_name'),
+    array( 'db' => 'first_name', 'dt' => 1, 'field' => 'first_name' ), 
+    array( 'db' => 'middle_name',  'dt' => 2, 'field' => 'middle_name' ), 
+    array( 'db' => 'last_name',      'dt' => 3, 'field' => 'last_name' ), 
+    array( 'db' => 'age',     'dt' => 4, 'field' => 'age' ), 
+    array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender' ),
+    array( 'db' => 'birthdate',      'dt' => 6, 'field' => 'birthdate' ), 
+    array( 'db' => 'civil',    'dt' => 7, 'field' => 'civil'),
     array( 'db' => 'contact',     'dt' => 8, 'field' => 'contact' ), 
     array( 'db' => 'email',    'dt' => 9, 'field' => 'email' ), 
 ); 

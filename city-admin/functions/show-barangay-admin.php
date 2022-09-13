@@ -57,6 +57,14 @@ $(document).ready(function () {
 $("#first_load_barangay_admin_table").addClass("d-none");
 $("#admin_table").removeClass("d-none");
 load_data_tables();
+
+//to align the data table buttons
+$("#admin_table_wrapper").addClass("row");
+$("#admin_table_length").addClass("col-sm-6");
+$("#admin_table_length").addClass("mb-3");
+$("#admin_table_filter").addClass("col-sm-6");
+$("#admin_table_filter").addClass("mb-3");
+$(".dt-buttons").addClass("col-sm-1");
 });
 </script>
 

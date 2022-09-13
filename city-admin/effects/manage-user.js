@@ -321,7 +321,7 @@ function load_data_tables() {
 
     var table = $('#admin_table').DataTable({
       
-      //"dom": 'Blfrtip',      
+      "dom": 'lfBrtip',      
 
       "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
 

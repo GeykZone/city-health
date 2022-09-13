@@ -73,7 +73,7 @@ include('includes/sidebar.php');
 
     
 
-      <table class="table  mb-0 d-none " id="admin_table" > 
+      <table class="table  mb-0 d-none w-100" id="admin_table" > 
         <thead class="table-info fw-semibold">
           <tr class="align-middle">
             <th>Barangay</th>

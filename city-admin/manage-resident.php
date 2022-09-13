@@ -29,6 +29,11 @@ include('includes/sidebar.php');
 <?php include('add-resident.php'); ?>
 <!--add barangay resident modal end-->
 
+
+<!--add barangay resident modal-->
+<?php include('delete-resident.php'); ?>
+<!--add barangay resident modal end-->
+
 <div class="body flex-grow-1 px-3">
 <div class="container-fluid">
 
@@ -90,6 +95,7 @@ include('includes/sidebar.php');
       <table class="table  mb-0 d-none w-100" id="resident_table" > 
         <thead class="table-info fw-semibold">
           <tr class="align-middle">
+            <th>Barangay</th>
             <th>First Name</th>
             <th>Middle Name</th>
             <th>Last Name</th>
@@ -97,7 +103,6 @@ include('includes/sidebar.php');
             <th>Gender</th>
             <th>Date of Birth</th>
             <th>Civil Status</th>
-            <th>Barangay</th>
             <th>Contact No.</th>
             <th>Email Address</th>
             <th>Settings</th>
