@@ -1,61 +1,45 @@
-<?php   include('../../route.php'); ?>
+<?php 
+// Database connection info 
+$dbDetails = array( 
+    'host' => 'localhost', 
+    'user' => 'root', 
+    'pass' => '', 
+    'db'   => 'hpcs_data' 
+); 
+ 
+// DB table to use 
+$table = 'residents'; 
+
+ 
+// Table's primary key 
+$primaryKey = 'id'; 
+ 
+// Array of database columns which should be read and sent back to DataTables. 
+// The `db` parameter represents the column name in the database.  
+// The `dt` parameter represents the DataTables column identifier. 
+
+$columns = array( 
+    array( 'db' => 'first_name', 'dt' => 0, 'field' => 'first_name' ), 
+    array( 'db' => 'middle_name',  'dt' => 1, 'field' => 'middle_name' ), 
+    array( 'db' => 'last_name',      'dt' => 2, 'field' => 'last_name' ), 
+    array( 'db' => 'age',     'dt' => 3, 'field' => 'age' ), 
+    array( 'db' => 'gender',    'dt' => 4, 'field' => 'gender' ),
+    array( 'db' => 'birthdate',      'dt' => 5, 'field' => 'birthdate' ), 
+    array( 'db' => 'civil',    'dt' => 6, 'field' => 'civil'),
+    array( 'db' => 'barangay_name',    'dt' => 7, 'field' => 'barangay_name'),
+    array( 'db' => 'contact',     'dt' => 8, 'field' => 'contact' ), 
+    array( 'db' => 'email',    'dt' => 9, 'field' => 'email' ), 
+); 
+ 
+// Include SQL query processing class 
+require 'ssp.class.php'; 
+
+$joinQuery = "FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
 
 
-<?php
-$sql = "SELECT * FROM barangays INNER JOIN residents ON barangays.id = residents.barangay_id ORDER BY residents.first_name";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-
-    while($row = $result->fetch_assoc()) {
-
-        ?>
-          <tr class="bg-tr align-middle">
-            <td>
-              <div><?php echo $row['first_name']." ".$row['middle_name']." ".$row['last_name']; ?></div>
-            </td>
-            <td>
-              <div><?php echo $row['age']; ?></div>
-            </td>
-            <td>
-              <div><?php echo $row['gender']; ?></div>
-            </td>
-            <td>
-              <div><?php echo $row['birthdate']; ?></div>
-            </td>
-            <td>
-              <div><?php echo $row['civil']; ?></div>
-            </td>
-            <td>
-              <div><?php echo $row['barangay_name']; ?></div>
-            </td>
-            <td>
-              <div><?php echo $row['contact']; ?></div>
-            </td>
-            <td>
-              <div><?php echo $row['email']; ?></div>
-            </td>
-            <td >
-              <i class="edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" onclick="modal_open();"></i>
-              <i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" onclick="modal_open();"></i>
-              <i class="barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>
-            </td>
-          </tr>
-        <?php
-      }
-}
-?>
-
-<script>
-$(document).ready(function () {
-$("#first_load_barangay_admin_table").addClass("d-none");
-$("#resident_table").removeClass("d-none");
-load_data_tables();
-});
-</script>
-
-
-
-
-
+ 
+// Output data as json format 
+echo json_encode( 
+    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery ) 
+);
 

@@ -8,7 +8,19 @@ $(document).attr("title", "HPCS | Manage Residents");
 select_with_search_box(); 
 enable_form();  
 generate_age();
-load_table_resident();
+//load_table_resident();
+
+$("#first_load_barangay_admin_table").addClass("d-none");
+$("#resident_table").removeClass("d-none");
+load_data_tables();
+
+//to align the data table buttons
+$("#resident_table_wrapper").addClass("row");
+$("#resident_table_length").addClass("col-sm-6");
+$("#resident_table_length").addClass("mb-3");
+$("#resident_table_filter").addClass("col-sm-6");
+$("#resident_table_filter").addClass("mb-3");
+$(".dt-buttons").addClass("col-sm-1");
 });
 
 //set do some stuff when confiramtion variable is changed
@@ -65,10 +77,34 @@ function load_data_tables() {
   if ( ! $.fn.DataTable.isDataTable( '#resident_table' ) ) { // check if data table is already exist
 
     var table = $('#resident_table').DataTable({
-
-     
+//<i class="edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" onclick="modal_open();"></i>
+//<i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" onclick="modal_open();"></i>
+//<i class="barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>
       
-      //"dom": 'Blfrtip',      
+        "processing": true,
+        "serverSide": true,
+        "ajax": "functions/show-resident.php",   
+        
+        "columns": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          {
+            "defaultContent": "<i class='edit_barangay_value update btn_icon fas fa-edit' data-coreui-toggle='modal' href='#update-barangay' id='edit_barangay_value' role='button' onclick='modal_open();'></i> "+
+            "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_barangay' data-coreui-toggle='modal' id='edit_barangay_value' role='button' onclick='modal_open();'></i>"+
+            "<i class='barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
+            
+          }
+        ],
+      
+        "dom": 'lfBrtip',      
 
       "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
 
@@ -367,10 +403,10 @@ if(confirmation.a == 1)
     title: 'A new resident has been added in the list.'
   });
   setTimeout(function(){  
-    $("#resident_table").addClass("d-none");
-    $("#first_load_barangay_admin_table").removeClass("d-none");
+    $("#first_load_barangay_admin_table").addClass("d-none");
+    $("#resident_table").removeClass("d-none");
     destroy_resident_table();
-    load_table_resident();
+    load_data_tables();
 
   },3000);
 }

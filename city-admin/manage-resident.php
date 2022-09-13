@@ -86,14 +86,13 @@ include('includes/sidebar.php');
             
   <hr class="mt-0">
     <!-- /.row-->
-      <div class="table-responsive-xxl" >
-
-    
-
-      <table class="table  mb-0 d-none " id="resident_table" > 
+      <div  class="table-responsive-xxl">
+      <table class="table  mb-0 d-none w-100" id="resident_table" > 
         <thead class="table-info fw-semibold">
           <tr class="align-middle">
-            <th>Full Name</th>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
             <th>Age</th>
             <th>Gender</th>
             <th>Date of Birth</th>
@@ -105,12 +104,8 @@ include('includes/sidebar.php');
           </tr>
         </thead>
 
-        <tbody id="barangay_resident_table"> 
-
-        
-
+        <tbody class=""> 
         </tbody>
-        
       </table>
 
       <div class="d-flex align-items-center mb-3 mt-3 bg-warning p-2 rounded-2" style="color: white;" id="first_load_barangay_admin_table">
