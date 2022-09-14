@@ -1,12 +1,24 @@
 var admin_id = "";
+var active_data = "";
 
 $(document).ready(function () {
   
   $(document).attr("title", "HPCS | Manage Users");
   select_with_search_box();
   generate_default_username_password();
-  load_table_admin();
-  get_admin_table_cell_value();   
+  get_admin_table_cell_value();
+
+$("#first_load_barangay_admin_table").addClass("d-none");
+$("#admin_table").removeClass("d-none");
+load_data_tables();
+
+//to align the data table buttons
+$("#admin_table_wrapper").addClass("row");
+$("#admin_table_length").addClass("col-sm-6");
+$("#admin_table_length").addClass("mb-3");
+$("#admin_table_filter").addClass("col-sm-6");
+$("#admin_table_filter").addClass("mb-3");
+$(".dt-buttons").addClass("col-sm-1");
 });
 
 //add a delay in loading the material icon
@@ -218,10 +230,10 @@ if(confirmation.a == 1)
     title: 'A new barangay admin has been added in the list.'
   });
   setTimeout(function(){
-    $("#admin_table").addClass("d-none");
-    $("#first_load_barangay_admin_table").removeClass("d-none");
+    $("#first_load_barangay_admin_table").addClass("d-none");
+    $("#admin_table").removeClass("d-none");
     destroy_admin_table();
-    load_table_admin();
+    load_data_tables();
   
 
   },3000);
@@ -245,10 +257,10 @@ else if(confirmation.a == 3)
     title: 'A default username and password has been restored.'
   });
   setTimeout(function(){
-    $("#admin_table").addClass("d-none");
-    $("#first_load_barangay_admin_table").removeClass("d-none");
+    $("#first_load_barangay_admin_table").addClass("d-none");
+    $("#admin_table").removeClass("d-none");
     destroy_admin_table();
-    load_table_admin();
+    load_data_tables();
   
 
   },3000);
@@ -262,10 +274,10 @@ else if(confirmation.a == 4)
     title: 'A barangay admin record has been deleted.'
   });
   setTimeout(function(){
-    $("#admin_table").addClass("d-none");
-    $("#first_load_barangay_admin_table").removeClass("d-none");
+    $("#first_load_barangay_admin_table").addClass("d-none");
+    $("#admin_table").removeClass("d-none");
     destroy_admin_table();
-    load_table_admin();
+    load_data_tables();
   
 
   },3000);
@@ -279,10 +291,10 @@ else if(confirmation.a == 5)
     title: 'A barangay admin record has been activated.'
   });
   setTimeout(function(){
-    $("#admin_table").addClass("d-none");
-    $("#first_load_barangay_admin_table").removeClass("d-none");
+    $("#first_load_barangay_admin_table").addClass("d-none");
+    $("#admin_table").removeClass("d-none");
     destroy_admin_table();
-    load_table_admin();
+    load_data_tables();
   
 
   },3000);
@@ -296,11 +308,10 @@ else if(confirmation.a == 6)
     title: 'A barangay admin record has been deactivated.'
   });
   setTimeout(function(){
-    $("#admin_table").addClass("d-none");
-    $("#first_load_barangay_admin_table").removeClass("d-none");
+    $("#first_load_barangay_admin_table").addClass("d-none");
+    $("#admin_table").removeClass("d-none");
     destroy_admin_table();
-    load_table_admin();
-  
+    load_data_tables();
 
   },3000);
 }
@@ -321,7 +332,56 @@ function load_data_tables() {
 
     var table = $('#admin_table').DataTable({
       
-      "dom": 'lfBrtip',      
+      "dom": 'lfBrtip',  
+      
+      "serverSide": true,
+      "ajax": "functions/show-barangay-admin.php", 
+
+      "columns": [
+
+        null,
+        null,
+        {
+          "targets": 2,
+          "render": function ( data, type, row, meta ) {
+
+
+            if(data === "0")
+            {active_data = data;
+              return  "<div class='bg-dark text-white rounded-2 d-flex justify-content-center' type='button'  style='width:9rem'>Deactivated</div> ";
+              
+            }
+            else
+            {active_data = data;
+              return "<div class='bg-success text-white rounded-2 d-flex justify-content-center' type='button' style='width:9rem'>Activated</div>";
+            }
+            
+          },
+         },
+        {
+          "defaultContent": "data",
+          "targets": 3,
+          "render": function ( data, type, row, meta ) {
+
+            if(active_data === "0")
+            {
+              return  "<i class='edit_barangay_value btn_icon fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' onclick='modal_open();'></i> "+
+              "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' onclick='modal_open();'></i> "+
+              " <i class='edit_barangay_value btn_icon fas fa-unlock' href='#activate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' onclick='modal_open();'></i>"+
+              "<i class='admin_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='admin_table_is_loading' role='button' disable></i>"
+            }
+            else
+            {
+              return  "<i class='edit_barangay_value btn_icon fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' onclick='modal_open();'></i> "+
+              "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' onclick='modal_open();'></i> "+
+              " <i class='edit_barangay_value btn_icon fas fa-lock' href='#deactivate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' onclick='modal_open();'></i>"+
+              "<i class='admin_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='admin_table_is_loading' role='button' disable></i>"
+            }
+              
+          },
+           
+        }
+      ],
 
       "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
 
@@ -410,15 +470,6 @@ function load_data_tables() {
   
 };
 //show data tables end
-
-
-//show the barangay admin table ajax
-function load_table_admin()
-{
-  $("#barangay_admin_table").load("functions/show-barangay-admin.php", {
-  });
-}
-//show the barangay admin table ajax
 
 //get the table cell value when selected
 function get_admin_table_cell_value()

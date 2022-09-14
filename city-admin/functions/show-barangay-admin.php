@@ -1,72 +1,44 @@
 <?php   include('../../route.php'); ?>
 
+<?php 
+// Database connection info 
+$dbDetails = array( 
+    'host' => $hostname, 
+    'user' => $username , 
+    'pass' => $password, 
+    'db'   => $database
+); 
+ 
+// DB table to use 
+$table = 'users'; 
 
-<?php
-$sql = "SELECT * FROM `users` WHERE `role` = '2' ORDER BY barangay_name";
-$result = $conn->query($sql);
+ 
+// Table's primary key 
+$primaryKey = 'id'; 
+ 
+// Array of database columns which should be read and sent back to DataTables. 
+// The `db` parameter represents the column name in the database.  
+// The `dt` parameter represents the DataTables column identifier. 
 
-if ($result->num_rows > 0) {
+$columns = array( 
+    array( 'db' => 'barangay_name',    'dt' => 0, 'field' => 'barangay_name'),
+    array( 'db' => 'username', 'dt' => 1, 'field' => 'username' ), 
+    array( 'db' => 'activated',  'dt' => 2, 'field' => 'activated' ), 
+); 
+ 
+// Include SQL query processing class 
+require 'ssp.class.php'; 
 
-  while($row = $result->fetch_assoc()) { 
+$joinQuery = "FROM `users` WHERE `role` = '2'";
 
-    ?>
-      <tr class="bg-tr align-middle">
-        <td>
-          <div><?php echo $row['barangay_name']; ?></div>
-        </td>
-        <td>
-          <div><?php echo $row['username']; ?></div>
-        </td>
-        <td>
-          <div> <?php $admin_status = $row['activated']; 
 
-          if($admin_status == 0)
-          {
-            ?> <div class="bg-dark text-white rounded-2 d-flex justify-content-center" type="button"  style="width:9rem">Deactivated</div><?php
-          }
-          else
-          {
-            ?><div class="bg-success text-white rounded-2 d-flex justify-content-center" type="button" style="width:9rem">Activated</div><?php
-          }
-          ?></div>
-        </td>
-        <td>
-          <i class="edit_barangay_value btn_icon fas fa-undo-alt" data-coreui-toggle="modal" href="#reset_barangay" id="update_barangay_value" role="button" onclick="modal_open();"></i>
-          <i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay_admin" data-coreui-toggle="modal" id="delete_barangay_admin_value" role="button" onclick="modal_open();"></i>
-          <?php
-          
-          if($admin_status == 0)
-          {
-            ?> <i class="edit_barangay_value btn_icon fas fa-unlock" href="#activate_barangay_admin" data-coreui-toggle="modal" id="activate_barangay_admin_value" role="button" onclick="modal_open();"></i><?php
-          }
-          else
-          {
-            ?><i class="edit_barangay_value btn_icon fas fa-lock" href="#deactivate_barangay_admin" data-coreui-toggle="modal" id="deactivate_barangay_value" role="button" onclick="modal_open();"></i><?php
-          }
-          ?>
-          <i class="admin_table_is_loading spinner-border spinner-border-sm mt-2 d-none" style="color:#3b7ddd;"  id="admin_table_is_loading" role="button" disable></i>
-        </td>
-      </tr>
-    <?php
-  }
-}
+ 
+// Output data as json format 
+echo json_encode( 
+    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery ) 
+);
+
 ?>
-
-<script>
-$(document).ready(function () {
-$("#first_load_barangay_admin_table").addClass("d-none");
-$("#admin_table").removeClass("d-none");
-load_data_tables();
-
-//to align the data table buttons
-$("#admin_table_wrapper").addClass("row");
-$("#admin_table_length").addClass("col-sm-6");
-$("#admin_table_length").addClass("mb-3");
-$("#admin_table_filter").addClass("col-sm-6");
-$("#admin_table_filter").addClass("mb-3");
-$(".dt-buttons").addClass("col-sm-1");
-});
-</script>
 
 
 

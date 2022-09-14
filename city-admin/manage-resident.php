@@ -109,7 +109,7 @@ include('includes/sidebar.php');
           </tr>
         </thead>
 
-        <tbody class=""> 
+        <tbody> 
         </tbody>
       </table>
 

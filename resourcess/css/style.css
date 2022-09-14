@@ -80,6 +80,19 @@
   --cui-highlight-bg: #fff3cd;
 }
 
+#resident_table tbody tr.even:hover {
+  background-color: #adb8c21e;
+  transition: 0.3s;
+}
+
+
+#resident_table tbody tr.odd:hover {
+  background-color: #adb8c21e;
+  transition: 0.3s;
+}
+
+
+
 .material-icons
 {
   opacity: 0;

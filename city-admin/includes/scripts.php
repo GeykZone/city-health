@@ -12,14 +12,6 @@
     <script>
       if ( window.history.replaceState ){window.history.replaceState( null, null, window.location.href );} // stop resubmission
 
-      //changing the page tittle
-      $(window).on('load', function() {
-
-        //remove passed cookies
-        Cookies.remove('var');
-      });       
-      //changing the page tittle end
-
       //remove invalid class
       $('div').bind('focus blur', function() {
         $("select").removeClass("is-invalid");

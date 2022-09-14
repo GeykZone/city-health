@@ -45,3 +45,4 @@ echo json_encode(
     SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery ) 
 );
 
+?>

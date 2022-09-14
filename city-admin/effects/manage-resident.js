@@ -8,7 +8,6 @@ $(document).attr("title", "HPCS | Manage Residents");
 select_with_search_box(); 
 enable_form();  
 generate_age();
-//load_table_resident();
 
 $("#first_load_barangay_admin_table").addClass("d-none");
 $("#resident_table").removeClass("d-none");
@@ -21,8 +20,11 @@ $("#resident_table_length").addClass("mb-3");
 $("#resident_table_filter").addClass("col-sm-6");
 $("#resident_table_filter").addClass("mb-3");
 $(".dt-buttons").addClass("col-sm-1");
+
 });
 
+$(window).on('load', function() {
+});      
 
 
 //add a delay in loading the material icon
@@ -66,19 +68,78 @@ sortField: 'text'
 }
 // for select  end
 
-
-//show the barangay resident table ajax
-function load_table_resident()
+//trigger error messages
+function alert_message()
 {
-  $("#barangay_resident_table").load("functions/show-resident.php", {
+  var toastMixin = Swal.mixin({
+    toast: true,
+    icon: 'success',
+    title: 'General Title',
+    animation: false,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer) 
+    }
   });
+
+if(confirmation.a == 1)
+{
+  $('#add-barangay-resident').modal('toggle');
+
+  $("#select_barangay").val("");
+  var $select = $('#select_barangay').selectize();
+  var control = $select[0].selectize;
+  control.clear();
+  $("#firstname").val("");
+  $("#middlename").val("");
+  $("#lastname").val("");
+  $("#gender").val("");
+  $select = $('#gender').selectize();
+  control = $select[0].selectize;
+  control.clear();
+  $( "#birthdate" ).val("0000-00-00");
+  $("#contact").val("");
+  $("#email").val("");
+  $("#civil_status").val("");
+  $select = $('#civil_status').selectize();
+  control = $select[0].selectize;
+  control.clear();
+
+  $(".barangay_table_is_loading").removeClass("d-none");
+  $(".edit_barangay_value").addClass("d-none");
+  toastMixin.fire({
+    animation: true,
+    title: 'A new resident has been added in the list.'
+  });
+  setTimeout(function(){  
+    $("#first_load_barangay_admin_table").addClass("d-none");
+    $("#resident_table").removeClass("d-none");
+    destroy_resident_table();
+    load_data_tables();
+  },3000);
 }
-//show the barangay resident table ajax
+else if(confirmation.a == 2)
+{
+  toastMixin.fire({
+    animation: true,
+    title: 'An admin is already assigned in the barangay.',
+    icon: 'error'
+  });
+  setTimeout(function(){
+  },3000);
+}
+}
+//trigger error messages
 
 //destroy data table
 function destroy_resident_table()
 {
-  $('#resident_table').dataTable().fnDestroy();
+ $('#resident_table').dataTable().fnDestroy();
+
 }
 //destroy data table
 
@@ -196,10 +257,8 @@ function load_data_tables() {
         }],
     });
     table.buttons().container().appendTo('#resident_table_wrapper .col-md-6:eq(0)');
-
   }
-
-  
+     
 };
 //show data tables end
 
@@ -363,74 +422,6 @@ $("#add_barangay_admin_btn").click(function () {
 
   });
   //submit new barangay end
-
-//trigger error messages
-function alert_message()
-{
-  var toastMixin = Swal.mixin({
-    toast: true,
-    icon: 'success',
-    title: 'General Title',
-    animation: false,
-    position: 'top-right',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer) 
-    }
-  });
-
-if(confirmation.a == 1)
-{
-  $('#add-barangay-resident').modal('toggle');
-
-  $("#select_barangay").val("");
-  var $select = $('#select_barangay').selectize();
-  var control = $select[0].selectize;
-  control.clear();
-  $("#firstname").val("");
-  $("#middlename").val("");
-  $("#lastname").val("");
-  $("#gender").val("");
-  $select = $('#gender').selectize();
-  control = $select[0].selectize;
-  control.clear();
-  $( "#birthdate" ).val("0000-00-00");
-  $("#contact").val("");
-  $("#email").val("");
-  $("#civil_status").val("");
-  $select = $('#civil_status').selectize();
-  control = $select[0].selectize;
-  control.clear();
-
-  $(".barangay_table_is_loading").removeClass("d-none");
-  $(".edit_barangay_value").addClass("d-none");
-  toastMixin.fire({
-    animation: true,
-    title: 'A new resident has been added in the list.'
-  });
-  setTimeout(function(){  
-    $("#first_load_barangay_admin_table").addClass("d-none");
-    $("#resident_table").removeClass("d-none");
-    destroy_resident_table();
-    load_data_tables();
-
-  },3000);
-}
-else if(confirmation.a == 2)
-{
-  toastMixin.fire({
-    animation: true,
-    title: 'An admin is already assigned in the barangay.',
-    icon: 'error'
-  });
-  setTimeout(function(){
-  },3000);
-}
-}
-//trigger error messages
 
 //erese input fields when x button is pressed
 //add resident
