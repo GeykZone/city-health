@@ -29,13 +29,14 @@ $columns = array(
 // Include SQL query processing class 
 require 'ssp.class.php'; 
 
-$joinQuery = "FROM `users` WHERE `role` = '2'";
+$joinQuery = "FROM `users` ";
+$where = "`role`=2";
 
 
  
 // Output data as json format 
 echo json_encode( 
-    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery ) 
+    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery, $where ) 
 );
 
 ?>

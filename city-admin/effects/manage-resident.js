@@ -33,7 +33,7 @@ function modal_open()
 setTimeout(function(){
   $('.material-icons').css('opacity','1');
 
-  },350);
+  },500);
 }
 //add a delay in loading the material icon
 
@@ -151,10 +151,9 @@ function load_data_tables() {
 
     var table = $('#resident_table').DataTable({
       
-        //"processing": true,
+       // "processing": true,
         "serverSide": true,
         "ajax": "functions/show-resident.php",   
-        
         "columns": [
           null,
           null,
@@ -176,7 +175,7 @@ function load_data_tables() {
       
         "dom": 'lfBrtip',      
 
-      "lengthMenu": [[10, 20, 50, 100], [10, 20, 50, 100]],
+        "lengthMenu": [[9, 15, 20, 100, 150], ["09", 15, 20, 100, 150]],
 
       //disable the sorting of colomn
       "columnDefs": [ {

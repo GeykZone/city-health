@@ -60,7 +60,7 @@ include('includes/sidebar.php');
         <h4 style="color:aliceblue;">Barangay Admin List</h4>
       </div>
       <div class="col-sm-6 text-end">
-      <a class="addbtn add-brgy px-4 fw-bolder" data-coreui-toggle="modal" href="#add-barangay-admin" role="button">Admin +</a>
+      <a class="addbtn add-brgy px-4 fw-bolder d-none" id="add_admin" data-coreui-toggle="modal" href="#add-barangay-admin" role="button" >Admin +</a>
       </div>
   </div> 
   </div>
@@ -70,10 +70,7 @@ include('includes/sidebar.php');
   <hr class="mt-0">
     <!-- /.row-->
       <div class="table-responsive-xxl" >
-
-    
-
-      <table class="table  mb-0 d-none w-100" id="admin_table" > 
+      <table class="table  mb-0 d-none w-100" id="admin_table"> 
         <thead class="table-info fw-semibold">
           <tr class="align-middle">
             <th>Barangay</th>
@@ -91,13 +88,9 @@ include('includes/sidebar.php');
         
       </table>
 
-      <div class="d-flex align-items-center mb-3 mt-3 bg-warning p-2 rounded-2" style="color: white;" id="first_load_barangay_admin_table">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      <span style="padding-left:10px;"></span>
-      <strong>Updating Table....</strong>
+      <div id="myProgress" class=" rounded-4">
+      <div id="myBar" class=" rounded-4">Loading 10%</div>
       </div>
-
-          
       </div>
     
   </div>

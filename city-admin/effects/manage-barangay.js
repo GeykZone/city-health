@@ -7,13 +7,14 @@ $(document).ready(function()
   get_barangay_table_cell_value();
 });
 
+
 //add a delay in loading the material icon
 function modal_open()
 {
 setTimeout(function(){
   $('.material-icons').css('opacity','1');
 
-  },350);
+  },400);
 }
 //add a delay in loading the material icon
 

@@ -1,5 +1,6 @@
 var admin_id = "";
 var active_data = "";
+var i = 0;
 
 $(document).ready(function () {
   
@@ -8,17 +9,14 @@ $(document).ready(function () {
   generate_default_username_password();
   get_admin_table_cell_value();
 
-$("#first_load_barangay_admin_table").addClass("d-none");
-$("#admin_table").removeClass("d-none");
-load_data_tables();
+  //load destroy and fix data table to clear previous data
+  load_data_tables();
+  destroy_admin_table();
+  load_data_tables();
+   //load destroy and fix end
 
-//to align the data table buttons
-$("#admin_table_wrapper").addClass("row");
-$("#admin_table_length").addClass("col-sm-6");
-$("#admin_table_length").addClass("mb-3");
-$("#admin_table_filter").addClass("col-sm-6");
-$("#admin_table_filter").addClass("mb-3");
-$(".dt-buttons").addClass("col-sm-1");
+  $("#admin_table_wrapper").addClass("d-none");
+  load_progress_bar();
 });
 
 //add a delay in loading the material icon
@@ -27,10 +25,45 @@ function modal_open()
 setTimeout(function(){
   $('.material-icons').css('opacity','1');
 
-  },350);
+  },500);
 }
 //add a delay in loading the material icon
 
+//progress bar
+function load_progress_bar()
+{
+  setInterval(move())
+  setTimeout( function()
+  {
+    $("#myBar").text("Table Loaded Successfully!");
+    setTimeout(function(){
+      $("#myProgress").addClass("d-none");
+      $("#admin_table").removeClass("d-none");
+      $("#admin_table_wrapper").removeClass("d-none");
+      $("#add_admin").removeClass("d-none");
+    },800);
+  },3000)
+}
+
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 10;
+    var id = setInterval(frame, 30);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+        elem.innerHTML ="Loading " + width  + "%";
+      }
+    }
+  }
+}
+//progress bar end
 
 //set do some stuff when confiramtion variable is changed
 var confirmation = {
@@ -68,6 +101,7 @@ function generate_default_username_password()
   $("#select_barangay").change(function(){ 
     var barangay_name = $("#select_barangay").text();
     barangay_name = barangay_name.replace(/ /g,"_");
+    barangay_name = barangay_name.replace(/\./g, "");   
     barangay_name = barangay_name.toLowerCase();
 
     if(barangay_name.trim().length != 0)
@@ -116,6 +150,11 @@ $( "#add_barangay_admin_btn" ).click(function() {
 
 //reset barangay admin username and password
 $( "#reset_admin" ).click(function() {
+
+  admin_id = admin_id.replace(/ /g,"_"); //remove space
+  admin_id = admin_id.replace(/\./g, ""); // remmove period
+  admin_id = admin_id.toLowerCase(); 
+  
   var reset_username = "admin"+"_"+admin_id;
   var reset_password = admin_id+":123";
 
@@ -222,20 +261,26 @@ if(confirmation.a == 1)
   var $select = $('#select_barangay').selectize();
   var control = $select[0].selectize;
   control.clear();
- 
+  
   $(".admin_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
+  $("#admin_table_paginate").addClass("d-none");
+  $("#admin_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
   toastMixin.fire({
     animation: true,
     title: 'A new barangay admin has been added in the list.'
   });
   setTimeout(function(){
-    $("#first_load_barangay_admin_table").addClass("d-none");
-    $("#admin_table").removeClass("d-none");
-    destroy_admin_table();
-    load_data_tables();
+   
+    $("#myBar").text("Table Updated Successfully!");
+    setTimeout(function(){
+      destroy_admin_table();
+      load_data_tables();
+      $("#myProgress").addClass("d-none");
+    },600);
   
-
   },3000);
 }
 else if(confirmation.a == 2)
@@ -252,67 +297,92 @@ else if(confirmation.a == 3)
 {
   $(".admin_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
+  $("#admin_table_paginate").addClass("d-none");
+  $("#admin_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
   toastMixin.fire({
     animation: true,
     title: 'A default username and password has been restored.'
   });
   setTimeout(function(){
-    $("#first_load_barangay_admin_table").addClass("d-none");
-    $("#admin_table").removeClass("d-none");
-    destroy_admin_table();
-    load_data_tables();
+   
+    $("#myBar").text("Table Updated Successfully!");
+    setTimeout(function(){
+      destroy_admin_table();
+      load_data_tables();
+      $("#myProgress").addClass("d-none");
+    },600);
   
-
   },3000);
 }
 else if(confirmation.a == 4)
 {
   $(".admin_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
+  $("#admin_table_paginate").addClass("d-none");
+  $("#admin_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
   toastMixin.fire({
     animation: true,
     title: 'A barangay admin record has been deleted.'
   });
   setTimeout(function(){
-    $("#first_load_barangay_admin_table").addClass("d-none");
-    $("#admin_table").removeClass("d-none");
-    destroy_admin_table();
-    load_data_tables();
+   
+    $("#myBar").text("Table Updated Successfully!");
+    setTimeout(function(){
+      destroy_admin_table();
+      load_data_tables();
+      $("#myProgress").addClass("d-none");
+    },600);
   
-
   },3000);
 }
 else if(confirmation.a == 5)
 {
   $(".admin_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
+  $("#admin_table_paginate").addClass("d-none");
+  $("#admin_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
   toastMixin.fire({
     animation: true,
     title: 'A barangay admin record has been activated.'
   });
   setTimeout(function(){
-    $("#first_load_barangay_admin_table").addClass("d-none");
-    $("#admin_table").removeClass("d-none");
-    destroy_admin_table();
-    load_data_tables();
+   
+    $("#myBar").text("Table Updated Successfully!");
+    setTimeout(function(){
+      destroy_admin_table();
+      load_data_tables();
+      $("#myProgress").addClass("d-none");
+    },600);
   
-
   },3000);
 }
 else if(confirmation.a == 6)
 {
   $(".admin_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
+  $("#admin_table_paginate").addClass("d-none");
+  $("#admin_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
   toastMixin.fire({
     animation: true,
     title: 'A barangay admin record has been deactivated.'
   });
   setTimeout(function(){
-    $("#first_load_barangay_admin_table").addClass("d-none");
-    $("#admin_table").removeClass("d-none");
-    destroy_admin_table();
-    load_data_tables();
-
+   
+    $("#myBar").text("Table Updated Successfully!");
+    setTimeout(function(){
+      destroy_admin_table();
+      load_data_tables();
+      $("#myProgress").addClass("d-none");
+    },600);
+  
   },3000);
 }
 }
@@ -332,10 +402,11 @@ function load_data_tables() {
 
     var table = $('#admin_table').DataTable({
       
-      "dom": 'lfBrtip',  
-      
+      "dom": 'lfBrtip',     
+      //"processing": true,
       "serverSide": true,
-      "ajax": "functions/show-barangay-admin.php", 
+      "ajax": "functions/show-barangay-admin.php",  
+      scrollCollapse: true,
 
       "columns": [
 
@@ -383,7 +454,7 @@ function load_data_tables() {
         }
       ],
 
-      "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+      "lengthMenu": [[9, 15, 20, 100, 150], ["09", 15, 20, 100, 150]],
 
       //disable the sorting of colomn
       "columnDefs": [ {
@@ -466,6 +537,14 @@ function load_data_tables() {
     table.buttons().container().appendTo('#admin_table_wrapper .col-md-6:eq(0)');
 
   }
+
+    //to align the data table buttons
+  $("#admin_table_wrapper").addClass("row");
+  $("#admin_table_length").addClass("col-sm-6");
+  $("#admin_table_length").addClass("mb-3");
+  $("#admin_table_filter").addClass("col-sm-6");
+  $("#admin_table_filter").addClass("mb-3");
+  $(".dt-buttons").addClass("col-sm-1");
 
   
 };
