@@ -96,7 +96,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<h5>When the admin privileges are enabled, the user will be able to login and alter some records in this application.</h5> 
+				<h5>Activating admin privileges allows the user to log in and change some records in this system.</h5> 
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>

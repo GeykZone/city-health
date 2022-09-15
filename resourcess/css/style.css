@@ -80,13 +80,18 @@
   --cui-highlight-bg: #fff3cd;
 }
 
+#th
+{
+  width: 100px  !important;
+}
+
 #myProgress {
   width: 100%;
   background-color: #ddd;
 }
 
 #myBar {
-  width: 10%;
+  width: 0%;
   height: 30px;
   background-color: #3b7ddd;
   text-align: center;
@@ -94,13 +99,13 @@
   color: white;
 }
 
-#resident_table tbody tr.even:hover {
+tbody tr.even:hover {
   background-color: #adb8c21e;
   transition: 0.3s;
 }
 
 
-#resident_table tbody tr.odd:hover {
+tbody tr.odd:hover {
   background-color: #adb8c21e;
   transition: 0.3s;
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Helper functions for building a DataTables server-side processing SQL query
  *

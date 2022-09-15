@@ -92,11 +92,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<h5>Do you really want to delete this record? This process cannot be undone.</h5>
+				<h5 id="del_res_txt">Do you really want to delete this record? This process cannot be undone.</h5>
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="btn btn-danger fw-bolder" id="delete_barangay_admin_record" data-coreui-dismiss="modal" aria-label="Close">Delete</button>
+				<button class="btn btn-danger fw-bolder" id="delete_resident_record" data-coreui-dismiss="modal" aria-label="Close">Delete</button>
 			</div>
 		</div>
 	</div>

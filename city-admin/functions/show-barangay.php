@@ -1,44 +1,41 @@
 <?php   include('../../route.php'); ?>
 
+<?php 
+// Database connection info 
+$dbDetails = array( 
+    'host' => $hostname, 
+    'user' => $username , 
+    'pass' => $password, 
+    'db'   => $database
+); 
+ 
+// DB table to use 
+$table = 'barangays'; 
 
-<?php
+ 
+// Table's primary key 
+$primaryKey = 'id'; 
+ 
+// Array of database columns which should be read and sent back to DataTables. 
+// The `db` parameter represents the column name in the database.  
+// The `dt` parameter represents the DataTables column identifier. 
+
+$columns = array( 
+    array( 'db' => 'barangay_name',    'dt' => 0, 'field' => 'barangay_name'),
+    array( 'db' => 'lat', 'dt' => 1, 'field' => 'lat' ), 
+    array( 'db' => 'long',  'dt' => 2, 'field' => 'long' ), 
+); 
+ 
+// Include SQL query processing class 
+require 'ssp.class.php'; 
 
 
-$sql = "SELECT `barangay_name`, `lat`, `long` FROM `barangays` ORDER BY barangay_name";
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0) { 
 
-  while($row = $result->fetch_assoc()) {
+ 
+// Output data as json format 
+echo json_encode( 
+    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns) 
+);
 
-    ?>
-      <tr class="bg-tr align-middle">
-        <td>
-          <div><?php echo $row['barangay_name']; ?></div>
-        </td>
-        <td>
-          <div><?php echo $row['lat']; ?></div>
-        </td>
-        <td>
-          <div><?php echo $row['long']; ?></div>
-        </td>
-        <td >
-          <i class="edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" onclick="modal_open();"></i>
-          <i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" onclick="modal_open();"></i>
-          <i class="barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>
-        </td>
-      </tr>
-    <?php
-  }
-}
 ?>
-
-<script>
-$(document).ready(function()
-{
-  $("#first_load_barangay_admin_table").addClass("d-none");
-  $("#barangay_table").removeClass("d-none");
-  show_barangay_datatables();
-});
-</script>
-                         

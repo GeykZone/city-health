@@ -1,6 +1,7 @@
 var admin_id = "";
 var active_data = "";
 var i = 0;
+var table = "";
 
 $(document).ready(function () {
   
@@ -8,13 +9,7 @@ $(document).ready(function () {
   select_with_search_box();
   generate_default_username_password();
   get_admin_table_cell_value();
-
-  //load destroy and fix data table to clear previous data
   load_data_tables();
-  destroy_admin_table();
-  load_data_tables();
-   //load destroy and fix end
-
   $("#admin_table_wrapper").addClass("d-none");
   load_progress_bar();
 });
@@ -276,8 +271,9 @@ if(confirmation.a == 1)
    
     $("#myBar").text("Table Updated Successfully!");
     setTimeout(function(){
-      destroy_admin_table();
-      load_data_tables();
+      table.ajax.reload();
+      $("#admin_table_paginate").removeClass("d-none");
+      $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
     },600);
   
@@ -309,8 +305,9 @@ else if(confirmation.a == 3)
    
     $("#myBar").text("Table Updated Successfully!");
     setTimeout(function(){
-      destroy_admin_table();
-      load_data_tables();
+      table.ajax.reload();
+      $("#admin_table_paginate").removeClass("d-none");
+      $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
     },600);
   
@@ -332,8 +329,9 @@ else if(confirmation.a == 4)
    
     $("#myBar").text("Table Updated Successfully!");
     setTimeout(function(){
-      destroy_admin_table();
-      load_data_tables();
+      table.ajax.reload();
+      $("#admin_table_paginate").removeClass("d-none");
+      $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
     },600);
   
@@ -355,8 +353,9 @@ else if(confirmation.a == 5)
    
     $("#myBar").text("Table Updated Successfully!");
     setTimeout(function(){
-      destroy_admin_table();
-      load_data_tables();
+      table.ajax.reload();
+      $("#admin_table_paginate").removeClass("d-none");
+      $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
     },600);
   
@@ -378,8 +377,9 @@ else if(confirmation.a == 6)
    
     $("#myBar").text("Table Updated Successfully!");
     setTimeout(function(){
-      destroy_admin_table();
-      load_data_tables();
+      table.ajax.reload();
+      $("#admin_table_paginate").removeClass("d-none");
+      $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
     },600);
   
@@ -391,7 +391,7 @@ else if(confirmation.a == 6)
 //destroy data table
 function destroy_admin_table()
 {
-  $('#admin_table').dataTable().fnDestroy();
+ table.destroy();
 }
 //destroy data table
 
@@ -400,8 +400,9 @@ function load_data_tables() {
 
   if ( ! $.fn.DataTable.isDataTable( '#admin_table' ) ) { // check if data table is already exist
 
-    var table = $('#admin_table').DataTable({
+    table = $('#admin_table').DataTable({
       
+      "deferRender": true,
       "dom": 'lfBrtip',     
       //"processing": true,
       "serverSide": true,
@@ -454,7 +455,7 @@ function load_data_tables() {
         }
       ],
 
-      "lengthMenu": [[9, 15, 20, 100, 150], ["09", 15, 20, 100, 150]],
+      "lengthMenu": [[10, 15, 20, 25, 50], [10, 15, 20, 25, 50]],
 
       //disable the sorting of colomn
       "columnDefs": [ {
@@ -539,12 +540,12 @@ function load_data_tables() {
   }
 
     //to align the data table buttons
-  $("#admin_table_wrapper").addClass("row");
-  $("#admin_table_length").addClass("col-sm-6");
-  $("#admin_table_length").addClass("mb-3");
-  $("#admin_table_filter").addClass("col-sm-6");
-  $("#admin_table_filter").addClass("mb-3");
-  $(".dt-buttons").addClass("col-sm-1");
+    $("#admin_table_wrapper").addClass("row");
+    $("#admin_table_length").addClass("col-sm-6");
+    $("#admin_table_length").addClass("mb-3");
+    $("#admin_table_filter").addClass("col-sm-6");
+    $("#admin_table_filter").addClass("mb-3");
+    $(".dt-buttons").addClass("col-sm-1");
 
   
 };

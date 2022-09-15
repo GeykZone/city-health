@@ -112,7 +112,7 @@
 
 </div>
 <div class="modal-footer">
-  <button type="btn"  id="add_barangay_admin_btn" class="addbtn add-brgy fw-bolder">Submit</button>
+  <button type="btn"  id="add_resident_btn" class="addbtn add-brgy fw-bolder">Submit</button>
 </div>
 </div>
 </div>

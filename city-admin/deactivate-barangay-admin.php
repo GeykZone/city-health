@@ -96,7 +96,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<h5>Deactivating admin privileges prevents the user from accessing and modifying some records in this system.</h5>
+				<h5>Deactivating admin access will block the user from signing in and changing some entries in this system.</h5>
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>

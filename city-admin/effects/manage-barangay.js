@@ -1,10 +1,14 @@
 var barangay_name_id = "";
+var i = 0;
+var table = "";
 
 $(document).ready(function()
 {
   $(document).attr("title", "HPCS | Manage Barangays");
-  load_table_barangay();
   get_barangay_table_cell_value();
+  load_data_tables();
+  $("#barangay_table_wrapper").addClass("d-none");
+  load_progress_bar();
 });
 
 
@@ -14,9 +18,45 @@ function modal_open()
 setTimeout(function(){
   $('.material-icons').css('opacity','1');
 
-  },400);
+  },500);
 }
 //add a delay in loading the material icon
+
+//progress bar
+function load_progress_bar()
+{
+  setInterval(move());
+  setTimeout( function()
+  {
+    $("#myBar").text("Table Loaded Successfully!");
+    setTimeout(function(){
+      $("#myProgress").addClass("d-none");
+      $("#barangay_table").removeClass("d-none");
+      $("#barangay_table_wrapper").removeClass("d-none");
+      $("#add_barangay").removeClass("d-none");
+    },800);
+  },3000)
+}
+
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 10;
+    var id = setInterval(frame, 30);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+        elem.innerHTML ="Loading " + width  + "%";
+      }
+    }
+  }
+}
+//progress bar end
 
 
 //set do some stuff when confiramtion variable is changed
@@ -141,17 +181,27 @@ if(confirmation.a == 1)
   $("#Latitude").val("");
   $("#Longitude").val("");
 
+
   $(".barangay_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
+  $("#barangay_table_paginate").addClass("d-none");
+  $("#barangay_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
+
   toastMixin.fire({
     animation: true,
     title: 'A new barangay admin has been added in the list.'
   });
   setTimeout(function(){
-    $("#barangay_table").addClass("d-none");
-    $("#first_load_barangay_admin_table").removeClass("d-none");
-    destroy_barangay_table();
-    load_table_barangay();
+
+    $("#myBar").text("Table Updated Successfully!");
+    setTimeout(function(){
+      table.ajax.reload();
+      $("#barangay_table_paginate").removeClass("d-none");
+      $("#barangay_table_info").removeClass("d-none");
+      $("#myProgress").addClass("d-none");
+    },600);
 
   },3000);
 }
@@ -168,38 +218,191 @@ else if(confirmation.a == 2)
 else if(confirmation.a == 3)
 {
   $('#update-barangay').modal('toggle');
+  
   $(".barangay_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
+  $("#barangay_table_paginate").addClass("d-none");
+  $("#barangay_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
+
   toastMixin.fire({
     animation: true,
     title: 'A barangay record has been updated.'
   });
   setTimeout(function(){
-    $("#barangay_table").addClass("d-none");
-    $("#first_load_barangay_admin_table").removeClass("d-none");
-    destroy_barangay_table();
-    load_table_barangay();
+    
+    $("#myBar").text("Table Updated Successfully!");
+    setTimeout(function(){
+      table.ajax.reload();
+      $("#barangay_table_paginate").removeClass("d-none");
+      $("#barangay_table_info").removeClass("d-none");
+      $("#myProgress").addClass("d-none");
+    },600);
 
   },3000);
 }
 else if(confirmation.a == 4)
 {
+  
   $(".barangay_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
+  $("#barangay_table_paginate").addClass("d-none");
+  $("#barangay_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
+
   toastMixin.fire({
     animation: true,
     title: 'A barangay has been deleted.'
   });
   setTimeout(function(){
-    $("#barangay_table").addClass("d-none");
-    $("#first_load_barangay_admin_table").removeClass("d-none");
-    destroy_barangay_table();
-    load_table_barangay();
+    
+    $("#myBar").text("Table Updated Successfully!");
+    setTimeout(function(){
+      table.ajax.reload();
+      $("#barangay_table_paginate").removeClass("d-none");
+      $("#barangay_table_info").removeClass("d-none");
+      $("#myProgress").addClass("d-none");
+    },600);
 
   },3000);
 }
 }
 //trigger error messages
+
+//destroy data table
+function destroy_barangay_table()
+{
+  table.destroy();
+}
+//destroy data table
+
+//show data tables
+function load_data_tables() {
+
+  if ( ! $.fn.DataTable.isDataTable( '#barangay_table' ) ) { // check if data table is already exist
+
+    table = $('#barangay_table').DataTable({
+
+      "deferRender": true,
+      "dom": 'lfBrtips',     
+      //"processing": true,
+      "serverSide": true,
+      "ajax": "functions/show-barangay.php",  
+      scrollCollapse: true,
+
+      select: true,
+      select: 'single',
+  
+      "columns": [
+  
+        null,
+        null,
+        null,
+        {
+          "defaultContent": '<i class="edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" onclick="modal_open();"></i> '+
+          '<i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" onclick="modal_open();"></i> '+
+          '<i class="barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>',
+        }
+      ],
+  
+  
+      "lengthMenu": [[10, 15, 20, 25, 50], [10, 15, 20, 25, 50]],
+  
+  
+       //disable the sorting of colomn
+       "columnDefs": [{
+          "targets": 3,
+          "orderable": false
+       }],
+  
+       "buttons": [{
+             extend: 'copy',
+             text: 'COPY',
+  
+             title: 'Health Profile Clustering System',
+  
+             messageTop: 'List of barangays in Oroquieta City',
+             //className: 'fa fa-solid fa-clipboard',
+  
+  
+             exportOptions: {
+                modifier: {
+                   page: 'current'
+                },
+                //columns: [0, 1] //r.broj kolone koja se stampa u PDF
+                columns: [0, 1, 2],
+                // optional space between columns
+                columnGap: 1
+             }
+  
+          },
+          {
+             extend: 'excel',
+             text: 'EXCEL',
+  
+             title: 'Health Profile Clustering System',
+  
+             messageTop: 'List of barangays in Oroquieta City',
+             //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
+  
+  
+             exportOptions: {
+                modifier: {
+                   page: 'current'
+                },
+                //columns: [0, 1] //r.broj kolone koja se stampa u PDF
+                columns: [0, 1, 2],
+                // optional space between columns
+                columnGap: 1
+             }
+  
+          },
+          {
+             extend: 'print',
+             text: 'PDF',
+  
+             title: 'Health Profile Clustering System',
+  
+             messageTop: 'List of barangays in Oroquieta City',
+             //className: 'fa fa-print',
+  
+  
+             exportOptions: {
+                modifier: {
+                   page: 'current'
+                },
+                //columns: [0, 1] //r.broj kolone koja se stampa u PDF
+                columns: [0, 1, 2],
+                // optional space between columns
+                columnGap: 1
+             },
+  
+             customize: function (win) {
+                $(win.document.body)
+                   .css('text-align', 'center')
+  
+                $(win.document.body).find('table')
+                   .css('font-size', '12pt');
+             }
+          }
+       ],
+    });
+    table.buttons().container().appendTo('#barangay_table_wrapper .col-md-6:eq(0)');
+
+  }
+
+      //to align the data table buttons
+      $("#barangay_table_wrapper").addClass("row");
+      $("#barangay_table_length").addClass("col-sm-6");
+      $("#barangay_table_length").addClass("mb-3");
+      $("#barangay_table_filter").addClass("col-sm-6");
+      $("#barangay_table_filter").addClass("mb-3");
+      $(".dt-buttons").addClass("col-sm-1");
+
+}
+//show data tables end
 
 //erese input fields when x button is pressed
 //add barangay
@@ -210,107 +413,6 @@ $("#close_add_barangay").click(function()
   $("#Longitude").val("");
 })
 //erese input fields when x button is pressed
-
-//show data tables
-function show_barangay_datatables() {
-
-  var table = $('#barangay_table').DataTable({
-     //"dom": 'Blfrtip',
-     "lengthMenu": [
-        [10, 20, 50, -1],
-        [10, 20, 50, "All"]
-     ],
-
-     //disable the sorting of colomn
-     "columnDefs": [{
-        "targets": 3,
-        "orderable": false
-     }],
-
-     "buttons": [{
-           extend: 'copy',
-           text: 'COPY',
-
-           title: 'Health Profile Clustering System',
-
-           messageTop: 'List of barangays in Oroquieta City',
-           //className: 'fa fa-solid fa-clipboard',
-
-
-           exportOptions: {
-              modifier: {
-                 page: 'current'
-              },
-              //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-              columns: [0, 1, 2],
-              // optional space between columns
-              columnGap: 1
-           }
-
-        },
-        {
-           extend: 'excel',
-           text: 'EXCEL',
-
-           title: 'Health Profile Clustering System',
-
-           messageTop: 'List of barangays in Oroquieta City',
-           //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
-
-
-           exportOptions: {
-              modifier: {
-                 page: 'current'
-              },
-              //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-              columns: [0, 1, 2],
-              // optional space between columns
-              columnGap: 1
-           }
-
-        },
-        {
-           extend: 'print',
-           text: 'PDF',
-
-           title: 'Health Profile Clustering System',
-
-           messageTop: 'List of barangays in Oroquieta City',
-           //className: 'fa fa-print',
-
-
-           exportOptions: {
-              modifier: {
-                 page: 'current'
-              },
-              //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-              columns: [0, 1, 2],
-              // optional space between columns
-              columnGap: 1
-           },
-
-           customize: function (win) {
-              $(win.document.body)
-                 .css('text-align', 'center')
-
-              $(win.document.body).find('table')
-                 .css('font-size', '12pt');
-           }
-        }
-     ],
-  });
-  table.buttons().container().appendTo('#barangay_table_wrapper .col-md-6:eq(0)');
-
-}
-//show data tables end
-
-//destroy data table
-function destroy_barangay_table()
-{
-  $('#barangay_table').dataTable().fnDestroy();
-}
-//destroy data table
-
 
 //get the table cell value when selected
 function get_barangay_table_cell_value()
@@ -358,15 +460,6 @@ $("#delete-barangay").click(function () {
 
 });
 //delete barangay end
-
-
-//show barangay on admin table ajax
-  function load_table_barangay()
-  {
-    $("#show_barangay_list_table").load("functions/show-barangay.php", {
-    });
-  }
-//show the barangay admin table ajax
 
 
 

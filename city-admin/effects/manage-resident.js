@@ -2,30 +2,30 @@ var $resident_age = "";
 var validation_link = "https://phonevalidation.abstractapi.com/v1/";
 var mobile_number_validation_api_key = "1adfab67d9d3468f932b8af2d70efbc9";
 var phone_number_is_valid = "";
+var i = 0;
+var table = "";
+
+var barangay_name = "";
+var first_name = "";
+var middle_name = "";
+var last_name = "";
+var age = "";
+var gender = "";
+var birthdate = "";
+var civil = "";
+var contact = "";
+var email = "";
 
 $(document).ready(function () {
 $(document).attr("title", "HPCS | Manage Residents"); 
 select_with_search_box(); 
 enable_form();  
 generate_age();
-
-$("#first_load_barangay_admin_table").addClass("d-none");
-$("#resident_table").removeClass("d-none");
+get_resident_table_cell_value()
 load_data_tables();
-
-//to align the data table buttons
-$("#resident_table_wrapper").addClass("row");
-$("#resident_table_length").addClass("col-sm-6");
-$("#resident_table_length").addClass("mb-3");
-$("#resident_table_filter").addClass("col-sm-6");
-$("#resident_table_filter").addClass("mb-3");
-$(".dt-buttons").addClass("col-sm-1");
-
+$("#resident_table_wrapper").addClass("d-none");
+load_progress_bar();
 });
-
-$(window).on('load', function() {
-});      
-
 
 //add a delay in loading the material icon
 function modal_open()
@@ -36,6 +36,43 @@ setTimeout(function(){
   },500);
 }
 //add a delay in loading the material icon
+
+//progress bar
+function load_progress_bar()
+{
+  setInterval(move())
+  setTimeout( function()
+  {
+    $("#myBar").text("Table Loaded Successfully!");
+    setTimeout(function(){
+      $("#myProgress").addClass("d-none");
+      $("#resident_table").removeClass("d-none");
+      $("#resident_table_wrapper").removeClass("d-none");
+      $("#add_resident").removeClass("d-none");
+      $("#residents_chart_row").removeClass("d-none");
+    },800);
+  },3000)
+}
+
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 10;
+    var id = setInterval(frame, 30);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+        elem.innerHTML ="Loading " + width  + "%";
+      }
+    }
+  }
+}
+//progress bar end
 
 //set do some stuff when confiramtion variable is changed
 var confirmation = {
@@ -108,18 +145,29 @@ if(confirmation.a == 1)
   $select = $('#civil_status').selectize();
   control = $select[0].selectize;
   control.clear();
-
+  
   $(".barangay_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
+  $("#resident_table_paginate").addClass("d-none");
+  $("#resident_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
+
   toastMixin.fire({
     animation: true,
     title: 'A new resident has been added in the list.'
   });
+
   setTimeout(function(){  
-    $("#first_load_barangay_admin_table").addClass("d-none");
-    $("#resident_table").removeClass("d-none");
-    destroy_resident_table();
-    load_data_tables();
+    
+    $("#myBar").text("Table Updated Successfully!");
+    setTimeout(function(){
+      table.ajax.reload();
+      $("#resident_table_paginate").removeClass("d-none");
+      $("#resident_table_info").removeClass("d-none");
+      $("#myProgress").addClass("d-none");
+    },600);
+
   },3000);
 }
 else if(confirmation.a == 2)
@@ -132,13 +180,39 @@ else if(confirmation.a == 2)
   setTimeout(function(){
   },3000);
 }
+else if(confirmation.a == 4)
+{  
+  $(".barangay_table_is_loading").removeClass("d-none");
+  $(".edit_barangay_value").addClass("d-none");
+  $("#resident_table_paginate").addClass("d-none");
+  $("#resident_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
+
+  toastMixin.fire({
+    animation: true,
+    title: 'A resident record has been deleted.'
+  });
+
+  setTimeout(function(){  
+
+    $("#myBar").text("Table Updated Successfully!");
+    setTimeout(function(){
+      table.ajax.reload();
+      $("#resident_table_paginate").removeClass("d-none");
+      $("#resident_table_info").removeClass("d-none");
+      $("#myProgress").addClass("d-none");
+    },600);
+
+  },3000);
+}
 }
 //trigger error messages
 
 //destroy data table
 function destroy_resident_table()
 {
- $('#resident_table').dataTable().fnDestroy();
+ table.destroy();
 
 }
 //destroy data table
@@ -148,12 +222,13 @@ function destroy_resident_table()
 function load_data_tables() {
 
   if ( ! $.fn.DataTable.isDataTable( '#resident_table' ) ) { // check if data table is already exist
-
-    var table = $('#resident_table').DataTable({
-      
+    
+     table = $('#resident_table').DataTable({
        // "processing": true,
+        "deferRender": true,
         "serverSide": true,
         "ajax": "functions/show-resident.php",   
+         scrollCollapse: true,
         "columns": [
           null,
           null,
@@ -167,15 +242,17 @@ function load_data_tables() {
           null,
           {
             "defaultContent": "<i class='edit_barangay_value update btn_icon fas fa-edit' data-coreui-toggle='modal' href='#update-barangay' id='edit_barangay_value' role='button' onclick='modal_open();'></i> "+
-            "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_resident' data-coreui-toggle='modal' id='edit_barangay_value' role='button' onclick='modal_open();'></i>"+
+            "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_resident' data-coreui-toggle='modal' id='delete_resident_value' role='button' onclick='modal_open();'></i>"+
             "<i class='barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
             
           }
+
         ],
       
         "dom": 'lfBrtip',      
 
-        "lengthMenu": [[9, 15, 20, 100, 150], ["09", 15, 20, 100, 150]],
+        "lengthMenu": [[10, 50, 100, 500, 1000], [10, 50, 100, 500, 1000]],
+
 
       //disable the sorting of colomn
       "columnDefs": [ {
@@ -257,7 +334,14 @@ function load_data_tables() {
     });
     table.buttons().container().appendTo('#resident_table_wrapper .col-md-6:eq(0)');
   }
-     
+
+    //to align the data table buttons
+  $("#resident_table_wrapper").addClass("row");
+  $("#resident_table_length").addClass("col-sm-6");
+  $("#resident_table_length").addClass("mb-3");
+  $("#resident_table_filter").addClass("col-sm-6");
+  $("#resident_table_filter").addClass("mb-3");
+  $(".dt-buttons").addClass("col-sm-1");      
 };
 //show data tables end
 
@@ -311,7 +395,7 @@ function generate_age()
 //generate an age base on the birthdate
 
 //submit new barangay
-$("#add_barangay_admin_btn").click(function () {
+$("#add_resident_btn").click(function () {
 
     var barangay_id = $("#select_barangay").val();
     var firstname = $("#firstname").val();
@@ -422,6 +506,29 @@ $("#add_barangay_admin_btn").click(function () {
   });
   //submit new barangay end
 
+  //delete resident
+  $("#delete_resident_record").click(function()
+  {
+    $.post("functions/delete-resident.php", {
+      barangay_name: barangay_name,
+      first_name: first_name,
+      middle_name: middle_name,
+      last_name: last_name,
+      age: age,
+      gender: gender,
+      birthdate: birthdate,
+      civil: civil,
+      contact: contact,
+      email: email
+      
+    },
+    function (data, status) {
+      confirmation.a = data;
+
+    });
+  })
+  //delete resident end
+
 //erese input fields when x button is pressed
 //add resident
 $("#close_add_resident").click(function()
@@ -446,3 +553,48 @@ $("#close_add_resident").click(function()
     control.clear();
 })
 //erese input fields when x button is pressed
+
+//get the table cell value when selected
+function get_resident_table_cell_value()
+{
+  //updating
+    $("#resident_table").on('click','#update_barangay_value',function(){
+
+      // get the current row
+      var currentRow=$(this).closest("tr");
+
+      var col1=currentRow.find("td:eq(0)").text().trim($(this).text()); // get current row 1st TD value
+
+
+  });
+
+//deleting
+ $("#resident_table").on('click','#delete_resident_value',function(){
+      // get the current row
+      var currentRow=$(this).closest("tr");
+
+      var col0=currentRow.find("td:eq(0)").text().trim($(this).text()); // get current row 1st TD value
+      var col1=currentRow.find("td:eq(1)").text().trim($(this).text()); // get current row 1st TD value
+      var col2=currentRow.find("td:eq(2)").text().trim($(this).text()); // get current row 1st TD value
+      var col3=currentRow.find("td:eq(3)").text().trim($(this).text()); // get current row 1st TD value
+      var col4=currentRow.find("td:eq(4)").text().trim($(this).text()); // get current row 1st TD value
+      var col5=currentRow.find("td:eq(5)").text().trim($(this).text()); // get current row 1st TD value
+      var col6=currentRow.find("td:eq(6)").text().trim($(this).text()); // get current row 1st TD value
+      var col7=currentRow.find("td:eq(7)").text().trim($(this).text()); // get current row 1st TD value
+      var col8=currentRow.find("td:eq(8)").text().trim($(this).text()); // get current row 1st TD value
+      var col9=currentRow.find("td:eq(9)").text().trim($(this).text()); // get current row 1st TD value
+
+       barangay_name = col0;
+       first_name = col1;
+       middle_name = col2;
+       last_name = col3;
+       age = col4;
+       gender = col5;
+       birthdate = col6;
+       civil = col7;
+       contact = col8;
+       email = col9;
+  });
+
+}
+//get the table cell value when selected end

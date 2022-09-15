@@ -37,8 +37,64 @@ include('includes/sidebar.php');
 <div class="body flex-grow-1 px-3">
 <div class="container-fluid">
 
-<!--Charts-->
+<!--Admins-->
 <div class="row">
+<div class="col-md-12">
+<div class="card mb-4">
+
+  <div class="card-header p-3" style="background-color:#3b7ddd;">
+  
+  <div class="row">
+      <div class="col-sm-6">
+        <h4 style="color:aliceblue;">Residents of Oroquieta City</h4>
+      </div>
+      <div class="col-sm-6 text-end">
+      <a class="addbtn add-brgy px-4 fw-bolder d-none" data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">Resident +</a>
+      </div>
+  </div> 
+  </div>
+
+  <div class="card-body"  id="wrapper" >
+            
+  <hr class="mt-0">
+    <!-- /.row-->
+      <div  class="table-responsive-xxl">
+      <table class="table  mb-0 d-none w-100" id="resident_table" > 
+        <thead class="table-info fw-semibold">
+          <tr class="align-middle">
+            <th id="th">Barangay</th>
+            <th id="th">First Name</th>
+            <th id="th">Middle Name</th>
+            <th id="th">Last Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th id="th">Date of Birth</th>
+            <th>Civil Status</th>
+            <th>Contact No.</th>
+            <th>Email Address</th>
+            <th>Settings</th>
+          </tr>
+        </thead>
+
+        <tbody> 
+        </tbody>
+      </table>
+
+      <div id="myProgress" class=" rounded-4">
+      <div id="myBar" class=" rounded-4"></div>
+      </div>
+
+          
+      </div>
+    
+  </div>
+</div>
+</div>
+</div>
+<!--Admins end-->
+
+<!--Charts-->
+<div class="row d-none" id="residents_chart_row">
 <div class="col-md-12">
 <div class="card mb-4">
 <div class="card-header">Charts</div>
@@ -68,65 +124,6 @@ include('includes/sidebar.php');
 </div>
 </div>
 <!--Charts end-->
-
-
-<!--Admins-->
-<div class="row">
-<div class="col-md-12">
-<div class="card mb-4">
-
-  <div class="card-header p-3" style="background-color:#3b7ddd;">
-  
-  <div class="row">
-      <div class="col-sm-6">
-        <h4 style="color:aliceblue;">Oroquieta City Residents List</h4>
-      </div>
-      <div class="col-sm-6 text-end">
-      <a class="addbtn add-brgy px-4 fw-bolder" data-coreui-toggle="modal" href="#add-barangay-resident" role="button">Resident +</a>
-      </div>
-  </div> 
-  </div>
-
-  <div class="card-body"  id="wrapper" >
-            
-  <hr class="mt-0">
-    <!-- /.row-->
-      <div  class="table-responsive-xxl">
-      <table class="table  mb-0 d-none w-100" id="resident_table" > 
-        <thead class="table-info fw-semibold">
-          <tr class="align-middle">
-            <th>Barangay</th>
-            <th>First Name</th>
-            <th>Middle Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Date of Birth</th>
-            <th>Civil Status</th>
-            <th>Contact No.</th>
-            <th>Email Address</th>
-            <th>Settings</th>
-          </tr>
-        </thead>
-
-        <tbody> 
-        </tbody>
-      </table>
-
-      <div class="d-flex align-items-center mb-3 mt-3 bg-warning p-2 rounded-2" style="color: white;" id="first_load_barangay_admin_table">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      <span style="padding-left:10px;"></span>
-      <strong>Updating Table....</strong>
-      </div>
-
-          
-      </div>
-    
-  </div>
-</div>
-</div>
-</div>
-<!--Admins end-->
 
 </div>
 </div>
