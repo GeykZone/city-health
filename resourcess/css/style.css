@@ -120,12 +120,34 @@ tbody tr.odd:hover {
 .gender .selectize-input.disabled { 
   background-color: #d8dbe0 !important;
   border-color: #b1b7c1 !important;
+  color:#818a99 !important;
   opacity: 1 !important;
 }
+
+
+
+.form-control:disabled {
+  color:#818a99 !important;
+}
+
+#gender-selectized { 
+  color: #333 !important;
+}
+#civil_status-selectized { 
+  color: #333 !important;
+}
+
 #gender-selectized::placeholder { 
   color:#818a99 !important;
 }
 #civil_status-selectized::placeholder { 
+  color:#818a99 !important;
+}
+
+#update_gender-selectized::placeholder { 
+  color:#818a99 !important;
+}
+#update_civil_status-selectized::placeholder { 
   color:#818a99 !important;
 }
 
@@ -135,6 +157,11 @@ tbody tr.odd:hover {
 }
 
 .birthdate
+{
+  color:#818a99 !important;
+}
+
+.birthdate2
 {
   color:#818a99 !important;
 }

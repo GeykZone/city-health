@@ -38,31 +38,31 @@
   </div>
   </div>
 
-  <fieldset disabled>
+  <fieldset id="fieldset1" disabled>
   <div class="mb-3">
     <label for="firstname" class="form-label">First Name*</label>
-    <input type="text" name="firstname" class="form-control barangay-form" id="firstname" placeholder="First name.">
+    <input type="text" name="firstname" class=" form-control barangay-form" id="firstname" placeholder="First name.">
     <div class="invalid-feedback">
     Please don't leave this area empty.
     </div>
   </div>
   <div class="mb-3">
     <label for="middlename" class="form-label">Middle Name*</label>
-    <input type="text" name="middlename" class="form-control barangay-form" id="middlename" placeholder="Middle name.">
+    <input type="text" name="middlename" class=" form-control barangay-form" id="middlename" placeholder="Middle name.">
     <div class="invalid-feedback">
     Please don't leave this area empty.
     </div>
   </div>
   <div class="mb-3">
     <label for="lastname" class="form-label">Last Name*</label>
-    <input type="text" name="lastname" class="form-control barangay-form" id="lastname" placeholder="Last name.">
+    <input type="text" name="lastname" class=" form-control barangay-form" id="lastname" placeholder="Last name.">
     <div class="invalid-feedback">
     Please don't leave this area empty.
     </div>
   </div>
   <div class="mb-3">
   <label for="birthdate" class="form-label">Date of Birth*</label>
-    <input type="button" class="birthdate form-control barangay-form text-sm-start" id="birthdate" name="birthdate" placeholder="Date of Birth">
+    <input type="button" class="  birthdate form-control barangay-form text-sm-start" id="birthdate" name="birthdate" placeholder="Date of Birth">
     <div class="invalid-feedback">
       Please don't leave this area empty.
     </div>
@@ -93,7 +93,7 @@
   </div>
   <div class="mb-3">
     <label for="contact" class="form-label">Contact No.*</label>
-    <input type="number" name="contact" class="form-control barangay-form" id="contact"
+    <input type="number" name="contact" class="  form-control barangay-form" id="contact"
      onkeypress='return event.charCode>=48 && event.charCode<=57' ondrop="return false;" onpaste="return false;"
      oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="Contact No.">
     <div class="invalid-feedback" id="phno_validator_label">
@@ -102,7 +102,7 @@
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email Address</label>
-    <input type="email" name="contact" class="form-control barangay-form" id="email" placeholder="Email Address.">
+    <input type="email" name="contact" class=" form-control barangay-form" id="email" placeholder="Email Address.">
     <div class="invalid-feedback">
       Invalid email address, email address must look like this (e.g. freed@email.com).
     </div>

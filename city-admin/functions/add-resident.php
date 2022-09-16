@@ -12,6 +12,10 @@ if(isset($_POST['barangay_id']))
     $contact = $_POST["contact"];
     $thisemail = $_POST["thisemail"];
     $civil_status = $_POST["civil_status"];
+
+    $firstname = ucwords($firstname);
+    $middlename = ucwords($middlename);
+    $lastname = ucwords($lastname);
   
     $sql = "INSERT INTO `residents`(`barangay_id`, `first_name`, `middle_name`, `last_name`, `age`, `gender`, `birthdate`, `contact`, `email`, `civil`) 
     VALUES ('$barangay_id','$firstname','$middlename','$lastname','$age','$gender','$birthdate','$contact','$thisemail','$civil_status')";

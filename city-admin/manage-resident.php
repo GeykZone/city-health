@@ -30,9 +30,13 @@ include('includes/sidebar.php');
 <!--add barangay resident modal end-->
 
 
-<!--add barangay resident modal-->
+<!--delete barangay resident modal-->
 <?php include('delete-resident.php'); ?>
-<!--add barangay resident modal end-->
+<!--delete barangay resident modal end-->
+
+<!--delete barangay resident modal-->
+<?php include('update-resident.php'); ?>
+<!--delete barangay resident modal end-->
 
 <div class="body flex-grow-1 px-3">
 <div class="container-fluid">
@@ -69,7 +73,7 @@ include('includes/sidebar.php');
             <th>Age</th>
             <th>Gender</th>
             <th id="th">Date of Birth</th>
-            <th>Civil Status</th>
+            <th>Status</th>
             <th>Contact No.</th>
             <th>Email Address</th>
             <th>Settings</th>
