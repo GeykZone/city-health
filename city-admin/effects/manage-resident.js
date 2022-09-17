@@ -394,6 +394,11 @@
   };
   //show data tables end
 
+
+  //get the number of data in data tables
+
+  //get the number of data in data tables end
+
   //enable the form when a barangay is picked
   function enable_form()
   {
@@ -851,6 +856,9 @@
   $("#update_contact").val(trimm_version_phone_number)
 
   $("#update_email").val(col9);
+
+  var info = table.page.info();
+  alert( info.pages);
 
   });
 
