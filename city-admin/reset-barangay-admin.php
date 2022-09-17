@@ -86,15 +86,13 @@
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
 			<div class="icon-box">
-					<i class="material-icons"><span class="material-symbols-outlined">
-                    restart_alt
-                    </span></i>
+					<i class="material-icons">&#xe889</i>
 				</div>					
 				<h4 class="modal-title w-100">Are you sure?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<h5>Do you truly want to restore the default username and password for this record?</h5>
+				<h5>Do you really want to restore the default username and password for this record?</h5>
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>

@@ -17,8 +17,7 @@ function modal_open()
 {
 setTimeout(function(){
   $('.material-icons').css('opacity','1');
-
-  },500);
+  },600);
 }
 //add a delay in loading the material icon
 
@@ -197,7 +196,7 @@ if(confirmation.a == 1)
 
     $("#myBar").text("Table Updated Successfully!");
     setTimeout(function(){
-      table.ajax.reload();
+      table.ajax.reload( null, false);
       $("#barangay_table_paginate").removeClass("d-none");
       $("#barangay_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
@@ -234,7 +233,7 @@ else if(confirmation.a == 3)
     
     $("#myBar").text("Table Updated Successfully!");
     setTimeout(function(){
-      table.ajax.reload();
+      table.ajax.reload( null, false);
       $("#barangay_table_paginate").removeClass("d-none");
       $("#barangay_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
@@ -260,7 +259,7 @@ else if(confirmation.a == 4)
     
     $("#myBar").text("Table Updated Successfully!");
     setTimeout(function(){
-      table.ajax.reload();
+      table.ajax.reload( null, false);
       $("#barangay_table_paginate").removeClass("d-none");
       $("#barangay_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");

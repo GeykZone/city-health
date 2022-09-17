@@ -60,6 +60,7 @@
 <!--icons-->
 <script src="https://kit.fontawesome.com/c8cf4d3921.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 
 <!-- Select2 4.1.0 -->

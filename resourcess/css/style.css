@@ -80,6 +80,16 @@
   --cui-highlight-bg: #fff3cd;
 }
 
+.toggle_chart1
+{
+  cursor: pointer;
+}
+
+.toggle_chart2
+{
+  cursor: pointer;
+}
+
 #th
 {
   width: 100px  !important;
@@ -110,9 +120,12 @@ tbody tr.odd:hover {
   transition: 0.3s;
 }
 
-
-
 .material-icons
+{
+  opacity: 0;
+}
+
+.material-symbols-outlined
 {
   opacity: 0;
 }

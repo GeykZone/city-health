@@ -86,11 +86,7 @@
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
 			<div class="icon-box">
-					<i class="material-icons">
-                    <span class="material-symbols-outlined">
-                    lock
-                    </span>
-                    </i>
+					<i class="material-icons">&#xe897</i>
 				</div>					
 				<h4 class="modal-title w-100">Are you sure?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

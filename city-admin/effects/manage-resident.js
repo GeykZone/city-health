@@ -4,6 +4,7 @@
   var phone_number_is_valid = "";
   var i = 0;
   var table = "";
+  var chart = "";
 
   var barangay_name = "";
   var first_name = "";
@@ -26,6 +27,7 @@
   get_resident_table_cell_value()
   load_data_tables();
   $("#resident_table_wrapper").addClass("d-none");
+  number_of_resident_chart();
   load_progress_bar();
   });
 
@@ -34,12 +36,11 @@
   {
   setTimeout(function(){
   $('.material-icons').css('opacity','1');
-
-  },500);
+  },600);
   }
   //add a delay in loading the material icon
 
-  //progress bar
+  //progress bar 
   function load_progress_bar()
   {
   setInterval(move())
@@ -51,7 +52,10 @@
   $("#resident_table").removeClass("d-none");
   $("#resident_table_wrapper").removeClass("d-none");
   $("#add_resident").removeClass("d-none");
-  $("#residents_chart_row").removeClass("d-none");
+  $(".c1").removeClass("d-none");
+  setTimeout(function(){
+       $('.material-symbols-outlined').css('opacity','1');
+    },500);
   },800);
   },3000)
   }
@@ -164,10 +168,11 @@
 
   $("#myBar").text("Table Updated Successfully!");
   setTimeout(function(){
-  table.ajax.reload();
+  table.ajax.reload( null, false);
   $("#resident_table_paginate").removeClass("d-none");
   $("#resident_table_info").removeClass("d-none");
   $("#myProgress").addClass("d-none");
+  number_of_resident_chart();
   },600);
 
   },3000);
@@ -221,10 +226,11 @@
 
   $("#myBar").text("Table Updated Successfully!");
   setTimeout(function(){
-  table.ajax.reload();
+  table.ajax.reload( null, false);
   $("#resident_table_paginate").removeClass("d-none");
   $("#resident_table_info").removeClass("d-none");
   $("#myProgress").addClass("d-none");
+  number_of_resident_chart();
   },600);
 
   },3000);
@@ -247,16 +253,17 @@
 
   $("#myBar").text("Table Updated Successfully!");
   setTimeout(function(){
-  table.ajax.reload();
+  table.ajax.reload( null, false);
   $("#resident_table_paginate").removeClass("d-none");
   $("#resident_table_info").removeClass("d-none");
   $("#myProgress").addClass("d-none");
+  number_of_resident_chart();
   },600);
 
   },3000);
   }
   }
-  //trigger error messages
+  //trigger error messages end
 
   //destroy data table
   function destroy_resident_table()
@@ -393,11 +400,6 @@
   $(".dt-buttons").addClass("col-sm-1");      
   };
   //show data tables end
-
-
-  //get the number of data in data tables
-
-  //get the number of data in data tables end
 
   //enable the form when a barangay is picked
   function enable_form()
@@ -857,10 +859,73 @@
 
   $("#update_email").val(col9);
 
-  var info = table.page.info();
-  alert( info.pages);
-
   });
 
   }
   //get the table cell value when selected end
+
+  //number of residents chart
+  function number_of_resident_chart()
+  {
+    $("#residents_chart_row").load("functions/show-number-of-resident.php", function()
+    {
+    },
+ );
+
+    
+     
+  }
+  //number of residents chart end
+
+  //toggle chart
+  $(".toggle_chart1").click(function(){
+    $("#residents_chart_row").slideToggle(400);
+
+    $('html, body').animate({
+      scrollTop: $("#residents_chart_row").offset().top
+  },400);
+
+  $(".c2").removeClass("d-none");
+  $(".c1").addClass("d-none"); 
+
+  });
+
+  $(".toggle_chart2").click(function(){
+    $("#residents_chart_row").slideToggle(800);
+
+    $('html, body').animate({
+      scrollTop: '0px'
+  },800); 
+  
+  $(".c1").removeClass("d-none");
+  $(".c2").addClass("d-none");
+
+  });
+  //toggle chart end
+
+  //destroy chart data
+    function destroy_chart_data()
+    {
+      
+      if ( $.fn.DataTable.isDataTable( '#number_of_residents_chart' ) ) { // check if data table is already exist
+          chart.destroy()
+        }
+    }
+  //destroy chart data end
+
+   //show data tables
+   function load_data_chart() {
+    if ( ! $.fn.DataTable.isDataTable( '#number_of_residents_chart' ) ) { // check if data table is already exist
+    chart = $('#number_of_residents_chart').DataTable({
+      searching: false, paging: false, info: false, 
+      order: [[2, 'desc']],
+
+      //disable the sorting of colomn
+      "columnDefs": [ {
+      "targets": 1,
+      "orderable": false
+    } ],
+    });
+    }
+    };
+    //show data tables end

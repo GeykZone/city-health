@@ -2,7 +2,6 @@
 include('includes/header.php');
 include('includes/sidebar.php');
 ?>
-
 <!--side bar-->
 
 <!--side bar end-->
@@ -90,82 +89,18 @@ include('includes/sidebar.php');
 
           
       </div>
+      
 
-      <div  class="table-responsive-xxl d-none" id="residents_chart_row">
-    <br>
-    <br> 
-    <hr class="mt-0">
-        <table class="table mb-0">
-        <thead class="table-info fw-semibold">
-          <tr class="align-middle">
-            <th style="width: 10% ;">Barangay</th>
-            <th class=" text-center" style="width: 100% ;">Total Residents</th>
-            <th ></th>
-          </tr>
-        </thead>
-        <tbody>
-              <?php
-                $old_sql = "SELECT * FROM `residents` LEFT JOIN `barangays` ON `residents`.`barangay_id` = `barangays`.`id`";
-                $old_rowcount = 0;
-                if ($old_result = mysqli_query($conn,$old_sql))
-                {
-                  $old_rowcount=mysqli_num_rows($old_result);
-                }
+      <div class="mt-4 c1 row d-none" id="c1"><div class="toggle_chart1 col-md-12"><a id="toggle_chart1">Show Total Number of Residents by Barangay <span class="material-symbols-outlined align-bottom">arrow_drop_down</span></div></a></div>
+      <div class="mt-4 c2 row d-none" id="c2"><div class="toggle_chart2 col-md-12"><a id="toggle_chart2">Hide Total Number of Residents by Barangay<span class="material-symbols-outlined align-bottom">arrow_drop_up</span></a></div></div>
+      
 
-
-              $sql = "SELECT `id`, `barangay_name`, `lat`, `long` FROM `barangays`";
-              $brg_name = "";
-              $result = $conn->query($sql);
-              if ($result->num_rows > 0) {
-              while($row = $result->fetch_assoc()) {
-                ?>
-                <tr class="align-middle">
-                      <td>
-                        <div><?php echo $row['barangay_name']; ?></div>
-                      </td>
-                      <td>
-                        <div class="progress">
-                          <div class=" progress-bar" role="progressbar" style="width:<?php 
-                            $brg_name = $row['barangay_name'];
-                            $rowcount = 0;
-                            $total_residents = $rowcount;
-                            $new_sql = "SELECT * FROM `residents` LEFT JOIN `barangays` ON `residents`.`barangay_id` = `barangays`.`id` WHERE `barangay_name` = '$brg_name'";
-                            $new_result = $conn->query($new_sql);
-                            if($new_result->num_rows > 0)
-                            {
-                              $new_result = mysqli_query($conn,$new_sql);
-                              $rowcount=mysqli_num_rows($new_result);
-                              $total_residents =  $rowcount;
-                              $rowcount = ($rowcount*100);
-                              $rowcount = $rowcount /  $old_rowcount;
-                              echo  $rowcount;
-                            }
-                            else
-                            {
-                              echo  $rowcount;
-                            }
-
-                          ?>%;  background-color:#3b7ddd;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" ></div>
-                        </div>
-                      </td>
-                      <td>
-                      <div class="clearfix">
-                          <div class="float-start">
-                            <div class="fw-semibold"><?php   echo $total_residents ?></div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                <?php 
-              }
-              ?>
-              <?php
-                }
-              ?>
-        </tbody>
-      </table>
+      <div  class="table-responsive-xxl" id="residents_chart_row" style="display: none;">
+        
     
-  </div>
+      </div>
+
+      <div class="c2 row d-none" id="c2"><div class="toggle_chart2 col-md-12"><a id="toggle_chart2">Hide Total Number of Residents by Barangay<span class="material-symbols-outlined align-bottom">arrow_drop_up</span></a></div></div>
     
   </div>
 
