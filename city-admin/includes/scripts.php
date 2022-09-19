@@ -1,5 +1,5 @@
 </div>
-    
+   
     <!-- CoreUI and necessary plugins-->
     <script src="../resourcess/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
     <script src="../resourcess/vendors/simplebar/js/simplebar.min.js"></script>
@@ -20,6 +20,6 @@
        //remove invalid class
       </script>
 
-
-  </body>
+    <script type="module" src="../resourcess/js/sidebar.js"></script>
+</body>
 </html>

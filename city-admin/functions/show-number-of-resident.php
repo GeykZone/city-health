@@ -1,8 +1,6 @@
 
 <?php   include('../../route.php'); ?> 
 
-<br>
-<br> 
 <style>
     #rs_chart_barangay
     {

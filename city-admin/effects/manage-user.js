@@ -545,7 +545,8 @@ function load_data_tables() {
     $("#admin_table_length").addClass("mb-3");
     $("#admin_table_filter").addClass("col-sm-6");
     $("#admin_table_filter").addClass("mb-3");
-    $(".dt-buttons").addClass("col-sm-1");
+    $(".dt-buttons").addClass("col-sm-2");
+    $(".dt-buttons").removeClass("flex-wrap ");
 
   
 };

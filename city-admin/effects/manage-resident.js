@@ -1,7 +1,4 @@
   var $resident_age = "";
-  var validation_link = "https://phonevalidation.abstractapi.com/v1/";
-  var mobile_number_validation_api_key = "1adfab67d9d3468f932b8af2d70efbc9";
-  var phone_number_is_valid = "";
   var i = 0;
   var table = "";
   var chart = "";
@@ -30,15 +27,6 @@
   number_of_resident_chart();
   load_progress_bar();
   });
-
-  //add a delay in loading the material icon
-  function modal_open()
-  {
-  setTimeout(function(){
-  $('.material-icons').css('opacity','1');
-  },600);
-  }
-  //add a delay in loading the material icon
 
   //progress bar 
   function load_progress_bar()
@@ -280,11 +268,22 @@
   if ( ! $.fn.DataTable.isDataTable( '#resident_table' ) ) { // check if data table is already exist
 
   table = $('#resident_table').DataTable({
+
     // "processing": true,
     "deferRender": true,
     "serverSide": true,
     "ajax": "functions/show-resident.php",   
-      scrollCollapse: true,
+    "autoWidth": false,
+    scrollCollapse: true,
+    "dom": 'lfBrtip',      
+    "lengthMenu": [[10, 50, 100, 500, 1000], [10, 50, 100, 500, 1000]],
+
+    //disable the sorting of colomn
+    "columnDefs": [ {
+      "targets": 10,
+      "orderable": false
+      } ],
+
     "columns": [
       null,
       null,
@@ -300,21 +299,8 @@
         "defaultContent": "<i class='edit_barangay_value update btn_icon fas fa-edit' data-coreui-toggle='modal' href='#update-barangay-resident' id='update_resident_value' role='button' onclick='modal_open();'></i> "+
         "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_resident' data-coreui-toggle='modal' id='delete_resident_value' role='button' onclick='modal_open();'></i>"+
         "<i class='barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
-        
       }
-
     ],
-
-    "dom": 'lfBrtip',      
-
-    "lengthMenu": [[10, 50, 100, 500, 1000], [10, 50, 100, 500, 1000]],
-
-
-  //disable the sorting of colomn
-  "columnDefs": [ {
-    "targets": 10,
-    "orderable": false
-    } ],
 
   "buttons": [
     {
@@ -389,6 +375,7 @@
     }],
   });
   table.buttons().container().appendTo('#resident_table_wrapper .col-md-6:eq(0)');
+    
   }
 
   //to align the data table buttons
@@ -397,7 +384,9 @@
   $("#resident_table_length").addClass("mb-3");
   $("#resident_table_filter").addClass("col-sm-6");
   $("#resident_table_filter").addClass("mb-3");
-  $(".dt-buttons").addClass("col-sm-1");      
+  $(".dt-buttons").addClass("col-sm-2"); 
+  $(".dt-buttons").removeClass("flex-wrap ");
+
   };
   //show data tables end
 
@@ -547,12 +536,81 @@
 
     function submit_new_resident()
     {
-      contact = "63"+contact;
-      $.getJSON(validation_link+"?api_key="+mobile_number_validation_api_key+"&phone="+contact, function(data) {
-        phone_number_is_valid = data.valid;
 
-        if(phone_number_is_valid)
+      function allCharactersSame(s)
+          {
+              let n = s.length;
+              for (let i = 1; i < n; i++)
+                  if (s[i] != s[0])
+                      return false;
+       
+              return true;
+          }
+
+          function line1(s)
+          {
+              let n = s.length;
+              for (let i = 2; i < n; i++)
+                  if (s[i] != s[1])
+                      return false;
+       
+              return true;
+          }
+
+          function line2(s)
+          {
+              let n = s.length;
+              for (let i = 3; i < n; i++)
+                  if (s[i] != s[2])
+                      return false;
+       
+              return true;
+          }
+
+          function line3(s)
+          {
+              let n = s.length;
+              for (let i = 4; i < n; i++)
+                  if (s[i] != s[3])
+                      return false;
+       
+              return true;
+          }
+
+          function line4(s)
+          {
+              let n = s.length;
+              for (let i = 5; i < n; i++)
+                  if (s[i] != s[4])
+                      return false;
+       
+              return true;
+          }
+
+          function line5(s)
+          {
+              let n = s.length;
+              for (let i = 6; i < n; i++)
+                  if (s[i] != s[5])
+                      return false;
+       
+              return true;
+          }
+
+          function line6(s)
+          {
+              let n = s.length;
+              for (let i = 7; i < n; i++)
+                  if (s[i] != s[6])
+                      return false;
+       
+              return true;
+          }
+
+          if(contact.charAt(0) === "9" && contact.length === 10 && allCharactersSame(contact) != true && line1(contact) != true && line2(contact) != true
+          && line3(contact) != true && line4(contact) != true && line5(contact) != true  && line6(contact) != true) 
         {
+          contact = "63"+contact;
           $.post("functions/add-resident.php", {
 
             barangay_id: barangay_id,
@@ -575,9 +633,8 @@
         else
         {
           $("#contact").addClass("is-invalid");
-          $("#phno_validator_label").text("Invalid phone number, please enter a 10-digit phone number and the phone number must start with a 9 (e.g. 9123456789).");
+          $("#phno_validator_label").text("Invalid phone number; please type a valid 10-digit Philippine phone number (e.g. 9123456789).");
         }
-      })
 
     }
 
@@ -681,12 +738,80 @@
 
         function update_resident()
         {
-          new_contact = "63"+new_contact;
-          $.getJSON(validation_link+"?api_key="+mobile_number_validation_api_key+"&phone="+new_contact, function(data) {
-            phone_number_is_valid = data.valid;
-    
-            if(phone_number_is_valid)
+          function allCharactersSame(s)
+          {
+              let n = s.length;
+              for (let i = 1; i < n; i++)
+                  if (s[i] != s[0])
+                      return false;
+       
+              return true;
+          }
+
+          function line1(s)
+          {
+              let n = s.length;
+              for (let i = 2; i < n; i++)
+                  if (s[i] != s[1])
+                      return false;
+       
+              return true;
+          }
+
+          function line2(s)
+          {
+              let n = s.length;
+              for (let i = 3; i < n; i++)
+                  if (s[i] != s[2])
+                      return false;
+       
+              return true;
+          }
+
+          function line3(s)
+          {
+              let n = s.length;
+              for (let i = 4; i < n; i++)
+                  if (s[i] != s[3])
+                      return false;
+       
+              return true;
+          }
+
+          function line4(s)
+          {
+              let n = s.length;
+              for (let i = 5; i < n; i++)
+                  if (s[i] != s[4])
+                      return false;
+       
+              return true;
+          }
+
+          function line5(s)
+          {
+              let n = s.length;
+              for (let i = 6; i < n; i++)
+                  if (s[i] != s[5])
+                      return false;
+       
+              return true;
+          }
+
+          function line6(s)
+          {
+              let n = s.length;
+              for (let i = 7; i < n; i++)
+                  if (s[i] != s[6])
+                      return false;
+       
+              return true;
+          }
+
+            if(new_contact.charAt(0) === "9" && new_contact.length === 10 && allCharactersSame(new_contact) != true && line1(new_contact) != true && line2(new_contact) != true
+            && line3(new_contact) != true && line4(new_contact) != true && line5(new_contact) != true  && line6(new_contact) != true) 
             {
+              new_contact = "63"+new_contact; //639276003238
 
               $.post("functions/update-resident.php", {
                 old_barangay_name: barangay_name,
@@ -721,9 +846,9 @@
             else
             {
               $("#update_contact").addClass("is-invalid");
-              $("#update_phno_validator_label").text("Invalid phone number, please enter a 10-digit phone number and the phone number must start with a 9 (e.g. 9123456789).");
+              $("#update_phno_validator_label").text("Invalid phone number; please type a valid 10-digit Philippine phone number (e.g. 9123456789).");
             }
-          })
+          
     
         }
 
@@ -871,9 +996,6 @@
     {
     },
  );
-
-    
-     
   }
   //number of residents chart end
 
@@ -881,24 +1003,22 @@
   $(".toggle_chart1").click(function(){
     $("#residents_chart_row").slideToggle(400);
 
-    $('html, body').animate({
-      scrollTop: $("#residents_chart_row").offset().top
-  },400);
-
   $(".c2").removeClass("d-none");
   $(".c1").addClass("d-none"); 
 
   });
 
   $(".toggle_chart2").click(function(){
-    $("#residents_chart_row").slideToggle(800);
-
-    $('html, body').animate({
-      scrollTop: '0px'
-  },800); 
-  
+  $("#residents_chart_row").slideToggle(400);
   $(".c1").removeClass("d-none");
   $(".c2").addClass("d-none");
+
+  setTimeout(function()
+  {
+    $('html, body').animate({
+      scrollTop: '0px'
+  },50); 
+  },50)
 
   });
   //toggle chart end
@@ -913,7 +1033,7 @@
     }
   //destroy chart data end
 
-   //show data tables
+   //show data chart 
    function load_data_chart() {
     if ( ! $.fn.DataTable.isDataTable( '#number_of_residents_chart' ) ) { // check if data table is already exist
     chart = $('#number_of_residents_chart').DataTable({
@@ -928,4 +1048,4 @@
     });
     }
     };
-    //show data tables end
+    //show data chart end

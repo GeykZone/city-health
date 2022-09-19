@@ -290,9 +290,6 @@ function load_data_tables() {
       "serverSide": true,
       "ajax": "functions/show-barangay.php",  
       scrollCollapse: true,
-
-      select: true,
-      select: 'single',
   
       "columns": [
   
@@ -398,7 +395,8 @@ function load_data_tables() {
       $("#barangay_table_length").addClass("mb-3");
       $("#barangay_table_filter").addClass("col-sm-6");
       $("#barangay_table_filter").addClass("mb-3");
-      $(".dt-buttons").addClass("col-sm-1");
+      $(".dt-buttons").addClass("col-sm-2");
+      $(".dt-buttons").removeClass("flex-wrap ");
 
 }
 //show data tables end

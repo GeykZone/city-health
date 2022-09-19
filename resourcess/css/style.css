@@ -80,6 +80,21 @@
   --cui-highlight-bg: #fff3cd;
 }
 
+body {
+  overflow-y: scroll; /* Add the ability to scroll */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .toggle_chart1
 {
   cursor: pointer;
@@ -94,6 +109,7 @@
 {
   width: 100px  !important;
 }
+
 
 #myProgress {
   width: 100%;
@@ -120,23 +136,12 @@ tbody tr.odd:hover {
   transition: 0.3s;
 }
 
-.material-icons
-{
-  opacity: 0;
-}
-
-.material-symbols-outlined
-{
-  opacity: 0;
-}
-
 .gender .selectize-input.disabled { 
   background-color: #d8dbe0 !important;
   border-color: #b1b7c1 !important;
   color:#818a99 !important;
   opacity: 1 !important;
 }
-
 
 
 .form-control:disabled {
@@ -8938,6 +8943,62 @@ html:not([dir=rtl]) .sidebar-nav .nav-group-items .nav-link .nav-icon {
     visibility: hidden;
     opacity: 0;
   }
+
+  /**/
+  .sidebar-narrow-unfoldable:hover, .sidebar-narrow {
+    z-index: 1031;
+    flex: 0 0 var(--cui-sidebar-narrow-width);
+    width: var(--cui-sidebar-narrow-width);
+    padding-bottom: var(--cui-sidebar-toggler-height);
+    overflow: visible;
+    
+  }
+  .sidebar-fixed.sidebar-narrow-unfoldable:hover, .sidebar-fixed.sidebar-narrow {
+    z-index: 1031;
+    width: var(--cui-sidebar-narrow-width);
+  }
+  .sidebar-narrow-unfoldable:hover .sidebar-brand-full, .sidebar-narrow .sidebar-brand-full {
+    display: none;
+  }
+  .sidebar-narrow-unfoldable:hover .sidebar-brand-narrow, .sidebar-narrow .sidebar-brand-narrow {
+    display: block;
+  }
+  .sidebar-narrow-unfoldable:hover .d-narrow-none, .sidebar-narrow .d-narrow-none,
+.sidebar-narrow-unfoldable:hover .nav-label,
+.sidebar-narrow .nav-label,
+.sidebar-narrow-unfoldable:hover .nav-title,
+.sidebar-narrow .nav-title,
+.sidebar-narrow-unfoldable:hover .nav-group-items,
+.sidebar-narrow .nav-group-items,
+.sidebar-narrow-unfoldable:hover .sidebar-footer,
+.sidebar-narrow .sidebar-footer,
+.sidebar-narrow-unfoldable:hover .sidebar-form,
+.sidebar-narrow .sidebar-form,
+.sidebar-narrow-unfoldable:hover .sidebar-header,
+.sidebar-narrow .sidebar-header:hover {
+    height: 0 !important;
+    padding: 0;
+    margin: 0;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  
+  .sidebar-narrow-unfoldable:hover .sidebar-toggler, .sidebar-narrow .sidebar-toggler {
+    position: fixed;
+    bottom: 0;
+  }
+  html:not([dir=rtl]) .sidebar-narrow-unfoldable:hover .sidebar-toggler::before, html:not([dir=rtl]) .sidebar-narrow .sidebar-toggler::before {
+    transform: rotate(-180deg);
+  }
+  *[dir=rtl] .sidebar-narrow-unfoldable:hover .sidebar-toggler::before, *[dir=rtl] .sidebar-narrow .sidebar-toggler::before {
+    transform: rotate(0deg);
+  }
+  .sidebar-end.sidebar-narrow-unfoldable:hover .sidebar-toggler::before, .sidebar-end.sidebar-narrow .sidebar-toggler::before {
+    transform: rotate(0deg);
+  }
+  /**/
+
   .sidebar-narrow-unfoldable:not(:hover) .sidebar-toggler, .sidebar-narrow .sidebar-toggler {
     position: fixed;
     bottom: 0;

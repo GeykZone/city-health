@@ -58,7 +58,18 @@ include('includes/sidebar.php');
   </div>
 
   <div class="card-body"  id="wrapper" >
-            
+  
+      <div class=" mb-3 c1 row d-none" id="c1"><div class="toggle_chart1 col-md-12"><a id="toggle_chart1">Show Total Number of Residents by Barangay <span style="color: #4f5d73;" class="fa-solid align-center"></span></div></a></div>
+      <div class=" mb-3 c2 row d-none" id="c2"><div class="toggle_chart2 col-md-12"><a id="toggle_chart2">Hide Total Number of Residents by Barangay <span style="color: #4f5d73;" class="fa-solid align-center"></span></a></div></div>
+      
+
+      <div  class="table-responsive-xxl" id="residents_chart_row" style="display: none;">
+        
+    
+      </div>
+
+      <div class="mb-3 mt-3 c2 row d-none" id="c2"><div class="toggle_chart2 col-md-12"><a id="toggle_chart2">Hide Total Number of Residents by Barangay <span style="color: #4f5d73;" class="fa-solid align-center"></span></a></div></div>
+
   <hr class="mt-0">
     <!-- /.row-->
       <div  class="table-responsive-xxl">
@@ -91,16 +102,7 @@ include('includes/sidebar.php');
       </div>
       
 
-      <div class="mt-4 c1 row d-none" id="c1"><div class="toggle_chart1 col-md-12"><a id="toggle_chart1">Show Total Number of Residents by Barangay <span class="material-symbols-outlined align-bottom">arrow_drop_down</span></div></a></div>
-      <div class="mt-4 c2 row d-none" id="c2"><div class="toggle_chart2 col-md-12"><a id="toggle_chart2">Hide Total Number of Residents by Barangay<span class="material-symbols-outlined align-bottom">arrow_drop_up</span></a></div></div>
       
-
-      <div  class="table-responsive-xxl" id="residents_chart_row" style="display: none;">
-        
-    
-      </div>
-
-      <div class="c2 row d-none" id="c2"><div class="toggle_chart2 col-md-12"><a id="toggle_chart2">Hide Total Number of Residents by Barangay<span class="material-symbols-outlined align-bottom">arrow_drop_up</span></a></div></div>
     
   </div>
 

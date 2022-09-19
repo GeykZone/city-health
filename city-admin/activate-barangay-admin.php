@@ -86,7 +86,7 @@
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
 			<div class="icon-box">
-					<i class="material-icons">&#xe898</i>
+				<i class="fa-solid " style="font-size: 40px; margin-top:15px;  color:#ffc137;"></i>
 				</div>					
 				<h4 class="modal-title w-100">Are you sure?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

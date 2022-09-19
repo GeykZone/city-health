@@ -21,6 +21,9 @@ if(session_destroy()){
 
       unset($_COOKIE['role']);
       setcookie('role', null, -1, '/');
+      
+      unset($_COOKIE['sidebar']);
+      setcookie('sidebar', null, -1, '/');
 
       return true;
     }

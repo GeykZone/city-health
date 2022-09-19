@@ -1,4 +1,10 @@
-<div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
+<div class="sidebar sidebar-dark sidebar-fixed <?php
+if(!isset($_COOKIE["sidebar"])) {
+  
+} else {
+  echo "sidebar-narrow-unfoldable";
+}
+?>" id="sidebar">
       <div class="sidebar-brand d-none d-md-flex">
           <div class= "sidebar-brand-full " ><img class="avatar-img avatar rounded-0 avatar-xxl" src="../resourcess/assets/img/avatars/city.png" alt="brand"></div>
 

@@ -34,48 +34,38 @@
 
 <!-- Main styles for this application-->
 <link href="../resourcess/css/style.css" rel="stylesheet">
-
 <link href="../resourcess/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
 
 <!--jquery-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="../resourcess/js/jquery.min.js"></script>
   
-
 <!--usingjquery to create cokkie-->
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<script src="../resourcess/js-cookie/js.cookie.min.js"></script>
+
 
 <!--jquery data tables-->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
-<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.5.6/js/buttons.bootstrap4.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="//cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../resourcess/DataTables/datatables.min.css"/>
+<script type="text/javascript" src="../resourcess/DataTables/datatables.min.js"></script>
+
 
 <!--icons-->
-<script src="https://kit.fontawesome.com/c8cf4d3921.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script src="../resourcess/fontawesome-free/js/all.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../resourcess/fontawesome-free/css/all.css">
 
 
 <!-- Select2 4.1.0 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
-      
+<script src="../resourcess/selectized/selectize.min.js" ></script>
+<link rel="stylesheet" href="../resourcess/selectized/selectize.bootstrap5.css"  />
 
+      
 <!--alert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+<script src="../resourcess/sweetalert2/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='../resourcess/sweetalert2/sweetalert2.min.css'>
 
 
 <!--datepicker-->
-<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
-<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link href = "../resourcess/jquery-ui-1.13.2.custom/jquery-ui.css" rel = "stylesheet">
+<script src = "../resourcess/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
 
 </head>
-<body>
+<body >

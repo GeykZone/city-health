@@ -3,6 +3,5 @@
   <script src="resourcess/vendors/simplebar/js/simplebar.min.js"></script>
   
   <script src="effects/login.js"></script>
-
 </body>
 </html>
