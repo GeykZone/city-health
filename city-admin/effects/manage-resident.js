@@ -26,6 +26,7 @@
   $("#resident_table_wrapper").addClass("d-none");
   number_of_resident_chart();
   load_progress_bar();
+ 
   });
 
   //progress bar 
@@ -67,6 +68,7 @@
   }
   }
   //progress bar end
+
 
   //set do some stuff when confiramtion variable is changed
   var confirmation = {
@@ -160,6 +162,8 @@
   $("#resident_table_paginate").removeClass("d-none");
   $("#resident_table_info").removeClass("d-none");
   $("#myProgress").addClass("d-none");
+  $(".barangay_table_is_loading").addClass("d-none");
+  $(".edit_barangay_value").removeClass("d-none");
   number_of_resident_chart();
   },600);
 
@@ -218,6 +222,8 @@
   $("#resident_table_paginate").removeClass("d-none");
   $("#resident_table_info").removeClass("d-none");
   $("#myProgress").addClass("d-none");
+  $(".barangay_table_is_loading").addClass("d-none");
+  $(".edit_barangay_value").removeClass("d-none");
   number_of_resident_chart();
   },600);
 
@@ -245,6 +251,8 @@
   $("#resident_table_paginate").removeClass("d-none");
   $("#resident_table_info").removeClass("d-none");
   $("#myProgress").addClass("d-none");
+  $(".barangay_table_is_loading").addClass("d-none");
+  $(".edit_barangay_value").removeClass("d-none");
   number_of_resident_chart();
   },600);
 
@@ -456,32 +464,20 @@
   }
   //enable the form when a barangay is picked end 
 
-  //generate an age base on the birthdate
+  //create date picker
   function generate_age()
   {
   //adding (first add)
   $("#birthdate").datepicker({
-  onSelect: function(value, ui) {
-    var today = new Date(),
-        age = today.getFullYear() - ui.selectedYear;
-        resident_age = age;
-  },
   dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
   });
-  $( "#birthdate" ).val("0000-00-00");
 
   //updating
   $("#update_birthdate").datepicker({
-  onSelect: function(value, ui) {
-    var today = new Date(),
-        age = today.getFullYear() - ui.selectedYear;
-        update_resident_age = age;
-  },
   dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
   });
-  $( "#update_birthdate" ).val("0000-00-00");
   }
-  //generate an age base on the birthdate end
+  //create date picker end
 
   //submit new barangay
   $("#add_resident_btn").click(function () {
@@ -493,6 +489,11 @@
   var gender = $("#gender").val();
 
   var birthdate = $('#birthdate').val();
+  dob = birthdate;
+  dob = new Date(dob);
+  today = new Date();
+  age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+  resident_age = age;
 
   var contact = $("#contact").val();
   var thisemail = $("#email").val();
@@ -514,7 +515,7 @@
   {
   $("#lastname").addClass("is-invalid");
   }
-  else if (birthdate === "0000-00-00") //check if value is empty
+  else if (birthdate.trim().length === 0) //check if value is empty
   {
   $("#birthdate").addClass("is-invalid");
   }
@@ -535,7 +536,7 @@
   {
 
     function submit_new_resident()
-    {
+    { 
 
       function allCharactersSame(s)
           {
@@ -693,9 +694,16 @@
       var new_firstname = $("#update_firstname").val();
       var new_middlename = $("#update_middlename").val();
       var new_lastname = $("#update_lastname").val();
-      var new_age = update_resident_age;
       var new_gender = $('#update_gender').val();
+
       var new_birthdate = $("#update_birthdate").val();
+      dob = new_birthdate;
+      dob = new Date(dob);
+      today = new Date();
+      upadateage = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+      update_resident_age = upadateage;
+      var new_age = update_resident_age;
+
       var new_civil = $('#update_civil_status').val();
       var new_contact = $("#update_contact").val();
       var new_email = $("#update_email").val();
@@ -716,7 +724,7 @@
       {
       $("#update_lastname").addClass("is-invalid");
       }
-      else if (new_birthdate === "0000-00-00") //check if value is empty
+      else if (new_birthdate.trim().length === 0) //check if value is empty
       {
       $("#update_birthdate").addClass("is-invalid");
       }

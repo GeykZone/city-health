@@ -57,7 +57,7 @@ include('includes/sidebar.php');
   
   <div class="row">
       <div class="col-sm-6">
-        <h4 style="color:aliceblue;">List of Barangay Admin Accounts</h4>
+        <h4 style="color:aliceblue;">Barangay Admin Accounts</h4>
       </div>
       <div class="col-sm-6 text-end">
       <a class="addbtn add-brgy px-4 fw-bolder d-none" id="add_admin" data-coreui-toggle="modal" href="#add-barangay-admin" role="button" >Admin +</a>
@@ -88,7 +88,7 @@ include('includes/sidebar.php');
         
       </table>
 
-      <div id="myProgress" class=" rounded-4">
+      <div id="myProgress" class=" mt-3 rounded-4">
       <div id="myBar" class=" rounded-4"></div>
       </div>
 

@@ -275,6 +275,8 @@ if(confirmation.a == 1)
       $("#admin_table_paginate").removeClass("d-none");
       $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $(".barangay_table_is_loading").addClass("d-none");
+      $(".edit_barangay_value").removeClass("d-none");
     },600);
   
   },3000);
@@ -309,6 +311,8 @@ else if(confirmation.a == 3)
       $("#admin_table_paginate").removeClass("d-none");
       $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $(".barangay_table_is_loading").addClass("d-none");
+      $(".edit_barangay_value").removeClass("d-none");
     },600);
   
   },3000);
@@ -333,6 +337,8 @@ else if(confirmation.a == 4)
       $("#admin_table_paginate").removeClass("d-none");
       $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $(".barangay_table_is_loading").addClass("d-none");
+      $(".edit_barangay_value").removeClass("d-none");
     },600);
   
   },3000);
@@ -357,6 +363,8 @@ else if(confirmation.a == 5)
       $("#admin_table_paginate").removeClass("d-none");
       $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $(".barangay_table_is_loading").addClass("d-none");
+      $(".edit_barangay_value").removeClass("d-none");
     },600);
   
   },3000);
@@ -381,6 +389,8 @@ else if(confirmation.a == 6)
       $("#admin_table_paginate").removeClass("d-none");
       $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $(".barangay_table_is_loading").addClass("d-none");
+      $(".edit_barangay_value").removeClass("d-none");
     },600);
   
   },3000);

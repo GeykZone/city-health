@@ -52,7 +52,7 @@ include('includes/sidebar.php');
         <h4 style="color:aliceblue;">Residents of Oroquieta City</h4>
       </div>
       <div class="col-sm-6 text-end">
-      <a class="addbtn add-brgy px-4 fw-bolder d-none" data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">Resident +</a>
+      <a class="addbtn add-brgy px-4 fw-bolder d-none"  data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">Resident +</a>
       </div>
   </div> 
   </div>
@@ -94,7 +94,7 @@ include('includes/sidebar.php');
         </tbody>
       </table>
 
-      <div id="myProgress" class=" rounded-4">
+      <div id="myProgress" class=" mt-3 rounded-4">
       <div id="myBar" class=" rounded-4"></div>
       </div>
 

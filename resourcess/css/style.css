@@ -80,6 +80,12 @@
   --cui-highlight-bg: #fff3cd;
 }
 
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
 body {
   overflow-y: scroll; /* Add the ability to scroll */
 }

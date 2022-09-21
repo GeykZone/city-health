@@ -81,7 +81,7 @@ include('includes/sidebar.php');
         
       </table>
 
-      <div id="myProgress" class=" rounded-4">
+      <div id="myProgress" class=" mt-3 rounded-4">
       <div id="myBar" class=" rounded-4"></div>
       </div>
       </div>

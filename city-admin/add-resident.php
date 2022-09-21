@@ -62,7 +62,7 @@
   </div>
   <div class="mb-3">
   <label for="birthdate" class="form-label">Date of Birth*</label>
-    <input type="button" class="  birthdate form-control barangay-form text-sm-start" id="birthdate" name="birthdate" placeholder="Date of Birth">
+    <input type="date" class="  birthdate form-control barangay-form text-sm-start" id="birthdate" name="birthdate" placeholder="Date of Birth">
     <div class="invalid-feedback">
       Please don't leave this area empty.
     </div>

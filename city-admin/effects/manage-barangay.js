@@ -57,7 +57,6 @@ function move() {
 }
 //progress bar end
 
-
 //set do some stuff when confiramtion variable is changed
 var confirmation = {
   aInternal: 10,
@@ -200,6 +199,8 @@ if(confirmation.a == 1)
       $("#barangay_table_paginate").removeClass("d-none");
       $("#barangay_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $(".barangay_table_is_loading").addClass("d-none");
+      $(".edit_barangay_value").removeClass("d-none");
     },600);
 
   },3000);
@@ -237,6 +238,8 @@ else if(confirmation.a == 3)
       $("#barangay_table_paginate").removeClass("d-none");
       $("#barangay_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $(".barangay_table_is_loading").addClass("d-none");
+      $(".edit_barangay_value").removeClass("d-none");
     },600);
 
   },3000);
@@ -263,6 +266,8 @@ else if(confirmation.a == 4)
       $("#barangay_table_paginate").removeClass("d-none");
       $("#barangay_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $(".barangay_table_is_loading").addClass("d-none");
+      $(".edit_barangay_value").removeClass("d-none");
     },600);
 
   },3000);
