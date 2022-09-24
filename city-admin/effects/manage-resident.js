@@ -261,15 +261,6 @@
   }
   //trigger error messages end
 
-  //destroy data table
-  function destroy_resident_table()
-  {
-  table.destroy();
-
-  }
-  //destroy data table
-
-
   //show data tables
   function load_data_tables() {
 
@@ -304,8 +295,8 @@
       null,
       null,
       {
-        "defaultContent": "<i class='edit_barangay_value update btn_icon fas fa-edit' data-coreui-toggle='modal' href='#update-barangay-resident' id='update_resident_value' role='button' onclick='modal_open();'></i> "+
-        "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_resident' data-coreui-toggle='modal' id='delete_resident_value' role='button' onclick='modal_open();'></i>"+
+        "defaultContent": "<i class='edit_barangay_value update btn_icon fas fa-edit' data-coreui-toggle='modal' href='#update-barangay-resident' id='update_resident_value' role='button'></i> "+
+        "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_resident' data-coreui-toggle='modal' id='delete_resident_value' role='button'></i>"+
         "<i class='barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
       }
     ],

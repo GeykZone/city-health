@@ -14,16 +14,6 @@ $(document).ready(function () {
   load_progress_bar();
 });
 
-//add a delay in loading the material icon
-function modal_open()
-{
-setTimeout(function(){
-  $('.material-icons').css('opacity','1');
-
-  },600);
-}
-//add a delay in loading the material icon
-
 //progress bar
 function load_progress_bar()
 {
@@ -447,16 +437,16 @@ function load_data_tables() {
 
             if(active_data === "0")
             {
-              return  "<i class='edit_barangay_value btn_icon fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' onclick='modal_open();'></i> "+
-              "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' onclick='modal_open();'></i> "+
-              " <i class='edit_barangay_value btn_icon fas fa-unlock' href='#activate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' onclick='modal_open();'></i>"+
+              return  "<i class='edit_barangay_value btn_icon fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' ></i> "+
+              "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' ></i> "+
+              " <i class='edit_barangay_value btn_icon fas fa-unlock' href='#activate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' ></i>"+
               "<i class='admin_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='admin_table_is_loading' role='button' disable></i>"
             }
             else
             {
-              return  "<i class='edit_barangay_value btn_icon fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' onclick='modal_open();'></i> "+
-              "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' onclick='modal_open();'></i> "+
-              " <i class='edit_barangay_value btn_icon fas fa-lock' href='#deactivate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' onclick='modal_open();'></i>"+
+              return  "<i class='edit_barangay_value btn_icon fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' ></i> "+
+              "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' ></i> "+
+              " <i class='edit_barangay_value btn_icon fas fa-lock' href='#deactivate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' ></i>"+
               "<i class='admin_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='admin_table_is_loading' role='button' disable></i>"
             }
               

@@ -32,6 +32,10 @@ include('includes/sidebar.php');
 <?php include "add-disease.php" ?>
 <!-- add disease end -->
 
+<!-- delete disease -->
+<?php include "delete-disease.php" ?>
+<!-- delete disease end -->
+
 <!--Admins-->
 <div class="row">
 <div class="col-md-12">

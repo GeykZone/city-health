@@ -42,10 +42,10 @@
 	border-radius: 50%;
 	z-index: 9;
 	text-align: center;
-	border: 3px solid #ffc137;
+	border: 3px solid #f15e5e;
 }
 .modal-confirm .icon-box i {
-	color: #ffc137;
+	color: #f15e5e;
 	font-size: 46px;
 	display: inline-block;
 	margin-top: 13px;
@@ -70,10 +70,10 @@
 	background: #a8a8a8;
 }
 .modal-confirm .btn-danger {
-	background: #ffc137;
+	background: #f15e5e;
 }
 .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
-	background: #ffa837;
+	background: #ee3535;
 }
 
 .close{
@@ -81,22 +81,22 @@
 }
 </style>
 
-<div id="reset_barangay" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="delete_disease" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog  modal-md modal-dialog-centered modal-confirm modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
 			<div class="icon-box">
-				<i class="fa-solid fa-rotate-left" style="font-size: 40px; margin-top:15px;  color:#ffc137;"></i>
-			</div>					
+			<i class="fa-solid fa-trash-can" style="font-size: 40px; margin-top:15px;  color:#f15e5e;"></i>
+				</div>					
 				<h4 class="modal-title w-100">Are you sure?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<h5>Do you really want to revert to the default username and password for this account?</h5>
+				<h5>Do you really want to delete this record? This process cannot be undone.</h5>
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="btn btn-danger fw-bolder" id="reset_admin" data-coreui-dismiss="modal" aria-label="Close">Reset</button>
+				<button class="btn btn-danger fw-bolder" id="delete_disease_btn" data-coreui-dismiss="modal" aria-label="Close">Delete</button>
 			</div>
 		</div>
 	</div>

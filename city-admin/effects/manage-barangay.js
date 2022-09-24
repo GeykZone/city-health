@@ -11,16 +11,6 @@ $(document).ready(function()
   load_progress_bar();
 });
 
-
-//add a delay in loading the material icon
-function modal_open()
-{
-setTimeout(function(){
-  $('.material-icons').css('opacity','1');
-  },600);
-}
-//add a delay in loading the material icon
-
 //progress bar
 function load_progress_bar()
 {
@@ -275,13 +265,6 @@ else if(confirmation.a == 4)
 }
 //trigger error messages
 
-//destroy data table
-function destroy_barangay_table()
-{
-  table.destroy();
-}
-//destroy data table
-
 //show data tables
 function load_data_tables() {
 
@@ -302,8 +285,8 @@ function load_data_tables() {
         null,
         null,
         {
-          "defaultContent": '<i class="edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" onclick="modal_open();"></i> '+
-          '<i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" onclick="modal_open();"></i> '+
+          "defaultContent": '<i class="edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" ></i> '+
+          '<i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" ></i> '+
           '<i class="barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>',
         }
       ],
