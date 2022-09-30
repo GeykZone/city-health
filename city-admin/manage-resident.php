@@ -59,16 +59,13 @@ include('includes/sidebar.php');
 
   <div class="card-body"  id="wrapper" >
   
-      <div class=" mb-3 c1 row d-none" id="c1"><div class="toggle_chart1 col-md-12"><a id="toggle_chart1">Show Total Number of Residents by Barangay <span style="color: #4f5d73;" class="fa-solid align-center"></span></div></a></div>
-      <div class=" mb-3 c2 row d-none" id="c2"><div class="toggle_chart2 col-md-12"><a id="toggle_chart2">Hide Total Number of Residents by Barangay <span style="color: #4f5d73;" class="fa-solid align-center"></span></a></div></div>
+      <div class=" mb-3 c1 row d-none" id="c1"><div class="toggle_chart1 col-md-12"><a id="toggle_chart1"><span style="color: #294168bf;" class=" fa-solid align-content-center"></span> Current Total Number of Residents of Each Barangay</div></a></div>
+    
       
-
-      <div  class="table-responsive-xxl" id="residents_chart_row" style="display: none;">
+      <div  class="mb-3 table-responsive-xxl" id="residents_chart_row">
         
     
       </div>
-
-      <div class="mb-3 mt-3 c2 row d-none" id="c2"><div class="toggle_chart2 col-md-12"><a id="toggle_chart2">Hide Total Number of Residents by Barangay <span style="color: #4f5d73;" class="fa-solid align-center"></span></a></div></div>
 
   <hr class="mt-0">
     <!-- /.row-->

@@ -22,11 +22,9 @@
   enable_form();  
   generate_age();
   get_resident_table_cell_value()
-  load_data_tables();
+  load_data_tables();;
   $("#resident_table_wrapper").addClass("d-none");
-  number_of_resident_chart();
   load_progress_bar();
- 
   });
 
   //progress bar 
@@ -38,13 +36,11 @@
   $("#myBar").text("Table Loaded Successfully!");
   setTimeout(function(){
   $("#myProgress").addClass("d-none");
+  number_of_resident_chart();
   $("#resident_table").removeClass("d-none");
   $("#resident_table_wrapper").removeClass("d-none");
   $("#add_resident").removeClass("d-none");
   $(".c1").removeClass("d-none");
-  setTimeout(function(){
-       $('.material-symbols-outlined').css('opacity','1');
-    },500);
   },800);
   },3000)
   }
@@ -237,7 +233,6 @@
   $("#resident_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
-
   toastMixin.fire({
   animation: true,
   title: 'A resident record has been deleted.'
@@ -998,53 +993,3 @@
   }
   //number of residents chart end
 
-  //toggle chart
-  $(".toggle_chart1").click(function(){
-    $("#residents_chart_row").slideToggle(400);
-
-  $(".c2").removeClass("d-none");
-  $(".c1").addClass("d-none"); 
-
-  });
-
-  $(".toggle_chart2").click(function(){
-  $("#residents_chart_row").slideToggle(400);
-  $(".c1").removeClass("d-none");
-  $(".c2").addClass("d-none");
-
-  setTimeout(function()
-  {
-    $('html, body').animate({
-      scrollTop: '0px'
-  },50); 
-  },50)
-
-  });
-  //toggle chart end
-
-  //destroy chart data
-    function destroy_chart_data()
-    {
-      
-      if ( $.fn.DataTable.isDataTable( '#number_of_residents_chart' ) ) { // check if data table is already exist
-          chart.destroy()
-        }
-    }
-  //destroy chart data end
-
-   //show data chart 
-   function load_data_chart() {
-    if ( ! $.fn.DataTable.isDataTable( '#number_of_residents_chart' ) ) { // check if data table is already exist
-    chart = $('#number_of_residents_chart').DataTable({
-      searching: false, paging: false, info: false, 
-      order: [[2, 'desc']],
-
-      //disable the sorting of colomn
-      "columnDefs": [ {
-      "targets": 1,
-      "orderable": false
-    } ],
-    });
-    }
-    };
-    //show data chart end
