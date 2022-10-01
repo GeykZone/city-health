@@ -67,6 +67,7 @@
 <link href = "../resourcess/jquery-ui-1.13.2.custom/jquery-ui.css" rel = "stylesheet">
 <script src = "../resourcess/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
 
+<!--chart-->
 <script src="../resourcess/chartjs/chart.min.js" ></script>
 
 
