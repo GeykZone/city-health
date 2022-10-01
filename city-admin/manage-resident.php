@@ -58,18 +58,18 @@ include('includes/sidebar.php');
   </div>
 
   <div class="card-body"  id="wrapper" >
-  
-      <div class=" mb-3 c1 row d-none" id="c1"><div class="toggle_chart1 col-md-12"><a id="toggle_chart1"><span style="color: #294168bf;" class=" fa-solid align-content-center"></span> Current Total Number of Residents of Each Barangay</div></a></div>
-    
-      
-      <div  class="mb-3 table-responsive-xxl" id="residents_chart_row">
-        
-    
-      </div>
 
-  <hr class="mt-0">
     <!-- /.row-->
       <div  class="table-responsive-xxl">
+
+      <div class=" mb-3 c1 row d-none" id="c1"><div class="toggle_chart1 col-md-12"><a id="toggle_chart1"><span style="color: #294168bf;" class=" fa-solid align-content-center"></span> Current Total Number of Barangay Residents</div></a></div>
+      <hr class="mt-0">
+
+      <div  class="mb-3 table-responsive-xxl d-none" id="residents_chart_row">
+      <canvas class="d-none"  id="myChart" style="width:100%; height:100px ;"></canvas> 
+      <hr class="mt-3 d-none" id="chart_line">
+      </div>
+
       <table class="table  mb-0 d-none w-100" id="resident_table" > 
         <thead class="table-info fw-semibold">
           <tr class="align-middle">

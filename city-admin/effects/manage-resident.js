@@ -13,8 +13,13 @@
   var civil = "";
   var contact = "";
   var email = "";
-
   var update_resident_age = "";
+
+  var x_value = "";
+  var y_value = "";
+
+  var myChart ="";
+  
 
   $(document).ready(function () {
   $(document).attr("title", "HPCS | Manage Residents"); 
@@ -34,13 +39,17 @@
   setTimeout( function()
   {
   $("#myBar").text("Table Loaded Successfully!");
+  $("#residents_chart_row").removeClass("d-none");
   setTimeout(function(){
-  $("#myProgress").addClass("d-none");
+  chart_array();
   number_of_resident_chart();
+  $("#myProgress").addClass("d-none");
   $("#resident_table").removeClass("d-none");
   $("#resident_table_wrapper").removeClass("d-none");
   $("#add_resident").removeClass("d-none");
-  $(".c1").removeClass("d-none");
+  $(".c1").removeClass("d-none"); 
+  $("#myChart").removeClass("d-none");
+  $("#chart_line").removeClass("d-none");
   },800);
   },3000)
   }
@@ -239,7 +248,6 @@
   });
 
   setTimeout(function(){  
-
   $("#myBar").text("Table Updated Successfully!");
   setTimeout(function(){
   table.ajax.reload( null, false);
@@ -248,9 +256,8 @@
   $("#myProgress").addClass("d-none");
   $(".barangay_table_is_loading").addClass("d-none");
   $(".edit_barangay_value").removeClass("d-none");
-  number_of_resident_chart();
+  update_chart();
   },600);
-
   },3000);
   }
   }
@@ -983,13 +990,104 @@
   }
   //get the table cell value when selected end
 
+  //initalize chart values
+  function chart_array()
+  {
+    $.ajaxSetup({async:false});
+    $.getJSON('functions/show-number-of-resident.php', 
+    {
+      barangay_name:'set'
+    }, 
+    
+    function (data, textStatus, jqXHR) 
+    {
+      x_value = data;
+      
+    });
+
+    $.getJSON('functions/show-number-of-resident.php', 
+    {
+      total_residents_number:'set'
+    }, 
+    
+    function (data, textStatus, jqXHR) 
+    {
+      y_value = data;
+      
+    });    
+
+        //sorting algorithm
+        arrayOfObj = x_value.map(function(d, i) {
+          return {
+            label: d,
+            data: y_value[i] || 0
+          };
+        });
+        
+        sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
+          return a.data - b.data;
+        });
+        
+        newArrayLabel = [];
+        newArrayData = [];
+        sortedArrayOfObj.forEach(function(d){
+          newArrayLabel.push(d.label);
+          newArrayData.push(d.data);
+        });
+        ////sorting algorithm
+
+        x_value = newArrayLabel;
+        y_value = newArrayData;
+
+  }
+   //initalize chart values end
+
   //number of residents chart
   function number_of_resident_chart()
   {
-    $("#residents_chart_row").load("functions/show-number-of-resident.php", function()
-    {
+    var xValues = x_value;
+    var yValues = y_value;
+    var barColors = [
+        'rgba(145, 215, 248, 1.0)',
+        'rgba(52, 152, 219,1.0)',
+    ];
+
+    const ctx = $('#myChart');
+
+    myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: xValues,
+        dataSorting: {
+          enabled: true
+       },
+        datasets: [{
+            label: 'Total Number of Residents of Each Barangay in Oroquieta City',
+            data: yValues,
+            backgroundColor: barColors,
+            borderColor: barColors,
+            borderWidth: 1
+        }]
     },
- );
-  }
+    options: {
+    plugins: {
+        legend: {
+            display: false,
+        }
+    }
+}
+
+});
+}
   //number of residents chart end
+
+//update chart
+function update_chart()
+{
+  chart_array();
+  myChart.data.labels = x_value;
+  myChart.data.datasets[0].data = y_value;
+  myChart.update();
+}
+//update chart end
 

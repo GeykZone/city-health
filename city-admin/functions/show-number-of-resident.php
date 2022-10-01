@@ -30,47 +30,18 @@
                 $total_residents_number[] = $total_residents;
                 $brgy[] = $row['barangay_name'];
     }
+
+    if(isset($_GET['barangay_name']))
+    {
+        print json_encode($brgy);
     }
+    elseif(isset($_GET['total_residents_number']))
+    {
+        print json_encode($total_residents_number);
+    }
+    }
+    
     ?>
 
-<hr class="mt-0">
-
-<canvas  id="myChart" style="width:100%; height:450px ;"></canvas> 
 
 
-<script>
-    $(document).ready(function()
-    {
-       var xValues = <?php print json_encode($brgy); ?>;
-        var yValues = <?php print json_encode($total_residents_number); ?>;
-        var barColors = [
-            'rgba(145, 215, 248, 1.0)',
-            'rgba(52, 152, 219,1.0)',
-        ];
-
-        const ctx = $('#myChart');
-
-        const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: xValues,
-            datasets: [{
-                label: 'Total Number of Residents of Each Barangay in Oroquieta City',
-                data: yValues,
-                backgroundColor: barColors,
-                borderColor: barColors,
-                borderWidth: 1
-            }]
-        },
-        options: {
-        plugins: {
-            legend: {
-                display: false,
-            }
-        }
-    }
-    });
-    
-
-    })
-</script>
