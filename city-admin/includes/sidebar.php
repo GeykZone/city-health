@@ -1,4 +1,4 @@
-<div class="sidebar sidebar-dark sidebar-fixed <?php
+<div class="sidebar sidebar-dark sidebar-fixed  ui-widget-shadow <?php
 if(!isset($_COOKIE["sidebar"])) {
   
 } else {

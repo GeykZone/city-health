@@ -106,6 +106,32 @@ $("#delete_disease_btn").click(function () {
 });
 //delete type of disease end
 
+//edit type of disease
+$("#edit_disease_btn").click(function()
+{
+  var old_disease_name = disease_name;
+  var edited_disease = $("#edited_disease").val();
+
+  if (edited_disease.trim().length === 0) //check if value is empty
+  {
+    $("#edited_disease").addClass("is-invalid");
+    $("#edited_disease").val("");
+  } 
+  else 
+  {
+    $.post("functions/edit-disease.php", {
+      old_delete_disease: old_disease_name, 
+      edited_disease: edited_disease
+    },
+    function (data, status) {
+     confirmation.a = data;
+  
+  
+    });
+  }
+})
+//edit type of disease end
+
 //trigger error messages
 function alert_message()
 {
@@ -166,18 +192,24 @@ else if(confirmation.a == 2)
   setTimeout(function(){
   },3000);
 }
-else if(confirmation.a == 4)
+else if(confirmation.a == 3)
 {
+  $('#edit-disease').modal('toggle');
+
+  $("#disease").val("");
+
+
   $(".barangay_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
   $("#diseases_table_paginate").addClass("d-none");
   $("#diseases_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
 
   toastMixin.fire({
     animation: true,
-    title: 'A type of disease has been deleted.'
+    title: "A disease's name has been successfully edited."
   });
   setTimeout(function(){
 
@@ -187,6 +219,36 @@ else if(confirmation.a == 4)
       $("#diseases_table_paginate").removeClass("d-none");
       $("#diseases_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $("#myProgress").addClass("mt-3");
+      $(".barangay_table_is_loading").addClass("d-none");
+      $(".edit_barangay_value").removeClass("d-none");
+    },600);
+
+  },3000);
+}
+else if(confirmation.a == 4)
+{
+  $(".barangay_table_is_loading").removeClass("d-none");
+  $(".edit_barangay_value").addClass("d-none");
+  $("#diseases_table_paginate").addClass("d-none");
+  $("#diseases_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
+
+  toastMixin.fire({
+    animation: true,
+    title: 'A type of disease has been deleted.'
+  });
+  setTimeout(function(){
+
+    $("#myBar").text("Table Updated Successfully!"); 
+     setTimeout(function(){
+      table.ajax.reload( null, false);
+      $("#diseases_table_paginate").removeClass("d-none");
+      $("#diseases_table_info").removeClass("d-none");
+      $("#myProgress").addClass("d-none");
+      $("#myProgress").addClass("mt-3");
       $(".barangay_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
@@ -214,9 +276,9 @@ function load_data_tables() {
   
         null,
         {
-          "defaultContent": '<i class="edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#update-disease" id="edit_disease_value" role="button"></i> '+
-          '<i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_disease" data-coreui-toggle="modal" id="delete_disease_value" role="button" ></i> '+
-          '<i class="barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>',
+          "defaultContent": '<i class="shadow-sm align-middle edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#edit-disease" id="edit_disease_value" role="button"></i> '+
+          '<i class="shadow-sm align-middle edit_barangay_value btn_icon fas fa-trash" href="#delete_disease" data-coreui-toggle="modal" id="delete_disease_value" role="button" ></i> '+
+          '<i class="shadow-sm align-middle barangay_table_is_loading spinner-border spinner-border-sm d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>',
         }
       ],
   
@@ -313,7 +375,7 @@ function load_data_tables() {
       $("#diseases_table_filter").addClass("col-sm-6");
       $("#diseases_table_filter").addClass("mb-3");
       $(".dt-buttons").addClass("col-sm-2");
-      $(".dt-buttons").removeClass("flex-wrap ");
+      $(".dt-buttons").removeClass("flex-wrap "); 
 
 }
 //show data tables end
@@ -335,9 +397,16 @@ function get_disease_table_cell_value()
     var currentRow=$(this).closest("tr");
     var col1=currentRow.find("td:eq(0)").text().trim($(this).text()); // get current row 1st TD value
     disease_name = col1;
-
-
-
   });
+
+//editing
+$("#diseases_table").on('click','#edit_disease_value',function(){
+  // get the current row
+  var currentRow=$(this).closest("tr");
+  var col1=currentRow.find("td:eq(0)").text().trim($(this).text()); // get current row 1st TD value
+
+  disease_name = col1;
+  $("#edited_disease").val(disease_name);
+});
 }
 //get the table cell value when selected end

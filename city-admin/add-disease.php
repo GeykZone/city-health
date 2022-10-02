@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
     <div class="modal-content">
       <div class="modal-header bg-warning">
-        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Add Barangay</h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Add Disease</h5>
         <svg class="c-icon" style="width: 20px; height:20px; margin-left: 7px; margin-top:5px; color:#ffff;">
         <use  xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-medical-cross"></use>
         </svg>

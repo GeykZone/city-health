@@ -25,7 +25,7 @@ include('includes/sidebar.php');
 </header>
 <!--header end-->
 
-<div class="body flex-grow-1 px-3">
+<div class="body flex-grow-1 px-5 pt-3"> 
 <div class="container-fluid">
 
 <!-- add disease -->
@@ -36,29 +36,31 @@ include('includes/sidebar.php');
 <?php include "delete-disease.php" ?>
 <!-- delete disease end -->
 
+<!-- edit disease -->
+<?php include "edit-disease.php" ?>
+<!-- edit disease end -->
+
 <!--Admins-->
 <div class="row">
 <div class="col-md-12">
-<div class="card mb-4">
+<div class="card mb-4 shadow-sm">
 
-  <div class="card-header p-3" style="background-color:#3b7ddd;">
+  <div class="card-header p-3 shadow" style="background-color:#3b7ddd;">
   
   <div class="row">
       <div class="col-sm-6">
         <h4 style="color:aliceblue;">Types of Health Diseases</h4>
       </div>
       <div class="col-sm-6 text-end">
-      <a class="addbtn d-none add-brgy px-4 fw-bolder" id="add_disease" data-coreui-toggle="modal" href="#add-disease" role="button" >Disease +</a>
+      <a class="shadow-sm addbtn d-none add-brgy px-4 fw-bolder" id="add_disease" data-coreui-toggle="modal" href="#add-disease" role="button" >Disease +</a>
       </div>
   </div> 
   </div>
 
-  <div class="card-body"  id="wrapper" >
-            
-  <hr class="mt-0">
-    <!-- /.row-->
+  <div class="card-body shadow-sm"  id="wrapper" >
+
       <div class="table-responsive-xxl" >
-      <table class="table d-none mb-0 w-100" id="diseases_table"> 
+      <table class="table d-none w-100" id="diseases_table"> 
         <thead class="table-info fw-semibold">
           <tr class="align-middle">
             <th>Name of Disease</th>
@@ -66,14 +68,14 @@ include('includes/sidebar.php');
           </tr>
         </thead>
 
-        <tbody id="types_of_disease_table"> 
+        <tbody class="align-middle"  id="types_of_disease_table"> 
 
         
         </tbody>
         
       </table>
 
-      <div id="myProgress" class=" mt-3 rounded-4">
+      <div id="myProgress" class="rounded-4">
       <div id="myBar" class=" rounded-4"></div>
       </div>
 
