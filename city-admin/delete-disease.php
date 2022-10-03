@@ -95,8 +95,8 @@
 				<h5>Do you really want to delete this record? This process cannot be undone.</h5>
 			</div>
 			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="btn btn-danger fw-bolder" id="delete_disease_btn" data-coreui-dismiss="modal" aria-label="Close">Delete</button>
+				<button type="button" class="border-0 shadow-sm btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
+				<button class="border-0 shadow-sm btn btn-danger fw-bolder" id="delete_disease_btn" data-coreui-dismiss="modal" aria-label="Close">Delete</button>
 			</div>
 		</div>
 	</div>

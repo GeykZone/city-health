@@ -62,7 +62,7 @@ include('includes/sidebar.php');
     <!-- /.row-->
       <div  class="table-responsive-xxl">
 
-      <div class=" mb-3 c1 row d-none" id="c1"><div class="toggle_chart1 col-md-12"><a id="toggle_chart1"><span style="color: #294168bf;" class=" fa-solid align-content-center"></span> Current Total Number of Barangay Residents</div></a></div>
+      <div class=" mb-3 c1 row d-none" id="c1"><div class="toggle_chart1 col-md-12"><a id="toggle_chart1"><span style="color: #294168bf;" class=" fa-solid align-content-center"></span> Current Total Number of Barangay Residents</a></div></div>
       <hr class="mt-0">
 
       <div  class="mb-3 table-responsive-xxl d-none" id="residents_chart_row">

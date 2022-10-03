@@ -22,7 +22,9 @@ function load_progress_bar()
       $("#myProgress").addClass("d-none");
       $("#diseases_table").removeClass("d-none");
       $("#diseases_table_wrapper").removeClass("d-none");
-      $("#add_disease").removeClass("d-none");
+      $("#add_disease").removeClass("d-none"); 
+      $(".hide_first_load").removeClass("d-none"); 
+      $(".remove_rounded").removeClass("rounded-5");
     },800);
   },3000)
 }
@@ -276,9 +278,10 @@ function load_data_tables() {
   
         null,
         {
-          "defaultContent": '<i class="shadow-sm align-middle edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#edit-disease" id="edit_disease_value" role="button"></i> '+
-          '<i class="shadow-sm align-middle edit_barangay_value btn_icon fas fa-trash" href="#delete_disease" data-coreui-toggle="modal" id="delete_disease_value" role="button" ></i> '+
-          '<i class="shadow-sm align-middle barangay_table_is_loading spinner-border spinner-border-sm d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>',
+          "defaultContent": 
+          '<i class="shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit" data-coreui-toggle="modal" href="#edit-disease" id="edit_disease_value" role="button"></i> '+
+          '<i class="shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can" href="#delete_disease" data-coreui-toggle="modal" id="delete_disease_value" role="button" ></i> '+
+          '<i class="align-middle barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>',
         }
       ],
   
@@ -374,8 +377,11 @@ function load_data_tables() {
       $("#diseases_table_length").addClass("mb-3");
       $("#diseases_table_filter").addClass("col-sm-6");
       $("#diseases_table_filter").addClass("mb-3");
-      $(".dt-buttons").addClass("col-sm-2");
-      $(".dt-buttons").removeClass("flex-wrap "); 
+      $(".dt-buttons").addClass("col-sm-2 mb-3");
+      $(".buttons-print").addClass("shadow-sm border-2"); 
+      $(".buttons-excel").addClass("shadow-sm border-2"); 
+      $(".buttons-copy").addClass("shadow-sm border-2"); 
+      $(".dt-buttons").removeClass("flex-wrap");       
 
 }
 //show data tables end

@@ -220,6 +220,48 @@ tbody tr.odd:hover {
   cursor: pointer;
 }
 
+.loader_icn
+{
+  color: #3b7ddd; 
+  background-color: #ffffff00;
+  border: 1px solid rgba(241, 94, 94, 0); 
+  padding:5px;
+}
+
+.del_btn
+{
+  color: white; 
+  background-color: #f15e5e;
+  border: 1px solid #f15e5e; 
+  padding:5px;
+}
+.del_btn:hover
+{
+  color: white; 
+  border: 1px solid #ce1b1b; 
+  background-color: #ce1b1b;
+  padding:5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.edit_btn
+{
+  color: white; 
+  background-color: #ffc137;
+  border: 1px solid #ffc137; 
+  padding:5px;
+}
+.edit_btn:hover
+{
+  color: white; 
+  border: 1px solid #ffa837; 
+  background-color: #ffa837;
+  padding:5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
 .dt-buttons {
   margin-top: 10px;
   margin-bottom: 5px;
@@ -230,6 +272,7 @@ tbody tr.odd:hover {
   color: #ffff !important;
   border-color: #ffff !important;
   font-weight: bolder !important;
+ 
 }
   .buttons-print:hover 
 {
@@ -2296,7 +2339,7 @@ html:not([dir=rtl]) .offset-11 {
 
 .table-info {
   --cui-table-color: #ffff;
-  --cui-table-bg: #3b7ddd;
+  --cui-table-bg: #4d8ae6;
   --cui-table-border-color: rgba(198, 219, 238, 0.995);
   --cui-table-striped-bg: rgba(206, 227, 247, 0.9975);
   --cui-table-striped-color: rgba(44, 56, 74, 0.95);
@@ -11154,7 +11197,7 @@ html:not([dir=rtl]) .text-center {
 
 .bg-info {
   --cui-bg-opacity: 1;
-  background-color: rgba(var(--cui-info-rgb), var(--cui-bg-opacity)) !important;
+  background-color: #4d8ae6 !important;
 }
 
 .bg-warning {
