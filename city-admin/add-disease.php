@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
     <div class="modal-content">
       <div class="modal-header bg-warning border-0 shadow-sm">
-        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Add Disease</h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Add Type of Health Disease</h5>
         <svg class="c-icon" style="width: 20px; height:20px; margin-left: 7px; margin-top:5px; color:#ffff;">
         <use  xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-medical-cross"></use>
         </svg>
@@ -14,7 +14,7 @@
       <form action="" id="add_disease_form" name="add_disease_form" method="post">
         <div class="mb-3">
           <label for="disease" class="form-label">Disease*</label>
-          <input type="text" name="disease" class="form-control barangay-form" id="disease" placeholder="Name of Disease">
+          <input type="text" name="disease" class="shadow-sm form-control barangay-form" id="disease" placeholder="Name of Disease">
           <div class="invalid-feedback">
             Please don't leave this area empty.
           </div>

@@ -42,10 +42,10 @@
 	border-radius: 50%;
 	z-index: 9;
 	text-align: center;
-	border: 3px solid #f15e5e;
+	border: 3px solid #60768f;
 }
 #deactivate_barangay_admin .modal-confirm .icon-box i {
-	color: #f15e5e;
+	color: #60768f;
 	font-size: 46px;
 	display: inline-block;
 	margin-top: 13px;
@@ -70,10 +70,10 @@
 	background: #a8a8a8;
 }
 #deactivate_barangay_admin .modal-confirm .btn-danger {
-	background: #f15e5e;
+	background: #60768f;
 }
 #deactivate_barangay_admin .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
-	background: #ee3535;
+	background: #2b3e53;
 }
 
 .close{
@@ -85,8 +85,8 @@
 	<div class="modal-dialog  modal-md modal-dialog-centered modal-confirm modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
-			<div class="icon-box">
-			<i class="fa-solid" style="font-size: 40px; margin-top:15px; color:#f15e5e;"></i>
+			<div class="icon-box shadow" style="background-color: #60768f ;">
+			<i class="fa-solid" style="font-size: 40px; margin-top:15px; color: white;"></i>
 				</div>					
 				<h4 class="modal-title w-100">Are you sure?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -95,8 +95,8 @@
 				<h5>Deactivating admin access will block the user from signing in and changing some entries in this system.</h5>
 			</div>
 			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="btn btn-danger fw-bolder" id="deactivate_barangay_admin_record" data-coreui-dismiss="modal" aria-label="Close">Deactivate</button>
+				<button type="button" class="border-0 shadow-sm btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
+				<button class="border-0 shadow-sm btn btn-danger fw-bolder" id="deactivate_barangay_admin_record" data-coreui-dismiss="modal" aria-label="Close">Deactivate</button>
 			</div>
 		</div>
 	</div>

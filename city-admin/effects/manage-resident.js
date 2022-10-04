@@ -103,6 +103,7 @@
   // maxItems: '1',
   sortField: 'text'
   });
+  $(".selectize-control").removeClass("form-control barangay-form")
   }
   // for select  end
 
@@ -495,6 +496,7 @@
   if (barangay_id.trim().length === 0) //check if value is empty
   {
   $("#select_barangay").addClass("is-invalid");
+  $(".selectize-control").addClass("is-invalid");
   }
   else if (firstname.trim().length === 0) //check if value is empty
   {
@@ -704,6 +706,7 @@
       if (new_barangay_name.trim().length === 0) //check if value is empty
       {
       $("#update_select_barangay").addClass("is-invalid");
+      $(".selectize-control").addClass("is-invalid");
       }
       else if (new_firstname.trim().length === 0) //check if value is empty
       {

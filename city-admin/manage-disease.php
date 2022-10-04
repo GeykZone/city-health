@@ -53,7 +53,7 @@ include('includes/sidebar.php');
       <div class="table-responsive-xxl" >
       <div class="d-flex">
 
-      <div class="col-md-6 text-sm-start hide_first_load d-none">
+      <div class="col-sm-6 text-sm-start hide_first_load d-none">
       <a id="toggle_chart1" >
       <span style="color: #294168bf;" class=" fa-solid align-content-center"></span> Types of Health Diseases
       </a>

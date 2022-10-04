@@ -26,6 +26,8 @@ function load_progress_bar()
       $("#admin_table").removeClass("d-none");
       $("#admin_table_wrapper").removeClass("d-none");
       $("#add_admin").removeClass("d-none");
+      $(".hide_first_load").removeClass("d-none"); 
+      $(".remove_rounded").removeClass("rounded-5");
     },800);
   },3000)
 }
@@ -77,6 +79,8 @@ function select_with_search_box()
   $('select').selectize({
     sortField: 'text'
 });
+
+$(".selectize-control").removeClass("form-control barangay-form")
 }
 // for select  end
 
@@ -114,6 +118,7 @@ $( "#add_barangay_admin_btn" ).click(function() {
   if (barangay_id.trim().length === 0) //check if value is empty
   {
     $("#select_barangay").addClass("is-invalid");
+    $(".selectize-control").addClass("is-invalid");
   }
   else
   {
@@ -253,6 +258,7 @@ if(confirmation.a == 1)
   $("#admin_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
   toastMixin.fire({
     animation: true,
     title: 'A new barangay admin has been added in the list.'
@@ -265,7 +271,8 @@ if(confirmation.a == 1)
       $("#admin_table_paginate").removeClass("d-none");
       $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
-      $(".barangay_table_is_loading").addClass("d-none");
+      $("#myProgress").removeClass("mt-3");
+      $(".admin_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
   
@@ -289,6 +296,7 @@ else if(confirmation.a == 3)
   $("#admin_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
   toastMixin.fire({
     animation: true,
     title: 'A default username and password has been restored.'
@@ -301,7 +309,8 @@ else if(confirmation.a == 3)
       $("#admin_table_paginate").removeClass("d-none");
       $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
-      $(".barangay_table_is_loading").addClass("d-none");
+      $("#myProgress").removeClass("mt-3");
+      $(".admin_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
   
@@ -315,6 +324,7 @@ else if(confirmation.a == 4)
   $("#admin_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
   toastMixin.fire({
     animation: true,
     title: 'A barangay admin record has been deleted.'
@@ -327,7 +337,8 @@ else if(confirmation.a == 4)
       $("#admin_table_paginate").removeClass("d-none");
       $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
-      $(".barangay_table_is_loading").addClass("d-none");
+      $("#myProgress").removeClass("mt-3");
+      $(".admin_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
   
@@ -341,6 +352,7 @@ else if(confirmation.a == 5)
   $("#admin_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
   toastMixin.fire({
     animation: true,
     title: 'A barangay admin record has been activated.'
@@ -353,7 +365,8 @@ else if(confirmation.a == 5)
       $("#admin_table_paginate").removeClass("d-none");
       $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
-      $(".barangay_table_is_loading").addClass("d-none");
+      $("#myProgress").removeClass("mt-3");
+      $(".admin_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
   
@@ -367,6 +380,7 @@ else if(confirmation.a == 6)
   $("#admin_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
   toastMixin.fire({
     animation: true,
     title: 'A barangay admin record has been deactivated.'
@@ -379,7 +393,8 @@ else if(confirmation.a == 6)
       $("#admin_table_paginate").removeClass("d-none");
       $("#admin_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
-      $(".barangay_table_is_loading").addClass("d-none");
+      $("#myProgress").removeClass("mt-3");
+      $(".admin_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
   
@@ -420,12 +435,12 @@ function load_data_tables() {
 
             if(data === "0")
             {active_data = data;
-              return  "<div class='bg-dark text-white rounded-2 d-flex justify-content-center' type='button'  style='width:9rem'>Deactivated</div> ";
+              return  "<div class='shadow-sm align-middle bg-dark text-white rounded-2 d-flex justify-content-center' type='button'  style='width:9rem'>Deactivated</div> ";
               
             }
             else
             {active_data = data;
-              return "<div class='bg-success text-white rounded-2 d-flex justify-content-center' type='button' style='width:9rem'>Activated</div>";
+              return "<div class='shadow-sm align-middle bg-success text-white rounded-2 d-flex justify-content-center' type='button' style='width:9rem'>Activated</div>";
             }
             
           },
@@ -437,17 +452,17 @@ function load_data_tables() {
 
             if(active_data === "0")
             {
-              return  "<i class='edit_barangay_value btn_icon fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' ></i> "+
-              "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' ></i> "+
-              " <i class='edit_barangay_value btn_icon fas fa-unlock' href='#activate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' ></i>"+
-              "<i class='admin_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='admin_table_is_loading' role='button' disable></i>"
+              return  "<i class='shadow-sm align-middle edit_barangay_value reset_btn fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' ></i> "+
+              "<i class='shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' ></i> "+
+              " <i class='shadow-sm align-middle edit_barangay_value act_btn fas fa-unlock' href='#activate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' ></i>"+
+              "<i class='align-middle admin_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='admin_table_is_loading' role='button' disable></i>"
             }
             else
             {
-              return  "<i class='edit_barangay_value btn_icon fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' ></i> "+
-              "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' ></i> "+
-              " <i class='edit_barangay_value btn_icon fas fa-lock' href='#deactivate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' ></i>"+
-              "<i class='admin_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='admin_table_is_loading' role='button' disable></i>"
+              return  "<i class='shadow-sm align-middle edit_barangay_value reset_btn fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' ></i> "+
+              "<i class='shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' ></i> "+
+              " <i class='shadow-sm align-middle edit_barangay_value deact_btn fas fa-lock' href='#deactivate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' ></i>"+
+              "<i class='align-middle admin_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='admin_table_is_loading' role='button' disable></i>"
             }
               
           },
@@ -545,10 +560,14 @@ function load_data_tables() {
     $("#admin_table_length").addClass("mb-3");
     $("#admin_table_filter").addClass("col-sm-6");
     $("#admin_table_filter").addClass("mb-3");
-    $(".dt-buttons").addClass("col-sm-2");
-    $(".dt-buttons").removeClass("flex-wrap ");
+    $(".dt-buttons").addClass("col-sm-2 mb-3");
+    $(".buttons-print").addClass("shadow-sm border-2"); 
+    $(".buttons-excel").addClass("shadow-sm border-2"); 
+    $(".buttons-copy").addClass("shadow-sm border-2"); 
+    $(".dt-buttons").removeClass("flex-wrap"); 
+    $(".form-control").addClass("shadow-sm");
+    $(".form-select").addClass("shadow-sm");
 
-  
 };
 //show data tables end
 

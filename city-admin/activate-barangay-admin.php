@@ -42,10 +42,10 @@
 	border-radius: 50%;
 	z-index: 9;
 	text-align: center;
-	border: 3px solid #ffc137;
+	border: 3px solid #06b92d;
 }
 .modal-confirm .icon-box i {
-	color: #ffc137;
+	color: #06b92d;
 	font-size: 46px;
 	display: inline-block;
 	margin-top: 13px;
@@ -70,10 +70,10 @@
 	background: #a8a8a8;
 }
 .modal-confirm .btn-danger {
-	background: #ffc137;
+	background: #06b92d;
 }
 .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
-	background: #ffa837;
+	background: #0e9115;
 }
 
 .close{
@@ -85,8 +85,8 @@
 	<div class="modal-dialog  modal-md modal-dialog-centered modal-confirm modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
-			<div class="icon-box">
-				<i class="fa-solid " style="font-size: 40px; margin-top:15px;  color:#ffc137;"></i>
+			<div class="icon-box shadow" style="background-color: #06b92d;">
+				<i class="fa-solid " style="font-size: 40px; margin-top:15px;  color:white;"></i>
 				</div>					
 				<h4 class="modal-title w-100">Are you sure?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -95,8 +95,8 @@
 				<h5>Activating admin privileges allows the user to log in and change some records in this system.</h5> 
 			</div>
 			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="btn btn-danger fw-bolder" id="activate_barangay_admin_record" data-coreui-dismiss="modal" aria-label="Close">Activate</button>
+				<button type="button" class="border-0 shadow-sm btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
+				<button class="border-0 shadow-sm btn btn-danger fw-bolder" id="activate_barangay_admin_record" data-coreui-dismiss="modal" aria-label="Close">Activate</button>
 			</div>
 		</div>
 	</div>

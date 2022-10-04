@@ -13,9 +13,11 @@
       $('div').bind('focus blur', function() {
         $("select").removeClass("is-invalid");
         $("input").removeClass("is-invalid");
+        $(".selectize-control").removeClass("is-invalid");
       });
       $('input').bind('focus blur', function() {
         $("input").removeClass("is-invalid");
+        $(".selectize-control").removeClass("is-invalid");
       });
        //remove invalid class
       </script>

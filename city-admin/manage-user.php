@@ -45,33 +45,36 @@ include('includes/sidebar.php');
 <?php include('deactivate-barangay-admin.php'); ?>
 <!--delete barangay admin modal end-->
 
-<div class="body flex-grow-1 px-3">
+<div class="body flex-grow-1 px-5 pt-3"> 
 <div class="container-fluid">
 
 <!--Admins-->
 <div class="row">
 <div class="col-md-12">
-<div class="card mb-4">
+<div class="card border-0 mb-4 rounded-5 shadow-sm remove_rounded">
 
-  <div class="card-header p-3" style="background-color:#3b7ddd;">
-  
-  <div class="row">
-      <div class="col-sm-6">
-        <h4 style="color:aliceblue;">Barangay Admin Accounts</h4>
-      </div>
-      <div class="col-sm-6 text-end">
-      <a class="addbtn add-brgy px-4 fw-bolder d-none" id="add_admin" data-coreui-toggle="modal" href="#add-barangay-admin" role="button" >Admin +</a>
-      </div>
-  </div> 
+  <div class="hide_first_load d-none card-header p-3 border-0 shadow-sm rounded-5 remove_rounded">
   </div>
 
-  <div class="card-body"  id="wrapper" >
+  <div class="card-body border-0 shadow-sm rounded-5 remove_rounded"  id="wrapper" >
             
-  <hr class="mt-0">
-    <!-- /.row-->
       <div class="table-responsive-xxl" >
-      <table class="table  mb-0 d-none w-100" id="admin_table"> 
-        <thead class="table-info fw-semibold">
+      <div class=" d-flex">
+
+      <div class="col-sm-6 text-sm-start hide_first_load d-none">
+      <a id="toggle_chart1" >
+      <span style="color: #294168bf;" class=" fa-solid align-content-center"></span> Barangay Admin Accounts
+      </a>
+      </div>
+
+      <div class="col-sm-6 text-sm-end">
+      <a class="mb-3 shadow-sm addbtn d-none add-brgy pt-1 pb-1 px-3 fw-bolder" id="add_admin" data-coreui-toggle="modal" href="#add-barangay-admin" role="button" >New <span class="fa-solid fa-circle-plus"></span></a>
+      </div>
+
+      </div> 
+
+      <table class="table table-striped table-borderless table-condensed d-none w-100" id="admin_table"> 
+        <thead class="table-info fw-semibold shadow-sm">
           <tr class="align-middle">
             <th>Barangay</th>
             <th>Username</th>
@@ -80,7 +83,7 @@ include('includes/sidebar.php');
           </tr>
         </thead>
 
-        <tbody id="barangay_admin_table"> 
+        <tbody class="align-middle shadow-sm" id="barangay_admin_table"> 
 
         
 
@@ -88,7 +91,7 @@ include('includes/sidebar.php');
         
       </table>
 
-      <div id="myProgress" class=" mt-3 rounded-4">
+      <div id="myProgress" class="rounded-4 border-1 shadow-sm">
       <div id="myBar" class=" rounded-4"></div>
       </div>
 

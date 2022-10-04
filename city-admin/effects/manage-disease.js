@@ -165,6 +165,7 @@ if(confirmation.a == 1)
   $("#diseases_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
 
   toastMixin.fire({
     animation: true,
@@ -178,6 +179,7 @@ if(confirmation.a == 1)
       $("#diseases_table_paginate").removeClass("d-none");
       $("#diseases_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $("#myProgress").removeClass("mt-3");
       $(".barangay_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
@@ -221,7 +223,7 @@ else if(confirmation.a == 3)
       $("#diseases_table_paginate").removeClass("d-none");
       $("#diseases_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
-      $("#myProgress").addClass("mt-3");
+      $("#myProgress").removeClass("mt-3");
       $(".barangay_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
@@ -250,7 +252,7 @@ else if(confirmation.a == 4)
       $("#diseases_table_paginate").removeClass("d-none");
       $("#diseases_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
-      $("#myProgress").addClass("mt-3");
+      $("#myProgress").removeClass("mt-3");
       $(".barangay_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
@@ -381,7 +383,9 @@ function load_data_tables() {
       $(".buttons-print").addClass("shadow-sm border-2"); 
       $(".buttons-excel").addClass("shadow-sm border-2"); 
       $(".buttons-copy").addClass("shadow-sm border-2"); 
-      $(".dt-buttons").removeClass("flex-wrap");       
+      $(".dt-buttons").removeClass("flex-wrap");
+      $(".form-control").addClass("shadow-sm");
+      $(".form-select").addClass("shadow-sm");
 
 }
 //show data tables end
