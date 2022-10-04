@@ -32,10 +32,10 @@
 	font-size: 13px;
 	padding: 10px 15px 25px;
 }
-.modal-confirm .modal-footer a {
+#reset_barangay .modal-confirm .modal-footer a {
 	color: #999;
 }		
-.modal-confirm .icon-box {
+#reset_barangay .modal-confirm .icon-box {
 	width: 80px; 
 	height: 80px;
 	margin: 0 auto;
@@ -44,13 +44,13 @@
 	text-align: center;
 	border: 3px solid #ffc137;
 }
-.modal-confirm .icon-box i {
+#reset_barangay .modal-confirm .icon-box i {
 	color: #ffc137;
 	font-size: 46px;
 	display: inline-block;
 	margin-top: 13px;
 }
-.modal-confirm .btn, .modal-confirm .btn:active {
+#reset_barangay .modal-confirm .btn, .modal-confirm .btn:active {
 	color: #fff;
 	border-radius: 4px;
 	background: #60c7c1;
@@ -63,16 +63,16 @@
 	border-radius: 3px;
 	margin: 0 5px;
 }
-.modal-confirm .btn-secondary {
+#reset_barangay .modal-confirm .btn-secondary {
 	background: #c1c1c1;
 }
-.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+#reset_barangay .modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
 	background: #a8a8a8;
 }
-.modal-confirm .btn-danger {
+#reset_barangay .modal-confirm .btn-danger {
 	background: #ffc137;
 }
-.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+#reset_barangay .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
 	background: #ffa837;
 }
 
