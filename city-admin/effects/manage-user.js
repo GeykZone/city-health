@@ -547,6 +547,8 @@ function load_data_tables() {
   
                $(win.document.body).find('table')
                    .css('font-size', '12pt');
+                   
+                   $(win.document.body).find('table').addClass("table-bordered")
            }
         }],
     });

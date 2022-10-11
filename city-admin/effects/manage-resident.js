@@ -39,17 +39,22 @@
   setTimeout( function()
   {
   $("#myBar").text("Table Loaded Successfully!");
-  $("#residents_chart_row").removeClass("d-none");
   setTimeout(function(){
-  chart_array();
-  number_of_resident_chart();
   $("#myProgress").addClass("d-none");
   $("#resident_table").removeClass("d-none");
   $("#resident_table_wrapper").removeClass("d-none");
   $("#add_resident").removeClass("d-none");
+  $(".hide_first_load").removeClass("d-none"); 
+  $(".remove_rounded").removeClass("rounded-5");
+
+  $(".chart_container").removeClass("d-none"); 
+  $("#residents_chart_row").removeClass("d-none"); 
+  chart_array();
+  number_of_resident_chart();
   $(".c1").removeClass("d-none"); 
   $("#myChart").removeClass("d-none");
   $("#chart_line").removeClass("d-none");
+
   },800);
   },3000)
   }
@@ -153,6 +158,7 @@
   $("#resident_table_paginate").addClass("d-none");
   $("#resident_table_info").addClass("d-none");
   setInterval(move())
+  $("#myProgress").addClass("mt-3");
   $("#myProgress").removeClass("d-none");
 
   toastMixin.fire({
@@ -168,9 +174,10 @@
   $("#resident_table_paginate").removeClass("d-none");
   $("#resident_table_info").removeClass("d-none");
   $("#myProgress").addClass("d-none");
-  $(".barangay_table_is_loading").addClass("d-none");
+  $("#myProgress").removeClass("mt-3");
+  $(".barangay_table_is_loading").addClass("d-none"); 
   $(".edit_barangay_value").removeClass("d-none");
-  number_of_resident_chart();
+  update_chart();
   },600);
 
   },3000);
@@ -213,6 +220,7 @@
   $("#resident_table_paginate").addClass("d-none");
   $("#resident_table_info").addClass("d-none");
   setInterval(move())
+  $("#myProgress").addClass("mt-3");
   $("#myProgress").removeClass("d-none");
 
   toastMixin.fire({
@@ -228,9 +236,10 @@
   $("#resident_table_paginate").removeClass("d-none");
   $("#resident_table_info").removeClass("d-none");
   $("#myProgress").addClass("d-none");
+  $("#myProgress").removeClass("mt-3");
   $(".barangay_table_is_loading").addClass("d-none");
   $(".edit_barangay_value").removeClass("d-none");
-  number_of_resident_chart();
+  update_chart();
   },600);
 
   },3000);
@@ -243,6 +252,7 @@
   $("#resident_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
   toastMixin.fire({
   animation: true,
   title: 'A resident record has been deleted.'
@@ -255,6 +265,7 @@
   $("#resident_table_paginate").removeClass("d-none");
   $("#resident_table_info").removeClass("d-none");
   $("#myProgress").addClass("d-none");
+  $("#myProgress").removeClass("mt-3");
   $(".barangay_table_is_loading").addClass("d-none");
   $(".edit_barangay_value").removeClass("d-none");
   update_chart();
@@ -298,9 +309,9 @@
       null,
       null,
       {
-        "defaultContent": "<i class='edit_barangay_value update btn_icon fas fa-edit' data-coreui-toggle='modal' href='#update-barangay-resident' id='update_resident_value' role='button'></i> "+
-        "<i class='edit_barangay_value btn_icon fas fa-trash' href='#delete_resident' data-coreui-toggle='modal' id='delete_resident_value' role='button'></i>"+
-        "<i class='barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
+        "defaultContent": "<i class='shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-barangay-resident' id='update_resident_value' role='button'></i> "+
+        "<i class='shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_resident' data-coreui-toggle='modal' id='delete_resident_value' role='button'></i>"+
+        "<i class='align-middle barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
       }
     ],
 
@@ -373,6 +384,8 @@
 
             $(win.document.body).find('table')
                 .css('font-size', '12pt');
+
+                $(win.document.body).find('table').addClass("table-bordered")
         }
     }],
   });
@@ -388,6 +401,11 @@
   $("#resident_table_filter").addClass("mb-3");
   $(".dt-buttons").addClass("col-sm-2"); 
   $(".dt-buttons").removeClass("flex-wrap ");
+  $(".buttons-print").addClass("shadow-sm border-2"); 
+  $(".buttons-excel").addClass("shadow-sm border-2"); 
+  $(".buttons-copy").addClass("shadow-sm border-2"); 
+  $(".form-control").addClass("shadow-sm");
+  $(".form-select").addClass("shadow-sm");
 
   };
   //show data tables end
@@ -496,7 +514,7 @@
   if (barangay_id.trim().length === 0) //check if value is empty
   {
   $("#select_barangay").addClass("is-invalid");
-  $(".selectize-control").addClass("is-invalid");
+  $("#select_brg_list .selectize-control").addClass("is-invalid");
   }
   else if (firstname.trim().length === 0) //check if value is empty
   {
@@ -517,10 +535,12 @@
   else if (gender.trim().length === 0) //check if value is empty
   {
   $("#gender").addClass("is-invalid");
+  $("#select_gender_list .selectize-control").addClass("is-invalid");
   }
   else if (civil_status.trim().length === 0) //check if value is empty
   {
   $("#civil_status").addClass("is-invalid");
+  $("#select_status_list .selectize-control").addClass("is-invalid");
   }
   else if (contact.trim().length === 0) //check if value is empty
   {
@@ -706,7 +726,7 @@
       if (new_barangay_name.trim().length === 0) //check if value is empty
       {
       $("#update_select_barangay").addClass("is-invalid");
-      $(".selectize-control").addClass("is-invalid");
+      $("#update_select_bgy_list .selectize-control").addClass("is-invalid");
       }
       else if (new_firstname.trim().length === 0) //check if value is empty
       {
@@ -727,10 +747,12 @@
       else if (new_gender.trim().length === 0) //check if value is empty
       {
       $("#update_gender").addClass("is-invalid");
+      $("#update_select_gender .selectize-control").addClass("is-invalid");
       }
       else if (new_civil.trim().length === 0) //check if value is empty
       {
       $("#update_civil_status").addClass("is-invalid");
+      $("#update_select_status .selectize-control").addClass("is-invalid");
       }
       else if (new_contact.trim().length === 0) //check if value is empty
       {

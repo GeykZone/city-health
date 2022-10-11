@@ -26,7 +26,7 @@ include('includes/sidebar.php');
 <!--header end-->
 
 <!--add barangay admin modal-->
-<?php include('add-barangay-admin.php'); ?>
+<?php include('add-barangay-admin.php'); ?> 
 <!--add barangay admin modal end-->
 
 <!--reset barangay admin modal-->

@@ -1,20 +1,20 @@
 <div class="modal fade" id="add-barangay-resident" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable" >
 <div class="modal-content">
-<div class="modal-header bg-warning">
+<div class="modal-header bg-warning border-0 shadow-sm">
   <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Add Oroquieta City Resident</h5>
   <svg class="c-icon" style="width: 20px; height:20px; margin-left: 10px; color:#ffff;">
   <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-layers"></use>
   </svg>
   <button type="button" id="close_add_resident" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
 </div>
-<div class="modal-body">
+<div class="modal-body border-0 shadow-sm">
 
   
 <form action="" id="add_barangay_resident_form" name="add_barangay_resident_form" method="post">
-  <div class="mb-3">
+  <div class="mb-3" id="select_brg_list">
   <label for="select_barangay" class="form-label">Barangay*</label>
-  <select id="select_barangay"  name="select_barangay" class="form-control barangay-form">
+  <select id="select_barangay"  name="select_barangay" class="form-control barangay-form shadow-sm">
       <option value="">Pick a barangay...</option>
 
   <?php
@@ -67,9 +67,9 @@
       Please don't leave this area empty.
     </div>
   </div>
-  <div class="mb-3">
+  <div class="mb-3" id="select_gender_list">
     <label for="gender" class="form-label">Gender*</label>
-    <select name="gender" id="gender" class="form-control gender barangay-form" >
+    <select name="gender" id="gender" class="form-control gender barangay-form shadow-sm" >
     <option value="">Pick a gender.</option>
     <option value="Male">Male</option>
     <option value="Female">Female</option>
@@ -78,9 +78,9 @@
       Please don't leave this area empty.
     </div>
   </div>
-  <div class="mb-3">
+  <div class="mb-3" id="select_status_list">
     <label for="civil_status" class="form-label">Civil Status*</label>
-    <select name="civil_status" id="civil_status" class="form-control gender barangay-form" >
+    <select name="civil_status" id="civil_status" class="form-control gender barangay-form shadow-sm" >
     <option value="">Pick a civil status.</option>
     <option value="Single">Single</option>
     <option value="Married">Married</option>
@@ -111,8 +111,8 @@
 </form>
 
 </div>
-<div class="modal-footer">
-  <button type="btn"  id="add_resident_btn" class="addbtn add-brgy fw-bolder">Submit</button>
+<div class="modal-footer border-0 shadow-sm">
+  <button type="btn"  id="add_resident_btn" class="addbtn add-brgy fw-bolder border-0 shadow-sm">Submit</button>
 </div>
 </div>
 </div>
