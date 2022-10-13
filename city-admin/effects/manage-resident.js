@@ -399,7 +399,7 @@
   $("#resident_table_length").addClass("mb-3");
   $("#resident_table_filter").addClass("col-sm-6");
   $("#resident_table_filter").addClass("mb-3");
-  $(".dt-buttons").addClass("col-sm-2"); 
+  $(".dt-buttons").addClass("col-sm-2 mb-3"); 
   $(".dt-buttons").removeClass("flex-wrap ");
   $(".buttons-print").addClass("shadow-sm border-2"); 
   $(".buttons-excel").addClass("shadow-sm border-2"); 

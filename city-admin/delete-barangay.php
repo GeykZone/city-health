@@ -72,7 +72,7 @@
 .modal-confirm .btn-danger {
 	background: #f15e5e;
 }
-.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus { 
 	background: #ee3535;
 }
 
@@ -85,8 +85,8 @@
 	<div class="modal-dialog  modal-md modal-dialog-centered modal-confirm modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
-			<div class="icon-box">
-			<i class="fa-solid fa-trash-can" style="font-size: 40px; margin-top:15px;  color:#f15e5e;"></i>
+			<div class="icon-box shadow" style="background-color: #f15e5e;">
+			<i class="fa-solid fa-trash-can" style="font-size: 40px; margin-top:15px;  color:white;"></i>
 				</div>					
 				<h4 class="modal-title w-100">Are you sure?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -95,8 +95,8 @@
 				<h5>Do you really want to delete this record? This process cannot be undone.</h5>
 			</div>
 			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="btn btn-danger fw-bolder" id="delete-barangay" data-coreui-dismiss="modal" aria-label="Close">Delete</button>
+				<button type="button" class=" border-0 shadow-sm btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
+				<button class=" border-0 shadow-sm btn btn-danger fw-bolder" id="delete-barangay" data-coreui-dismiss="modal" aria-label="Close">Delete</button>
 			</div>
 		</div>
 	</div>

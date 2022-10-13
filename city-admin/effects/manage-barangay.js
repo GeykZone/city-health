@@ -23,6 +23,8 @@ function load_progress_bar()
       $("#barangay_table").removeClass("d-none");
       $("#barangay_table_wrapper").removeClass("d-none");
       $("#add_barangay").removeClass("d-none");
+      $(".hide_first_load").removeClass("d-none"); 
+      $(".remove_rounded").removeClass("rounded-5");
     },800);
   },3000)
 }
@@ -176,6 +178,7 @@ if(confirmation.a == 1)
   $("#barangay_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
 
   toastMixin.fire({
     animation: true,
@@ -189,6 +192,7 @@ if(confirmation.a == 1)
       $("#barangay_table_paginate").removeClass("d-none");
       $("#barangay_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $("#myProgress").removeClass("mt-3");
       $(".barangay_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
@@ -215,6 +219,7 @@ else if(confirmation.a == 3)
   $("#barangay_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
 
   toastMixin.fire({
     animation: true,
@@ -228,6 +233,7 @@ else if(confirmation.a == 3)
       $("#barangay_table_paginate").removeClass("d-none");
       $("#barangay_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $("#myProgress").removeClass("mt-3");
       $(".barangay_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
@@ -243,6 +249,7 @@ else if(confirmation.a == 4)
   $("#barangay_table_info").addClass("d-none");
   setInterval(move())
   $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
 
   toastMixin.fire({
     animation: true,
@@ -256,6 +263,7 @@ else if(confirmation.a == 4)
       $("#barangay_table_paginate").removeClass("d-none");
       $("#barangay_table_info").removeClass("d-none");
       $("#myProgress").addClass("d-none");
+      $("#myProgress").removeClass("mt-3");
       $(".barangay_table_is_loading").addClass("d-none");
       $(".edit_barangay_value").removeClass("d-none");
     },600);
@@ -285,9 +293,10 @@ function load_data_tables() {
         null,
         null,
         {
-          "defaultContent": '<i class="edit_barangay_value update btn_icon fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" ></i> '+
-          '<i class="edit_barangay_value btn_icon fas fa-trash" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" ></i> '+
-          '<i class="barangay_table_is_loading spinner-border spinner-border-sm mt-2 d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>',
+          "defaultContent": 
+          '<i class="shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" ></i> '+
+          '<i class="shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" ></i> '+
+          '<i class="align-middle barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>',
         }
       ],
   
@@ -357,7 +366,7 @@ function load_data_tables() {
                 modifier: {
                    page: 'current'
                 },
-                //columns: [0, 1] //r.broj kolone koja se stampa u PDF
+                //columns: [0, 1] //r.broj kolone koja se stampa u PDF 
                 columns: [0, 1, 2],
                 // optional space between columns
                 columnGap: 1
@@ -385,8 +394,13 @@ function load_data_tables() {
       $("#barangay_table_length").addClass("mb-3");
       $("#barangay_table_filter").addClass("col-sm-6");
       $("#barangay_table_filter").addClass("mb-3");
-      $(".dt-buttons").addClass("col-sm-2");
+      $(".dt-buttons").addClass("col-sm-2 mb-3");
       $(".dt-buttons").removeClass("flex-wrap ");
+      $(".buttons-print").addClass("shadow-sm border-2"); 
+      $(".buttons-excel").addClass("shadow-sm border-2"); 
+      $(".buttons-copy").addClass("shadow-sm border-2"); 
+      $(".form-control").addClass("shadow-sm");
+      $(".form-select").addClass("shadow-sm");
 
 }
 //show data tables end

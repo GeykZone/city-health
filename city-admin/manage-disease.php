@@ -4,7 +4,6 @@ include('includes/sidebar.php');
 ?>
 
 <!--side bar-->
-
 <!--side bar end-->
 
 <div class="wrapper d-flex flex-column min-vh-100 bg-light">
@@ -25,9 +24,6 @@ include('includes/sidebar.php');
 </header>
 <!--header end-->
 
-<div class="body flex-grow-1 px-5 pt-3"> 
-<div class="container-fluid">
-
 <!-- add disease -->
 <?php include "add-disease.php" ?>
 <!-- add disease end -->
@@ -39,6 +35,9 @@ include('includes/sidebar.php');
 <!-- edit disease -->
 <?php include "edit-disease.php" ?>
 <!-- edit disease end -->
+
+<div class="body flex-grow-1 px-5 pt-3"> 
+<div class="container-fluid">
 
 <!--Admins-->
 <div class="row">
@@ -60,7 +59,7 @@ include('includes/sidebar.php');
       </div>
 
       <div class="col-sm-6 text-sm-end">
-      <a class="mb-3 shadow-sm addbtn d-none add-brgy pt-1 pb-1 px-3 fw-bolder" id="add_disease" data-coreui-toggle="modal" href="#add-disease" role="button" >NEW <span class="fa-solid fa-circle-plus"></span></a>
+      <a class="mb-3 border-0 shadow-sm addbtn d-none add-brgy pt-1 pb-1 px-3 fw-bolder" id="add_disease" data-coreui-toggle="modal" href="#add-disease" role="button" >NEW <span class="fa-solid fa-circle-plus"></span></a>
       </div>
 
       </div> 
@@ -84,7 +83,7 @@ include('includes/sidebar.php');
       <div id="myBar" class=" rounded-4"></div>
       </div>
 
-      
+
       </div>
     
   </div>

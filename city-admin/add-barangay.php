@@ -1,14 +1,14 @@
 <div class="modal fade" id="add-barangay" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
     <div class="modal-content">
-      <div class="modal-header bg-warning">
+      <div class="modal-header bg-warning border-0 shadow-sm">
         <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Add Barangay</h5>
         <svg class="c-icon" style="width: 20px; height:20px; margin-left: 10px; color:#ffff;">
         <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-map"></use>
         </svg>
         <button id="close_add_barangay" type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body border-0 shadow-sm">
 
         
       <form action="" id="add_barangay_form" name="add_barangay_form" method="post">
@@ -36,8 +36,8 @@
       </form>
 
       </div>
-      <div class="modal-footer">
-        <button type="btn" id="add_barangay_btn" class="addbtn add-brgy fw-bolder">Submit</button>
+      <div class="modal-footer border-0 shadow-sm">
+        <button type="btn" id="add_barangay_btn" class="addbtn add-brgy fw-bolder border-0 shadow-sm">Submit</button>
       </div>
     </div>
   </div>
