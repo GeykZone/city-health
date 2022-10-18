@@ -1027,7 +1027,6 @@
     function (data, textStatus, jqXHR) 
     {
       x_value = data;
-      
     });
 
     $.getJSON('functions/show-number-of-resident.php', 

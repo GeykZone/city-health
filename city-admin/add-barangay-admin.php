@@ -15,7 +15,7 @@
   <div class="mb-3">
   <label for="select_barangay" class="form-label">Barangay*</label>
   <select id="select_barangay"  name="select_barangay" class="form-control barangay-form shadow-sm">
-      <option value="">Pick a barangay...</option>
+      <option value="">Pick a barangay.</option>
 
   <?php
   $sql = "SELECT `id`, `barangay_name`, `lat`, `long` FROM `barangays`";

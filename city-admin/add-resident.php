@@ -15,7 +15,7 @@
   <div class="mb-3" id="select_brg_list">
   <label for="select_barangay" class="form-label">Barangay*</label>
   <select id="select_barangay"  name="select_barangay" class="form-control barangay-form shadow-sm">
-      <option value="">Pick a barangay...</option>
+      <option value="">Pick a barangay.</option>
 
   <?php
   $sql = "SELECT `id`, `barangay_name`, `lat`, `long` FROM `barangays`";
@@ -102,7 +102,7 @@
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email Address</label>
-    <input type="email" name="contact" class=" form-control barangay-form" id="email" placeholder="Email Address.">
+    <input type="email" name="contact" class=" form-control barangay-form" id="email" placeholder="Email Address (Optional).">
     <div class="invalid-feedback">
       Invalid email address, email address must look like this (e.g. freed@email.com).
     </div>

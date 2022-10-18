@@ -116,6 +116,11 @@ body {
   width: 100px  !important;
 }
 
+tr
+{
+  font-size: 15px !important;
+}
+
 
 #myProgress {
   width: 100%;
@@ -160,7 +165,22 @@ tbody tr.odd:hover {
 #civil_status-selectized { 
   color: #333 !important;
 }
+#add_hp_select_resident-selectized 
+{ 
+  color: #333 !important;
+}
+#add_hp_select_diseases-selectized  
+{ 
+  color: #333 !important;
+}
 
+
+#add_hp_select_diseases-selectized::placeholder {  
+  color:#818a99 !important;
+}
+#add_hp_select_resident-selectized::placeholder {  
+  color:#818a99 !important;
+}
 #gender-selectized::placeholder { 
   color:#818a99 !important;
 }

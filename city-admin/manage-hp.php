@@ -4,14 +4,13 @@ include('includes/sidebar.php');
 ?>
 
 <!--side bar-->
-
 <!--side bar end-->
 
 <div class="wrapper d-flex flex-column min-vh-100 bg-light">
 
 <!--header-->
 <?php   include('includes/navhead.php'); ?>
-<div class="header-divider"></div>
+<div class=" header-divider"></div>
 <div class="container-fluid">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb my-0 ms-2">
@@ -25,118 +24,73 @@ include('includes/sidebar.php');
 </header>
 <!--header end-->
 
-<div class="body flex-grow-1 px-3">
-<div class="container-lg">
+<!-- add disease -->
+<?php include "add-hp.php" ?>
+<!-- add disease end -->
 
-<!--for map-->
-<div class="card mb-4">
-  <div class="card-body">
-    <div class="d-flex justify-content-between">
-      <div>
-        <h4 class="card-title mb-0">For Map</h4>
-        <div class="small text-medium-emphasis">Sample Text</div>
-      </div>
-      <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-        <div class="btn-group btn-group-toggle mx-3" data-coreui-toggle="buttons">
-          <input class="btn-check" id="option1" type="radio" name="options" autocomplete="off">
-          <label class="btn btn-outline-secondary"> Day</label>
-          <input class="btn-check" id="option2" type="radio" name="options" autocomplete="off" checked="">
-          <label class="btn btn-outline-secondary active"> Month</label>
-          <input class="btn-check" id="option3" type="radio" name="options" autocomplete="off">
-          <label class="btn btn-outline-secondary"> Year</label>
-        </div>
-        <button class="btn btn-primary" type="button">
-          <svg class="icon">
-            <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-cloud-download"></use>
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div class="c-chart-wrapper" style="height:300px;margin-top:40px;">
-      <canvas class="chart" id="main-chart" height="300"></canvas><!--MAP HERE-->
-    </div>
-  </div>
-</div>
-<!--for map end-->
-
-<!--Charts-->
-<div class="row">
-  <div class="col-md-12">
-    <div class="card mb-4">
-      <div class="card-header">Charts</div>
-      <div class="card-body">
-
-        <div class="row">
-
-          <!--health diseases chart-->
-          <div class="col-sm-6">
-            <hr class="mt-0">
-            <div class="card-header">For chart health disease</div>
-          </div>
-            <!--health diseases chart end-->
-
-
-          <!--prevalence chart-->
-          <div class="col-sm-6">
-            <hr class="mt-0">
-            <div class="card-header">For chart health disease</div>
-          </div>
-          <!--prevalence chart end-->
-
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-<!--Charts end-->
-
+<div class="body flex-grow-1 px-5 pt-3"> 
+<div class="container-fluid">
 
 <!--Admins-->
 <div class="row">
-  <div class="col-md-12">
-    <div class="card mb-4">
-      <div class="card-header">Barangay Admins</div>
-      <div class="card-body">
-      <hr class="mt-0">
-        <!-- /.row-->
-        <div class="table-responsive">
-          <table class="table border mb-0">
+<div class="col-md-12">
+<div class="card border-0 mb-4 rounded-5 shadow-sm remove_rounded">
 
-            <thead class="table-light fw-semibold">
-              <tr class="align-middle">
-                <th>Barangay</th>
-                <th>Email</th>
-                <th></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr class="align-middle">
-                <td>
-                  <div>Sample Barangay Name</div>
-                </td>
-                <td>
-                  <div>Sample Email for Barangay</div>
-                </td>
-                <td>
-                  <div class="dropdown">
-                    <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <svg class="icon">
-                        <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-options"></use>
-                      </svg>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Info</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-
-          </table>
-        </div>
-      </div>
-    </div>
+  <div class="hide_first_load d-none card-header p-3 border-0 shadow-sm rounded-5 remove_rounded">
   </div>
+
+  <div class="card-body border-0 shadow-sm rounded-5 remove_rounded"  id="wrapper" >
+
+      <div class="table-responsive-xxl" >
+      <div class="d-flex">
+
+      <div class="col-sm-6 text-sm-start d-none hide_first_load">
+      <a id="toggle_chart1" >
+      <span style="color: #294168bf;" class=" fa-solid align-content-center"></span> List of Health Profiles
+      </a>
+      </div>
+
+      <div class="col-sm-6 text-sm-end">
+      <a class="mb-3 border-0 shadow-sm d-none addbtn add-brgy pt-1 pb-1 px-3 fw-bolder" id="add_hp" data-coreui-toggle="modal" href="#add-hp" role="button" >NEW <span class="fa-solid fa-circle-plus"></span></a>
+      </div>
+
+      </div> 
+
+      <table class="table table-striped table-borderless table-condensed d-none w-100" id="hp_table"> 
+        <thead class="table-info fw-semibold shadow-sm">
+          <tr class="align-middle">
+            <th id="#th">Disease</th>
+            <th id="#th">First Name</th>
+            <th id="#th">Middle Name</th>
+            <th id="#th">Last Name</th>
+            <th id="#th">Barangay</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th id="#th">PhilHealth Id</th>
+            <th id="#th">Contact No.</th>
+            <th>HP Status</th>
+            <th>Date Created</th>
+            <th>Settings</th>
+          </tr>
+        </thead>
+
+        <tbody class="align-middle shadow-sm"  id="health_profiles_table"> 
+
+        
+        </tbody>
+        
+      </table>
+
+      <div id="myProgress" class="rounded-4 border-1 shadow-sm">
+      <div id="myBar" class=" rounded-4"></div>
+      </div>
+
+
+      </div>
+    
+  </div>
+</div>
+</div>
 </div>
 <!--Admins end-->
 
@@ -147,6 +101,10 @@ include('includes/sidebar.php');
 <!-- footer-->
 <?php   include('includes/footer.php'); ?>
 <!--Footer end-->
+
+<!--scripts-->
+<script id="manage_user" src="effects/manage-hp.js" ></script>
+<!--scripts end-->
 
 <!--scripts-->
 <?php include('includes/scripts.php'); ?>
