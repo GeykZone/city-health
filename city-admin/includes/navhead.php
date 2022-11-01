@@ -17,9 +17,9 @@
             <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-md"><img class="avatar-img" src="../resourcess/assets/img/avatars/profile.png" alt="user@email.com"></div>
               </a>
-              <div class="dropdown-menu dropdown-menu-end pt-0">
-                <div class="dropdown-header bg-light py-2">
-                  <div class="fw-semibold">Account</div>
+              <div class="dropdown-menu dropdown-menu-end pt-0 border-0 shadow">
+                <div class="dropdown-header bg-light py-2 border-0 shadow-sm">
+                  <div class="fw-semibold ">Account</div>
                 </div>
 
                 <a class="dropdown-item" href="../logout.php">
@@ -28,7 +28,7 @@
                   </svg>Logout
                 </a>
 
-                <div class="dropdown-header bg-light py-2">
+                <div class="dropdown-header bg-light py-2 border-0 shadow-sm">
                   <div class="fw-semibold">Settings</div>
                 </div>
 

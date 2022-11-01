@@ -101,6 +101,10 @@ body {
   scrollbar-width: none;  /* Firefox */
 }
 
+#hp_option::after {
+  content: none;
+}
+
 .toggle_chart1
 {
   cursor: pointer;
@@ -4193,10 +4197,10 @@ html:not([dir=rtl]) .dropdown-toggle:empty::after {
   --cui-dropdown-divider-margin-y: 0.5rem;
   --cui-dropdown-box-shadow: 0 0.5rem 1rem rgba(0, 0, 21, 0.15);
   --cui-dropdown-link-color: #4f5d73;
-  --cui-dropdown-link-hover-color: #475468;
-  --cui-dropdown-link-hover-bg: #d8dbe0;
+  --cui-dropdown-link-hover-color: #fff;
+  --cui-dropdown-link-hover-bg: #4d8ae6;
   --cui-dropdown-link-active-color: rgba(255, 255, 255, 0.87);
-  --cui-dropdown-link-active-bg: #321fdb;
+  --cui-dropdown-link-active-bg: #4d8ae6;
   --cui-dropdown-link-disabled-color: #9da5b1;
   --cui-dropdown-item-padding-x: 1rem;
   --cui-dropdown-item-padding-y: 0.25rem;

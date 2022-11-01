@@ -15,6 +15,7 @@ var created_at = new Date();
 var dd = String(created_at.getDate()).padStart(2, '0');
 var mm = String(created_at.getMonth() + 1).padStart(2, '0');
 var yyyy = created_at.getFullYear();
+var hp_id_value = "";
 
 $(document).ready(function()
 {
@@ -60,7 +61,6 @@ function load_progress_bar()
       $("#myProgress").addClass("d-none");
       $("#hp_table").removeClass("d-none");
       $("#hp_table_wrapper").removeClass("d-none");
-      $("#add_hp").removeClass("d-none"); 
       $(".hide_first_load").removeClass("d-none"); 
       $(".remove_rounded").removeClass("rounded-5");
     },800);
@@ -181,9 +181,15 @@ function load_data_tables() {
       null,
       null,
       {
-        "defaultContent": "<i class='shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-barangay-resident' id='update_resident_value' role='button'></i> "+
-        "<i class='shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_resident' data-coreui-toggle='modal' id='delete_resident_value' role='button'></i>"+
-        "<i class='align-middle barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
+        "targets": 11,
+        "render": function ( data, type, row, meta ) {
+
+          return  "<i onclick = 'click_value(this.id)' class='shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-barangay-resident' id='update_resident_value "+data+"' role='button'></i> "+
+          "<i onclick = 'click_value(this.id)' class='shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-calendar-xmark' href='#delete_hp' data-coreui-toggle='modal' id='delete_resident_value "+data+"' role='button'></i>"+
+          "<i class='align-middle barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
+          
+        },
+        
       }
     ],
 
@@ -203,7 +209,7 @@ function load_data_tables() {
             page: 'current'
         },
           //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-          columns: [0,1,2,3,4,5,6,7,9,10,11],
+          columns: [0,1,2,3,4,5,6,7,9,10],
           // optional space between columns
           columnGap: 1
         }
@@ -224,7 +230,7 @@ function load_data_tables() {
             page: 'current'
         },
           //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-          columns: [0,1,2,3,4,5,6,7,9,10,11],
+          columns: [0,1,2,3,4,5,6,7,9,10],
           // optional space between columns
           columnGap: 1
         }
@@ -245,7 +251,7 @@ function load_data_tables() {
             page: 'current'
         },
           //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-          columns: [0,1,2,3,4,5,6,7,9,10,11],
+          columns: [0,1,2,3,4,5,6,7,9,10],
           // optional space between columns
           columnGap: 1
         },
@@ -281,6 +287,13 @@ function load_data_tables() {
 
   };
   //show data tables end
+
+//get the id of health profile
+function click_value(this_value)
+{
+  hp_id_value = this_value.substr(this_value.indexOf(" ") + 1);
+}
+//get the id of health profile end
 
 //trigger error messages
 function alert_message()
@@ -356,6 +369,33 @@ icon: 'error'
 setTimeout(function(){
 },3000);
 }
+else if(confirmation.a == 4)
+  {  
+  $(".barangay_table_is_loading").removeClass("d-none");
+  $(".edit_barangay_value").addClass("d-none");
+  $("#hp_table_paginate").addClass("d-none");
+  $("#hp_table_info").addClass("d-none");
+  setInterval(move())
+  $("#myProgress").removeClass("d-none");
+  $("#myProgress").addClass("mt-3");
+  toastMixin.fire({
+  animation: true,
+  title: 'A resident record has been deleted.'
+  });
+
+  setTimeout(function(){  
+  $("#myBar").text("Table Updated Successfully!");
+  setTimeout(function(){
+  table.ajax.reload( null, false);
+  $("#hp_table_paginate").removeClass("d-none");
+  $("#hp_table_info").removeClass("d-none");
+  $("#myProgress").addClass("d-none");
+  $("#myProgress").removeClass("mt-3");
+  $(".barangay_table_is_loading").addClass("d-none");
+  $(".edit_barangay_value").removeClass("d-none");
+  },600);
+  },3000);
+  }
 }
 //trigger error messages end
 
@@ -473,5 +513,19 @@ $("#add_hp_btn").click(function () {
   
 });
 //submit new hp end
+
+//delete hp
+$("#delete_hp_btn").click(function()
+{
+  $.post("functions/delete-hp.php", {
+    hp_id: hp_id_value,
+  
+  },
+  function (data, status) {
+  confirmation.a = data;
+
+  });
+})
+//delete hp end
 
 

@@ -2,9 +2,9 @@
   <div class="modal-dialog modal-dialog-centered" >
     <div class="modal-content">
       <div class="modal-header bg-warning border-0 shadow-sm">
-        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Add Type of Health Disease</h5>
-        <svg class="c-icon" style="width: 20px; height:20px; margin-left: 7px; margin-top:5px; color:#ffff;">
-        <use  xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-medical-cross"></use>
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Add Health Profile</h5>
+        <svg class="c-icon" style="width: 20px; height:20px; margin-left: 7px; margin-top: -2px; color:#ffff;">
+        <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-chart"></use>
         </svg>
         <button id="close_add_hp" type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>

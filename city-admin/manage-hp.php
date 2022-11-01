@@ -28,6 +28,10 @@ include('includes/sidebar.php');
 <?php include "add-hp.php" ?>
 <!-- add disease end -->
 
+<!-- delete disease -->
+<?php include "delete-hp.php" ?>
+<!-- delete disease end -->
+
 <div class="body flex-grow-1 px-5 pt-3"> 
 <div class="container-fluid">
 
@@ -46,12 +50,18 @@ include('includes/sidebar.php');
 
       <div class="col-sm-6 text-sm-start d-none hide_first_load">
       <a id="toggle_chart1" >
-      <span style="color: #294168bf;" class=" fa-solid align-content-center"></span> List of Health Profiles
+      <span style="color: #294168bf;" class=" fa-solid align-content-center"></span> List of Active Health Cases
       </a>
       </div>
 
-      <div class="col-sm-6 text-sm-end">
-      <a class="mb-3 border-0 shadow-sm d-none addbtn add-brgy pt-1 pb-1 px-3 fw-bolder" id="add_hp" data-coreui-toggle="modal" href="#add-hp" role="button" >NEW <span class="fa-solid fa-circle-plus"></span></a>
+      <div class="col-sm-6 text-sm-end d-none hide_first_load dropdown-center">
+      <a class="mb-3 border-0 shadow-sm addbtn add-brgy pt-1 pb-1 px-3 fw-bolder dropdown-toggle" id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid"></span></a>
+      <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
+        <li><a class="dropdown-item" href="#"><span class="fa-solid" style="margin-right: 10px;"></span> Inactive List</a></li>
+        <li><a class="dropdown-item" href="#"><span class="fa-solid" style="margin-right: 10px;"></span> View Graph</a></li>
+        <li><a class="dropdown-item" href="#"><span class="fa-solid" style="margin-right: 10px;"></span> View Map</a></li>
+      </ul>
+      <a class="mb-3 border-0 shadow-sm addbtn add-brgy pt-1 pb-1 px-3 fw-bolder" id="add_hp" data-coreui-toggle="modal" href="#add-hp" role="button" >NEW <span class="fa-solid fa-circle-plus"></span></a>
       </div>
 
       </div> 

@@ -90,7 +90,7 @@ include('includes/sidebar.php');
       </div>
 
       <div class="col-sm-6 text-sm-end">
-      <a class="mb-3 shadow-sm addbtn d-none add-brgy pt-1 pb-1 px-3 fw-bolder"  data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">New <span class="fa-solid fa-circle-plus"></a>
+      <a class="mb-3 shadow-sm addbtn d-none add-brgy pt-1 pb-1 px-3 fw-bolder"  data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">NEW <span class="fa-solid fa-circle-plus"></a>
       </div>
 
       </div> 

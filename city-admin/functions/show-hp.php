@@ -14,7 +14,7 @@ $table = 'health_profiles';
 
  
 // Table's primary key 
-$primaryKey = 'id'; 
+$primaryKey = 'hp_id'; 
  
 // Array of database columns which should be read and sent back to DataTables. 
 // The `db` parameter represents the column name in the database.  
@@ -32,6 +32,7 @@ $columns = array(
     array( 'db' => 'contact',    'dt' => 8, 'field' => 'contact'),
     array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
     array( 'db' => 'date',    'dt' => 10, 'field' => 'date'),
+    array( 'db' => 'hp_id',    'dt' => 11, 'field' => 'hp_id'),
 ); 
  
 // Include SQL query processing class 
@@ -39,12 +40,13 @@ require 'ssp.class.php';
 
 $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`id`) LEFT JOIN `diseases` AS `d` 
 ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
+$where = "`case_status`= 'Active'";
 
 
  
 // Output data as json format 
 echo json_encode( 
-    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery ) 
+    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery,$where ) 
 );
 
 ?>
