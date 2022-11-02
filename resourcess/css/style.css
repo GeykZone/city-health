@@ -177,8 +177,21 @@ tbody tr.odd:hover {
 { 
   color: #333 !important;
 }
+#update_hp_select_resident-selectized 
+{ 
+  color: #333 !important;
+}
+#update_hp_select_diseases-selectized  
+{ 
+  color: #333 !important;
+}
 
-
+#update_hp_select_diseases-selectized::placeholder {  
+  color:#818a99 !important;
+}
+#update_hp_select_resident-selectized::placeholder {  
+  color:#818a99 !important;
+}
 #add_hp_select_diseases-selectized::placeholder {  
   color:#818a99 !important;
 }
