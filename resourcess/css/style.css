@@ -317,6 +317,23 @@ tbody tr.odd:hover {
   cursor: pointer;
 }
 
+.active_hp_btn
+{
+  color: white; 
+  background-color: #06b92d;
+  border: 1px solid #06b92d; 
+  padding:5px;
+}
+.active_hp_btn:hover
+{
+  color: white; 
+  border: 1px solid #0e9115; 
+  background-color: #0e9115;
+  padding:5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
 
 .del_btn
 {

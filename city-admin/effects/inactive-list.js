@@ -24,6 +24,7 @@ var hp_id_value = "";
 $(document).ready(function()
 {
     $(document).attr("title", "HPCS | Manage Health Profiles");
+    $("#nav_hp").addClass("active");
     select_with_search_box()
     load_data_tables()
     $("#hp_table_wrapper").addClass("d-none");
@@ -102,55 +103,6 @@ $(".selectize-control").removeClass("form-control barangay-form")
 }
 // for select  end
 
-// selectized residents
-function selectized_residents_list()
-{
-if(selectize_barangay_id_enabled != selectize_barangay_id_disabled)
-{
-    $('#add_hp_select_resident').selectize()[0].selectize.destroy();
-}
-
-$.ajaxSetup({async:false});
-$.getJSON('functions/select-residents.php', 
-{
-    resident_names: selectize_barangay_id
-}, 
-
-function (data, textStatus, jqXHR) 
-{
-    selectize_residents = data;
-});
-
-var selectize_residents_data = selectize_residents;
-var items = selectize_residents_data.map(function(x) { 
-    //remove the first words
-    var one = x.substr(x.indexOf(" ") + 1);
-    var two = one.substr(one.indexOf(" ") + 1);
-    var three = two.substr(two.indexOf(" ") + 1);
-    //remove last word
-    function removeLastWord(str) {
-        const lastIndexOfSpace = str.lastIndexOf(' ');
-      
-        if (lastIndexOfSpace === -1) {
-          return str;
-        }
-        return str.substring(0, lastIndexOfSpace);
-      }
-      var text_label = removeLastWord(x)
-    return {
-     item: three,
-     field: text_label
-    }; });
-$('#add_hp_select_resident').selectize({
-    options: items,
-    labelField: "field",
-    valueField: "item",
-    searchField: "field"
-});
-$(".selectize-control").removeClass("form-control barangay-form")
-}
-// selectized residents end
-
 //selectized resident update area
 function update_selectize_resident()
 {
@@ -212,7 +164,7 @@ function load_data_tables() {
     // "processing": true,
     "deferRender": true,
     "serverSide": true,
-    "ajax": "functions/show-hp.php",   
+    "ajax": "functions/show-inactive-hp.php",   
     "autoWidth": false,
     scrollCollapse: true,
     "dom": 'lfBrtip',      
@@ -241,7 +193,7 @@ function load_data_tables() {
         "render": function ( data, type, row, meta ) {
 
           return  "<i onclick = 'click_value(this.id)' class='update_hp_value shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-hp' id='update_hp_value "+data+"' role='button'></i> "+
-          "<i onclick = 'click_value(this.id)' class='shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-calendar-xmark' href='#delete_hp' data-coreui-toggle='modal' id='delete_resident_value "+data+"' role='button'></i>"+
+          "<i onclick = 'click_value(this.id)' class='shadow-sm align-middle edit_barangay_value active_hp_btn fa-solid fa-circle-arrow-left' href='#active_hp' data-coreui-toggle='modal' id='delete_resident_value "+data+"' role='button'></i>"+
           "<i class='align-middle barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
           
         },
@@ -256,7 +208,7 @@ function load_data_tables() {
 
         title: 'Health Profile Clustering System',
 
-        messageTop: 'List of Active Health Cases',
+        messageTop: 'List of Inactive Health Cases',
         //className: 'fa fa-solid fa-clipboard',
         
 
@@ -277,7 +229,7 @@ function load_data_tables() {
 
         title: 'Health Profile Clustering System',
 
-        messageTop: 'List of Active Health Cases',
+        messageTop: 'List of Inactive Health Cases',
         //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
         
 
@@ -298,7 +250,7 @@ function load_data_tables() {
 
         title: 'Health Profile Clustering System',
 
-        messageTop: 'List of Active Health Cases',
+        messageTop: 'List of Inactive Health Cases',
         //className: 'fa fa-print',
         
 
@@ -369,53 +321,7 @@ toast.addEventListener('mouseleave', Swal.resumeTimer)
 }
 });
 
-if(confirmation.a == 1)
-{
-$('#add-hp').modal('toggle');
-
-var $select = $('#add_hp_select_barangay').selectize();
-var control = $select[0].selectize;
-control.clear();
-
- $select = $('#add_hp_select_resident').selectize();
- control = $select[0].selectize;
-control.clear();
-
- $select = $('#add_hp_select_diseases').selectize();
- control = $select[0].selectize;
-control.clear();
-
-$("#philhealth").val("");
-
-$(".barangay_table_is_loading").removeClass("d-none");
-$(".edit_barangay_value").addClass("d-none");
-$("#hp_table_paginate").addClass("d-none");
-$("#hp_table_table_info").addClass("d-none");
-setInterval(move())
-$("#myProgress").addClass("mt-3");
-$("#myProgress").removeClass("d-none");
-
-toastMixin.fire({
-animation: true,
-title: 'A new health profile has been added in the list.'
-});
-
-setTimeout(function(){  
-
-$("#myBar").text("Table Updated Successfully!");
-setTimeout(function(){
-table.ajax.reload( null, false);
-$("#hp_table_paginate").removeClass("d-none");
-$("#hp_table_info").removeClass("d-none");
-$("#myProgress").addClass("d-none");
-$("#myProgress").removeClass("mt-3");
-$(".barangay_table_is_loading").addClass("d-none"); 
-$(".edit_barangay_value").removeClass("d-none");
-},600);
-
-},3000);
-}
-else if(confirmation.a == 2)
+if(confirmation.a == 2)
 {
 toastMixin.fire({
 animation: true,
@@ -453,7 +359,7 @@ else if(confirmation.a == 3)
   },600);
   },3000);
   }
-else if(confirmation.a == 4)
+else if(confirmation.a == 5)
   {  
   $(".barangay_table_is_loading").removeClass("d-none");
   $(".edit_barangay_value").addClass("d-none");
@@ -464,7 +370,7 @@ else if(confirmation.a == 4)
   $("#myProgress").addClass("mt-3");
   toastMixin.fire({
   animation: true,
-  title: 'A record has been added into list of inactive health profiles.'
+  title: 'A record has been added into list of active health profiles.'
   });
 
   setTimeout(function(){  
@@ -486,33 +392,6 @@ else if(confirmation.a == 4)
 //enable the form when a barangay is picked
 function enable_form()
 {
-// adding (first time)
-$("#add_hp_select_barangay").change(function(){ 
-var barangay_name = $("#add_hp_select_barangay").text();
-
-if(barangay_name.trim().length != 0)
-{
-var brgy_list_value = $("#add_hp_select_barangay").val();
-$('#fieldset1').removeAttr("disabled");
-$('#add_hp_select_resident')[0].selectize.enable();
-$('#add_hp_select_diseases')[0].selectize.enable();  
-selectize_barangay_id = brgy_list_value;
-selectize_barangay_id_enabled = selectize_barangay_id;
-selectized_residents_list();
-
-
-}
-else
-{
-$('#fieldset1').attr("disabled", true);
-$('#add_hp_select_resident')[0].selectize.disable();
-$('#add_hp_select_diseases')[0].selectize.disable();
-selectize_barangay_id_disabled = selectize_barangay_id_enabled;
-
-}
-});
-
-
 // updating
 $("#update_hp_select_barangay").change(function(){ 
   var update_barangay_name = $("#update_hp_select_barangay").text();
@@ -540,90 +419,6 @@ $("#update_hp_select_barangay").change(function(){
   });
 }
 //enable the form when a barangay is picked end 
-
-//erese input fields when x button is pressed
-  $("#close_add_hp").click(function()
-  {
-
-  var $select = $('#add_hp_select_barangay').selectize();
-  var control = $select[0].selectize;
-  control.clear();
-
-   $select = $('#add_hp_select_resident').selectize();
-   control = $select[0].selectize;
-  control.clear();
-
-   $select = $('#add_hp_select_diseases').selectize();
-   control = $select[0].selectize;
-  control.clear();
-
-  $("#philhealth").val("");
-  })
-//erese input fields when x button is pressed end
-
-//submit new hp
-$("#add_hp_btn").click(function () {
-
-    created_at = yyyy + '-' + mm + '-' + dd;
-    id_full_naame = $("#add_hp_select_resident").val();
-    id_disease = $("#add_hp_select_diseases").val();
-    philhealth_number = $("#philhealth").val();
-    select_brgy = $("#add_hp_select_barangay").text();
-    fullname_txt = $("#add_hp_select_resident").text();
-    disease_txt = $("#add_hp_select_diseases").text();
-
-    function submit_new_hp_lists()
-    {
-        $.post("functions/add-hp.php", {
-            created_at: created_at,
-            id_full_naame: id_full_naame,
-            id_disease: id_disease,
-            philhealth_number: philhealth_number
-
-          },
-          function (data, status) {
-           
-            confirmation.a = data;
-    
-          });
-    }
-    
-
-    if (select_brgy.trim().length === 0) //check if value is empty
-    {
-      $("#add_hp_select_barangay").addClass("is-invalid");
-      $("#add_hp_select_brg_list .selectize-control").addClass("is-invalid");
-    }
-    else if (fullname_txt.trim().length === 0) //check if value is empty
-    {
-      $("#add_hp_select_resident").addClass("is-invalid");
-      $("#add_hp_select_resident_list .selectize-control").addClass("is-invalid");
-    }
-    else if (disease_txt.trim().length === 0) //check if value is empty
-    {
-      $("#add_hp_select_diseases").addClass("is-invalid");
-      $("#add_hp_select_diseases_list .selectize-control").addClass("is-invalid");
-    }
-    else 
-    {
-        if (philhealth_number.trim().length != 0 && philhealth_number.length === 12)
-        {
-            submit_new_hp_lists()
-        }
-        else if (philhealth_number.trim().length === 0)
-        {
-            submit_new_hp_lists()
-        }
-        else
-        {
-            $("#philhealth").addClass("is-invalid");
-        }
-    }
-
-
-  
-});
-//submit new hp end
 
 //update hp
 $("#update_hp_btn").click(function () {
@@ -689,19 +484,18 @@ $("#update_hp_btn").click(function () {
 });
 //update hp end
 
-//delete hp
-$("#delete_hp_btn").click(function()
+//active hp
+$("#active_hp").click(function()
 {
-  $.post("functions/delete-hp.php", {
+  $.post("functions/active-hp.php", {
     hp_id: hp_id_value,
-  
   },
   function (data, status) {
   confirmation.a = data;
 
   });
 })
-//delete hp end
+//active hp end
 
 //get cell value when selected
 function get_hp_table_cell_value()
