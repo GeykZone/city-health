@@ -96,7 +96,7 @@
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="border-0 shadow-sm btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="border-0 shadow-sm btn btn-danger fw-bolder" id="active_hp" data-coreui-dismiss="modal" aria-label="Close">Move</button>
+				<button class="border-0 shadow-sm btn btn-danger fw-bolder" id="active_hp_btn" data-coreui-dismiss="modal" aria-label="Close">Move</button>
 			</div>
 		</div>
 	</div>

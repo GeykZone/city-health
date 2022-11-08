@@ -70,6 +70,9 @@
 <!--chart-->
 <script src="../resourcess/chartjs/chart.min.js" ></script>
 
+<!--map-->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
 
 </head>
 <body >

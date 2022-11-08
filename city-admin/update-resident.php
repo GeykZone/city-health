@@ -19,18 +19,8 @@
       <option value="">Pick a barangay...</option>
 
   <?php
-  $sql = "SELECT `id`, `barangay_name`, `lat`, `long` FROM `barangays`";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-      ?>
-      
-      <option value="<?php echo $row['barangay_name']; ?>"><?php echo $row['barangay_name']; ?></option>
-      <?php 
-    }
-    ?>
-    <?php
-      }
+    $resident_pick = "set";
+    include('functions/select_barangays.php');
     ?>
 
   </select>

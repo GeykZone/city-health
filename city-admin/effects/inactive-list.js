@@ -485,7 +485,7 @@ $("#update_hp_btn").click(function () {
 //update hp end
 
 //active hp
-$("#active_hp").click(function()
+$("#active_hp_btn").click(function()
 {
   $.post("functions/active-hp.php", {
     hp_id: hp_id_value,

@@ -15,23 +15,10 @@
   <div class="mb-3">
   <label for="select_barangay" class="form-label">Barangay*</label>
   <select id="select_barangay"  name="select_barangay" class="form-control barangay-form shadow-sm">
-      <option value="">Pick a barangay.</option>
-
+  <option value="">Pick a barangay.</option>
   <?php
-  $sql = "SELECT `id`, `barangay_name`, `lat`, `long` FROM `barangays`";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-      ?>
-      
-      <option value="<?php echo $row['id']; ?>"><?php echo $row['barangay_name']; ?></option>
-      <?php 
-    }
+   include('functions/select_barangays.php');
     ?>
-    <?php
-      }
-    ?>
-
   </select>
   <div class="invalid-feedback">
       Please select a barangay to assign an admin.

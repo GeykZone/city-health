@@ -17,22 +17,9 @@
         <label for="add_hp_select_barangay" class="form-label">Barangay*</label>
         <select id="add_hp_select_barangay"  name="add_hp_select_barangay" class="form-control barangay-form shadow-sm">
             <option value="">Pick a barangay.</option>
-
-        <?php
-        $sql = "SELECT `id`, `barangay_name`, `lat`, `long` FROM `barangays`";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+          <?php
+          include('functions/select_barangays.php');
             ?>
-            
-            <option value="<?php echo $row['id']; ?>"><?php echo $row['barangay_name']; ?></option>
-            <?php 
-            }
-            ?>
-            <?php
-            }
-            ?>
-
         </select>
         <div class="invalid-feedback">
             Please select a barangay for the resident.
@@ -56,17 +43,7 @@
         <select id="add_hp_select_diseases"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm">
             <option value="">Select Type.</option>
             <?php
-        $sql = "SELECT * FROM `diseases`";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-            ?>
-            <option value="<?php echo $row['id']; ?>"><?php echo $row['disease_name']; ?></option>
-            <?php 
-            }
-            ?>
-            <?php
-            }
+              include('functions/select_diseases.php');
             ?>
         </select>
         <div class="invalid-feedback">
