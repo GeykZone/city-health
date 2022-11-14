@@ -8,15 +8,13 @@ include('includes/sidebar.php');
 
 <!--side bar end-->
 
-<div class="wrapper d-flex flex-column min-vh-100 bg-light">
+<div class="wrapper d-flex flex-column min-vh-100" style="background-color: #e2e7e9;">
 
 <!--header-->
 <?php   include('includes/navhead.php'); ?>
-<div class="header-divider"></div>
-<div class="container-fluid">
 <nav aria-label="breadcrumb">
 <ol class="breadcrumb my-0 ms-2">
-<li class="breadcrumb-item">
+<li class="breadcrumb-item active">
 <!-- if breadcrumb is single--><span>City Admin</span>
 </li>
 <li class="breadcrumb-item active"><span>Dashboard</span></li>

@@ -7,28 +7,9 @@ $(document).ready(function()
   $(document).attr("title", "HPCS | Manage Barangays");
   get_barangay_table_cell_value();
   load_data_tables();
-  $("#barangay_table_wrapper").addClass("d-none");
-  load_progress_bar();
 });
 
 //progress bar
-function load_progress_bar()
-{
-  setInterval(move());
-  setTimeout( function()
-  {
-    $("#myBar").text("Table Loaded Successfully!");
-    setTimeout(function(){
-      $("#myProgress").addClass("d-none");
-      $("#barangay_table").removeClass("d-none");
-      $("#barangay_table_wrapper").removeClass("d-none");
-      $("#add_barangay").removeClass("d-none");
-      $(".hide_first_load").removeClass("d-none"); 
-      $(".remove_rounded").removeClass("rounded-5");
-    },800);
-  },3000)
-}
-
 function move() {
   if (i == 0) {
     i = 1;
@@ -294,9 +275,9 @@ function load_data_tables() {
         null,
         {
           "defaultContent": 
-          '<i class="shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" ></i> '+
-          '<i class="shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" ></i> '+
-          '<i class="align-middle barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i>',
+          '<div class="text-end px-3"><i class="shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" ></i> '+
+          '<i class="shadow-sm mt-sm-2 mt-2 mt-lg-0 mt-md-0 align-middle edit_barangay_value del_btn fa-solid fa-trash-can" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" ></i> '+
+          '<i class="align-middle px-3 barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i> </div>',
         }
       ],
   

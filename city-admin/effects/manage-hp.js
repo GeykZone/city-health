@@ -26,10 +26,8 @@ $(document).ready(function()
     $(document).attr("title", "HPCS | Manage Health Profiles");
     select_with_search_box()
     load_data_tables()
-    $("#hp_table_wrapper").addClass("d-none");
     enable_form()
     get_hp_table_cell_value();
-    load_progress_bar();
 
 })
 
@@ -56,22 +54,6 @@ var confirmation = {
 
 
 //progress bar
-function load_progress_bar()
-{
-  setInterval(move());
-  setTimeout( function()
-  {
-    $("#myBar").text("Table Loaded Successfully!");
-    setTimeout(function(){
-      $("#myProgress").addClass("d-none");
-      $("#hp_table").removeClass("d-none");
-      $("#hp_table_wrapper").removeClass("d-none");
-      $(".hide_first_load").removeClass("d-none"); 
-      $(".remove_rounded").removeClass("rounded-5");
-    },800);
-  },3000)
-}
-
 function move() {
   if (i == 0) {
     i = 1;

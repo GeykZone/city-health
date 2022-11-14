@@ -28,17 +28,17 @@
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="../resourcess/assets/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
+
 <!-- Vendors styles-->
 <link rel="stylesheet" href="../resourcess/vendors/simplebar/css/simplebar.css">
 <link rel="stylesheet" href="../resourcess/css/vendors/simplebar.css">
 
-<!-- Main styles for this application-->
-<link href="../resourcess/css/style.css" rel="stylesheet">
-<link href="../resourcess/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
-
 <!--jquery-->
-  <script src="../resourcess/js/jquery.min.js"></script>
-  
+<script src="../resourcess/js/jquery.min.js"></script>
+
+  <!-- Main styles for this application-->
+<link href="../resourcess/css/style.css" rel="stylesheet">
+
 <!--usingjquery to create cokkie-->
 <script src="../resourcess/js-cookie/js.cookie.min.js"></script>
 
@@ -73,6 +73,9 @@
 <!--map-->
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+
+<script src="../resourcess/opentip_tooltips/opentip-jquery-excanvas.js"></script><!-- Change to the adapter you actually use -->
+<link href="../resourcess/opentip_tooltips/opentip.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body >

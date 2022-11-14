@@ -9,6 +9,8 @@ include('includes/sidebar.php');
 <!--side bar end-->
 
 <style>
+
+
 #map { position: absolute; 
 top: 0; 
 bottom: 0; 
@@ -21,14 +23,14 @@ position: absolute;
 background: #efefef;
 padding: 10px;
 font-family: 'Open Sans', sans-serif;
-left: 1;
 margin-top: 11px;
 opacity: 0.89;
+margin-right: 20px !important;
 }
 
 #map_container
 {
-  height: 65vh;
+  height: 62vh;
 }
 
 .mapboxgl-ctrl-bottom-right
@@ -44,8 +46,8 @@ opacity: 0.89;
 .green {
   background-image: url('../resourcess/images/green.png');
   background-size: cover;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -62,8 +64,8 @@ opacity: 0.89;
 .orange {
   background-image: url('../resourcess/images/orange.png');
   background-size: cover;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   cursor: pointer;
   
@@ -72,8 +74,8 @@ opacity: 0.89;
 .red {
   background-image: url('../resourcess/images/red.png');
   background-size: cover;
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -149,45 +151,172 @@ margin-top: 10px;
 
 .selectize-control
 {
-  margin-bottom: 5px !important;
   width: 200px !important;
-  margin-top: 8px;
+ 
 }
 
-@media (min-width: 768px) {
-
-  .selectize-control
+.selectize-input
 {
-  width: 100px !important;
+  padding-top: 6px !important;
+  padding-bottom : 6px !important;
 }
 
-}
-
-@media (min-width: 1400px) {
-  
-  .selectize-control
-{
-  width: 200px !important;
-}
-  
-}
 
 #range_break
 {
   margin-left: -7px !important;
   margin-right: -7px !important;
 }
+
+.map-text {
+position: absolute;
+bottom: 0;
+left: 0;
+margin-right: 15px;
+width: 1000px !important;
+padding-left: 15px !important;
+margin-bottom: 3px !important;
+}
+
+#map_overlay
+{
+  font: 15px !important
+
+}
+
+#hide_overlay
+{
+  color:#294168bf;
+  margin-bottom:0px; 
+  margin-right: 5px;
+  font-size: 15px ;
+}
+
+#show_overlay
+{
+  color:#294168bf;
+  margin-bottom:0px; 
+  margin-right: 5px;
+  font-size: 15px ;
+}
+
+@media (min-width: 100px) {
+
+.map-text {
+  width: 100px !important;
+}
+#map_text
+{
+  font-size: 8px !important;
+}
+.map-overlay {
+  width: 100px !important;
+  font-size: 8px !important;
+}
+#map_overlay
+{
+  font-size: 8px !important
+}
+.legend-key {
+width: 6px;
+height: 6px;
+margin-right: 8px;
+margin-top: 8px;
+}
+
+#hide_overlay
+{
+  font-size: 8px ;
+}
+
+#show_overlay
+{
+  font-size: 8px ;
+}
+}
+
+@media (min-width: 768px) {
+.map-text {
+  width: 100px !important;
+}
+#map_text
+{
+  font-size: 8px !important;
+}
+.map-overlay {
+  width: 100px !important;
+  font-size: 8px !important;
+}
+#map_overlay
+{
+  font-size: 8px !important
+
+}
+.legend-key {
+width: 6px;
+height: 6px;
+margin-right: 8px;
+margin-top: 8px;
+}
+
+#hide_overlay
+{
+  font-size: 8px ;
+}
+
+#show_overlay
+{
+  font-size: 8px ;
+}
+}
+
+@media (min-width: 992px) {
+  .map-text {
+  width: 1000px !important;
+}
+#map_text
+{
+  font-size: 13.5px !important;
+}
+.map-overlay {
+  width: 305px !important;
+  height: 190px !important;
+  font-size: 15px !important;
+}
+#map_overlay
+{
+  font-size: 15px !important
+  
+
+}
+
+.legend-key {
+width: 15px;
+height: 15px;
+margin-right: 10px;
+margin-top: 10px;
+}
+
+#hide_overlay
+{
+  font-size: 15px ;
+}
+
+#show_overlay
+{
+  font-size: 15px ;
+}
+}
+
 </style>
 
 <div class="wrapper d-flex flex-column min-vh-100 bg-light">
 
 <!--header-->
 <?php   include('includes/navhead.php'); ?>
-<div class="header-divider"></div>
-<div class="container-fluid">
 <nav aria-label="breadcrumb">
 <ol class="breadcrumb my-0 ms-2">
-<li class="breadcrumb-item">
+<li class="breadcrumb-item active">
 <!-- if breadcrumb is single--><span>City Admin</span>
 </li>
 <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
@@ -198,74 +327,81 @@ margin-top: 10px;
 </header>
 <!--header end-->
 
-<div class="body flex-grow-1 px-5 pt-3"> 
+<div class="body flex-grow-1 px-5 pt-3 pb-3"> 
 <div class="container-fluid">
 
 <!--for map-->
 <div class="card mb-4 border-0 shadow-sm">
-<div class="card-header p-3 border-0 shadow-sm ">
+<div class="card-header p-3 border-0 shadow-sm bg-info">
 </div>
 <div class="card-body">
-<div class="d-flex justify-content-between">
-<div>
-<h4 style="color: #294168bf; " class="card-title mb-2"><span style="margin-right: 10px;" class="fa-solid"></span>Map Visualization: <span id="map_year">2022</span> </h4>
-<div class="row g-2 align-items-center mx-1">
-<div class="col-auto" id="range_break">
-    <span style="color: black ; margin-right: 5px;" class="form-text" >
-      From: 
-    </span>
-  </div>
-   <div class="col-auto">
-    <input type="date" id="range_from" class="form-control  birthdate  barangay-form text-sm-start shadow-sm" aria-describedby="passwordHelpInline" placeholder="From">
-  </div>
-  <div class="col-auto" id="range_break">
-    <span style="color: black ; margin-right: 5px; margin-left: 5px;"  class="form-text" >
-      To: 
-    </span>
-  </div>
-  <div class="col-auto">
-    <input type="date" id="range_to" class="form-control birthdate  barangay-form text-sm-start shadow-sm" aria-describedby="passwordHelpInline" placeholder="To">
-  </div>
 
-  <div class="col-auto">
-  <a  class="btn  all-cases  rounded-1 border-1 shadow-sm" id="all_cases" type="button" style="padding-top: 7px; padding-bottom: 7px; padding-right:20px; padding-left:20px; margin-left: 3px;">
-  <span id="span_check" class="fa-regular"></span><span class=" mx-2" id="active only">Active Cases Only</span>
-  </a>
+<div class="card-title mx-2 mb-3"  >
+<button type="button" id="current_year" style="margin-right: 20px;" class="border-0 bg-transparent p-0"><span style="color: #294168bf; " class="fa-solid"></span></button>Map Visualization
+</div>
 
-  <a  class="btn active-only-hp  rounded-1 border-1 shadow-sm" id="active_only_btn" type="button" style="padding-top: 7px; display: none; padding-bottom: 7px; padding-right:20px; padding-left:20px; margin-left: 3px;">
-  <span id="span_check" class="fa-solid"></span><span class=" mx-2" id="active only">Active Cases Only</span>
-  </a>
+
+
+<div class="container-fluid p-0">
+  <div class="row">
+
+    <div class="col-lg-9 px-1">
+    <div class="container-fluid">
+    <div class=" row row-cols-auto align-items-center">
+
+    <div class="col mb-3 mb-lg-3 mb-sm-3" style="color:gray;">FROM :</div>
+
+    <div class="col mb-3  mb-lg-3 mb-sm-3"><input type="date" id="range_from" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="From"></div>
+
+    <div class="col mb-3  mb-lg-3 mb-sm-3" style="color:gray;">TO :</div>
+
+    <div class="col mb-3  mb-lg-3 mb-sm-3"><input type="date" id="range_to" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="To"></div>
+    
+    <div class="col mb-3  mb-lg-3 mb-sm-3">  
+      <a  class="btn  all-cases  rounded-1 border-1 shadow-sm" id="all_cases" type="button" >
+      <span id="span_check" class="fa-regular"></span><span class=" mx-2" id="active only">Active Cases Only</span>
+      </a>
+
+      <a  class="btn active-only-hp d-none rounded-1 border-1 shadow-sm" id="active_only_btn" type="button" >
+      <span id="span_check" class="fa-solid"></span><span class=" mx-2" id="active only">Active Cases Only</span>
+      </a>
+    </div>
+
+    <div class="col mb-3  mb-lg-3 mb-sm-3">  
+      <select id="select_diseases"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm">
+        <option value="">All Diseases</option>
+        <?php
+        include('functions/select_diseases.php');
+        ?>
+      </select>
+    </div>
+
+    <div class="col mb-3 mb-lg-3 mb-sm-3">  <button  class="act_btn act_btn rounded-2 border-0 shadow-sm" id="date_range_btn" type="button" style=" font-weight:bold; padding-top: 7px; padding-bottom: 7px; padding-right:20px; padding-left:20px;">
+      <span class="fa-solid"></span> QUERY</button>
+    </div>  
+
+    </div>
+    </div>
+    </div>
+
+    <div class="col mb-3  mb-lg-3 mb-sm-3 col-lg-3 d-lg-flex d-md-block justify-content-end">
+      <div class="col-auto">
+      <a  class="border-0 shadow-sm addbtn add-brgy fw-bolder dropdown-toggle" id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid"></span></a>
+            <ul class="dropdown-menu align-content-center shadow border-0 mx-1" id="hp_dropdown_options">
+              <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Active List</a></li>
+              <li><a class="dropdown-item" href="#"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Cluster Graph</a></li>
+              <li><a class="dropdown-item" href="inactive-list.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Inactive List</a></li>
+            </ul>
+      </div>
+    </div>
+
   </div>
-<!---->
-  <div class="col-auto">
-  <a class="btn add-brgy addbtn rounded-1 border-0 shadow-sm" id="date_range_btn" type="button" style=" font-weight:bold; padding-top: 7px; padding-bottom: 7px; padding-right:20px; padding-left:20px; margin-left: 3px;">
-  <span class="fa-solid"></span> QUERY</a>
-  </div>
 </div>
-</div>
-<div class="btn-toolbar d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-<div class="d-grid gap-2 d-md-flex justify-content-sm-end">
-<a class="border-0 shadow-sm addbtn add-brgy pt-1 pb-1 px-3 fw-bolder dropdown-toggle" id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid"></span></a>
-      <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
-        <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Active List</a></li>
-        <li><a class="dropdown-item" href="#"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Cluster Graph</a></li>
-        <li><a class="dropdown-item" href="inactive-list.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Inactive List</a></li>
-      </ul>
-</div>
-<div class="col-auto">
-   <select id="select_diseases"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm" >
-    <option value="">All Diseases</option>
-    <?php
-    include('functions/select_diseases.php');
-    ?>
-  </select>
-</div>
-</div>
-</div>
-<div id="map_container" class=" card mt-2 w-100 container-fluid rounded-2 mt-2 border-0 shadow-sm">
+
+<div id="map_container" class=" card w-100 container-fluid rounded-2 mt-2 border-0 shadow-sm">
 <div id="map" class=" w-100 rounded-3"></div>
 
-<div id="menu" class=" rounded-3">
+<div id="menu" class="  rounded-3">
 <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked">
 <label for="streets-v11">streets</label>
 <input id="light-v10" type="radio" name="rtoggle" value="light">
@@ -276,8 +412,12 @@ margin-top: 10px;
 <label for="satellite-streets-v11">satellite</label>
 </div>
 
-<div class="map-overlay rounded-2" id="legend"><h6 class=" mt-2"><button type="button" id="hide_overlay" style="color:#294168bf; margin-bottom:0px; margin-right: 5px;" class=" fa-solid "></button>Cluster Color Definition</h6></div>
-<button type="button" id="show_overlay" style="color:#294168bf; margin-bottom:0px; margin-right: 5px;" class="btn-overlay  fa-solid "></button>
+<div class="map-overlay d-none rounded-2" id="legend"><h6  class=" mt-2"><button type="button" id="hide_overlay" class="fa-solid"></button><span id="map_overlay">Cluster Color Definition</span></h6></div>
+<button type="button" id="show_overlay" class="btn-overlay  fa-solid "></button>
+
+<div class="map-text d-none"><h6 id="map_text" style="font-size: 13.5px;"><span id="map_from"></span><span id="map_to"></span><span id="map_disease"></span><span id="map_cases"></span></h6></div>
+
+
 
 </div>
 </div>

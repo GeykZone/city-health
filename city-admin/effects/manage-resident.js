@@ -27,37 +27,14 @@
   enable_form();  
   generate_age();
   get_resident_table_cell_value()
-  load_data_tables();;
-  $("#resident_table_wrapper").addClass("d-none");
-  load_progress_bar();
-  });
-
-  //progress bar 
-  function load_progress_bar()
-  {
-  setInterval(move())
-  setTimeout( function()
-  {
-  $("#myBar").text("Table Loaded Successfully!");
-  setTimeout(function(){
-  $("#myProgress").addClass("d-none");
-  $("#resident_table").removeClass("d-none");
-  $("#resident_table_wrapper").removeClass("d-none");
-  $("#add_resident").removeClass("d-none");
-  $(".hide_first_load").removeClass("d-none"); 
-  $(".remove_rounded").removeClass("rounded-5");
-
-  $(".chart_container").removeClass("d-none"); 
-  $("#residents_chart_row").removeClass("d-none"); 
+  
   chart_array();
   number_of_resident_chart();
-  $(".c1").removeClass("d-none"); 
-  $("#myChart").removeClass("d-none");
-  $("#chart_line").removeClass("d-none");
 
-  },800);
-  },3000)
-  }
+  load_data_tables();
+  });
+
+
 
   function move() {
   if (i == 0) {
