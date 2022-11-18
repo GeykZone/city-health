@@ -1,5 +1,5 @@
 
-<?php   include('../../route.php'); ?> 
+<?php   include('../../../route.php'); ?> 
     <?php
     $old_sql = "SELECT * FROM `residents` LEFT JOIN `barangays` ON `residents`.`barangay_id` = `barangays`.`id`";
     $old_rowcount = 0;

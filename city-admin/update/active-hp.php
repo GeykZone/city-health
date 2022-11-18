@@ -86,13 +86,13 @@
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
 			<div class="icon-box shadow" style="background-color: #06b92d;">
-				<i class="fa-solid " style="font-size: 40px; margin-top:15px;  color:white;"></i>
+				<i class="fa-solid " style="font-size: 40px; margin-top:15px;  color:white;"></i>
 				</div>					
-				<h4 class="modal-title w-100">Are you sure?</h4>	
+				<h4 class="modal-title w-100">Do you really want to move this record as active?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<h5>This will move the record to the list of active health profiles.</h5> 
+				<p>Active health profiles are those that are currently taking place and can be used by an office. They are typically consulted on a daily or monthly basis.</p>
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="border-0 shadow-sm btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>

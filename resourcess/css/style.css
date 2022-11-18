@@ -126,7 +126,7 @@ body {
 
 #th
 {
-  width: 100px  !important;
+  min-width: 100px !important;
 }
 
 tr
@@ -326,6 +326,21 @@ tbody tr.odd:hover {
   cursor: pointer;
 }
 
+.filter_btn
+{
+  color: white; 
+  background-color: #4d8ae6 ;
+  padding:5px;
+}
+.filter_btn:hover
+{
+  color: white;  
+  background-color: #366bbb ;
+  padding:5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
 .active_hp_btn
 {
   color: white; 
@@ -359,6 +374,23 @@ tbody tr.odd:hover {
   padding:5px;
   transition: 0.3s;
   cursor: pointer;
+}
+
+.remove_btn
+{
+  color: white; 
+  background-color: #f15e5e;
+  border: 1px solid #f15e5e; 
+  padding:5px;
+  padding-left: 6px;
+  padding-right: 6px
+}
+.remove_btn:hover
+{
+  color: white; 
+  border: 1px solid #ce1b1b; 
+  background-color: #ce1b1b;
+  transition: 0.3s;
 }
 
 .edit_btn
@@ -4321,8 +4353,7 @@ html:not([dir=rtl]) .dropdown-menu[data-coreui-popper] {
   right: 0;
   left: auto;
 }
-
-@media (min-width: 576px) {
+@media (min-width: 100px) {
   .dropdown-menu-sm-start {
     --cui-position: start;
   }
@@ -4337,8 +4368,80 @@ html:not([dir=rtl]) .dropdown-menu[data-coreui-popper] {
     right: 0;
     left: auto;
   }
+  .dataTables_paginate 
+  {
+    margin-top: 15px !important;
+  }
+
+  .paginate_button
+  {
+    width: 30px !important;
+    text-align: center;
+  }
+
+  .page-link
+  {
+    font-size: 6px !important;
+    font-weight: 500;
+  }
+
+  .previous
+  {
+    display: none;
+  }
+
+  .next
+  {
+    display: none;
+  }
+
 }
-@media (min-width: 768px) {
+
+@media (min-width: 433px) {
+  .dropdown-menu-sm-start {
+    --cui-position: start;
+  }
+  .dropdown-menu-sm-start[data-coreui-popper] {
+    right: auto;
+    left: 0;
+  }
+  .dropdown-menu-sm-end {
+    --cui-position: end;
+  }
+  .dropdown-menu-sm-end[data-coreui-popper] {
+    right: 0;
+    left: auto;
+  }
+  .dataTables_paginate 
+  {
+    margin-top: 15px !important;
+  }
+
+  .paginate_button
+  {
+    width: 30px !important;
+    text-align: center;
+  }
+
+  .page-link
+  {
+    font-size: 5px !important;
+    font-weight: 500;
+  }
+
+  .previous
+  {
+    width: 40px !important;
+    display: block;
+  }
+
+  .next
+  {
+    display: block;
+  }
+
+}
+@media (min-width: 787px) {
   .dropdown-menu-md-start {
     --cui-position: start;
   }
@@ -4353,8 +4456,33 @@ html:not([dir=rtl]) .dropdown-menu[data-coreui-popper] {
     right: 0;
     left: auto;
   }
+
+  .dataTables_paginate 
+  {
+    margin-top: 15px !important;
+  }
+
+  .paginate_button
+  {
+    width: 40px !important;
+    text-align: center;
+  }
+
+  .page-link
+  {
+    font-size: 8px !important;
+    font-weight: 500;
+   
+  }
+
+  .previous
+  {
+    width: 50px !important;
+  }
+
+  
 }
-@media (min-width: 992px) {
+@media (min-width: 993px) {
   .dropdown-menu-lg-start {
     --cui-position: start;
   }
@@ -4368,6 +4496,23 @@ html:not([dir=rtl]) .dropdown-menu[data-coreui-popper] {
   .dropdown-menu-lg-end[data-coreui-popper] {
     right: 0;
     left: auto;
+  }
+
+  .dataTables_paginate 
+  {
+    margin-top: 80px !important;
+  }
+
+  .paginate_button
+  {
+    width: inherit !important;
+    font-size: inherit !important;
+  }
+
+  .page-link
+  {
+    font-size: inherit !important;
+    font-weight: inherit !important;
   }
 }
 @media (min-width: 1200px) {
@@ -4385,8 +4530,27 @@ html:not([dir=rtl]) .dropdown-menu[data-coreui-popper] {
     right: 0;
     left: auto;
   }
+
+  .dataTables_paginate 
+  {
+    margin-top: 80px !important;
+    
+  }
+
+  .paginate_button
+  {
+    width: inherit !important;
+    font-size: inherit !important;
+  }
+
+  .page-link
+  {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+  }
+  
 }
-@media (min-width: 1400px) {
+@media (min-width: 1258px) {
   .dropdown-menu-xxl-start {
     --cui-position: start;
   }
@@ -4401,6 +4565,23 @@ html:not([dir=rtl]) .dropdown-menu[data-coreui-popper] {
     right: 0;
     left: auto;
   }
+  .dataTables_paginate 
+  {
+    margin-top: 15px !important;
+  }
+
+  .paginate_button
+  {
+    width: inherit !important;
+    font-size: inherit !important;
+  }
+
+  .page-link
+  {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+  }
+  
 }
 .dropup .dropdown-menu[data-coreui-popper] {
   top: auto;

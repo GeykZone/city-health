@@ -1,11 +1,9 @@
 <div class="modal fade" id="update-hp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" >
     <div class="modal-content">
-      <div class="modal-header bg-warning border-0 shadow-sm">
-        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Update Health Profile</h5>
-        <svg class="c-icon" style="width: 20px; height:20px; margin-left: 7px; margin-top: -2px; color:#ffff;">
-        <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-chart"></use>
-        </svg>
+      <div class="modal-header bg-warning border-0 px-3 py-2 shadow-sm">
+      <span class=" fa-solid me-2" style="width: 15px; height:15px; color:#ffff;"></span>
+        <h6 class="modal-title" id="exampleModalLabel" style="color: #ffff; font-weight:500;">Update Health Profile</h6>
         <button id="close_add_hp" type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body border-0 shadow-sm">
@@ -18,7 +16,7 @@
         <select id="update_hp_select_barangay"  name="update_hp_select_barangay" class="form-control barangay-form shadow-sm">
             <option value="">Pick a barangay.</option>
             <?php
-            include('functions/select_barangays.php');
+            include('functions/display-functions/select_barangays.php');
             ?>
 
         </select>
@@ -44,7 +42,7 @@
         <select id="update_hp_select_diseases"  name="update_hp_select_diseases" class="form-control gender barangay-form shadow-sm">
             <option value="">Select Type.</option>
             <?php
-             include('functions/select_diseases.php');
+             include('functions/display-functions/select_diseases.php');
             ?>
         </select>
         <div class="invalid-feedback">
@@ -68,7 +66,7 @@
 
       </div>
       <div class="modal-footer border-0 shadow-sm">
-        <button type="btn" id="update_hp_btn" class="border-0 shadow-sm addbtn add-brgy fw-bolder">Submit</button>
+        <button style="padding-top: 7px; padding-bottom: 7px;" type="btn" id="update_hp_btn" class="border-0 shadow-sm addbtn add-brgy fw-bolder">SUBMIT</button>
       </div>
     </div>
   </div>

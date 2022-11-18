@@ -1,4 +1,4 @@
-<?php   include('../../route.php'); ?>
+<?php   include('../../../route.php'); ?>
 
 <?php
     if(isset($_GET['resident_names']))
@@ -10,7 +10,7 @@
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-    $resident_names[] = $row['first_name']." ".$row['middle_name']." ".$row['last_name']." ".$row['id'];
+    $resident_names[] = $row['first_name']." ".$row['middle_name']." ".$row['last_name']." ".$row['resident_id'];
     }
         print json_encode($resident_names);
     }

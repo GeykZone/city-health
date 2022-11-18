@@ -1,11 +1,9 @@
 <div class="modal fade" id="add-barangay-resident" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable" >
 <div class="modal-content">
-<div class="modal-header bg-warning border-0 shadow-sm">
-  <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Add Oroquieta City Resident</h5>
-  <svg class="c-icon" style="width: 20px; height:20px; margin-left: 10px; color:#ffff;">
-  <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-layers"></use>
-  </svg>
+<div class="modal-header bg-warning border-0 px-3 py-2 shadow-sm">
+  <span class=" fa-solid me-2" style="width: 15px; height:15px; color:#ffff;"></span>
+  <h6 class="modal-title" id="exampleModalLabel" style="color: #ffff; font-weight:500;">New Resident Record</h6>
   <button type="button" id="close_add_resident" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body border-0 shadow-sm">
@@ -17,7 +15,7 @@
   <select id="select_barangay"  name="select_barangay" class="form-control barangay-form shadow-sm">
       <option value="">Pick a barangay.</option>
   <?php
-  include('functions/select_barangays.php');
+  include('functions/display-functions/select_barangays.php');
     ?>
 
   </select>
@@ -59,8 +57,8 @@
     <label for="gender" class="form-label">Gender*</label>
     <select name="gender" id="gender" class="form-control gender barangay-form shadow-sm" >
     <option value="">Pick a gender.</option>
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
+    <option value="M (Male)">M (Male)</option>
+    <option value="F (Female)">F (Female)</option>
     </select>
     <div class="invalid-feedback">
       Please don't leave this area empty.
@@ -100,7 +98,7 @@
 
 </div>
 <div class="modal-footer border-0 shadow-sm">
-  <button type="btn"  id="add_resident_btn" class="addbtn add-brgy fw-bolder border-0 shadow-sm">Submit</button>
+  <button style="padding-top: 7px; padding-bottom: 7px;" type="btn"  id="add_resident_btn" class="addbtn add-brgy fw-bolder border-0 shadow-sm">SUBMIT</button>
 </div>
 </div>
 </div>

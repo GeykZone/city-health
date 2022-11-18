@@ -1,4 +1,4 @@
-<?php   include('../../route.php'); ?>
+<?php   include('../../../route.php'); ?>
 
 <?php 
 // Database connection info 
@@ -20,6 +20,10 @@ $primaryKey = 'hp_id';
 // The `db` parameter represents the column name in the database.  
 // The `dt` parameter represents the DataTables column identifier. 
 
+$query_btn = $_GET['query_btn'];
+$date_range_from = $_GET['date_range_from'];
+$date_range_to = $_GET['date_range_to'];
+
 $columns = array( 
     array( 'db' => 'disease_name',    'dt' => 0, 'field' => 'disease_name'),
     array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
@@ -30,23 +34,38 @@ $columns = array(
     array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
     array( 'db' => 'phil_health_number',    'dt' => 7, 'field' => 'phil_health_number'),
     array( 'db' => 'contact',    'dt' => 8, 'field' => 'contact'),
-    array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-    array( 'db' => 'date',    'dt' => 10, 'field' => 'date'),
+    array( 'db' => 'date',    'dt' => 9, 'field' => 'date'),
+    array( 'db' => 'case_status',    'dt' => 10, 'field' => 'case_status'),
     array( 'db' => 'hp_id',    'dt' => 11, 'field' => 'hp_id'),
 ); 
  
 // Include SQL query processing class 
-require 'ssp.class.php'; 
+require '../ssp.class.php'; 
 
-$joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`id`) LEFT JOIN `diseases` AS `d` 
-ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
-$where = "`case_status`= 'Inactive'";
+if($query_btn != "unclicked")
+{
+    $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
+    ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
+    $where = "`date` BETWEEN '$date_range_from' AND '$date_range_to'";
+}
+else
+{
+    $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
+    ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
+    $where = "";
+}
+
 
 
  
 // Output data as json format 
-echo json_encode( 
-    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery,$where ) 
-);
+
+
+    echo json_encode( 
+        SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery,$where ) 
+    );
+
+
+
 
 ?>

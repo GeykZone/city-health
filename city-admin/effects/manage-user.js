@@ -437,14 +437,14 @@ function load_data_tables() {
               return  "<div class='text-end px-1'> <i class='shadow-sm align-middle edit_barangay_value reset_btn fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' ></i> "+
               "<i class='shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' ></i> "+
               " <i class=' mt-sm-2 mt-2 mt-lg-0 shadow-sm align-middle edit_barangay_value act_btn fas fa-unlock' href='#activate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' ></i>"+
-              "<i class='px-4 align-middle admin_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='admin_table_is_loading' role='button' disable></i> </div>"
+              "<i class='px-4 align-middle admin_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd; margin-right: 8px;'  id='admin_table_is_loading' role='button' disable></i> </div>"
             }
             else
             {
               return  "<div class='text-end px-1'> <i class='shadow-sm align-middle edit_barangay_value reset_btn fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' ></i> "+
               "<i class='shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' ></i> "+
               " <i class='shadow-sm mt-sm-2 mt-2 mt-lg-0 align-middle edit_barangay_value deact_btn fas fa-lock' href='#deactivate_barangay_admin' data-coreui-toggle='modal' id='activate_barangay_admin_value' role='button' ></i>"+
-              "<i class='px-4 align-middle admin_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='admin_table_is_loading' role='button' disable></i> </div>"
+              "<i class='px-4 align-middle admin_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd; margin-right: 8px;'  id='admin_table_is_loading' role='button' disable></i> </div>"
             }
               
           },

@@ -427,7 +427,7 @@ function display_map()
              $("#all_cases").addClass("d-none")
     
     
-                active_inactive = "Active"
+                active_inactive = "(Active)"
     
            })
     

@@ -19,6 +19,7 @@
   var y_value = "";
 
   var myChart ="";
+  var res_id_value ="";
   
 
   $(document).ready(function () {
@@ -28,9 +29,6 @@
   generate_age();
   get_resident_table_cell_value()
   
-  chart_array();
-  number_of_resident_chart();
-
   load_data_tables();
   });
 
@@ -130,34 +128,14 @@
   control = $select[0].selectize;
   control.clear();
 
-  $(".barangay_table_is_loading").removeClass("d-none");
-  $(".edit_barangay_value").addClass("d-none");
-  $("#resident_table_paginate").addClass("d-none");
-  $("#resident_table_info").addClass("d-none");
-  setInterval(move())
-  $("#myProgress").addClass("mt-3");
-  $("#myProgress").removeClass("d-none");
-
+  
   toastMixin.fire({
   animation: true,
   title: 'A new resident has been added in the list.'
   });
 
-  setTimeout(function(){  
-
-  $("#myBar").text("Table Updated Successfully!");
-  setTimeout(function(){
   table.ajax.reload( null, false);
-  $("#resident_table_paginate").removeClass("d-none");
-  $("#resident_table_info").removeClass("d-none");
-  $("#myProgress").addClass("d-none");
-  $("#myProgress").removeClass("mt-3");
-  $(".barangay_table_is_loading").addClass("d-none"); 
-  $(".edit_barangay_value").removeClass("d-none");
   update_chart();
-  },600);
-
-  },3000);
   }
   else if(confirmation.a == 2)
   {
@@ -166,8 +144,7 @@
   title: 'An admin is already assigned in the barangay.',
   icon: 'error'
   });
-  setTimeout(function(){
-  },3000);
+
   }
   else if(confirmation.a == 3)
   {
@@ -192,65 +169,35 @@
   control = $select[0].selectize;
   control.clear();
 
-  $(".barangay_table_is_loading").removeClass("d-none");
-  $(".edit_barangay_value").addClass("d-none");
-  $("#resident_table_paginate").addClass("d-none");
-  $("#resident_table_info").addClass("d-none");
-  setInterval(move())
-  $("#myProgress").addClass("mt-3");
-  $("#myProgress").removeClass("d-none");
 
   toastMixin.fire({
   animation: true,
   title: 'A resident record has been updated.'
   });
 
-  setTimeout(function(){  
-
-  $("#myBar").text("Table Updated Successfully!");
-  setTimeout(function(){
   table.ajax.reload( null, false);
-  $("#resident_table_paginate").removeClass("d-none");
-  $("#resident_table_info").removeClass("d-none");
-  $("#myProgress").addClass("d-none");
-  $("#myProgress").removeClass("mt-3");
-  $(".barangay_table_is_loading").addClass("d-none");
-  $(".edit_barangay_value").removeClass("d-none");
   update_chart();
-  },600);
-
-  },3000);
   }
   else if(confirmation.a == 4)
   {  
-  $(".barangay_table_is_loading").removeClass("d-none");
-  $(".edit_barangay_value").addClass("d-none");
-  $("#resident_table_paginate").addClass("d-none");
-  $("#resident_table_info").addClass("d-none");
-  setInterval(move())
-  $("#myProgress").removeClass("d-none");
-  $("#myProgress").addClass("mt-3");
+
   toastMixin.fire({
   animation: true,
   title: 'A resident record has been deleted.'
   });
 
-  setTimeout(function(){  
-  $("#myBar").text("Table Updated Successfully!");
-  setTimeout(function(){
   table.ajax.reload( null, false);
-  $("#resident_table_paginate").removeClass("d-none");
-  $("#resident_table_info").removeClass("d-none");
-  $("#myProgress").addClass("d-none");
-  $("#myProgress").removeClass("mt-3");
-  $(".barangay_table_is_loading").addClass("d-none");
-  $(".edit_barangay_value").removeClass("d-none");
   update_chart();
-  },600);
-  },3000);
   }
   }
   //trigger error messages end
+
+//get the id of resident
+function click_value(this_value)
+{
+  res_id_value = this_value.substr(this_value.indexOf(" ") + 1);
+}
+//get the id of resident end
 
   //show data tables
   function load_data_tables() {
@@ -262,10 +209,10 @@
     // "processing": true,
     "deferRender": true,
     "serverSide": true,
-    "ajax": "functions/show-resident.php",   
+    "ajax": "functions/display-functions/show-resident.php",   
     "autoWidth": false,
     scrollCollapse: true,
-    "dom": 'lfBrtip',      
+    "dom": 'Brltip',     
     "lengthMenu": [[10, 50, 100, 500, 1000], [10, 50, 100, 500, 1000]],
 
     //disable the sorting of colomn
@@ -286,9 +233,14 @@
       null,
       null,
       {
-        "defaultContent": "<i class='shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-barangay-resident' id='update_resident_value' role='button'></i> "+
-        "<i class='shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_resident' data-coreui-toggle='modal' id='delete_resident_value' role='button'></i>"+
-        "<i class='align-middle barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i>"
+        targets: 10,
+        render: function(data)
+        {
+          return "<div class='text-end px-3'> <i onclick = 'click_value(this.id)' class='update_resident_value shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-barangay-resident' id='update_resident_value "+data+"' role='button'></i> "+
+          "<i onclick = 'click_value(this.id)' class='delete_resident_value shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_resident' data-coreui-toggle='modal' id='delete_resident_value "+data+"' role='button'></i>"+
+          "<i class=' px-3 align-middle barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i> </div>"
+        }
+
       }
     ],
 
@@ -355,34 +307,67 @@
           columnGap: 1
         },
 
-        customize: function (win) {
-            $(win.document.body)
-                .css('text-align', 'center')
-
-            $(win.document.body).find('table')
-                .css('font-size', '12pt');
-
-                $(win.document.body).find('table').addClass("table-bordered")
+        customize: function ( doc ) {
+          $(doc.document.body).find('h1').css('font-size', '15pt');
+          $(doc.document.body).find('h1').css('text-align', 'center'); 
+          $(doc.document.body).find('table').addClass("table-bordered")
+          $(doc.document.body).find('table').css('font-size', '15pt');
+          $(doc.document.body).find('table').css('width', '100%');
+          $(doc.document.body).css('text-align', 'center')
         }
     }],
   });
   table.buttons().container().appendTo('#resident_table_wrapper .col-md-6:eq(0)');
+
+  $('#resident_table #th_1 td').each(function () {
+    var title = this.id;
+
+    if(title === "settings" )
+    {
+    
+      $(this).html('<div class="text-center" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid fa-magnifying-glass me-2"></span>Search Area</span></div>');
+    }
+    else
+    {
+      $(this).html('<input type="text" class="form-control table_search rounded-1 w-100 shadow-sm py-0"  placeholder="'+title+'" aria-controls="hp_table">');
+    }
+  
+});
+
+table.columns().every(function () {
+    var table = this;
+    $('input', this.footer()).on('keyup change', function () {
+        if (table.search() !== this.value) {
+            table.search(this.value).draw();
+        }
+    });
+});
     
   }
-
   //to align the data table buttons
   $("#resident_table_wrapper").addClass("row");
-  $("#resident_table_length").addClass("col-sm-6");
-  $("#resident_table_length").addClass("mb-3");
-  $("#resident_table_filter").addClass("col-sm-6");
-  $("#resident_table_filter").addClass("mb-3");
-  $(".dt-buttons").addClass("col-sm-2 mb-3"); 
-  $(".dt-buttons").removeClass("flex-wrap ");
-  $(".buttons-print").addClass("shadow-sm border-2"); 
-  $(".buttons-excel").addClass("shadow-sm border-2"); 
-  $(".buttons-copy").addClass("shadow-sm border-2"); 
+
+  $(".dt-buttons").detach().appendTo('#buttons') 
+  $(".dt-buttons").addClass("col-lg-2 text-center col-md-12 mb-3"); 
+  $(".dt-buttons").removeClass("flex-wrap");
+
+  $(".dataTables_length").detach().appendTo('#buttons')
+  $(".dataTables_length").addClass("col-lg-10 text-lg-end text-center text-md-center text-sm-center col-md-12 mb-3");
+  
+  $(".dataTables_info").detach().appendTo('#table_page')
+  $(".dataTables_info").addClass("col-lg-6 col-md-12 text-lg-start text-center text-md-center text-sm-center")
+
+  $(".dataTables_paginate ").detach().appendTo('#table_page')
+  $(".dataTables_paginate ").addClass("col-lg-6 d-flex justify-content-center justify-content-lg-end justify-content-md-center justify-content-sm-center ")
+  
+
+  $(".buttons-print").addClass("shadow-sm border-2 "); 
+  $(".buttons-excel").addClass("shadow-sm border-2 "); 
+  $(".buttons-copy").addClass("shadow-sm border-2 "); 
+
   $(".form-control").addClass("shadow-sm");
   $(".form-select").addClass("shadow-sm");
+
 
   };
   //show data tables end
@@ -482,7 +467,7 @@
   dob = new Date(dob);
   today = new Date();
   age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
-  resident_age = age;
+  resident_age = "-"+age+"-";
 
   var contact = $("#contact").val();
   var thisemail = $("#email").val();
@@ -604,7 +589,7 @@
           && line3(contact) != true && line4(contact) != true && line5(contact) != true  && line6(contact) != true) 
         {
           contact = "63"+contact;
-          $.post("functions/add-resident.php", {
+          $.post("functions/add-functions/add-resident.php", {
 
             barangay_id: barangay_id,
             firstname: firstname,
@@ -659,17 +644,8 @@
   //delete resident
   $("#delete_resident_record").click(function()
   {
-    $.post("functions/delete-resident.php", {
-    barangay_name: barangay_name,
-    first_name: first_name,
-    middle_name: middle_name,
-    last_name: last_name,
-    age: age,
-    gender: gender,
-    birthdate: birthdate,
-    civil: civil,
-    contact: contact,
-    email: email
+    $.post("functions/delete-functions/delete-resident.php", {
+      resident_id: res_id_value
 
     },
     function (data, status) {
@@ -693,7 +669,7 @@
       dob = new Date(dob);
       today = new Date();
       upadateage = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
-      update_resident_age = upadateage;
+      update_resident_age = "-"+upadateage+"-";
       var new_age = update_resident_age;
 
       var new_civil = $('#update_civil_status').val();
@@ -816,17 +792,8 @@
             {
               new_contact = "63"+new_contact; //639276003238
 
-              $.post("functions/update-resident.php", {
-                old_barangay_name: barangay_name,
-                old_first_name: first_name,
-                old_middle_name: middle_name,
-                old_last_name: last_name,
-                old_age: age,
-                old_gender: gender,
-                old_birthdate: birthdate,
-                old_civil: civil,
-                old_contact: contact,
-                old_email: email,
+              $.post("functions/update-functions/update-resident.php", {
+                resident_id: res_id_value,
         
                 new_barangay_name: new_barangay_name,
                 new_firstname: new_firstname,
@@ -916,36 +883,8 @@
   function get_resident_table_cell_value()
   {
 
-  //deleting
-  $("#resident_table").on('click','#delete_resident_value',function(){
-  // get the current row
-  var currentRow=$(this).closest("tr");
-
-  var col0=currentRow.find("td:eq(0)").text().trim($(this).text()); // get current row 1st TD value
-  var col1=currentRow.find("td:eq(1)").text().trim($(this).text()); // get current row 1st TD value
-  var col2=currentRow.find("td:eq(2)").text().trim($(this).text()); // get current row 1st TD value
-  var col3=currentRow.find("td:eq(3)").text().trim($(this).text()); // get current row 1st TD value
-  var col4=currentRow.find("td:eq(4)").text().trim($(this).text()); // get current row 1st TD value
-  var col5=currentRow.find("td:eq(5)").text().trim($(this).text()); // get current row 1st TD value
-  var col6=currentRow.find("td:eq(6)").text().trim($(this).text()); // get current row 1st TD value
-  var col7=currentRow.find("td:eq(7)").text().trim($(this).text()); // get current row 1st TD value
-  var col8=currentRow.find("td:eq(8)").text().trim($(this).text()); // get current row 1st TD value
-  var col9=currentRow.find("td:eq(9)").text().trim($(this).text()); // get current row 1st TD value
-
-    barangay_name = col0;
-    first_name = col1;
-    middle_name = col2;
-    last_name = col3;
-    age = col4;
-    gender = col5;
-    birthdate = col6;
-    civil = col7;
-    contact = col8;
-    email = col9;
-  });
-
   //update
-  $("#resident_table").on('click','#update_resident_value',function(){
+  $("#resident_table").on('click','.update_resident_value',function(){
   // get the current row
   var currentRow=$(this).closest("tr");
 
@@ -959,17 +898,6 @@
   var col7=currentRow.find("td:eq(7)").text().trim($(this).text()); // get current row 1st TD value
   var col8=currentRow.find("td:eq(8)").text().trim($(this).text()); // get current row 1st TD value
   var col9=currentRow.find("td:eq(9)").text().trim($(this).text()); // get current row 1st TD value
-
-  barangay_name = col0;
-  first_name = col1;
-  middle_name = col2;
-  last_name = col3;
-  age = col4;
-  gender = col5;
-  birthdate = col6;
-  civil = col7;
-  contact = col8;
-  email = col9;
 
   $("#update_select_barangay").data('selectize').setValue(col0);
   $("#update_firstname").val(col1);
@@ -996,7 +924,7 @@
   function chart_array()
   {
     $.ajaxSetup({async:false});
-    $.getJSON('functions/show-number-of-resident.php', 
+    $.getJSON('functions/display-functions/show-number-of-resident.php', 
     {
       barangay_name:'set'
     }, 
@@ -1006,7 +934,7 @@
       x_value = data;
     });
 
-    $.getJSON('functions/show-number-of-resident.php', 
+    $.getJSON('functions/display-functions/show-number-of-resident.php', 
     {
       total_residents_number:'set'
     }, 
@@ -1049,9 +977,12 @@
     var xValues = x_value;
     var yValues = y_value;
     var barColors = [
+      
         'rgba(145, 215, 248, 1.0)',
         'rgba(52, 152, 219,1.0)',
     ];
+
+   // console.log(y_value);
 
     const ctx = $('#myChart');
 
@@ -1092,3 +1023,42 @@ function update_chart()
 }
 //update chart end
 
+
+//show graph button
+var chart_show_variable = "close"
+var chart_shower = "firstime"
+$("#show_graph").click(function()
+{
+  $("#show_graph_txt").text("ClOSE CHART")
+  if(chart_show_variable === "close")
+  {
+    if(chart_shower === "firstime")
+    {
+      chart_array();
+      number_of_resident_chart();
+      myChart.destroy();
+      $(".chart_container").slideDown("slow", function()
+      {
+          chart_array();
+      });
+      number_of_resident_chart();
+    }
+    
+    $(".chart_container").slideDown("slow", function()
+    {
+    });
+    chart_show_variable = "open"
+    chart_shower = "!firstime"
+  }
+  else
+  {
+    $("#show_graph_txt").text("OPEN CHART")
+    $(".chart_container").slideUp("slow", function()
+    {
+      chart_show_variable = "close"
+    })
+
+  }
+
+})
+//show graph button end

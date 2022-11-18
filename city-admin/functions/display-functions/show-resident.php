@@ -1,4 +1,4 @@
-<?php   include('../../route.php'); ?>
+<?php   include('../../../route.php'); ?>
 
 <?php 
 // Database connection info 
@@ -14,7 +14,7 @@ $table = 'residents';
 
  
 // Table's primary key 
-$primaryKey = 'id'; 
+$primaryKey = 'resident_id'; 
  
 // Array of database columns which should be read and sent back to DataTables. 
 // The `db` parameter represents the column name in the database.  
@@ -31,10 +31,11 @@ $columns = array(
     array( 'db' => 'civil',    'dt' => 7, 'field' => 'civil'),
     array( 'db' => 'contact',     'dt' => 8, 'field' => 'contact' ), 
     array( 'db' => 'email',    'dt' => 9, 'field' => 'email' ), 
+    array( 'db' => 'resident_id',    'dt' => 10, 'field' => 'resident_id' ),
 ); 
  
 // Include SQL query processing class 
-require 'ssp.class.php'; 
+require '../ssp.class.php'; 
 
 $joinQuery = "FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
 

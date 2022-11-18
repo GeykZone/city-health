@@ -377,7 +377,7 @@ margin-top: 10px;
     </div>
 
     <div class="col mb-3 mb-lg-3 mb-sm-3">  <button  class="act_btn act_btn rounded-2 border-0 shadow-sm" id="date_range_btn" type="button" style=" font-weight:bold; padding-top: 7px; padding-bottom: 7px; padding-right:20px; padding-left:20px;">
-      <span class="fa-solid"></span> QUERY</button>
+      <span class="fa-solid"></span> FILTER</button>
     </div>  
 
     </div>
@@ -386,7 +386,7 @@ margin-top: 10px;
 
     <div class="col mb-3  mb-lg-3 mb-sm-3 col-lg-3 d-lg-flex d-md-block justify-content-end">
       <div class="col-auto">
-      <a  class="border-0 shadow-sm addbtn add-brgy fw-bolder dropdown-toggle" id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid"></span></a>
+      <a  class="border-0 shadow-sm addbtn add-brgy fw-bolder dropdown-toggle" id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid ms-1"></span></a>
             <ul class="dropdown-menu align-content-center shadow border-0 mx-1" id="hp_dropdown_options">
               <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Active List</a></li>
               <li><a class="dropdown-item" href="#"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Cluster Graph</a></li>
