@@ -1,4 +1,4 @@
-<?php   include('../../route.php'); ?>
+<?php   include('../../../route.php'); ?>
 
 <?php 
 // Database connection info 
@@ -10,7 +10,7 @@ $dbDetails = array(
 ); 
  
 // DB table to use 
-$table = 'users'; 
+$table = 'diseases'; 
 
  
 // Table's primary key 
@@ -21,28 +21,16 @@ $primaryKey = 'id';
 // The `dt` parameter represents the DataTables column identifier. 
 
 $columns = array( 
-    array( 'db' => 'barangay_name',    'dt' => 0, 'field' => 'barangay_name'),
-    array( 'db' => 'username', 'dt' => 1, 'field' => 'username' ), 
-    array( 'db' => 'activated',  'dt' => 2, 'field' => 'activated' ), 
+    array( 'db' => 'disease_name',    'dt' => 0, 'field' => 'disease_name')
 ); 
  
 // Include SQL query processing class 
-require 'ssp.class.php'; 
-
-$joinQuery = "FROM `users` ";
-$where = "`role`=2";
-
+require '../ssp.class.php'; 
 
  
 // Output data as json format 
 echo json_encode( 
-    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery, $where ) 
+    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns) 
 );
 
 ?>
-
-
-
-
-
-

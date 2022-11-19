@@ -841,10 +841,6 @@ $("#date_range_btn").click(function()
 $("#refresh_table").click(function()
 {
 
-  var $select = $("#update_hp_select_barangay").selectize();
-  var selectize = $select[0].selectize;
-  selectize.setValue(selectize.search("").items[0].id);
-
   $("#range_from").val("")
   $("#range_to").val("")
 

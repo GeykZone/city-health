@@ -7,28 +7,8 @@ $(document).ready(function()
   $(document).attr("title", "HPCS | Manage Barangays");
   get_barangay_table_cell_value();
   load_data_tables();
+  opentip_tooltip();
 });
-
-//progress bar
-function move() {
-  if (i == 0) {
-    i = 1;
-    var elem = document.getElementById("myBar");
-    var width = 10;
-    var id = setInterval(frame, 30);
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id);
-        i = 0;
-      } else {
-        width++;
-        elem.style.width = width + "%";
-        elem.innerHTML ="Loading " + width  + "%";
-      }
-    }
-  }
-}
-//progress bar end
 
 //set do some stuff when confiramtion variable is changed
 var confirmation = {
@@ -76,7 +56,7 @@ $("#add_barangay_btn").click(function () {
   } 
   else 
   {
-    $.post("functions/add-barangay.php", {
+    $.post("functions/add-functions/add-barangay.php", {
         barangay: barangay,
         Latitude: Latitude,
         Longitude: Longitude,
@@ -112,7 +92,7 @@ $("#update_barangay_btn").click(function () {
   } 
   else 
   {
-     $.post("functions/update-barangay.php", {
+     $.post("functions/update-functions/update-barangay.php", {
       update_barangay: update_barangay,
       update_Latitude: update_Latitude,
       update_Longitude: update_Longitude,
@@ -152,33 +132,11 @@ if(confirmation.a == 1)
   $("#Latitude").val("");
   $("#Longitude").val("");
 
-
-  $(".barangay_table_is_loading").removeClass("d-none");
-  $(".edit_barangay_value").addClass("d-none");
-  $("#barangay_table_paginate").addClass("d-none");
-  $("#barangay_table_info").addClass("d-none");
-  setInterval(move())
-  $("#myProgress").removeClass("d-none");
-  $("#myProgress").addClass("mt-3");
-
   toastMixin.fire({
     animation: true,
     title: 'A new barangay admin has been added in the list.'
   });
-  setTimeout(function(){
-
-    $("#myBar").text("Table Updated Successfully!");
-    setTimeout(function(){
-      table.ajax.reload( null, false);
-      $("#barangay_table_paginate").removeClass("d-none");
-      $("#barangay_table_info").removeClass("d-none");
-      $("#myProgress").addClass("d-none");
-      $("#myProgress").removeClass("mt-3");
-      $(".barangay_table_is_loading").addClass("d-none");
-      $(".edit_barangay_value").removeClass("d-none");
-    },600);
-
-  },3000);
+  table.ajax.reload( null, false);
 }
 else if(confirmation.a == 2)
 {
@@ -187,69 +145,24 @@ else if(confirmation.a == 2)
     title: 'The barangay is already in the list.',
     icon: 'error'
   });
-  setTimeout(function(){
-  },3000);
 }
 else if(confirmation.a == 3)
 {
   $('#update-barangay').modal('toggle');
-  
-  $(".barangay_table_is_loading").removeClass("d-none");
-  $(".edit_barangay_value").addClass("d-none");
-  $("#barangay_table_paginate").addClass("d-none");
-  $("#barangay_table_info").addClass("d-none");
-  setInterval(move())
-  $("#myProgress").removeClass("d-none");
-  $("#myProgress").addClass("mt-3");
 
   toastMixin.fire({
     animation: true,
     title: 'A barangay record has been updated.'
   });
-  setTimeout(function(){
-    
-    $("#myBar").text("Table Updated Successfully!");
-    setTimeout(function(){
-      table.ajax.reload( null, false);
-      $("#barangay_table_paginate").removeClass("d-none");
-      $("#barangay_table_info").removeClass("d-none");
-      $("#myProgress").addClass("d-none");
-      $("#myProgress").removeClass("mt-3");
-      $(".barangay_table_is_loading").addClass("d-none");
-      $(".edit_barangay_value").removeClass("d-none");
-    },600);
-
-  },3000);
+  table.ajax.reload( null, false);
 }
 else if(confirmation.a == 4)
 {
-  
-  $(".barangay_table_is_loading").removeClass("d-none");
-  $(".edit_barangay_value").addClass("d-none");
-  $("#barangay_table_paginate").addClass("d-none");
-  $("#barangay_table_info").addClass("d-none");
-  setInterval(move())
-  $("#myProgress").removeClass("d-none");
-  $("#myProgress").addClass("mt-3");
-
   toastMixin.fire({
     animation: true,
     title: 'A barangay has been deleted.'
   });
-  setTimeout(function(){
-    
-    $("#myBar").text("Table Updated Successfully!");
-    setTimeout(function(){
-      table.ajax.reload( null, false);
-      $("#barangay_table_paginate").removeClass("d-none");
-      $("#barangay_table_info").removeClass("d-none");
-      $("#myProgress").addClass("d-none");
-      $("#myProgress").removeClass("mt-3");
-      $(".barangay_table_is_loading").addClass("d-none");
-      $(".edit_barangay_value").removeClass("d-none");
-    },600);
-
-  },3000);
+  table.ajax.reload( null, false);
 }
 }
 //trigger error messages
@@ -262,10 +175,10 @@ function load_data_tables() {
     table = $('#barangay_table').DataTable({
 
       "deferRender": true,
-      "dom": 'lfBrtips',     
+      "dom": 'Brltip',   
       //"processing": true,
       "serverSide": true,
-      "ajax": "functions/show-barangay.php",  
+      "ajax": "functions/display-functions/show-barangay.php",  
       scrollCollapse: true,
   
       "columns": [
@@ -277,7 +190,7 @@ function load_data_tables() {
           "defaultContent": 
           '<div class="text-end px-3"><i class="shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" ></i> '+
           '<i class="shadow-sm mt-sm-2 mt-2 mt-lg-0 mt-md-0 align-middle edit_barangay_value del_btn fa-solid fa-trash-can" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" ></i> '+
-          '<i class="align-middle px-3 barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none" style="color:#3b7ddd;"  id="barangay_table_is_loading" role="button" disable></i> </div>',
+          '</div>',
         }
       ],
   
@@ -296,8 +209,8 @@ function load_data_tables() {
              text: 'COPY',
   
              title: 'Health Profile Clustering System',
-  
-             messageTop: 'List of barangays in Oroquieta City',
+
+             messageTop: 'Barangays in Oroquieta City',
              //className: 'fa fa-solid fa-clipboard',
   
   
@@ -318,7 +231,7 @@ function load_data_tables() {
   
              title: 'Health Profile Clustering System',
   
-             messageTop: 'List of barangays in Oroquieta City',
+             messageTop: 'Barangays in Oroquieta City',
              //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
   
   
@@ -339,7 +252,7 @@ function load_data_tables() {
   
              title: 'Health Profile Clustering System',
   
-             messageTop: 'List of barangays in Oroquieta City',
+             messageTop: 'Barangays in Oroquieta City',
              //className: 'fa fa-print',
   
   
@@ -353,33 +266,65 @@ function load_data_tables() {
                 columnGap: 1
              },
   
-             customize: function (win) {
-                $(win.document.body)
-                   .css('text-align', 'center')
-  
-                $(win.document.body).find('table')
-                   .css('font-size', '12pt');
-
-                   $(win.document.body).find('table').addClass("table-bordered")
-             }
+             customize: function ( doc ) {
+              $(doc.document.body).find('h1').css('font-size', '15pt');
+              $(doc.document.body).find('h1').css('text-align', 'center'); 
+              $(doc.document.body).find('table').addClass("table-bordered")
+              $(doc.document.body).find('table').css('font-size', '15pt');
+              $(doc.document.body).find('table').css('width', '100%');
+              $(doc.document.body).css('text-align', 'center')
+            }
           }
        ],
     });
     table.buttons().container().appendTo('#barangay_table_wrapper .col-md-6:eq(0)');
 
+    $('#barangay_table #th_1 td').each(function () {
+      var title = this.id;
+
+      if(title === "settings" )
+      {
+      
+        $(this).html('<div class="text-end" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid fa-magnifying-glass me-2"></span>Search Area</span></div>');
+      }
+      else
+      {
+        $(this).html('<input style="width: 155px;" type="text" class="form-control table_search rounded-1 shadow-sm py-0"  placeholder="'+title+'" aria-controls="hp_table">');
+      }
+        
+      });
+
+      table.columns().every(function () {
+          var table = this;
+          $('input', this.footer()).on('keyup change', function () {
+              if (table.search() !== this.value) {
+                  table.search(this.value).draw();
+              }
+          });
+      });
+
   }
 
       //to align the data table buttons
       $("#barangay_table_wrapper").addClass("row");
-      $("#barangay_table_length").addClass("col-sm-6");
-      $("#barangay_table_length").addClass("mb-3");
-      $("#barangay_table_filter").addClass("col-sm-6");
-      $("#barangay_table_filter").addClass("mb-3");
-      $(".dt-buttons").addClass("col-sm-2 mb-3");
-      $(".dt-buttons").removeClass("flex-wrap ");
-      $(".buttons-print").addClass("shadow-sm border-2"); 
-      $(".buttons-excel").addClass("shadow-sm border-2"); 
-      $(".buttons-copy").addClass("shadow-sm border-2"); 
+
+      $(".dt-buttons").detach().appendTo('#buttons') 
+      $(".dt-buttons").addClass("col-lg-2 col-md-12 mb-3"); 
+      $(".dt-buttons").removeClass("flex-wrap");
+
+      $(".dataTables_length").detach().appendTo('#buttons')
+      $(".dataTables_length").addClass("col-lg-10 text-lg-end text-center text-md-center text-sm-center col-md-12 mb-3");
+      
+      $(".dataTables_info").detach().appendTo('#table_page')
+      $(".dataTables_info").addClass("col-lg-6 col-md-12 text-lg-start text-center text-md-center text-sm-center")
+
+      $(".dataTables_paginate ").detach().appendTo('#table_page')
+      $(".dataTables_paginate ").addClass("col-lg-6 d-flex justify-content-center justify-content-lg-end justify-content-md-center justify-content-sm-center ")
+
+      $(".buttons-print").addClass("shadow-sm border-2 "); 
+      $(".buttons-excel").addClass("shadow-sm border-2 "); 
+      $(".buttons-copy").addClass("shadow-sm border-2 "); 
+
       $(".form-control").addClass("shadow-sm");
       $(".form-select").addClass("shadow-sm");
 
@@ -432,7 +377,7 @@ function get_barangay_table_cell_value()
 
 //delete barangay
 $("#delete-barangay").click(function () {
-     $.post("functions/delete-barangay.php", {
+     $.post("functions/delete-functions/delete-barangay.php", {
       barangay_name_id: barangay_name_id
     },
     function (data, status) {
@@ -442,6 +387,29 @@ $("#delete-barangay").click(function () {
 
 });
 //delete barangay end
+
+//refresh table back to current data
+$("#refresh_table").click(function()
+{
+  swal.close();
+
+  table.destroy()
+  $(".dataTables_length").remove();
+  $(".dataTables_info").remove();
+  $(".dataTables_paginate ").remove();
+
+  load_data_tables()
+})
+//refresh table back to current data end
+
+//generate a tooltip
+function opentip_tooltip()
+{
+  var refresh_table_tooltip = $("#refresh_table")
+  var myOpentip = new Opentip(refresh_table_tooltip, { showOn:"mouseover", tipJoint: "bottom", target:refresh_table_tooltip });
+  myOpentip.setContent("Refresh Table"); // Updates Opentips content
+}
+//generate a tooltip end
 
 
 

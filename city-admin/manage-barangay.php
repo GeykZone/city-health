@@ -24,15 +24,15 @@ include('includes/sidebar.php');
 <!--header end-->
 
 <!--add barangay modal-->
-<?php include('add-barangay.php') ?>
+<?php include('add/add-barangay.php') ?>
 <!--add barangay modal end-->
 
 <!--update barangay modal-->
-<?php include('update-barangay.php') ?>
+<?php include('update/update-barangay.php') ?>
 <!--update barangay modal end-->  
 
 <!--delete barangay modal-->
-<?php include('delete-barangay.php') ?>
+<?php include('delete/delete-barangay.php') ?>
 <!--delete barangay modal end-->  
 
 <div class="body flex-grow-1 px-5 pt-3  pb-3"> 
@@ -44,26 +44,23 @@ include('includes/sidebar.php');
 <div class="col-md-12">
 <div class="card border-0 mb-4  shadow-sm remove_rounded">
 
-    <div class="hide_first_load bg-info card-header p-3 border-0 shadow-sm remove_rounded">
-    </div>
+  <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
+  <button type="button" id="refresh_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangays in Oroquieta City
+  </div>  
 
   <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >
 
-      <div class="table-responsive-xxl" >
-      <div class="d-flex">
-      
-      <div class="col-sm-6 text-sm-start hide_first_load ">
-      <a id="toggle_chart1" >
-      <span style="color: #294168bf; margin-right: 10px;" class=" fa-solid align-content-center"></span> Barangays in Oroquieta City
-      </a>
+      <div class=" container-fluid">
+        <div class=" dataTables_wrapper dt-bootstrap5 row" id="buttons">
+
+        <div class="col-lg-12">
+            <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" data-coreui-toggle="modal" href="#add-barangay" id="add_barangay" role="button">NEW <span class="fa-solid ms-1 fa-circle-plus"></a>
+        </div>
+
+        </div>
       </div>
 
-      <div class="col-sm-6 text-end">
-      <a class="mb-3 border-0 shadow-sm addbtn add-brgy pt-1 pb-1 px-3 fw-bolder" data-coreui-toggle="modal" href="#add-barangay" id="add_barangay" role="button">NEW <span class="fa-solid fa-circle-plus"></span></a>
-      </div>
-
-      </div> 
-
+      <div class="table-responsive container-fluid" >
       <table class="table table-striped table-borderless table-condensed  mb-0 w-100" id="barangay_table"> 
         <thead class="table-info fw-semibold shadow-sm">
           <tr class="align-middle">
@@ -75,18 +72,24 @@ include('includes/sidebar.php');
         </thead>
 
         <tbody class=" align-middle shadow-sm" id="show_barangay_list_table"> 
+        </tbody>
 
         
-
-        </tbody>
+        <tfoot class=" table-secondary fw-semibold shadow-sm" id="th_1">
+          <tr class="align-middle" >
+            <td id="Barangay" style="min-width: 100px;"></td>
+            <td id="Latitude" style="min-width: 100px;"></td>
+            <td id="longitude" style="min-width: 100px;"></td>
+            <td id="settings" style="min-width:100px;"></td>
+          </tr>
+        </tfoot>
         
       </table>
-
-      <div id="myProgress" class="rounded-4 d-none border-1 shadow-sm">
-      <div id="myBar" class=" rounded-4"></div>
       </div>
 
-
+      <div class="table-responsive container-fluid" >
+        <div class="dataTables_wrapper dt-bootstrap5 row" id="table_page">
+        </div>
       </div>
     
   </div>

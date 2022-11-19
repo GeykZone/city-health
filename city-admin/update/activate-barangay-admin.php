@@ -42,10 +42,10 @@
 	border-radius: 50%;
 	z-index: 9;
 	text-align: center;
-	border: 3px solid #f15e5e;
+	border: 3px solid #06b92d;
 }
 .modal-confirm .icon-box i {
-	color: #f15e5e;
+	color: #06b92d;
 	font-size: 46px;
 	display: inline-block;
 	margin-top: 13px;
@@ -70,10 +70,10 @@
 	background: #a8a8a8;
 }
 .modal-confirm .btn-danger {
-	background: #f15e5e;
+	background: #06b92d;
 }
 .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
-	background: #ee3535;
+	background: #0e9115;
 }
 
 .close{
@@ -81,22 +81,22 @@
 }
 </style>
 
-<div id="delete_disease" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="activate_barangay_admin" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog  modal-md modal-dialog-centered modal-confirm modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header flex-column">	
-			<div class="icon-box shadow" style="background-color: #f15e5e;">
-			<i class="fa-solid fa-trash-can" style="font-size: 40px; margin-top:15px;  color:white;"></i>
+			<div class="icon-box shadow" style="background-color: #06b92d;">
+				<i class="fa-solid " style="font-size: 40px; margin-top:15px;  color:white;"></i>
 				</div>					
-				<h4 class="modal-title w-100">Are you sure?</h4>	
+				<h4 class="modal-title w-100">Do you really want to activate this account?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<h5>Do you really want to delete this record? This process cannot be undone.</h5>
+				<p>Activating admin privileges allows the user to log in and change some records in this system.</p>
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="border-0 shadow-sm btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
-				<button class="border-0 shadow-sm btn btn-danger fw-bolder" id="delete_disease_btn" data-coreui-dismiss="modal" aria-label="Close">Delete</button>
+				<button class="border-0 shadow-sm btn btn-danger fw-bolder" id="activate_barangay_admin_record" data-coreui-dismiss="modal" aria-label="Close">Activate</button>
 			</div>
 		</div>
 	</div>

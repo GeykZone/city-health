@@ -1,4 +1,4 @@
-<?php   include('../../route.php'); ?>
+<?php   include('../../../route.php'); ?>
 
 <?php 
 // Database connection info 
@@ -10,7 +10,7 @@ $dbDetails = array(
 ); 
  
 // DB table to use 
-$table = 'barangays'; 
+$table = 'users'; 
 
  
 // Table's primary key 
@@ -22,20 +22,27 @@ $primaryKey = 'id';
 
 $columns = array( 
     array( 'db' => 'barangay_name',    'dt' => 0, 'field' => 'barangay_name'),
-    array( 'db' => 'lat', 'dt' => 1, 'field' => 'lat' ), 
-    array( 'db' => 'long',  'dt' => 2, 'field' => 'long' ), 
+    array( 'db' => 'username', 'dt' => 1, 'field' => 'username' ), 
+    array( 'db' => 'activated',  'dt' => 2, 'field' => 'activated' ), 
 ); 
  
 // Include SQL query processing class 
-require 'ssp.class.php'; 
+require '../ssp.class.php'; 
 
-
+$joinQuery = "FROM `users` ";
+$where = "`role`=2";
 
 
  
 // Output data as json format 
 echo json_encode( 
-    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns) 
+    SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery, $where ) 
 );
 
 ?>
+
+
+
+
+
+

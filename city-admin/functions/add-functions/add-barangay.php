@@ -1,4 +1,4 @@
-<?php   include('../../route.php'); ?>
+<?php   include('../../../route.php'); ?>
 <?php
 //add new barangay
 if(isset($_POST['barangay']))

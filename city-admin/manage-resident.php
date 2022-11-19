@@ -74,20 +74,20 @@ include('includes/sidebar.php');
 <div class="card border-0 mb-4 shadow-sm ">
 
 <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-<button type="button" id="refresh_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay Residents
+<button type="button" id="refresh_resident_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay Residents
 </div>
 
 <div class="card-body border-0 shadow-sm "  id="wrapper" >
 
 <div class=" container-fluid">
   <div class=" dataTables_wrapper dt-bootstrap5 row" id="buttons">
-  
-  <div class="col-lg-6">
-      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" type="button" id="show_graph" role="button"><span id="show_graph_txt">OPEN CHART </span><span class=" ms-1 fa-solid"></span></a>
+
+  <div class="col-lg-6 ">
+      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder"  data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">NEW <span class="fa-solid ms-1 fa-circle-plus"></a>
   </div>
 
   <div class="col-lg-6 text-lg-end">
-      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder"  data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">NEW <span class="fa-solid ms-1 fa-circle-plus"></a>
+      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" type="button" id="show_graph" role="button"><span id="show_graph_txt">OPEN CHART </span><span class=" ms-1 fa-solid"></span></a>
   </div>
 
   </div>
@@ -131,10 +131,6 @@ include('includes/sidebar.php');
   </tr>
 </tfoot>
 </table>
-
-<div id="myProgress" class="rounded-4 d-none border-1 shadow-sm">
-<div id="myBar" class=" rounded-4"></div>
-</div>
    
 </div>
 

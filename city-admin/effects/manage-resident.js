@@ -30,30 +30,8 @@
   get_resident_table_cell_value()
   
   load_data_tables();
+  opentip_tooltip()
   });
-
-
-
-  function move() {
-  if (i == 0) {
-  i = 1;
-  var elem = document.getElementById("myBar");
-  var width = 10;
-  var id = setInterval(frame, 30);
-  function frame() {
-  if (width >= 100) {
-    clearInterval(id);
-    i = 0;
-  } else {
-    width++;
-    elem.style.width = width + "%";
-    elem.innerHTML ="Loading " + width  + "%";
-  }
-  }
-  }
-  }
-  //progress bar end
-
 
   //set do some stuff when confiramtion variable is changed
   var confirmation = {
@@ -144,7 +122,6 @@
   title: 'An admin is already assigned in the barangay.',
   icon: 'error'
   });
-
   }
   else if(confirmation.a == 3)
   {
@@ -180,12 +157,10 @@
   }
   else if(confirmation.a == 4)
   {  
-
   toastMixin.fire({
   animation: true,
   title: 'A resident record has been deleted.'
   });
-
   table.ajax.reload( null, false);
   update_chart();
   }
@@ -238,7 +213,7 @@ function click_value(this_value)
         {
           return "<div class='text-end px-3'> <i onclick = 'click_value(this.id)' class='update_resident_value shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-barangay-resident' id='update_resident_value "+data+"' role='button'></i> "+
           "<i onclick = 'click_value(this.id)' class='delete_resident_value shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_resident' data-coreui-toggle='modal' id='delete_resident_value "+data+"' role='button'></i>"+
-          "<i class=' px-3 align-middle barangay_table_is_loading loader_icn fas fa-sync fa-spin d-none' style='color:#3b7ddd;'  id='barangay_table_is_loading' role='button' disable></i> </div>"
+          "</div>"
         }
 
       }
@@ -975,19 +950,46 @@ table.columns().every(function () {
   function number_of_resident_chart()
   {
     var xValues = x_value;
-    var yValues = y_value;
-    var barColors = [
-      
-        'rgba(145, 215, 248, 1.0)',
-        'rgba(52, 152, 219,1.0)',
-    ];
+    var yValues = y_value; 
 
-   // console.log(y_value);
+    //generate a color base on percentage
+    var largets_total = Math.max(...y_value) //get the largest element of the brg resident array
+    var myColors=[];
+    $.each(yValues, function( index,value ) {
+        var b =100
+        var percentage = b * value;
+        percentage = percentage / largets_total;
 
+      if(percentage<=10){
+         myColors[index]="#b3e6ff";
+      }
+      else if(percentage<=30)
+      {
+        myColors[index]="#80d4ff";
+      }
+      else if(percentage<=50)
+      {
+        myColors[index]="#4dc3ff";
+      }
+      else{
+        myColors[index]="#1ab2ff";
+      }
+    });
+
+
+    //initialize chart
     const ctx = $('#myChart');
-
     myChart = new Chart(ctx, {
     type: 'bar',
+    options: {
+      plugins: {
+          responsive: true,
+          legend: {
+              display: false,
+          }
+      }
+    },
+    
     data: {
         labels: xValues,
         dataSorting: {
@@ -996,20 +998,18 @@ table.columns().every(function () {
         datasets: [{
             label: 'Total Number of Residents of Each Barangay in Oroquieta City',
             data: yValues,
-            backgroundColor: barColors,
-            borderColor: barColors,
-            borderWidth: 1
+            backgroundColor: myColors,
+            borderColor: myColors,
+            borderWidth: 1,
+            borderRadius: 2,
+            //pointRadius: 8,
+            //poinStyle: 'circle'
         }]
     },
-    options: {
-    plugins: {
-        legend: {
-            display: false,
-        }
-    }
-}
-
 });
+
+
+
 }
   //number of residents chart end
 
@@ -1062,3 +1062,26 @@ $("#show_graph").click(function()
 
 })
 //show graph button end
+
+//refresh table back to current data
+$("#refresh_resident_table").click(function()
+{
+  swal.close();
+
+  table.destroy()
+  $(".dataTables_length").remove();
+  $(".dataTables_info").remove();
+  $(".dataTables_paginate ").remove();
+
+  load_data_tables()
+})
+//refresh table back to current data end
+
+//generate a tooltip
+function opentip_tooltip()
+{
+  var refresh_table_tooltip = $("#refresh_resident_table")
+  var myOpentip = new Opentip(refresh_table_tooltip, { showOn:"mouseover", tipJoint: "bottom", target:refresh_table_tooltip });
+  myOpentip.setContent("Refresh Table"); // Updates Opentips content
+}
+//generate a tooltip end

@@ -206,7 +206,7 @@ function display_map()
              var long_lat = [];
     
              $.ajaxSetup({async:false});
-             $.getJSON('functions/map-statistic.php', 
+             $.getJSON('functions/display-functions/map-statistic.php', 
              {
                  long_lat:'set',
                  
@@ -303,7 +303,7 @@ function display_map()
                  var display_diseases_that_occured = "";
     
                  $.ajaxSetup({async:false});
-                 $.getJSON('functions/get-occuring-diseases.php', 
+                 $.getJSON('functions/display-functions/get-occuring-diseases.php', 
                  {
                     query_click:query_click,
     

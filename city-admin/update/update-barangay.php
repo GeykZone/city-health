@@ -1,11 +1,9 @@
 <div class="modal fade" id="update-barangay" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
 <div class="modal-content">
-<div class="modal-header bg-warning shadow-sm border-0">
-<h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Update Barangay</h5>
-<svg class="c-icon" style="width: 20px; height:20px; margin-left: 10px; color:#ffff;">
-<use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-map"></use>
-</svg>
+<div class="modal-header bg-warning border-0 shadow-sm px-3 py-3">
+      <span class=" fa-solid me-2" style="width: 15px; height:15px; color:#ffff;"></span>
+        <h6 class="modal-title" id="exampleModalLabel" style="color: #ffff; font-weight:500;">Update Barangay Name</h6>
 <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body border-0 shadow-sm">
@@ -37,7 +35,7 @@
 
 </div>
 <div class="modal-footer border-0 shadow-sm">
-<button id="update_barangay_btn" class="addbtn add-brgy border-0 shadow-sm">Update</button>
+<button style="padding-top: 7px; padding-bottom: 7px;" type="btn" id="update_barangay_btn" class="addbtn add-brgy fw-bolder border-0 shadow-sm">SUBMIT</button>
 </div>
 </div>
 </div>

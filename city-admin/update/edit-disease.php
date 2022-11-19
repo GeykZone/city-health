@@ -1,11 +1,9 @@
 <div class="modal fade" id="edit-disease" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
     <div class="modal-content">
-      <div class="modal-header bg-warning border-0 shadow-sm">
-        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffff;">Edit Type of Health Disease</h5>
-        <svg class="c-icon" style="width: 20px; height:20px; margin-left: 7px; margin-top:5px; color:#ffff;">
-        <use  xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-medical-cross"></use>
-        </svg>
+      <div class="modal-header bg-warning border-0 shadow-sm px-3 py-3">
+      <span class=" fa-solid me-2" style="width: 15px; height:15px; color:#ffff;"></span>
+        <h6 class="modal-title" id="exampleModalLabel" style="color: #ffff; font-weight:500;">Update Disease Name</h6>
         <button id="close_edit_disease" type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body border-0 shadow-sm">
@@ -23,7 +21,7 @@
 
       </div>
       <div class="modal-footer border-0 shadow-sm">
-        <button type="btn" id="edit_disease_btn" class="addbtn add-brgy fw-bolder border-0 shadow-sm">Submit</button>
+        <button style="padding-top: 7px; padding-bottom: 7px;" type="btn" type="btn" id="edit_disease_btn" class="addbtn add-brgy fw-bolder border-0 shadow-sm">SUBMIT</button>
       </div>
     </div>
   </div>

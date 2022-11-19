@@ -1,4 +1,4 @@
-<?php   include('../../route.php'); ?>
+<?php   include('../../../route.php'); ?>
 <?php
  if (isset($_POST['update_barangay'])) {
     $name_id = $_POST['barangay_name_id'];

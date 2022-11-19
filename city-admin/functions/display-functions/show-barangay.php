@@ -1,4 +1,4 @@
-<?php   include('../../route.php'); ?>
+<?php   include('../../../route.php'); ?>
 
 <?php 
 // Database connection info 
@@ -10,7 +10,7 @@ $dbDetails = array(
 ); 
  
 // DB table to use 
-$table = 'diseases'; 
+$table = 'barangays'; 
 
  
 // Table's primary key 
@@ -21,11 +21,16 @@ $primaryKey = 'id';
 // The `dt` parameter represents the DataTables column identifier. 
 
 $columns = array( 
-    array( 'db' => 'disease_name',    'dt' => 0, 'field' => 'disease_name')
+    array( 'db' => 'barangay_name',    'dt' => 0, 'field' => 'barangay_name'),
+    array( 'db' => 'lat', 'dt' => 1, 'field' => 'lat' ), 
+    array( 'db' => 'long',  'dt' => 2, 'field' => 'long' ), 
 ); 
  
 // Include SQL query processing class 
-require 'ssp.class.php'; 
+require '../ssp.class.php'; 
+
+
+
 
  
 // Output data as json format 

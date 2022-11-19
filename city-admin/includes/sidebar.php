@@ -11,24 +11,24 @@ if(!isset($_COOKIE["sidebar"])) {
           <div class="sidebar-brand-narrow p-1 border-0 shadow-sm bg-light rounded-circle" width="46" height="46" ><img class="avatar-img avatar rounded-0 avatar-md" src="../resourcess/assets/img/avatars/profile.png" alt="brand"></div>
       </div>
       <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
-        <li class="nav-item" id="dashboard_icon"><a class="nav-link " href="index.php" id="nav_dashboard">
-          <i class=" nav-icon fa-solid fa-square-poll-vertical"  style="width: 20px; height:20px;"></i> Dashboard</a>
+        <li class="nav-item" ><a class="nav-link " href="index.php" id="nav_dashboard">
+          <i id="dashboard_icon" class=" nav-icon fa-solid fa-square-poll-vertical"  style="width: 20px; height:20px;"></i> Dashboard</a>
         </li>
         <li class="nav-title">MENU</li>
-        <li class="nav-item" id="manage_barangay_icon"><a class="nav-link" href="manage-barangay.php" id="nav_barangay">
-        <i style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Barangays</a>
+        <li class="nav-item" ><a class="nav-link" href="manage-barangay.php" id="nav_barangay">
+        <i id="manage_barangay_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Barangays</a>
         </li>
-        <li class="nav-item" id="manage_residents_icon"><a class="nav-link" href="manage-resident.php" id="nav_residents">
-        <i style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Residents</a>
+        <li class="nav-item" ><a class="nav-link" href="manage-resident.php" id="nav_residents">
+        <i id="manage_residents_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Residents</a>
         </li>
-        <li class="nav-item" id="manage_users_icon"><a class="nav-link" href="manage-user.php" id="nav_users">
-        <i style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Users</a>
+        <li class="nav-item" ><a class="nav-link" href="manage-user.php" id="nav_users">
+        <i id="manage_users_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Users</a>
         </li>
-        <li class="nav-item" id="manage_diseases_Type_icon"><a class="nav-link" href="manage-disease.php" id="nav_diseases">
-        <i style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Diseases Type</a>
+        <li class="nav-item" ><a class="nav-link" href="manage-disease.php" id="nav_diseases">
+        <i id="manage_diseases_Type_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Diseases Type</a>
         </li>
-        <li class="nav-item" id="manage_hp_icon"><a class="nav-link" href="manage-hp.php" id="nav_hp">
-        <i style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Health Profiles</a>
+        <li class="nav-item" ><a class="nav-link" href="manage-hp.php" id="nav_hp">
+        <i id="manage_hp_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Health Profiles</a>
         </li>
       </ul>
       <button  class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>

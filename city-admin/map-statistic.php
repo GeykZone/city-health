@@ -371,7 +371,7 @@ margin-top: 10px;
       <select id="select_diseases"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm">
         <option value="">All Diseases</option>
         <?php
-        include('functions/select_diseases.php');
+        include('functions/display-functions/select_diseases.php');
         ?>
       </select>
     </div>

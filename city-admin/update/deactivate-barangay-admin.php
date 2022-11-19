@@ -88,11 +88,11 @@
 			<div class="icon-box shadow" style="background-color: #60768f ;">
 			<i class="fa-solid" style="font-size: 40px; margin-top:15px; color: white;"></i>
 				</div>					
-				<h4 class="modal-title w-100">Are you sure?</h4>	
+				<h4 class="modal-title w-100">Do you really want to deactivate this account?</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<h5>Deactivating admin access will block the user from signing in and changing some entries in this system.</h5>
+				<p>Deactivating admin access will block the user from signing in and changing some entries in this system.</p>
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="border-0 shadow-sm btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>
