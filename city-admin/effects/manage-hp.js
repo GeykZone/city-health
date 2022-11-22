@@ -242,7 +242,13 @@ function load_data_tables(){
           date_range_from:date_range_from,
           date_range_to:date_range_to,
           query_btn:query_btn
-        }
+        },
+        "dataSrc": function ( json ) {
+          //Make your callback here.
+          console.log(json.data)
+          return json.data;
+      }      
+      
     },
     
        

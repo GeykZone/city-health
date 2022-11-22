@@ -79,8 +79,8 @@ include('includes/sidebar.php');
   <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
     <li  id="show_inactive" type="button" ><a class="dropdown-item"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Inactive List</a></li>
     <li class="d-none" id="show_active"  type="button"><a class="dropdown-item" ><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Active List</a></li>
-    <li><a class="dropdown-item" href="#"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Cluster Graph</a></li>
-    <li><a class="dropdown-item" href="map-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Cluster Map</a></li>
+    <li><a class="dropdown-item" href="graphical-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Graphical Statistic</a></li>
+    <li><a class="dropdown-item" href="map-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Map Visualization</a></li>
   </ul>
   
   <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="add_hp" data-coreui-toggle="modal" href="#add-hp" role="button" >NEW <span class="fa-solid ms-1 fa-circle-plus"></span></a>

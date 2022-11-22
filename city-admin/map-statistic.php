@@ -30,7 +30,7 @@ margin-right: 20px !important;
 
 #map_container
 {
-  height: 62vh;
+  height: 64vh;
 }
 
 .mapboxgl-ctrl-bottom-right
@@ -46,8 +46,8 @@ margin-right: 20px !important;
 .green {
   background-image: url('../resourcess/images/green.png');
   background-size: cover;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -55,8 +55,8 @@ margin-right: 20px !important;
 .yellow {
   background-image: url('../resourcess/images/yellow.png');
   background-size: cover;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -64,8 +64,8 @@ margin-right: 20px !important;
 .orange {
   background-image: url('../resourcess/images/orange.png');
   background-size: cover;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   cursor: pointer;
   
@@ -74,16 +74,14 @@ margin-right: 20px !important;
 .red {
   background-image: url('../resourcess/images/red.png');
   background-size: cover;
-  width: 75px;
-  height: 75px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .mapboxgl-popup {
-  max-width: 1000px !important;
   padding-bottom: -21px;  
-  
 }
 
 .mapboxgl-popup-content {
@@ -91,7 +89,7 @@ margin-right: 20px !important;
   text-align: start;
   font-family: 'Open Sans', sans-serif;
   border-radius: 10px !important;
-  opacity: 0.8 !important;
+  opacity: 1 !important;
 }
 
 .mapboxgl-popup-close-button
@@ -149,17 +147,6 @@ margin-right: 10px;
 margin-top: 10px;
 }
 
-.selectize-control
-{
-  width: 200px !important;
- 
-}
-
-.selectize-input
-{
-  padding-top: 6px !important;
-  padding-bottom : 6px !important;
-}
 
 
 #range_break
@@ -168,15 +155,6 @@ margin-top: 10px;
   margin-right: -7px !important;
 }
 
-.map-text {
-position: absolute;
-bottom: 0;
-left: 0;
-margin-right: 15px;
-width: 1000px !important;
-padding-left: 15px !important;
-margin-bottom: 3px !important;
-}
 
 #map_overlay
 {
@@ -201,14 +179,6 @@ margin-bottom: 3px !important;
 }
 
 @media (min-width: 100px) {
-
-.map-text {
-  width: 100px !important;
-}
-#map_text
-{
-  font-size: 8px !important;
-}
 .map-overlay {
   width: 100px !important;
   font-size: 8px !important;
@@ -236,13 +206,6 @@ margin-top: 8px;
 }
 
 @media (min-width: 768px) {
-.map-text {
-  width: 100px !important;
-}
-#map_text
-{
-  font-size: 8px !important;
-}
 .map-overlay {
   width: 100px !important;
   font-size: 8px !important;
@@ -270,14 +233,8 @@ margin-top: 8px;
 }
 }
 
+
 @media (min-width: 992px) {
-  .map-text {
-  width: 1000px !important;
-}
-#map_text
-{
-  font-size: 13.5px !important;
-}
 .map-overlay {
   width: 305px !important;
   height: 190px !important;
@@ -327,97 +284,61 @@ margin-top: 10px;
 </header>
 <!--header end-->
 
+<!-- filter map hp -->
+<?php include "update/filter-map.php" ?>
+<!-- filter map end -->
+
 <div class="body flex-grow-1 px-5 pt-3 pb-3"> 
 <div class="container-fluid">
 
 <!--for map-->
 <div class="card mb-4 border-0 shadow-sm">
-<div class="card-header p-3 border-0 shadow-sm bg-info">
-</div>
-<div class="card-body">
 
-<div class="card-title mx-2 mb-3"  >
-<button type="button" id="current_year" style="margin-right: 20px;" class="border-0 bg-transparent p-0"><span style="color: #294168bf; " class="fa-solid"></span></button>Map Visualization
+<div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
+<button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Map Visualization
 </div>
 
 
-
-<div class="container-fluid p-0">
+<div class="container-fluid mt-3 px-4">
   <div class="row">
 
-    <div class="col-lg-9 px-1">
-    <div class="container-fluid">
-    <div class=" row row-cols-auto align-items-center">
+  <div class=" col-lg-6 col-md-12 rounded-3 d-flex text-dark text-opacity-50">
+  <span class="fa-regular me-3" style="padding-top:7px;"></span><h6 class=" mt-1"><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_disease"></span><span id="map_gender"></span></h6>
+  </div>
 
-    <div class="col mb-3 mb-lg-3 mb-sm-3" style="color:gray;">FROM :</div>
 
-    <div class="col mb-3  mb-lg-3 mb-sm-3"><input type="date" id="range_from" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="From"></div>
+  <div class="col-lg-6 col-md-12 text-lg-end text-md-start align-content-center dropdown-center">
+  <a style="padding-top: 7px; padding-bottom: 7px;" class=" me-2 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder dropdown-toggle"  id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid ms-1"></span></a>
+  <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
+    <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Health Profiles</a></li>
+    <li><a class="dropdown-item" href="graphical-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Graphical Statistic</a></li>
+    <li><a class="dropdown-item" href="map-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Map Visualization</a></li>
+  </ul>
+        <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="filter_map" data-coreui-toggle="modal" href="#filter-map" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
+  </div>
 
-    <div class="col mb-3  mb-lg-3 mb-sm-3" style="color:gray;">TO :</div>
-
-    <div class="col mb-3  mb-lg-3 mb-sm-3"><input type="date" id="range_to" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="To"></div>
-    
-    <div class="col mb-3  mb-lg-3 mb-sm-3">  
-      <a  class="btn  all-cases  rounded-1 border-1 shadow-sm" id="all_cases" type="button" >
-      <span id="span_check" class="fa-regular"></span><span class=" mx-2" id="active only">Active Cases Only</span>
-      </a>
-
-      <a  class="btn active-only-hp d-none rounded-1 border-1 shadow-sm" id="active_only_btn" type="button" >
-      <span id="span_check" class="fa-solid"></span><span class=" mx-2" id="active only">Active Cases Only</span>
-      </a>
-    </div>
-
-    <div class="col mb-3  mb-lg-3 mb-sm-3">  
-      <select id="select_diseases"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm">
-        <option value="">All Diseases</option>
-        <?php
-        include('functions/display-functions/select_diseases.php');
-        ?>
-      </select>
-    </div>
-
-    <div class="col mb-3 mb-lg-3 mb-sm-3">  <button  class="act_btn act_btn rounded-2 border-0 shadow-sm" id="date_range_btn" type="button" style=" font-weight:bold; padding-top: 7px; padding-bottom: 7px; padding-right:20px; padding-left:20px;">
-      <span class="fa-solid"></span> FILTER</button>
-    </div>  
-
-    </div>
-    </div>
-    </div>
-
-    <div class="col mb-3  mb-lg-3 mb-sm-3 col-lg-3 d-lg-flex d-md-block justify-content-end">
-      <div class="col-auto">
-      <a  class="border-0 shadow-sm addbtn add-brgy fw-bolder dropdown-toggle" id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid ms-1"></span></a>
-            <ul class="dropdown-menu align-content-center shadow border-0 mx-1" id="hp_dropdown_options">
-              <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Active List</a></li>
-              <li><a class="dropdown-item" href="#"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Cluster Graph</a></li>
-              <li><a class="dropdown-item" href="inactive-list.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Inactive List</a></li>
-            </ul>
-      </div>
-    </div>
 
   </div>
 </div>
 
-<div id="map_container" class=" card w-100 container-fluid rounded-2 mt-2 border-0 shadow-sm">
+
+<div class="card-body px-3">
+<div id="map_container" class=" card w-100 container-fluid table-responsive rounded-2 border-0 shadow-sm">
 <div id="map" class=" w-100 rounded-3"></div>
 
 <div id="menu" class="  rounded-3">
-<input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked">
-<label for="streets-v11">streets</label>
-<input id="light-v10" type="radio" name="rtoggle" value="light">
+<input id="light-v10" type="radio" name="rtoggle" value="light" checked="checked">
 <label for="light-v10">light</label>
-<input id="dark-v10" type="radio" name="rtoggle" value="dark">
-<label for="dark-v10">dark</label>
+<input id="streets-v11" type="radio" name="rtoggle" value="streets" >
+<label for="streets-v11">Colored</label>
+<input id="navigation-night-v1" type="radio" name="rtoggle" value="dark">
+<label for="navigation-night-v1">dark</label>
 <input id="satellite-streets-v11" type="radio" name="rtoggle" value="satellite">
 <label for="satellite-streets-v11">satellite</label>
 </div>
 
 <div class="map-overlay d-none rounded-2" id="legend"><h6  class=" mt-2"><button type="button" id="hide_overlay" class="fa-solid"></button><span id="map_overlay">Cluster Color Definition</span></h6></div>
 <button type="button" id="show_overlay" class="btn-overlay  fa-solid "></button>
-
-<div class="map-text d-none"><h6 id="map_text" style="font-size: 13.5px;"><span id="map_from"></span><span id="map_to"></span><span id="map_disease"></span><span id="map_cases"></span></h6></div>
-
-
 
 </div>
 </div>

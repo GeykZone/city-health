@@ -47,18 +47,29 @@ include('includes/sidebar.php');
 <div class="card border-0 mb-4 shadow-sm remove_rounded">
 
 <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-<button type="button" id="refresh_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Current Number of Residents in Each Barangays
+<span  id="refresh_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></span>Current Number of Residents in Each Barangays
 </div>
 
   <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >
 
     <!-- /.row-->
-      <div  class="container-fluid">
 
-      <div  class="mb-3" id="residents_chart_row">
-      <canvas class=""  id="myChart" style="width:100%; max-height:500px ;"></canvas> 
+  <div class="container-fluid mb-3 ">
+  <div class="row">
+  <div class="col-lg-6 col-md-12  text-md-start align-content-center dropdown-center">
+        <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="sort_cases" role="button" >SORT <span class="fa-solid ms-1 fa-sort"></span></a>
+  </div>
+  </div>
+  </div>
+
+      <div  class="container-fluid table-responsive">
+      <div class="row">
+
+      <div  class="mb-3" id="hp_chart_row" style="min-height: 300px;  min-width:1200px;">
+      <canvas class=" rounded-4 p-3 bg-light bg-opacity-50 border-0 shadow-sm"  id="myChart"  style="width:100%; max-height:500px ;"></canvas> 
       </div>
 
+      </div>
       </div>
     
   </div>

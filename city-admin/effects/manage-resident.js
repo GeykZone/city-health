@@ -17,6 +17,12 @@
 
   var x_value = "";
   var y_value = "";
+  var xValues = "";
+  var yValues = "";
+  var largets_total = "";
+  var myColors=[];
+  
+  var sort = "names";
 
   var myChart ="";
   var res_id_value ="";
@@ -920,6 +926,8 @@ table.columns().every(function () {
       
     });    
 
+    if(sort === "asc")
+    {
         //sorting algorithm
         arrayOfObj = x_value.map(function(d, i) {
           return {
@@ -939,9 +947,80 @@ table.columns().every(function () {
           newArrayData.push(d.data);
         });
         ////sorting algorithm
+    }
+    else if(sort === "desc")
+    {
+        //sorting algorithm
+        arrayOfObj = x_value.map(function(d, i) {
+          return {
+            label: d,
+            data: y_value[i] || 0
+          };
+        });
+        
+        sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
+          return b.data - a.data ;
+        });
+        
+        newArrayLabel = [];
+        newArrayData = [];
+        sortedArrayOfObj.forEach(function(d){
+          newArrayLabel.push(d.label);
+          newArrayData.push(d.data);
+        });
+        ////sorting algorithm
+    }
+    else
+    {
+            //sorting algorithm
+            arrayOfObj = x_value.map(function(d, i) {
+              return {
+                label: d,
+                data: y_value[i] || 0
+              };
+            });
+            
+            sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
+              return a.data + b.data;
+            });
+            
+            newArrayLabel = [];
+            newArrayData = [];
+            sortedArrayOfObj.forEach(function(d){
+              newArrayLabel.push(d.label);
+              newArrayData.push(d.data);
+            });
+            ////sorting algorithm
+    }
 
         x_value = newArrayLabel;
         y_value = newArrayData;
+
+        xValues = x_value;
+        yValues = y_value; 
+
+        //generate a color base on percentage
+        largets_total = Math.max(...y_value) //get the largest element of the brg resident array
+        $.each(yValues, function( index,value ) {
+            var b =100
+            var percentage = b * value;
+            percentage = percentage / largets_total;
+
+          if(percentage<=10){
+              myColors[index]="#b3e6ffff";
+          }
+          else if(percentage<=30)
+          {
+            myColors[index]="#80d5ffff";
+          }
+          else if(percentage<=50)
+          {
+            myColors[index]="#4dc4ffff";
+          }
+          else{
+            myColors[index]="#1ab3ffff";
+          }
+        });
 
   }
    //initalize chart values end
@@ -949,43 +1028,64 @@ table.columns().every(function () {
   //number of residents chart
   function number_of_resident_chart()
   {
-    var xValues = x_value;
-    var yValues = y_value; 
-
-    //generate a color base on percentage
-    var largets_total = Math.max(...y_value) //get the largest element of the brg resident array
-    var myColors=[];
-    $.each(yValues, function( index,value ) {
-        var b =100
-        var percentage = b * value;
-        percentage = percentage / largets_total;
-
-      if(percentage<=10){
-         myColors[index]="#b3e6ff";
-      }
-      else if(percentage<=30)
-      {
-        myColors[index]="#80d4ff";
-      }
-      else if(percentage<=50)
-      {
-        myColors[index]="#4dc3ff";
-      }
-      else{
-        myColors[index]="#1ab2ff";
-      }
-    });
-
-
+    
     //initialize chart
     const ctx = $('#myChart');
     myChart = new Chart(ctx, {
     type: 'bar',
     options: {
+      indexAxis: 'x',
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            display: true
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            display: true,
+            drawBorder: true
+          },
+          ticks: {
+            display: true
+          }
+        }
+  
+      },
       plugins: {
           responsive: true,
           legend: {
               display: false,
+          },
+          tooltip: {
+            enabled: true,
+            displayColors: false,
+            events:['click'],
+            padding: 15,
+            caretSize: 10,
+            cornerRadius: 20,
+            caretPadding: 0,
+            usePointStyle: true,
+            backgroundColor: '#ffffff',
+            bodyColor: "#626464",
+            titleColor:  "#626464",
+            borderColor: "#dee0e0",
+            borderWidth: 1,
+            callbacks: {
+            labelPointStyle: function(context) {
+              return {
+                  pointStyle: 'rectRounded',
+                  rotation: 0,
+              };
+            }
+
+          },
           }
       }
     },
@@ -996,13 +1096,16 @@ table.columns().every(function () {
           enabled: true
        },
         datasets: [{
-            label: 'Total Number of Residents of Each Barangay in Oroquieta City',
+            label: 'Total Number of Residents: ',
             data: yValues,
             backgroundColor: myColors,
-            borderColor: myColors,
+            borderColor: "#80d5ffff",
             borderWidth: 1,
-            borderRadius: 2,
-            //pointRadius: 8,
+            borderRadius: 8,
+           // pointRadius: myPoints,
+            borderSkipped: false,
+            barPercentage: 0.8,
+            categoryPercentage:0.8,
             //poinStyle: 'circle'
         }]
     },
@@ -1034,14 +1137,15 @@ $("#show_graph").click(function()
   {
     if(chart_shower === "firstime")
     {
-      chart_array();
+      chart_array()
       number_of_resident_chart();
       myChart.destroy();
       $(".chart_container").slideDown("slow", function()
       {
-          chart_array();
+
       });
       number_of_resident_chart();
+     
     }
     
     $(".chart_container").slideDown("slow", function()
@@ -1064,7 +1168,7 @@ $("#show_graph").click(function()
 //show graph button end
 
 //refresh table back to current data
-$("#refresh_resident_table").click(function()
+$("#refresh_resident_table").click(function(e)
 {
   swal.close();
 
@@ -1085,3 +1189,42 @@ function opentip_tooltip()
   myOpentip.setContent("Refresh Table"); // Updates Opentips content
 }
 //generate a tooltip end
+
+//sort chart
+$("#sort_cases").click(function(e){
+ 
+  if(sort === "names")
+  {
+    sort = "asc"
+  }
+  else if(sort === "asc")
+  {
+    sort = "desc"
+  }
+  else
+  {
+    sort = "names"
+  }
+  update_chart()
+ 
+
+})
+//sort chart end
+
+
+//reactivate tooltip chart
+$("#myChart").click(function(e){
+ 
+  if(myChart.options.plugins.tooltip.enabled != true)
+  {
+    myChart.options.plugins.tooltip.enabled = true
+  }
+  myChart.update();
+
+})
+
+$("#myChart").mouseout(function(e){
+  myChart.options.plugins.tooltip.enabled = false
+  myChart.update();
+});
+//reactivate tooltip chart end
