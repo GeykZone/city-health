@@ -71,7 +71,7 @@ function current_status()
 
     if(query_click != "clicked")
     {
-        $("#map_from").text(getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " - ")
+        $("#map_from").text(getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " to ")
         $("#map_to").text(getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
     }
     else
@@ -82,28 +82,38 @@ function current_status()
         var new_date_range_to = date_range_to.replaceAll('-', ' ');
         var array_date_range_to = new_date_range_to.split(" ")
 
-        $("#map_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " - ")
-        $("#map_to").text(getMonthName(array_date_range_to[1]) + ' ' + array_date_range_to[2] + ", "+ array_date_range_to[0])
+        
+        if($( "#range_from" ).val() === $( "#range_to" ).val())
+        {
+          $("#map_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + "")
+          $("#map_to").text("")
+        }
+        else
+        {
+          $("#map_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " to ")
+          $("#map_to").text(getMonthName(array_date_range_to[1]) + ' ' + array_date_range_to[2] + ", "+ array_date_range_to[0])
+        }
+
     }
 
     
 
     if(disease_type === "default")
     {
-        $("#map_disease").text("")
+        $("#map_disease").text(" from ")
     }
     else
     {
-        $("#map_disease").text(" : "+tittle_disease_type)   
+        $("#map_disease").text(" of "+tittle_disease_type+" from ")   
     }
 
     if(active_inactive === "default")
     {
-        $("#map_cases").text("All cases from : ")
+        $("#map_cases").text("All recorded cases")
     }
     else
     {
-        $("#map_cases").text("Active cases from : ")   
+        $("#map_cases").text("Active cases")   
     }
 
     if(gender === "default")
@@ -114,11 +124,11 @@ function current_status()
     {   
         if(gender === "F (Female)")
         {
-            $("#map_gender").text(" : Females record")
+            $("#map_gender").text(", females record")
         }
         else if(gender === "M (Male)")
         {
-            $("#map_gender").text(" : Males record")
+            $("#map_gender").text(", males record")
         }
           
     }
@@ -433,6 +443,7 @@ function display_map()
                     query_click = "clicked"
                     date_range_from = from_input;
                     date_range_to = to_input;
+                    $('#filter-map').modal('toggle');
     
                     current_status()
                     markers()

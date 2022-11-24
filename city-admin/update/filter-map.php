@@ -69,7 +69,7 @@
 
       </div>
       <div class="modal-footer border-0 shadow-sm">
-      <button  class="add-brgy btn rounded-2 border-0 shadow-sm" class="btn-close" data-coreui-dismiss="modal"  id="date_range_btn" type="button" style=" font-weight:bold; padding-top: 7px; padding-bottom: 7px; padding-right:20px; padding-left:20px;">FILTER</button>
+      <button  class="add-brgy btn rounded-2 border-0 shadow-sm"  id="date_range_btn" type="button" style=" font-weight:bold; padding-top: 7px; padding-bottom: 7px; padding-right:20px; padding-left:20px;">FILTER</button>
       </div>
     </div>
   </div>

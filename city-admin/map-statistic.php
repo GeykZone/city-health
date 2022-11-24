@@ -46,8 +46,8 @@ margin-right: 20px !important;
 .green {
   background-image: url('../resourcess/images/green.png');
   background-size: cover;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -55,8 +55,8 @@ margin-right: 20px !important;
 .yellow {
   background-image: url('../resourcess/images/yellow.png');
   background-size: cover;
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -64,8 +64,8 @@ margin-right: 20px !important;
 .orange {
   background-image: url('../resourcess/images/orange.png');
   background-size: cover;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   cursor: pointer;
   
@@ -74,8 +74,8 @@ margin-right: 20px !important;
 .red {
   background-image: url('../resourcess/images/red.png');
   background-size: cover;
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -303,7 +303,7 @@ margin-top: 10px;
   <div class="row">
 
   <div class=" col-lg-6 col-md-12 rounded-3 d-flex text-dark text-opacity-50">
-  <span class="fa-regular me-3" style="padding-top:7px;"></span><h6 class=" mt-1"><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_disease"></span><span id="map_gender"></span></h6>
+  <span class="fa-regular me-3" style="padding-top:7px;"></span><h6 class=" mt-1"><span id="map_cases"></span><span id="map_disease"></span><span id="map_from"></span><span id="map_to"></span><span id="map_gender"></span></h6>
   </div>
 
 
