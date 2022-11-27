@@ -401,7 +401,9 @@ function number_of_resident_chart()
         ticks: {
           padding: 10,
           display: true,
-        }
+        },
+        type: 'linear',
+        grace: '5%'
       },
 
     },
@@ -620,15 +622,28 @@ $("#date_range_btn").click(function()
      var from_input = $("#range_from").val()
      var to_input = $("#range_to").val()
 
+     var d_from = new Date(from_input)
+     var d_to = new  Date(to_input)
+     var validator = true
+
      if(from_input.trim().length === 0)
      {
          $("#range_from").addClass("is-invalid");
+         validator =false
      }
      else if(to_input.trim().length === 0)
      {
          $("#range_to").addClass("is-invalid");
+         validator =false
      }
-     else
+     else if(d_from > d_to)
+     {
+       $("#range_to").addClass("is-invalid");
+       validator =false
+     }
+
+
+     if(validator === true)
      {
          query_click = "clicked"
          sort = "names"

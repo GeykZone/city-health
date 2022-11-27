@@ -55,5 +55,9 @@
     <script src="../resourcess/vendors/simplebar/js/simplebar.min.js"></script>
     <!-- Plugins and scripts required by this view-->
     <script src="../resourcess/vendors/@coreui/utils/js/coreui-utils.js"></script>
+
+    <!--scripts-->
+    <script id="manage_user" src="effects/update-password_username.js" ></script>
+    <!--scripts end-->
 </body>
 </html>

@@ -17,7 +17,7 @@
         <label for="range_from" class="form-label">Date Start:</label>
         <input  type="date" id="range_from" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="From">
         <div class="invalid-feedback">
-        Please don't leave this area empty.
+        Invalid start date.
         </div>
         </div>
 
@@ -25,7 +25,7 @@
         <label for="range_to" class="form-label">Date End:</label>
         <input  type="date" id="range_to" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="To">
         <div class="invalid-feedback">
-        Please don't leave this area empty.
+        Invalid end date.
         </div>
         </div>
 

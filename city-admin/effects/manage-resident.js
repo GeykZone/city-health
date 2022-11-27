@@ -1054,7 +1054,9 @@ table.columns().every(function () {
           },
           ticks: {
             display: true
-          }
+          },
+          type: 'linear',
+          grace: '5%'
         }
   
       },

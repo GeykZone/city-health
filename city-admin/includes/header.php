@@ -74,6 +74,7 @@
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
 
+<!--tooltip-->
 <script src="../resourcess/opentip_tooltips/opentip-jquery-excanvas.js"></script><!-- Change to the adapter you actually use -->
 <link href="../resourcess/opentip_tooltips/opentip.css" rel="stylesheet" type="text/css" />
 

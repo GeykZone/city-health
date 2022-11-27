@@ -20,16 +20,21 @@
                   <div class="fw-semibold ">Account</div>
                 </div>
 
-                <a class="dropdown-item " href="../logout.php">
-                <span class="fa-solid fa-right-from-bracket"></span> Logout
+                <a class="dropdown-item " data-coreui-toggle="modal" href="#update_password" id="add_barangay" role="button">
+                <span class="fa-solid me-1"></span> New Password
                 </a>
 
-                <a class="dropdown-item rounded-bottom" href="#">
-                <span class="fa-solid fa-pen-to-square"></span> Update Password
+                <a class="dropdown-item " data-coreui-toggle="modal" href="#update_username" id="add_barangay" role="button">
+                <span class="fa-solid me-1"></span> New Username
+                </a>
+
+                <a class="dropdown-item rounded-bottom" href="../logout.php">
+                <span class="fa-solid fa-right-from-bracket me-1"></span> Logout
                 </a>
               </div>
             </li>
           </ul>
         </div>
         <div class="container-fluid pt-2 pb-2" id="account_view">
+
 

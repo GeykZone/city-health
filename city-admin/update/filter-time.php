@@ -1,4 +1,4 @@
-<div class="modal fade" id="filter-diseases" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="filter-time" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" >
     <div class="modal-content">
       <div class="modal-header bg-warning border-0 py-3 px-3 shadow-sm">
@@ -37,7 +37,7 @@
         <option value="F (Female)">F (Female)</option>
         </select>
         <div class="invalid-feedback">
-        Please don't leave this area empty.
+        Invalid Selection.
         </div>
         </div>
 
@@ -50,9 +50,23 @@
             ?>
         </select>
           <div class="invalid-feedback" id="PhilHealth_validator_label">
-          Please don't leave this area empty.
+          Invalid Selection.
           </div>
         </div>
+
+        <div class="mb-3">
+          <label for="disease_select_diseases" class="form-label">Diseases Type:</label>
+          <select id="disease_select_diseases"  name="disease_select_diseases" class="form-control gender barangay-form shadow-sm">
+            <option value="">All Diseases</option>
+            <?php
+            include('functions/display-functions/select_diseases.php');
+            ?>
+        </select>
+          <div class="invalid-feedback" id="PhilHealth_validator_label">
+          Invalid Selection.
+          </div>
+        </div>
+        
 
         <div class="mb-3 ms-1">
         <a  class="btn text-dark text-opacity-75 rounded-1 border-0 p-0 text-start" id="disease_all_cases" type="button" style="min-width: 200px; font-weight:500;" >

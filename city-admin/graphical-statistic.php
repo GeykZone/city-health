@@ -17,7 +17,7 @@ include('includes/sidebar.php');
 </li>
 <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
 <li class="breadcrumb-item active"><span>Graphical Statistic</span></li>
-<li class="breadcrumb-item active"><span>HP Statistic</span></li>
+<li class="breadcrumb-item active"><span>Health Profiles</span></li>
 </ol>
 </nav>
 </div>
@@ -53,7 +53,7 @@ include('includes/sidebar.php');
   <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
   <li><a class="dropdown-item" href="graphical-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> HP Statistic</a></li>
     <li><a class="dropdown-item" href="graphical-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Diseases Statistic</a></li>
-    <li><a class="dropdown-item" href=""><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span>Time Span Statistic</a></li>
+    <li><a class="dropdown-item" href="time-span.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span>Time Span Statistic</a></li>
   </ul> 
   </div>
 

@@ -122,9 +122,9 @@ function objToString (obj) {
         return `${str}${val},\n`;
     }, '');
   }
-  //object to string
+//object to string
   
-  //tooltip
+//tooltip
   function oneTip()
   {
       var current_year_tooltip = $("#current_year")
@@ -132,30 +132,30 @@ function objToString (obj) {
       myOpentip.setContent("Back to current statistic."); // Updates Opentips content
   
   }
-  //tooltp end
+//tooltp end
   
-  //remove first word from string
-  function removeFirstWord(str) {
-    const indexOfSpace = str.indexOf(' ');
-    
-    if (indexOfSpace === -1) {
-        return '';
-    }
-    
-    return str.substring(indexOfSpace + 1);
-    }
-  //remove first word from string end
+//remove first word from string
+function removeFirstWord(str) {
+  const indexOfSpace = str.indexOf(' ');
   
-  //remove last word from a string
-  function removeLastWord(str) {
-    const lastIndexOfSpace = str.lastIndexOf(' ');
-  
-    if (lastIndexOfSpace === -1) {
-      return str;
-    }
-    return str.substring(0, lastIndexOfSpace);
+  if (indexOfSpace === -1) {
+      return '';
   }
-  //remove last word from a string end
+  
+  return str.substring(indexOfSpace + 1);
+  }
+//remove first word from string end
+  
+//remove last word from a string
+function removeLastWord(str) {
+  const lastIndexOfSpace = str.lastIndexOf(' ');
+
+  if (lastIndexOfSpace === -1) {
+    return str;
+  }
+  return str.substring(0, lastIndexOfSpace);
+}
+//remove last word from a string end
   
   //convert month number into words
   function getMonthName(monthNumber) {
@@ -345,7 +345,7 @@ function chart_array()
     }
     else{
       myColors[index]="#1ab3ffff";
-      myPoints[index]=  30;
+      myPoints[index]=  35;
     }
 
   });
@@ -402,7 +402,9 @@ function number_of_resident_chart()
         ticks: {
           padding: 25,
           display: true,
-        }
+        },
+        type: 'linear',
+        grace: '5%'
       },
 
     },
@@ -578,6 +580,10 @@ $("#disease_date_range_btn").click(function()
      var from_input = $("#disease_range_from").val()
      var to_input = $("#disease_range_to").val()
 
+     var d_from = new Date(from_input)
+     var d_to = new  Date(to_input)
+     var validator = true
+
      if(from_input.trim().length === 0)
      {
          $("#disease_range_from").addClass("is-invalid");
@@ -586,7 +592,14 @@ $("#disease_date_range_btn").click(function()
      {
          $("#disease_range_to").addClass("is-invalid");
      }
-     else
+     else if(d_from > d_to)
+     {
+      $("#disease_range_to").addClass("is-invalid");
+       validator =false
+     }
+
+
+     if(validator === true)
      {
          query_click = "clicked"
          sort = "names"

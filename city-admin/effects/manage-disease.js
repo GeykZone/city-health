@@ -10,7 +10,7 @@ $(document).ready(function()
   opentip_tooltip()
 });
 
-//set do some stuff when confiramtion variable is changed
+//set do some stuff when confiramtion variable is changed 
 var confirmation = {
     aInternal: 10,
     aListener: function(val) {},
@@ -62,8 +62,6 @@ $("#delete_disease_btn").click(function () {
   },
   function (data, status) {
    confirmation.a = data;
-
-
   });
 
 });

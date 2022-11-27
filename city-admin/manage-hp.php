@@ -58,13 +58,15 @@ include('includes/sidebar.php');
   <div class=" container-fluid">
   <div class=" dataTables_wrapper dt-bootstrap5 row" id="buttons">
   <div class="col-lg-2  mb-3 text-sm-start  hide_first_load">
-    <label for="range_from"  class="mb-1 text-secondary">Start Date :</label>
+    <label for="range_from"  class="mb-1 text-secondary">Start Date : </label>
   <input type="date" id="range_from" class="form-control birthdate text-sm-start shadow-sm"  placeholder="From">
+  <label class="invalid-feedback">Invalid start date.</label>
   </div>
 
   <div class="col-lg-2 mb-3 text-sm-start  hide_first_load">
-  <label for="range_to"  class="mb-1 text-secondary">End Date :</label>
+  <label for="range_to"  class="mb-1 text-secondary">End Date : </label>
   <input type="date" id="range_to" class="form-control birthdate  text-sm-start shadow-sm" placeholder="From">
+  <label class="invalid-feedback">Invalid end date.</label>
   </div>
 
   <div class="col-lg-2 mb-3 mt-1 text-sm-start  hide_first_load">

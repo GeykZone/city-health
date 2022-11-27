@@ -4,6 +4,7 @@
     $query_click = $_GET['query_click'];
 
     $barangay_name = $_GET['barangay_name'];
+    $disease_type = $_GET['disease_type'];
     $date_range_from = $_GET['date_range_from'];
     $date_range_to = $_GET['date_range_to'];
     $case_status = $_GET['active_inactive'];
@@ -21,7 +22,11 @@
         
         if($barangay_name != "default")
         {
-            $conditions[] = "`b`.`id` = '$barangay_name'";
+            $conditions[] = "`b`.`id`='$barangay_name'";
+        }
+        if($disease_type != "default")
+        {
+            $conditions[] = "`disease_id`='$disease_type'";
         }
         if($case_status != "default")
         {
@@ -32,20 +37,20 @@
             $conditions[] = "`gender`='$gender'";
         }
 
-
         $sql = $query;
         if (count($conditions) > 0) {
-          $sql .= " WHERE `date` BETWEEN '$date_range_from' AND '$date_range_to' && " . implode(' AND ', $conditions) . " ORDER BY `disease_name` ASC ";
+          $sql .= " WHERE `date` BETWEEN '$date_range_from' AND '$date_range_to' && " . implode(' AND ', $conditions) . " ORDER BY `date` ASC ";
         }
         else
         {
-            $sql .= " WHERE `date` BETWEEN '$date_range_from' AND '$date_range_to' ORDER BY `disease_name` ASC ";
+            $sql .= " WHERE `date` BETWEEN '$date_range_from' AND '$date_range_to' ORDER BY `date` ASC ";
         }
+
     }
     else
     {
         $sql = "SELECT * FROM `health_profiles` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
-        ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) WHERE  `date` BETWEEN '$current_year_from' AND '$current_year_to' ORDER BY `disease_name` ASC";
+        ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) WHERE  `date` BETWEEN '$current_year_from' AND '$current_year_to' ORDER BY `date` ASC";
     }
 
 
@@ -54,7 +59,7 @@
 
     while($row = $result->fetch_assoc()) {
 
-        $disease_name = $row['disease_name'];
+        $date = $row['date'];
 
         if($query_click == "clicked")
         {
@@ -65,7 +70,11 @@
             
             if($barangay_name != "default")
             {
-                $conditions2[] = "`b`.`id` = '$barangay_name'";
+                $conditions2[] = "`b`.`id`='$barangay_name'";
+            }
+            if($disease_type != "default")
+            {
+                $conditions2[] = "`disease_id`='$disease_type'";
             }
             if($case_status != "default")
             {
@@ -76,20 +85,20 @@
                 $conditions2[] = "`gender`='$gender'";
             }
     
-    
             $new_sql = $query2;
             if (count($conditions2) > 0) {
-              $new_sql .= " WHERE `date` BETWEEN '$date_range_from' AND '$date_range_to' && " . implode(' AND ', $conditions2) . " && `disease_name` = '$disease_name' ORDER BY `disease_name` ASC ";
+              $new_sql .= " WHERE  `date` = '$date' AND " . implode(' AND ', $conditions2) . " ORDER BY `date` ASC ";
             }
             else
             {
-                $new_sql .= " WHERE  `date` BETWEEN '$date_range_from' AND '$date_range_to' && `disease_name` = '$disease_name' ORDER BY `disease_name` ASC ";
+            
+                $new_sql .= " WHERE  `date` = '$date'  ORDER BY `date` ASC ";
             }
         }
         else
         {
             $new_sql = "SELECT * FROM `health_profiles` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
-            ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) WHERE  `date` BETWEEN '$current_year_from' AND '$current_year_to' && `disease_name` = '$disease_name' ORDER BY `disease_name` ASC";
+            ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) WHERE  `date` = '$date' ORDER BY `date` ASC";
         }
         
 
@@ -106,15 +115,15 @@
             }
             
 
-            $disease = str_replace(' ', '_', $row['disease_name']);
-            $total_hp_number[] = $disease." ".$total_hp;
+            $date_name = str_replace(' ', '_', $row['date']);
+            $total_hp_number[] = $date_name." ".$total_hp;
 
     }
 }
 else
 {
-    $disease = str_replace(' ', '_', 'No Records Found');
-    $total_hp_number[] = $disease." ".'N/A';
+    $date_name = "Invalid_date Invalid";
+    $total_hp_number[] = $date_name;
 }
    
 if(isset($_GET['total_hp']))

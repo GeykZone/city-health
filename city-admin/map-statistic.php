@@ -329,12 +329,12 @@ margin-top: 10px;
 <div id="menu" class="  rounded-3">
 <input id="light-v10" type="radio" name="rtoggle" value="light" checked="checked">
 <label for="light-v10">light</label>
-<input id="streets-v11" type="radio" name="rtoggle" value="streets" >
-<label for="streets-v11">Colored</label>
+<input id="streets-v8" type="radio" name="rtoggle" value="streets" >
+<label for="streets-v8">Colored</label>
 <input id="navigation-night-v1" type="radio" name="rtoggle" value="dark">
 <label for="navigation-night-v1">dark</label>
-<input id="satellite-streets-v11" type="radio" name="rtoggle" value="satellite">
-<label for="satellite-streets-v11">satellite</label>
+<input id="satellite-streets-v12" type="radio" name="rtoggle" value="satellite">
+<label for="satellite-streets-v12">satellite</label>
 </div>
 
 <div class="map-overlay d-none rounded-2" id="legend"><h6  class=" mt-2"><button type="button" id="hide_overlay" class="fa-solid"></button><span id="map_overlay">Cluster Color Definition</span></h6></div>
