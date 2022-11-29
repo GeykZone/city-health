@@ -23,6 +23,35 @@ alert_message();
 //set do some stuff when confiramtion variable is changed end
 
 
+function showPassword(pass, lbl, txt) {
+var x = document.getElementById(pass);
+var x_lbl = document.getElementById(lbl);
+var x_txt = document.getElementById(txt);
+
+if (x.type === "password") {
+    x.type = "text";
+    x_lbl.classList.remove("opacity-50")
+    x_txt.innerHTML = "Hide Password";
+} else {
+    x.type = "password";
+    x_lbl.classList.add("opacity-50")
+    x_txt.innerHTML = "Show Password";
+}
+}
+
+
+function rembMe(lbl) {
+    var x_lbl = document.getElementById(lbl);
+
+    
+    if (x_lbl.classList.contains('opacity-50')) {
+        x_lbl.classList.remove("opacity-50")
+    } else {
+        x_lbl.classList.add("opacity-50")
+    }
+}
+
+
 //submiting
 $( "#login_btn" ).click(function() {
 

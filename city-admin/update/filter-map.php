@@ -1,7 +1,7 @@
 <div class="modal fade" id="filter-map" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" >
     <div class="modal-content">
-      <div class="modal-header bg-warning border-0 py-3 px-3 shadow-sm">
+      <div class="modal-header bg-warning border-0 py-2 px-3 shadow-sm">
       <span class=" fa-solid me-2" style="width: 15px; height:15px; color:#ffff;"></span>
         <h6 class="modal-title" id="filter_id" style="color: #ffff; font-weight:500;">Filter Map Statistic</h6>
         <button id="close_filter" type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
@@ -37,7 +37,7 @@
         <option value="F (Female)">F (Female)</option>
         </select>
         <div class="invalid-feedback">
-        Please don't leave this area empty.
+        Invalid selection.
         </div>
         </div>
 
@@ -50,7 +50,7 @@
             ?>
         </select>
           <div class="invalid-feedback" id="PhilHealth_validator_label">
-          Please don't leave this area empty.
+          Invalid selection.
           </div>
         </div>
 

@@ -1,7 +1,7 @@
 <div class="modal fade" id="add-barangay-resident" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable" >
 <div class="modal-content">
-<div class="modal-header bg-warning border-0 px-3 py-3 shadow-sm">
+<div class="modal-header bg-warning border-0 px-3 py-2 shadow-sm">
   <span class=" fa-solid me-2" style="width: 15px; height:15px; color:#ffff;"></span>
   <h6 class="modal-title" id="exampleModalLabel" style="color: #ffff; font-weight:500;">New Resident Record</h6>
   <button type="button" id="close_add_resident" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
@@ -20,7 +20,7 @@
 
   </select>
   <div class="invalid-feedback">
-      Please select a barangay for the resident.
+     Invalid selection.
   </div>
   </div>
 
@@ -29,28 +29,28 @@
     <label for="firstname" class="form-label">First Name*</label>
     <input type="text" name="firstname" class=" form-control barangay-form" id="firstname" placeholder="First name.">
     <div class="invalid-feedback">
-    Please don't leave this area empty.
+    Invalid input.
     </div>
   </div>
   <div class="mb-3">
     <label for="middlename" class="form-label">Middle Name*</label>
     <input type="text" name="middlename" class=" form-control barangay-form" id="middlename" placeholder="Middle name.">
     <div class="invalid-feedback">
-    Please don't leave this area empty.
+    Invalid input.
     </div>
   </div>
   <div class="mb-3">
     <label for="lastname" class="form-label">Last Name*</label>
     <input type="text" name="lastname" class=" form-control barangay-form" id="lastname" placeholder="Last name.">
     <div class="invalid-feedback">
-    Please don't leave this area empty.
+    Invalid input.
     </div>
   </div>
   <div class="mb-3">
   <label for="birthdate" class="form-label">Date of Birth*</label>
     <input type="date" class="  birthdate form-control barangay-form text-sm-start" id="birthdate" name="birthdate" placeholder="Date of Birth">
     <div class="invalid-feedback">
-      Please don't leave this area empty.
+    Invalid input.
     </div>
   </div>
   <div class="mb-3" id="select_gender_list">
@@ -61,7 +61,7 @@
     <option value="F (Female)">F (Female)</option>
     </select>
     <div class="invalid-feedback">
-      Please don't leave this area empty.
+    Invalid selection
     </div>
   </div>
   <div class="mb-3" id="select_status_list">
@@ -74,7 +74,7 @@
     <option value="widowed">Widowed</option>
     </select>
     <div class="invalid-feedback">
-      Please don't leave this area empty.
+    Invalid selection.
     </div>
   </div>
   <div class="mb-3">
@@ -83,7 +83,7 @@
      onkeypress='return event.charCode>=48 && event.charCode<=57' ondrop="return false;" onpaste="return false;"
      oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="Contact No.">
     <div class="invalid-feedback" id="phno_validator_label">
-    Please don't leave this area empty.
+    Invalid input.
     </div>
   </div>
   <div class="mb-3">

@@ -30,12 +30,20 @@
                     <div class="invalid-feedback" id="invalid_password">
                     </div>
                   </div>
-                  <div class="input-group mb-4">
-                  <label class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" name="checkbox" id="checkbox">
+
+                  <div class="mb-3 ms-2">
+                  <label id="old_pass_lbl" class="form-label col-lg-6 col-md-12 opacity-50">
+                  <input id="old_pass_checkbox" type="checkbox" onclick="showPassword('password','old_pass_lbl','old_pass_span')" class="me-1">
+                  <span id="old_pass_span">Show Password</span>
+                  </label>
+                  </div>
+
+                  <div class="input-group mb-4 row ">
+                  <label class="custom-control rounded-3 py-2 ms-2 bg-light custom-checkbox col-lg-12 col-md-12  opacity-50 " id="rember_check">
+                      <input type="checkbox" class="custom-control-input" name="checkbox" id="checkbox" onclick="rembMe('rember_check')">
                       <span class="custom-control-indicator"></span>
                       <span class="custom-control-description">Remember me</span>
-                    </label>
+                  </label>
                   </div>
                   <div class="row">
                     <div class="col-6">

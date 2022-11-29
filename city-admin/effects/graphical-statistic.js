@@ -30,8 +30,11 @@ var myPoints=[]
 var data_set_handler = [];
 var tittle_disease_type;
 
+var active_inactive_validator = "default"
+var details_title;
 
 var sort = "names";
+
 
 $(document).ready(function()
 {
@@ -128,8 +131,10 @@ function current_status()
 
     if(query_click != "clicked")
     {
-        $("#map_from").text(getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " to ")
+        $("#map_from").text("between "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " and ")
         $("#map_to").text(getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
+
+        $(".details_head_from").text(getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " - "+getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
     }
     else
     {
@@ -142,50 +147,60 @@ function current_status()
         
         if($( "#range_from" ).val() === $( "#range_to" ).val())
         {
-          $("#map_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + "")
+          $("#map_from").text("from "+getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + "")
           $("#map_to").text("")
+
+          $(".details_head_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + "")
         }
         else
         {
-          $("#map_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " to ")
+          $("#map_from").text("between "+getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " and ")
           $("#map_to").text(getMonthName(array_date_range_to[1]) + ' ' + array_date_range_to[2] + ", "+ array_date_range_to[0])
+
+          $(".details_head_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " - "+getMonthName(array_date_range_to[1]) + ' ' + array_date_range_to[2] + ", "+ array_date_range_to[0])
         }
 
     }
 
     
 
+
     if(disease_type === "default")
     {
-        $("#map_disease").text(" from ")
+        $("#map_disease").text("All ")
     }
     else
     {
-        $("#map_disease").text(" of "+tittle_disease_type+" from ")   
+        $("#map_disease").text("All "+tittle_disease_type+" ")   
     }
 
     if(active_inactive === "default")
     {
-        $("#map_cases").text("All recorded cases")
+        $("#map_cases").text("health cases documented ")
+        $(".details_head_status").text("All documented health cases.")
     }
     else
     {
-        $("#map_cases").text("Active cases")   
+        $("#map_cases").text("health cases that are currently active and were documented ") 
+        $(".details_head_status").text("Health cases that are currently active.") 
     }
 
     if(gender === "default")
     {
         $("#map_gender").text("")
+        $(".details_head_gender").text("Male and female records.")
     }
     else
     {   
         if(gender === "F (Female)")
         {
-            $("#map_gender").text(", females record")
+            $("#map_gender").text(", female records")
+            $(".details_head_gender").text("Female records.")
         }
         else if(gender === "M (Male)")
         {
-            $("#map_gender").text(", males record")
+            $("#map_gender").text(", male records")
+            $(".details_head_gender").text("Male records.")
         }
           
     }
@@ -345,7 +360,7 @@ function chart_array()
       data_set_handler.push(data_set_handler_single)
     }
     else{
-      myColors[index]="#1ab3ffff";
+      myColors[index]="#07a3f1ff";
       myPoints[index]=  30;
     }
 
@@ -379,6 +394,80 @@ function number_of_resident_chart()
   myChart = new Chart(ctx, {
   type: 'bar',
   options: {
+    onClick: (e, elements) => {
+
+      if(elements.length > 0) 
+      {
+        var current_index = elements[0].index;
+
+        $("#details_title").text(x_value[current_index])
+        var all_diseases_that_occured = xValues[current_index];
+        var display_diseases_that_occured = "";
+        var details_title;
+
+        if(active_inactive_validator === "default")
+        {
+            if(yValues[current_index] != 1)
+            {
+              details_title = "There are "+yValues[current_index]+" health cases in total.";
+            }
+            else
+            {
+              details_title = "There is only "+yValues[current_index]+" health case in total";
+            }
+        }
+        else
+        {
+          if(yValues[current_index] != 1)
+          {
+            details_title = "There are "+yValues[current_index]+" currently active health cases in total.";
+          }
+          else
+          {
+            details_title = "There is only "+yValues[current_index]+" currently active health case in total.";
+          }
+          
+        }
+        
+
+        $('.details_content_label').remove();
+        $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
+        
+
+        //to get the occuring diseases in that area
+        $.ajaxSetup({async:false});
+        $.getJSON('functions/display-functions/get-occuring-diseases.php', 
+        {
+          query_click:query_click,
+
+          disease_type:disease_type,
+          date_range_from:date_range_from,
+          date_range_to:date_range_to,
+          active_inactive:active_inactive,
+          gender:gender,
+
+          current_year_from:current_year_from,
+          current_year_to:current_year_to,
+
+          all_diseases_that_occured: all_diseases_that_occured
+            
+        },     
+        function (data, textStatus, jqXHR) 
+        {
+          display_diseases_that_occured = data
+        });
+        //to get the occuring diseases in that area end
+
+        $('.details_list').remove();
+        $.each(display_diseases_that_occured, function( index,value ) {
+
+          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label"><span class="fa-solid me-2"></span>'+value+'</label></div>');
+      
+        });
+
+        $('#show_details').modal('toggle');
+      }
+    },
     indexAxis: 'x',
     scales: {
       x: {
@@ -415,7 +504,6 @@ function number_of_resident_chart()
         tooltip: {
           enabled: true,
           displayColors: false,
-          events:['click'],
           usePointStyle: true,
           padding: {
                 left: 20,
@@ -423,62 +511,36 @@ function number_of_resident_chart()
                 top: 20,
                 bottom: 20
           },
-          caretSize: 10,
+          caretSize: 15,
           cornerRadius: 20,
           caretPadding: 0,
           callbacks: {
-              beforeLabel: function(context) {            
-                var modified_label = "Barangay "+xValues[context.parsed.x]+"\n";
-                return modified_label
-                },
               label: function(context) { 
 
-                  var modified_label = "Total Number of Health Cases: "+context.parsed.y
-
-
+                 if(active_inactive_validator === "default")
+                 {
+                   var modified_label = context.parsed.y+" health cases in total."
+                   if(context.parsed.y == 1)
+                   {
+                     var modified_label = context.parsed.y+" health case in total."
+                   }
+                 }
+                 else
+                 {
+                   var modified_label = context.parsed.y+" currently active health cases in total."
+                   if(context.parsed.y == 1)
+                   {
+                     var modified_label = context.parsed.y+" currently active health case in total."
+                   }
+                 }
+                  
 
                 return modified_label           
              
             },
             afterLabel: function(context) {            
-              
-              //to get the occuring diseases in that area
-              var all_diseases_that_occured = xValues[context.parsed.x];
-              var display_diseases_that_occured = "";
-
-              $.ajaxSetup({async:false});
-              $.getJSON('functions/display-functions/get-occuring-diseases.php', 
-              {
-                query_click:query_click,
-
-                disease_type:disease_type,
-                date_range_from:date_range_from,
-                date_range_to:date_range_to,
-                active_inactive:active_inactive,
-                gender:gender,
-    
-                current_year_from:current_year_from,
-                current_year_to:current_year_to,
-    
-                all_diseases_that_occured: all_diseases_that_occured
-                  
-              },     
-              function (data, textStatus, jqXHR) 
-              {
-                display_diseases_that_occured = objToString (data);
-                display_diseases_that_occured = display_diseases_that_occured.slice(0, -2);
-              });
-              //to get the occuring diseases in that area end
-
-              var modified_label = "\n"+display_diseases_that_occured;
-
-              
-              return modified_label
-              
-              },
-            title: function(context) {            
-              return ;
-            },
+               return "(click to see more details)"
+             },
             labelPointStyle: function(context) {
               return {
                   pointStyle: 'rectRounded',
@@ -492,6 +554,8 @@ function number_of_resident_chart()
           titleColor:  "#626464",
           borderColor: "#dee0e0",
           borderWidth: 1,
+          bodySpacing: 4,
+          titleMarginBottom: 15
         }
     }
   },
@@ -539,24 +603,6 @@ $("#sort_cases").click(function(e){
 
 })
 //sort chart end
-
-
-//reactivate tooltip chart
-$("#hpChart").click(function(e){
- 
-  if(myChart.options.plugins.tooltip.enabled != true)
-  {
-    myChart.options.plugins.tooltip.enabled = true
-  }
-  myChart.update();
-
-})
-
-$("#hpChart").mouseout(function(e){
-  myChart.options.plugins.tooltip.enabled = false
-  myChart.update();
-});
-//reactivate tooltip chart end
 
 //active and all-time cases
 $("#active_only_btn").click(function()
@@ -651,6 +697,15 @@ $("#date_range_btn").click(function()
          date_range_to = to_input;
          $('#filter-map').modal('toggle');
 
+         if(active_inactive === "default")
+         {
+          active_inactive_validator = "default"
+         }
+         else
+         {
+           active_inactive_validator = "(Active)"
+         }
+
          current_status()
          update_chart()
       
@@ -665,6 +720,7 @@ $("#current_year").click(function()
  $("#all_cases").removeClass("d-none")
 
      active_inactive = "default"
+     active_inactive_validator = "default"
      disease_type = "default"
      date_range_from = "default";
      date_range_to = "default";

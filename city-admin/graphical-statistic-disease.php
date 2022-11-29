@@ -17,7 +17,7 @@ include('includes/sidebar.php');
 </li>
 <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
 <li class="breadcrumb-item active"><span>Graphical Statistic</span></li>
-<li class="breadcrumb-item active"><span>Recorded Diseases</span></li>
+<li class="breadcrumb-item active"><span>Disease Statistic</span></li>
 </ol>
 </nav>
 </div>
@@ -28,6 +28,10 @@ include('includes/sidebar.php');
 <!-- filter map hp -->
 <?php include "update/filter-diseases.php" ?>
 <!-- filter map end -->
+
+<!-- more details hp -->
+<?php include "display/detail-disease.php" ?>
+<!-- more details  end -->
 
 
 <div class="body flex-grow-1 px-5 pt-3  pb-3"> 
@@ -40,7 +44,7 @@ include('includes/sidebar.php');
 <div class="card border-0 mb-4 shadow-sm remove_rounded">
 
 <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-<button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Diseases Graphical Statistic
+<button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Disease Statistic
 </div>
 
   <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >
@@ -53,9 +57,9 @@ include('includes/sidebar.php');
   
   <a style="padding-top: 7px; padding-bottom: 7px;" class=" me-2 mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder dropdown-toggle"  id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false" >TYPES <span class="fa-solid ms-1"></span></a>
   <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
-    <li><a class="dropdown-item" href="graphical-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> HP Statistic</a></li>
-    <li><a class="dropdown-item" href="graphical-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Diseases Statistic</a></li>
-    <li><a class="dropdown-item" href="time-span.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span>Time Span Statistic</a></li>
+    <li><a class="dropdown-item" href="graphical-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Barangay Health Statistic</a></li>
+    <li><a class="dropdown-item" href="graphical-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Disease Statistic</a></li>
+    <li><a class="dropdown-item" href="time-span.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Time Span</a></li>
   </ul> 
   </div>
 

@@ -109,11 +109,11 @@ if ($result->num_rows > 0)
 
         if($total_hp == 1)
         {
-            $get_disease_names[] = "".$row['disease_name'].": ".$total_hp." Infected Person";
+            $get_disease_names[] = $total_hp." individual was infected with ".$row['disease_name'].".";
         }
         else{
 
-            $get_disease_names[] = "".$row['disease_name'].": ".$total_hp." Infected People";
+            $get_disease_names[] =  $total_hp." individuals were infected with ".$row['disease_name'].".";
         }
 
        

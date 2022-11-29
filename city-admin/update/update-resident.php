@@ -23,7 +23,7 @@
 
   </select>
   <div class="invalid-feedback">
-      Please select a barangay for the resident.
+    Invalid selection.
   </div>
   </div>
 
@@ -32,28 +32,28 @@
     <label for="update_firstname" class="form-label">First Name*</label>
     <input type="text" name="update_firstname" class="form-control barangay-form" id="update_firstname" placeholder="First name.">
     <div class="invalid-feedback">
-    Please don't leave this area empty.
+    Invalid input.
     </div>
   </div>
   <div class="mb-3">
     <label for="update_middlename" class="form-label">Middle Name*</label>
     <input type="text" name="update_middlename" class="form-control barangay-form" id="update_middlename" placeholder="Middle name.">
     <div class="invalid-feedback">
-    Please don't leave this area empty.
+    Invalid input.
     </div>
   </div>
   <div class="mb-3">
     <label for="update_lastname" class="form-label">Last Name*</label>
     <input type="text" name="update_lastname" class="form-control barangay-form" id="update_lastname" placeholder="Last name.">
     <div class="invalid-feedback">
-    Please don't leave this area empty.
+    Invalid input.
     </div>
   </div>
   <div class="mb-3">
   <label for="update_birthdate" class="form-label">Date of Birth*</label>
     <input type="date" class="birthdate2 form-control barangay-form text-sm-start" id="update_birthdate" name="update_birthdate" placeholder="Date of Birth">
     <div class="invalid-feedback">
-      Please don't leave this area empty.
+    Invalid input.
     </div>
   </div>
   <div class="mb-3" id="update_select_gender">
@@ -64,7 +64,7 @@
     <option value="F (Female)">F (Female)</option>
     </select>
     <div class="invalid-feedback">
-      Please don't leave this area empty.
+    Invalid selection.
     </div>
   </div>
   <div class="mb-3" id="update_select_status">
@@ -77,7 +77,7 @@
     <option value="Widowed">Widowed</option>
     </select>
     <div class="invalid-feedback">
-      Please don't leave this area empty.
+    Invalid selection.
     </div>
   </div>
   <div class="mb-3">
@@ -86,7 +86,7 @@
      onkeypress='return event.charCode>=48 && event.charCode<=57' ondrop="return false;" onpaste="return false;"
      oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="Contact No.">
     <div class="invalid-feedback" id="update_phno_validator_label">
-    Please don't leave this area empty.
+    Invalid input.
     </div>
   </div>
   <div class="mb-3">

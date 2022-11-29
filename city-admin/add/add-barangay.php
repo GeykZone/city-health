@@ -1,7 +1,7 @@
 <div class="modal fade" id="add-barangay" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
     <div class="modal-content">
-    <div class="modal-header bg-warning border-0 shadow-sm px-3 py-3">
+    <div class="modal-header bg-warning border-0 shadow-sm px-3 py-2">
       <span class=" fa-solid me-2" style="width: 15px; height:15px; color:#ffff;"></span>
         <h6 class="modal-title" id="exampleModalLabel" style="color: #ffff; font-weight:500;">New Barangay Name</h6>
         <button id="close_add_barangay" type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
@@ -14,21 +14,21 @@
           <label for="barangay" class="form-label">Barangay*</label>
           <input type="text" name="barangay" class="form-control barangay-form" id="barangay" placeholder="Barangay">
           <div class="invalid-feedback">
-            Please don't leave this area empty.
+            Invalid input.
           </div>
         </div>
         <div class="mb-3">
           <label for="Latitude" class="form-label">Latitude*</label>
           <input type="number" name="Latitude" class="form-control barangay-form" id="Latitude" placeholder="Latitude">
           <div class="invalid-feedback">
-            Please don't leave this area empty.
+          Invalid input.
           </div>
         </div>
         <div class="mb-3">
           <label for="Longitude" class="form-label">Longitude*</label>
           <input type="number" name="Longitude" class="form-control barangay-form" id="Longitude" placeholder="Longitude">
           <div class="invalid-feedback">
-            Please don't leave this area empty.
+          Invalid input.
           </div>
         </div>
       </form>

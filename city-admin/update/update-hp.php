@@ -1,7 +1,7 @@
 <div class="modal fade" id="update-hp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" >
     <div class="modal-content">
-      <div class="modal-header bg-warning border-0 px-3 py-3 shadow-sm">
+      <div class="modal-header bg-warning border-0 px-3 py-2 shadow-sm">
       <span class=" fa-solid me-2" style="width: 15px; height:15px; color:#ffff;"></span>
         <h6 class="modal-title" id="exampleModalLabel" style="color: #ffff; font-weight:500;">Update Health Profile</h6>
         <button id="close_add_hp" type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
@@ -21,7 +21,7 @@
 
         </select>
         <div class="invalid-feedback">
-            Please select a barangay for the resident.
+        Invalid selection.
         </div>
         </div>
 
@@ -33,7 +33,7 @@
             <option value="">Select Resident.</option>
         </select>
         <div class="invalid-feedback">
-        Please don't leave this area empty.
+        Invalid input.
         </div>
         </div>
 
@@ -46,7 +46,7 @@
             ?>
         </select>
         <div class="invalid-feedback">
-        Please don't leave this area empty.
+        Invalid selection.
         </div>
         </div>
 

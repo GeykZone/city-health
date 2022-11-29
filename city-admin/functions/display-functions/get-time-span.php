@@ -117,11 +117,11 @@ if ($result->num_rows > 0)
 
         if($total_hp == 1)
         {
-            $get_disease_names[] = $total_hp." ".$row['disease_name']." in ".$row['barangay_name'];
+            $get_disease_names[] = $total_hp." ".$row['disease_name']." health case in ".$row['barangay_name'].".";
         }
         else{
 
-            $get_disease_names[] = $total_hp." ".$row['disease_name']." in ".$row['barangay_name'];
+            $get_disease_names[] = $total_hp." ".$row['disease_name']." health cases in ".$row['barangay_name'].".";
         }
 
        

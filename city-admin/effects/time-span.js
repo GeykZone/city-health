@@ -33,8 +33,11 @@ var data_set_handler = [];
 
 var barangay_title
 var disease_title
+var active_inactive_validator = "default"
+var details_title;
 
 var sort = "names";
+
 
 $(document).ready(function()
 {
@@ -55,8 +58,9 @@ function current_status()
 
     if(query_click != "clicked")
     {
-        $("#map_from").text(getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " to ")
+      $("#map_from").text("between "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " and ")
         $("#map_to").text(getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
+
     }
     else
     {
@@ -68,12 +72,12 @@ function current_status()
 
         if($( "#disease_range_from" ).val() === $( "#disease_range_to" ).val())
         {
-          $("#map_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + "")
+          $("#map_from").text("from "+getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + "")
           $("#map_to").text("")
         }
         else
         {
-          $("#map_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " to ")
+          $("#map_from").text("between "+getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " and ")
           $("#map_to").text(getMonthName(array_date_range_to[1]) + ' ' + array_date_range_to[2] + ", "+ array_date_range_to[0])
         }
 
@@ -93,35 +97,40 @@ function current_status()
 
     if(disease_type === "default")
     {
-        $("#map_disease").text(" from ")
+        $("#map_disease").text("All ")
     }
     else
     {
-        $("#map_disease").text(" of "+disease_title+" from ")   
+        $("#map_disease").text("All "+disease_title+" ")   
     }
 
     if(active_inactive === "default")
     {
-        $("#map_cases").text("All recorded cases")
+        $("#map_cases").text("health cases documented ")
+        $(".details_head_status").text("All documented health cases.")
     }
     else
     {
-        $("#map_cases").text("Active cases")   
+        $("#map_cases").text("health cases that are currently active and were documented ") 
+        $(".details_head_status").text("Health cases that are currently active.") 
     }
-
+    
     if(gender === "default")
     {
         $("#map_gender").text("")
+        $(".details_head_gender").text("Male and female records.")
     }
     else
     {   
         if(gender === "F (Female)")
         {
-            $("#map_gender").text(", females record")
+            $("#map_gender").text(", female records")
+            $(".details_head_gender").text("Female records.")
         }
         else if(gender === "M (Male)")
         {
-            $("#map_gender").text(", males record")
+            $("#map_gender").text(", male records")
+            $(".details_head_gender").text("Male records.")
         }
           
     }
@@ -277,7 +286,8 @@ function removeLastWord(str) {
        arrayOfObj = x_value.map(function(d, i) {
          return {
            label: d,
-           data: y_value[i] || 0
+           data: y_value[i] || 0,
+           title: xx_value[i]
          };
        });
        
@@ -287,59 +297,68 @@ function removeLastWord(str) {
        
        newArrayLabel = [];
        newArrayData = [];
+       newArrayTitle = [];
        sortedArrayOfObj.forEach(function(d){
          newArrayLabel.push(d.label);
          newArrayData.push(d.data);
+         newArrayTitle.push(d.title);
        });
        ////sorting algorithm
    }
    else if(sort === "desc")
    {
-       //sorting algorithm
-       arrayOfObj = x_value.map(function(d, i) {
-         return {
-           label: d,
-           data: y_value[i] || 0
-         };
-       });
-       
-       sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
-         return b.data - a.data ;
-       });
-       
-       newArrayLabel = [];
-       newArrayData = [];
-       sortedArrayOfObj.forEach(function(d){
-         newArrayLabel.push(d.label);
-         newArrayData.push(d.data);
-       });
-       ////sorting algorithm
+      //sorting algorithm
+      arrayOfObj = x_value.map(function(d, i) {
+        return {
+          label: d,
+          data: y_value[i] || 0,
+          title: xx_value[i]
+        };
+      });
+      
+      sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
+        return b.data - a.data;
+      });
+      
+      newArrayLabel = [];
+      newArrayData = [];
+      newArrayTitle = [];
+      sortedArrayOfObj.forEach(function(d){
+        newArrayLabel.push(d.label);
+        newArrayData.push(d.data);
+        newArrayTitle.push(d.title);
+      });
+      ////sorting algorithm
    }
    else if(sort === "names")
    {
-           //sorting algorithm
-           arrayOfObj = x_value.map(function(d, i) {
-             return {
-               label: d,
-               data: y_value[i] || 0
-             };
-           });
-           
-           sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
-             return a.label - b.label;
-           });
-           
-           newArrayLabel = [];
-           newArrayData = [];
-           sortedArrayOfObj.forEach(function(d){
-             newArrayLabel.push(d.label);
-             newArrayData.push(d.data);
-           });
-           ////sorting algorithm
+        //sorting algorithm
+        arrayOfObj = x_value.map(function(d, i) {
+          return {
+            label: d,
+            data: y_value[i] || 0,
+            title: xx_value[i]
+          };
+        });
+
+        sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
+          return a.data + b.data;
+        });
+
+        newArrayLabel = [];
+        newArrayData = [];
+        newArrayTitle = [];
+        sortedArrayOfObj.forEach(function(d){
+          newArrayLabel.push(d.label);
+          newArrayData.push(d.data);
+          newArrayTitle.push(d.title);
+        });
+        ////sorting algorithm
    }
  
    x_value = newArrayLabel;
    y_value = newArrayData;
+   xx_value = newArrayTitle;
  
    xValues = x_value;
    yValues = y_value; 
@@ -362,8 +381,8 @@ function removeLastWord(str) {
      borderColor: "#6cc4f0ff",
      borderWidth: 1.5,
      //borderRadius: 8,
-     pointRadius: 5,
-     hoverRadius:5,
+     pointRadius: 3,
+     hoverRadius:3,
      borderSkipped: true,
      barPercentage: 0.8,
      categoryPercentage:0.8,
@@ -378,6 +397,78 @@ function removeLastWord(str) {
    myChart = new Chart(ctx, {
    type: 'line',
    options: {
+    onClick: (e, elements) => {
+
+      if(elements.length > 0) 
+      {
+        var current_index = elements[0].index;
+
+        $("#details_title").text(x_value[current_index])
+        $(".details_head_from").text(x_value[current_index])
+        var all_dates = xx_value[current_index];
+        var display_diseases_that_occured = "";
+        var details_title;
+
+        if(active_inactive_validator === "default")
+        {
+            if(yValues[current_index] != 1)
+            {
+              details_title = "There are "+yValues[current_index]+" health cases in total.";
+            }
+            else
+            {
+              details_title = "There is only "+yValues[current_index]+" health case in total";
+            }
+        }
+        else
+        {
+          if(yValues[current_index] != 1)
+          {
+            details_title = "There are "+yValues[current_index]+" currently active health cases in total.";
+          }
+          else
+          {
+            details_title = "There is only "+yValues[current_index]+" currently active health case in total.";
+          }
+          
+        }
+        
+
+        $('.details_content_label').remove();
+        $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
+        
+        $.ajaxSetup({async:false});
+        $.getJSON('functions/display-functions/get-time-span.php',
+        {
+          query_click:query_click,
+
+          barangay_name:barangay_name,
+          disease_type:disease_type,
+          date_range_from:date_range_from,
+          date_range_to:date_range_to,
+          active_inactive:active_inactive,
+          gender:gender,
+
+          current_year_from:current_year_from,
+          current_year_to:current_year_to,
+
+          all_dates: all_dates
+            
+        },     
+        function (data, textStatus, jqXHR) 
+        {
+          display_diseases_that_occured = data
+        });
+        $('.details_list').remove();
+        $.each(display_diseases_that_occured, function( index,value ) {
+
+          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label"><span class="fa-solid me-2"></span>'+value+'</label></div>');
+      
+        });
+
+        $('#show_details').modal('toggle');
+      }
+    },
      pointStyle: "circle",
      indexAxis: 'x',
      scales: {
@@ -415,7 +506,6 @@ function removeLastWord(str) {
          tooltip: {
            enabled: true,
            displayColors: false,
-           events:['click'],
            usePointStyle: true,
            padding: {
                  left: 20,
@@ -423,67 +513,36 @@ function removeLastWord(str) {
                  top: 20,
                  bottom: 20
            },
-           caretSize: 10,
+           caretSize: 15,
            cornerRadius: 20,
            caretPadding: 0,
            callbacks: {
-               beforeLabel: function(context) {            
-                 var modified_label = ""+xValues[context.parsed.x]+"\n";
-                 var aDate = new Date(modified_label)
-
-                 var aDate_year_dd = String(aDate.getDate()).padStart(2, '0');
-                 var aDate_year_mm = String(aDate.getMonth() + 1).padStart(2, '0');
-                 var aDate_year_yyyy = aDate.getFullYear();
-
-                 return getMonthName(aDate_year_mm)+" "+aDate_year_dd+", "+aDate_year_yyyy+"\n"
-                 },
                label: function(context) { 
- 
-                   var modified_label = "Total Recorded Health Cases: "+context.parsed.y
+
+                  if(active_inactive_validator === "default")
+                  {
+                    var modified_label = context.parsed.y+" health cases in total."
+                    if(context.parsed.y == 1)
+                    {
+                      var modified_label = context.parsed.y+" health case in total."
+                    }
+                  }
+                  else
+                  {
+                    var modified_label = context.parsed.y+" currently active health cases in total."
+                    if(context.parsed.y == 1)
+                    {
+                      var modified_label = context.parsed.y+" currently active health case in total."
+                    }
+                  }
+                   
  
                  return modified_label           
               
              },
              afterLabel: function(context) {            
-               
-               //to get the occuring diseases in that area
-               var all_dates = xx_value[context.parsed.x];
-               var display_diseases_that_occured = "";
- 
-               $.ajaxSetup({async:false});
-               $.getJSON('functions/display-functions/get-time-span.php',
-               {
-                 query_click:query_click,
- 
-                 barangay_name:barangay_name,
-                 disease_type:disease_type,
-                 date_range_from:date_range_from,
-                 date_range_to:date_range_to,
-                 active_inactive:active_inactive,
-                 gender:gender,
-     
-                 current_year_from:current_year_from,
-                 current_year_to:current_year_to,
-     
-                 all_dates: all_dates
-                   
-               },     
-               function (data, textStatus, jqXHR) 
-               {
-                 display_diseases_that_occured = objToString (data);
-                 display_diseases_that_occured = display_diseases_that_occured.slice(0, -2);
-               });
-               //to get the occuring diseases in that area end
- 
-               var modified_label = "\n"+display_diseases_that_occured;
- 
-               
-               return modified_label
-               
-               },
-             title: function(context) {            
-               return ;
-             },
+                return "(click to see more details)"
+              },
              labelPointStyle: function(context) {
                return {
                    pointStyle: 'rectRounded',
@@ -497,6 +556,8 @@ function removeLastWord(str) {
            titleColor:  "#626464",
            borderColor: "#dee0e0",
            borderWidth: 1,
+           bodySpacing: 4,
+           titleMarginBottom: 15
          }
      }
    },
@@ -544,23 +605,6 @@ $("#sort_cases").click(function(e){
   
   })
   //sort chart end
-
- //reactivate tooltip chart
-$("#hpChart").click(function(e){
- 
-    if(myChart.options.plugins.tooltip.enabled != true)
-    {
-      myChart.options.plugins.tooltip.enabled = true
-    }
-    myChart.update();
-  
-  })
-  
-  $("#hpChart").mouseout(function(e){
-    myChart.options.plugins.tooltip.enabled = false
-    myChart.update();
-  });
-  //reactivate tooltip chart end
 
 //active and all-time cases
 $("#disease_active_only_btn").click(function()
@@ -668,6 +712,15 @@ $("#disease_date_range_btn").click(function()
          date_range_to = to_input;
          $('#filter-time').modal('toggle');
 
+         if(active_inactive === "default")
+         {
+          active_inactive_validator = "default"
+         }
+         else
+         {
+           active_inactive_validator = "(Active)"
+         }
+
          current_status()
          update_chart()
      }
@@ -681,6 +734,7 @@ $("#current_year").click(function()
  $("#disease_all_cases").removeClass("d-none")
 
      active_inactive = "default"
+     active_inactive_validator = "default"
      barangay_name = "default"
      date_range_from = "default";
      date_range_to = "default";

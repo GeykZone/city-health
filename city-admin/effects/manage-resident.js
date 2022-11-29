@@ -488,7 +488,7 @@ table.columns().every(function () {
   else if (contact.trim().length === 0) //check if value is empty
   {
   $("#contact").addClass("is-invalid");
-  $("#phno_validator_label").text("Please don't leave this area empty.")
+  $("#phno_validator_label").text("Invalid input.")
   }
   else
   {
@@ -691,7 +691,7 @@ table.columns().every(function () {
       else if (new_contact.trim().length === 0) //check if value is empty
       {
       $("#update_contact").addClass("is-invalid");
-      $("#update_phno_validator_label").text("Please don't leave this area empty.")
+      $("#update_phno_validator_label").text("Invalid input.")
       }
       else
       {
@@ -1018,7 +1018,7 @@ table.columns().every(function () {
             myColors[index]="#4dc4ffff";
           }
           else{
-            myColors[index]="#1ab3ffff";
+            myColors[index]="#07a3f1ff";
           }
         });
 
@@ -1068,7 +1068,6 @@ table.columns().every(function () {
           tooltip: {
             enabled: true,
             displayColors: false,
-            events:['click'],
             padding: 15,
             caretSize: 10,
             cornerRadius: 20,
@@ -1213,20 +1212,3 @@ $("#sort_cases").click(function(e){
 })
 //sort chart end
 
-
-//reactivate tooltip chart
-$("#myChart").click(function(e){
- 
-  if(myChart.options.plugins.tooltip.enabled != true)
-  {
-    myChart.options.plugins.tooltip.enabled = true
-  }
-  myChart.update();
-
-})
-
-$("#myChart").mouseout(function(e){
-  myChart.options.plugins.tooltip.enabled = false
-  myChart.update();
-});
-//reactivate tooltip chart end

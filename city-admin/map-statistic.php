@@ -80,21 +80,18 @@ margin-right: 20px !important;
   cursor: pointer;
 }
 
-.mapboxgl-popup {
-  padding-bottom: -21px;  
-}
 
 .mapboxgl-popup-content {
-  padding-top: 23px !important;
-  text-align: start;
+  position:static;
+  padding-left: 23px;
+  padding-right: 23px;
   font-family: 'Open Sans', sans-serif;
-  border-radius: 10px !important;
+  border-radius: 25px !important;
   opacity: 1 !important;
-}
-
-.mapboxgl-popup-close-button
-{
-  display: none;
+  width: auto;
+  height: 110px;
+  padding-top: 20px;
+  align-self: center;
 }
 
 .map-overlay {
@@ -288,6 +285,10 @@ margin-top: 10px;
 <?php include "update/filter-map.php" ?>
 <!-- filter map end -->
 
+<!-- more details hp -->
+<?php include "display/detail-map.php" ?>
+<!-- more details  end -->
+
 <div class="body flex-grow-1 px-5 pt-3 pb-3"> 
 <div class="container-fluid">
 
@@ -299,30 +300,27 @@ margin-top: 10px;
 </div>
 
 
-<div class="container-fluid mt-3 px-4">
+<div class="container-fluid px-4">
   <div class="row">
 
-  <div class=" col-lg-6 col-md-12 rounded-3 d-flex text-dark text-opacity-50">
-  <span class="fa-regular me-3" style="padding-top:7px;"></span><h6 class=" mt-1"><span id="map_cases"></span><span id="map_disease"></span><span id="map_from"></span><span id="map_to"></span><span id="map_gender"></span></h6>
+  <div class="col-lg-6 col-md-12 mt-3 text-lg-start text-md-start align-content-center dropdown-center">
+  <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="filter_map" data-coreui-toggle="modal" href="#filter-map" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
   </div>
 
-
-  <div class="col-lg-6 col-md-12 text-lg-end text-md-start align-content-center dropdown-center">
+  <div class="col-lg-6 col-md-12 mt-3 text-lg-end align-content-center dropdown-center">
   <a style="padding-top: 7px; padding-bottom: 7px;" class=" me-2 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder dropdown-toggle"  id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid ms-1"></span></a>
   <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
     <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Health Profiles</a></li>
     <li><a class="dropdown-item" href="graphical-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Graphical Statistic</a></li>
     <li><a class="dropdown-item" href="map-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Map Visualization</a></li>
   </ul>
-        <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="filter_map" data-coreui-toggle="modal" href="#filter-map" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
   </div>
-
 
   </div>
 </div>
 
 
-<div class="card-body px-3">
+<div class="card-body px-4">
 <div id="map_container" class=" card w-100 container-fluid table-responsive rounded-2 border-0 shadow-sm">
 <div id="map" class=" w-100 rounded-3"></div>
 
@@ -341,6 +339,14 @@ margin-top: 10px;
 <button type="button" id="show_overlay" class="btn-overlay  fa-solid "></button>
 
 </div>
+</div>
+
+<div class=" container-fluid mb-3 px-4">
+  <div class="row ">
+  <div class=" col-lg-12 col-md-12 rounded-3 d-flex text-dark text-opacity-50">
+  <span class="fa-regular me-3" style="padding-top:7px;"></span><h6 class=" mt-1"><span id="map_disease"></span><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_gender"></span>.</h6>
+  </div>
+  </div>
 </div>
 </div>
 <!--for map end-->
