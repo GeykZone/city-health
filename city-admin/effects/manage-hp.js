@@ -43,6 +43,10 @@ var query_btn = "unclicked";
 var active_data = "";
 var active_inactive_variable = "(Active)";
 
+var min_age;
+var max_age;
+var filter_status;
+
 $(document).ready(function()
 {
     $(document).attr("title", "HPCS | Manage Health Profiles");
@@ -52,7 +56,6 @@ $(document).ready(function()
     get_hp_table_cell_value();
     date_range();
     opentip_tooltip();
-    active_inactive();
 })
 
 //set do some stuff when confiramtion variable is changed
@@ -145,85 +148,46 @@ function (data, textStatus, jqXHR)
 });
 
 var selectize_residents_data = selectize_residents;
-var items = selectize_residents_data.map(function(x) { 
+var items = selectize_residents_data.map(function(x) 
+{ 
     //remove the first words
     var one = x.substr(x.indexOf(" ") + 1);
     var two = one.substr(one.indexOf(" ") + 1);
     var three = two.substr(two.indexOf(" ") + 1);
     //remove last word
-    function removeLastWord(str) {
-        const lastIndexOfSpace = str.lastIndexOf(' ');
-      
-        if (lastIndexOfSpace === -1) {
-          return str;
-        }
-        return str.substring(0, lastIndexOfSpace);
+
+    function removeLastWord(str) 
+    {
+      const lastIndexOfSpace = str.lastIndexOf(' ');
+    
+      if (lastIndexOfSpace === -1) {
+        return str;
       }
-      var text_label = removeLastWord(x)
+      return str.substring(0, lastIndexOfSpace);
+    }
+
+    var text_label = removeLastWord(x)
+    text_label = text_label.split('_').join(' ') 
+
     return {
      item: three,
      field: text_label
-    }; });
-$('#add_hp_select_resident').selectize({
+    };
+  
+});
+
+$('#add_hp_select_resident').selectize
+({
     options: items,
     labelField: "field",
     valueField: "item",
     searchField: "field"
 });
+
 $(".selectize-control").removeClass("form-control barangay-form")
+
 }
 // selectized residents end
-
-//selectized resident update area
-function update_selectize_resident()
-{
-  //updating
-if(update_selectize_barangay_id_enabled != update_selectize_barangay_id_disabled)
-{
-    $('#update_hp_select_resident').selectize()[0].selectize.destroy();
-}
-
-$.ajaxSetup({async:false});
-$.getJSON('functions/display-functions/select-residents.php', 
-{
-    resident_names: update_selectize_barangay_id
-}, 
-
-function (data, textStatus, jqXHR) 
-{
-    update_selectize_residents = data;
-});
-
-var update_selectize_residents_data = update_selectize_residents;
-var items = update_selectize_residents_data.map(function(x) { 
-    //remove the first words
-    var one = x.substr(x.indexOf(" ") + 1);
-    var two = one.substr(one.indexOf(" ") + 1);
-    var three = two.substr(two.indexOf(" ") + 1);
-    
-    //remove last word
-    function removeLastWord(str) {
-        const lastIndexOfSpace = str.lastIndexOf(' ');
-      
-        if (lastIndexOfSpace === -1) {
-          return str;
-        }
-        return str.substring(0, lastIndexOfSpace);
-      }
-      var text_label = removeLastWord(x)
-    return {
-     item: three,
-     field: text_label
-    }; });
-$('#update_hp_select_resident').selectize({
-    options: items,
-    labelField: "field",
-    valueField: "item",
-    searchField: "field"
-});
-$(".selectize-control").removeClass("form-control barangay-form")
-}
-//selectize resident update area
 
 //show data tables
 function load_data_tables(){
@@ -241,7 +205,10 @@ function load_data_tables(){
         data: {
           date_range_from:date_range_from,
           date_range_to:date_range_to,
-          query_btn:query_btn
+          query_btn:query_btn,
+          min_age:min_age,
+          max_age:max_age,
+          filter_status:filter_status
         },
         "dataSrc": function ( json ) {
           //Make your callback here.
@@ -250,10 +217,10 @@ function load_data_tables(){
       }      
       
     },
+    order: [[10,'asc']],
     
-       
     "autoWidth": false,
-    scrollCollapse: true,
+      scrollCollapse: true,
 
     "dom": 'Brltip',      
     "lengthMenu": [[10, 50, 100, 500, 1000], [10, 50, 100, 500, 1000]],
@@ -265,7 +232,13 @@ function load_data_tables(){
       } ],
 
     "columns": [
-      null,
+      {
+        "targets": 9,
+        "render": function(data)
+        {
+          return data+getOrdinal(data)+" Occurrence"
+        }
+      },
       null,
       null,
       null,
@@ -307,15 +280,17 @@ function load_data_tables(){
           if(active_data === "(Active)")
           {
 
-            return  "<div class='text-end px-3'> <i onclick = 'click_value(this.id)' class='update_hp_value shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-hp' id='update_hp_value "+data+"' role='button'></i> "+
-            "<i onclick = 'click_value(this.id)' class='shadow-sm align-middle edit_barangay_value remove_btn fa-solid fa-head-side-cough-slash' href='#delete_hp' data-coreui-toggle='modal' id='delete_resident_value "+data+"' role='button'></i>"+
+            return  "<div class='text-end px-3'>"+
+            "<i onclick = 'click_value(this.id)' class='update_hp_value shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-hp' id='update_hp_value "+data+"' role='button'></i> "+
+            "<i onclick = 'click_value(this.id)' class='update_hp_value shadow-sm align-middle edit_barangay_value update deact_btn fas fa-server' data-coreui-toggle='modal' href='#detail_resident_hp' id='update_hp_value "+data+"' role='button'></i>"+
             "</div>"
 
           }
           else
           {
-            return  "<div class='text-end px-3'> <i onclick = 'click_value(this.id)' class='update_hp_value shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-hp' id='update_hp_value "+data+"' role='button'></i> "+
-            "<i onclick = 'click_value(this.id)' class='shadow-sm align-middle edit_barangay_value active_hp_btn fa-solid fa-head-side-cough' href='#active_hp' data-coreui-toggle='modal' id='delete_resident_value "+data+"' role='button'></i>"+
+            return  "<div class='text-end px-3'> "+
+            "<i onclick = 'click_value(this.id)' class='activate_hp shadow-sm align-middle edit_barangay_value filter_btn fa-solid fa-circle-question' data-coreui-toggle='modal' href='#active_hp' id='update_hp_value "+data+"' role='button'></i> "+
+            "<i onclick = 'click_value(this.id)' class='update_hp_value shadow-sm align-middle edit_barangay_value update deact_btn fas fa-server' data-coreui-toggle='modal' href='#detail_resident_hp' id='update_hp_value "+data+"' role='button'></i>"+
             "</div>"
           }
           
@@ -442,7 +417,7 @@ function load_data_tables(){
   
   $(".dataTables_info").detach().appendTo('#table_page')
   $(".dataTables_info").addClass("col-lg-6 col-md-12 text-lg-start text-center text-md-center text-sm-center")
-
+ 
   $(".dataTables_paginate ").detach().appendTo('#table_page')
   $(".dataTables_paginate ").addClass("col-lg-6 d-flex justify-content-center justify-content-lg-end justify-content-md-center justify-content-sm-center ")
 
@@ -467,7 +442,10 @@ function alert_message()
 {
 if(confirmation.a == 1)
 {
-$('#add-hp').modal('toggle');
+
+if($('#add-hp').is(":visible") ){
+  $('#add-hp').modal('toggle');
+}
 
 var $select = $('#add_hp_select_barangay').selectize();
 var control = $select[0].selectize;
@@ -499,7 +477,10 @@ icon: 'error'
 }
 else if(confirmation.a == 3)
 { 
-$('#update-hp').modal('toggle');
+if($('#update-hp').is(":visible") ){
+  $('#update-hp').modal('toggle');
+}
+
 
 toastMixin.fire({
 animation: true,
@@ -528,6 +509,51 @@ title: 'A record has been added into list of active health profiles.'
 table.ajax.reload( null, false);
 
 }
+else if(confirmation.a == 6)
+{
+  $('#add-hp').modal('toggle'); 
+  $('#occurence').modal('toggle');
+}
+else if(confirmation.a == 7)
+{
+toastMixin.fire({
+animation: true,
+title: 'It is not possible to create a new health profile for a deceased individual.',
+icon: 'error'
+});
+}
+else if(confirmation.a == 8)
+{ 
+toastMixin.fire({
+animation: true,
+title: 'A record has been successfully deleted.'
+});
+table.ajax.reload( null, false);
+}
+else if(confirmation.a == 9)
+{
+toastMixin.fire({
+animation: true,
+title: 'The individual in the new health profile that you are attempting to record already exists and has not yet been fully recovered.',
+icon: 'error'
+});
+}
+else if(confirmation.a == 10)
+{
+toastMixin.fire({
+animation: true,
+title: 'It is not possible to reactivate a health profile whose occurrence number is not the most recent.',
+icon: 'error'
+});
+}
+else if(confirmation.a == 11)
+{
+toastMixin.fire({
+animation: true,
+title: "It is not possible to add a reoccurrence on the same date as the person's recovery date.",
+icon: 'error'
+});
+}
 }
 //trigger error messages end
 
@@ -547,8 +573,6 @@ $('#add_hp_select_diseases')[0].selectize.enable();
 selectize_barangay_id = brgy_list_value;
 selectize_barangay_id_enabled = selectize_barangay_id;
 selectized_residents_list();
-
-
 }
 else
 {
@@ -559,33 +583,6 @@ selectize_barangay_id_disabled = selectize_barangay_id_enabled;
 
 }
 });
-
-
-// updating
-$("#update_hp_select_barangay").change(function(){ 
-  var update_barangay_name = $("#update_hp_select_barangay").text();
-  
-  if(update_barangay_name.trim().length != 0)
-  {
-  var update_brgy_list_value = $("#update_hp_select_barangay").val();
-  $('#fieldset2').removeAttr("disabled");
-  $('#update_hp_select_resident')[0].selectize.enable();
-  $('#update_hp_select_diseases')[0].selectize.enable();  
-  update_selectize_barangay_id = update_brgy_list_value;
-  update_selectize_barangay_id_enabled = update_selectize_barangay_id;
-  update_selectize_resident();
-  
-  
-  }
-  else
-  {
-  $('#fieldset2').attr("disabled", true);
-  $('#update_hp_select_resident')[0].selectize.disable();
-  $('#update_hp_select_diseases')[0].selectize.disable();
-  update_selectize_barangay_id_disabled = update_selectize_barangay_id_enabled;
-  
-  }
-  });
 }
 //enable the form when a barangay is picked end 
 
@@ -626,7 +623,8 @@ $("#add_hp_btn").click(function () {
             created_at: created_at,
             id_full_naame: id_full_naame,
             id_disease: id_disease,
-            philhealth_number: philhealth_number
+            philhealth_number: philhealth_number,
+            new_hp:'set'
 
           },
           function (data, status) {
@@ -674,84 +672,96 @@ $("#add_hp_btn").click(function () {
 });
 //submit new hp end
 
+//occurrence
+$("#accept").click(function()
+{
+
+  $.post("functions/add-functions/add-hp.php", {
+    created_at: created_at,
+    id_full_naame: id_full_naame,
+    id_disease: id_disease,
+    philhealth_number: philhealth_number,
+    occurrence:'set'
+
+  },
+  function (data, status) {
+   
+    confirmation.a = data;
+
+  });
+
+})
+//occurrence end
+
 //update hp
 $("#update_hp_btn").click(function () {
 
-
-
-  var new_hp_brgy = $("#update_hp_select_barangay").val();
-  var new_hp_name = $("#update_hp_select_resident").val();
-  var new_hp_diseases =  $("#update_hp_select_diseases").val();
   var new_hp_philhealth = $("#update_philhealth").val();
   var hp_update_id = hp_id_value;
+  created_at = yyyy + '-' + mm + '-' + dd;
+  var update_validator = true;
+  var update_hp_select_new_stats =  $("#update_hp_select_new_stats").val();
+  var update_hp_select_cause_of_death = $("#update_hp_select_cause_of_death").val();
+  var update_hp_select_other = $("#update_hp_select_other").val();
 
   function submit_update_hp_lists()
   {
       $.post("functions/update-functions/update-hp.php", {
         hp_update_id: hp_update_id,
-        new_hp_name: new_hp_name,
-        new_hp_diseases: new_hp_diseases,
-        new_hp_philhealth: new_hp_philhealth
-
+        new_hp_philhealth: new_hp_philhealth,
+        status:update_hp_select_new_stats,
+        death:update_hp_select_cause_of_death,
+        other_death:update_hp_select_other,
+        created_at:created_at
         },
         function (data, status) {
-         
-        confirmation.a = data;
-  
+         confirmation.a = data;
         });
   }
-  
 
-  if (new_hp_brgy.trim().length === 0) //check if value is empty
+  if (update_hp_select_new_stats.trim().length === 0) //check if value is empty
   {
-    $("#update_hp_select_barangay").addClass("is-invalid");
-    $("#update_hp_select_brg_list .selectize-control").addClass("is-invalid");
+    $("#update_hp_select_new_stats").addClass("is-invalid");
+    $("#s_t .selectize-control").addClass("is-invalid");
+    update_validator = false;
   }
-  else if (new_hp_name.trim().length === 0) //check if value is empty
+  else if (update_hp_select_new_stats === "Inactive (Dead)" && update_hp_select_cause_of_death.trim().length === 0) //check if value is empty
   {
-    $("#update_hp_select_resident").addClass("is-invalid");
-    $("#update_hp_select_resident_list .selectize-control").addClass("is-invalid");
+    $("#update_hp_select_cause_of_death").addClass("is-invalid");
+    $("#co_l .selectize-control").addClass("is-invalid");
+    update_validator = false;
   }
-  else if (new_hp_diseases.trim().length === 0) //check if value is empty
+  else if (update_hp_select_cause_of_death === "Other" && update_hp_select_other.trim().length === 0) //check if value is empty
   {
-    $("#update_hp_select_diseases").addClass("is-invalid");
-    $("#update_hp_select_diseases_list .selectize-control").addClass("is-invalid");
+    $("#update_hp_select_other").addClass("is-invalid");
+    update_validator = false;
   }
-  else 
+  else if (new_hp_philhealth.trim().length != 0 && new_hp_philhealth.length === 12)
   {
-      if (new_hp_philhealth.trim().length != 0 && new_hp_philhealth.length === 12)
-      {
-        submit_update_hp_lists()
-      }
-      else if (new_hp_philhealth.trim().length === 0)
-      {
-        new_hp_philhealth = "No PhilHealth";
-        submit_update_hp_lists()
-      }
-      else
-      {
-          $("#update_philhealth").addClass("is-invalid");
-      }
+    var update_validator = true;
   }
+  else if (new_hp_philhealth.trim().length === 0)
+  {
+    new_hp_philhealth = "No PhilHealth";
+    var update_validator = true;
+  }
+  else
+  {
+      $("#update_philhealth").addClass("is-invalid");
+      update_validator = false;
+  }
+
+
+  if(update_validator === true)
+  {
+    submit_update_hp_lists()
+  }
+
 
 
 
 });
 //update hp end
-
-//inactive hp
-$("#delete_hp_btn").click(function()
-{
-  $.post("functions/update-functions/inactive-hp.php", {
-    hp_id: hp_id_value,
-  
-  },
-  function (data, status) {
-  confirmation.a = data;
-
-  });
-})
-//inactive hp end
 
 //active hp
 $("#active_hp_btn").click(function()
@@ -766,6 +776,38 @@ $("#active_hp_btn").click(function()
 })
 //active hp end
 
+$("#delete_hp_btn_final").click(function()
+{
+  $.post("functions/update-functions/update-hp.php", {
+    hp_id: hp_id_value,
+    delete:'set'
+    },
+    function (data, status) {
+      confirmation.a = data;
+    });
+})
+
+//turn 123 into 1st 2nd 3rd
+function getOrdinal(n) {
+  let ord = 'th';
+
+  if (n % 10 == 1 && n % 100 != 11)
+  {
+    ord = 'st';
+  }
+  else if (n % 10 == 2 && n % 100 != 12)
+  {
+    ord = 'nd';
+  }
+  else if (n % 10 == 3 && n % 100 != 13)
+  {
+    ord = 'rd';
+  }
+
+  return ord;
+}
+//turn 123 into 1st 2nd 3rd end
+
 //get cell value when selected
 function get_hp_table_cell_value()
 {
@@ -779,61 +821,180 @@ function get_hp_table_cell_value()
     var col2=currentRow.find("td:eq(2)").text().trim($(this).text()); // get current row 1st TD value
     var col3=currentRow.find("td:eq(3)").text().trim($(this).text()); // get current row 1st TD value
     var col4=currentRow.find("td:eq(4)").text().trim($(this).text()); // get current row 1st TD value
+    var col5=currentRow.find("td:eq(5)").text().trim($(this).text()); // get current row 1st TD value
+    var col6=currentRow.find("td:eq(6)").text().trim($(this).text()); // get current row 1st TD value
     var col7=currentRow.find("td:eq(7)").text().trim($(this).text()); // get current row 1st TD value
+    var col8=currentRow.find("td:eq(8)").text().trim($(this).text()); // get current row 1st TD value
+    var col9=currentRow.find("td:eq(9)").text().trim($(this).text()); // get current row 1st TD value
+    var col10=currentRow.find("td:eq(10)").text().trim($(this).text()); // get current row 1st TD value
 
-    fullname_txt = col1 + " " + col2 + " " +col3;
+    fullname_txt = col2 + " " + col3+ " " +col4;
     disease_txt = col0;
-    select_brgy = col4;
+    select_brgy = col5;
     philhealth_number = col7;
-
-
-    var $select = $("#update_hp_select_barangay").selectize();
-    var selectize = $select[0].selectize;
-    selectize.setValue(selectize.search(select_brgy).items[0].id);
-
-    var $select = $("#update_hp_select_resident").selectize();
-    var selectize = $select[0].selectize;
-    selectize.setValue(selectize.search(fullname_txt).items[0].id);
     
-    var $select = $("#update_hp_select_diseases").selectize();
+
+    $.ajaxSetup({async:false});
+    $.getJSON('functions/display-functions/get_hp_dates.php', 
+    {
+      hp_id_value:hp_id_value,
+      recover_date:"set"
+    }, 
+    function (data, textStatus, jqXHR) 
+    {
+      let dateStr = data;
+      let dateObj = new Date(dateStr);
+      let readableDate = dateObj.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'}); 
+      $("#update_hp_recover_date").text(readableDate);
+
+    });
+
+    $.ajaxSetup({async:false});
+    $.getJSON('functions/display-functions/get_hp_dates.php', 
+    {
+      hp_id_value:hp_id_value,
+      death_date:"set"
+    }, 
+    function (data, textStatus, jqXHR) 
+    {
+      let dateStr = data;
+      let dateObj = new Date(dateStr);
+      let readableDate = dateObj.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+      $("#update_hp_death_date").text(readableDate);
+    });
+
+    
+  
+    $.ajaxSetup({async:false});
+    $.getJSON('functions/display-functions/get_hp_dates.php', 
+    {
+      hp_id_value:hp_id_value,
+      occurrence:"set"
+    }, 
+    function (data, textStatus, jqXHR) 
+    {
+      $("#update_hp_occurrence").text(data+getOrdinal(data)+" Occurrence");
+
+    });
+
+    $.ajaxSetup({async:false});
+    $.getJSON('functions/display-functions/get_hp_dates.php', 
+    {
+      hp_id_value:hp_id_value,
+      recovery:"set"
+    }, 
+    function (data, textStatus, jqXHR) 
+    {
+      $("#update_hp_recovery").text(data);
+    });
+
+
+    $.ajaxSetup({async:false});
+    $.getJSON('functions/display-functions/get_hp_dates.php', 
+    {
+      hp_id_value:hp_id_value,
+      cause_of_death:"set"
+    }, 
+    function (data, textStatus, jqXHR) 
+    {
+      $("#update_hp_death").text(data);
+
+    });
+
+    $.ajaxSetup({async:false});
+    $.getJSON('functions/display-functions/get_hp_dates.php', 
+    {
+      hp_id_value:hp_id_value,
+      philnum:"set"
+    }, 
+    function (data, textStatus, jqXHR) 
+    {
+      $("#philNum").text(data);
+      $("#update_philhealth").val(data); 
+
+    });
+
+
+    let dateStr = col9;
+    let dateObj = new Date(dateStr);
+    let readableDate = dateObj.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+    $("#date_created").text(readableDate);
+    $("#update_hp_select_barangay").text(select_brgy);
+    $("#update_hp_select_resident").text(fullname_txt);
+    $("#update_hp_select_contact").text(col8); 
+    $("#update_hp_status").text(col10);
+    $("#update_hp_age").text(col7);
+    $("#update_hp_gender").text(col6);
+    $("#update_hp_diagnosis").text(col1);
+
+    var $select = $("#update_hp_select_new_stats").selectize();
     var selectize = $select[0].selectize;
-    selectize.setValue(selectize.search(disease_txt).items[0].id);
-
-    $("#update_philhealth").val(philhealth_number);
+    selectize.setValue(selectize.search("Active").items[0].id);
 
 
+    if($("#update_hp_recover_date").text() != "Invalid Date")
+    {
+        $("#d_r").removeClass("d-none") 
+        $("#r_o").removeClass("d-none") 
+    }
+    else
+    {
+      $("#d_r").addClass("d-none") 
+      $("#r_o").addClass("d-none")
+    }
+
+    if($("#update_hp_death_date").text() != "Invalid Date")
+    {
+        $("#d_d").removeClass("d-none")
+        $("#c_d").removeClass("d-none")
+    }
+    else
+    {
+      $("#d_d").addClass("d-none")
+      $("#c_d").addClass("d-none")
+    }
     
     });
 }
 //get cell value when selected end
 
+
 //filter date range
 $("#date_range_btn").click(function()
 {
-  var $select = $("#update_hp_select_barangay").selectize();
+  var $select = $("#update_hp_select_new_stats").selectize();
   var selectize = $select[0].selectize;
   selectize.setValue(selectize.search("").items[0].id);
 
   var from_input = $("#range_from").val()
   var to_input = $("#range_to").val()
+  var click_min_age = $("#age_min").val();
+  var click_max_age = $("#age_max").val();
+  var click_filter_status = $("#filter_status").val(); 
 
   var d_from = new Date(from_input)
   var d_to = new  Date(to_input)
   var validator = true
 
-  if(from_input.trim().length === 0)
+  if(click_min_age.length === 1 )
   {
-      $("#range_from").addClass("is-invalid");
-      validator = false
+    click_min_age = "0"+click_min_age
   }
-  else if(to_input.trim().length === 0)
+
+  if(click_max_age.length === 1 )
   {
-      $("#range_to").addClass("is-invalid");
-      validator = false
+    click_max_age = "0"+click_max_age
   }
-  else if(d_from > d_to)
+
+  if(d_from > d_to)
   {
     $("#range_to").addClass("is-invalid");
+    validator =false
+  }
+
+  if(click_max_age != "" && click_min_age > click_max_age)
+  {
+    $("#age_max").addClass("is-invalid");
     validator =false
   }
 
@@ -842,15 +1003,56 @@ $("#date_range_btn").click(function()
   {
         date_range_from = from_input;
         date_range_to = to_input;
+        min_age = click_min_age
+        max_age = click_max_age
+        filter_status = click_filter_status
         query_btn = "clicked";
-
+        
         table.destroy()
         $(".dataTables_length").remove();
         $(".dataTables_info").remove();
         $(".dataTables_paginate ").remove();
 
         load_data_tables()
-        active_inactive()
+        $("#filter_table").modal("toggle");
+
+        var result_tittle = "Filtered results for: "
+        var results =  [];
+        let a = 0
+        if(filter_status != "")
+        {
+          results[a] = " Status: "+filter_status+""
+          a+=1
+        }
+        if(min_age != "")
+        {
+          results[a] = "  Min Age: "+min_age+""
+          a+=1
+        }
+        if(max_age != "")
+        {
+          results[a] = "  Max Age: "+max_age+""
+          a+=1
+        }
+        if(date_range_from != "")
+        {
+  
+          results[a]  = "  Min Date: "+date_range_from+""
+          a+=1
+        }
+        if(date_range_to != "")
+        {
+
+          results[a] = "  Max Date: "+date_range_to+""
+          a+=1
+        }
+
+
+        if (results.length > 0) 
+        {
+          $("#search_result").html("<a><span class='me-2 fw-semibold' >"+result_tittle+"</span><span>"+results+"</span></a>")
+        }
+
   }
 
 })
@@ -862,28 +1064,24 @@ $("#refresh_table").click(function()
 
   $("#range_from").val("")
   $("#range_to").val("")
+  $("#range_from").val("")
+  $("#range_to").val("")
+  $("#age_min").val("");
+  $("#age_max").val("");
+  $("#search_result").html("")
+
+  var $select = $('#filter_status').selectize();
+  var control = $select[0].selectize;
+  control.clear();
 
   query_btn = "unclicked";
-  if(active_inactive_variable == "(Inactive)")
-  {
-    $("#show_active").removeClass("d-none")
-    $("#show_inactive").addClass("d-none")
-  }
-  else
-  {
-    $("#show_inactive").removeClass("d-none")
-    $("#show_active").addClass("d-none")
-  }
-
   swal.close();
 
   table.destroy()
   $(".dataTables_length").remove();
   $(".dataTables_info").remove();
   $(".dataTables_paginate ").remove();
-
   load_data_tables()
-  active_inactive()
 })
 //refresh table back to current data end
 
@@ -896,43 +1094,51 @@ function opentip_tooltip()
 }
 //generate a tooltip end
 
-//table draw active and inactive
-function active_inactive()
-{
-  if(active_inactive_variable !== "(Inactive)")
+
+//permanently delete hp
+$("#delete_hp_btn_permanently").click(function()
+{  
+  $('#delete_hp_permanently').modal('toggle');
+})
+
+//show cause of death field
+$("#update_hp_select_new_stats").on('change', function(){
+
+  if($("#update_hp_select_new_stats").val() === "Inactive (Dead)")
   {
-    table.search("(Active)").draw();
+    $("#co_l").removeClass("d-none")
   }
   else
   {
-    table.search("(Inactive)").draw();
+    $("#co_l").addClass("d-none")
+    $("#o_c_d").addClass("d-none")
+
+    var $select = $('#update_hp_select_cause_of_death').selectize();
+    var control = $select[0].selectize;
+    control.clear();
   }
-}
-//table draw active and inactive
+  
+});
 
-//show inacttive list
-$("#show_inactive").click(function()
-{
-  active_inactive_variable = "(Inactive)";
+//show cause of death field
+$("#update_hp_select_cause_of_death").on('change', function(){
 
-  $("#show_active").removeClass("d-none")
-  $("#show_inactive").addClass("d-none")
-  swal.close();
-  active_inactive()
-})
-//show inactive list end
+  if($("#update_hp_select_cause_of_death").val() === "Other")
+  {
+    $("#o_c_d").removeClass("d-none")
+  }
+  else
+  {
+    $("#o_c_d").addClass("d-none")
 
-//show active list
-$("#show_active").click(function()
-{
-  active_inactive_variable = "(Active)";
+    var $select = $('#update_hp_select_other').selectize();
+    var control = $select[0].selectize;
+    control.clear();
+  }
+  
+});
 
-  $("#show_inactive").removeClass("d-none")
-  $("#show_active").addClass("d-none")
-  swal.close();
-  active_inactive()
-})
-//show inactive list end
+
 
 
 

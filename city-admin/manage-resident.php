@@ -128,7 +128,7 @@ include('includes/sidebar.php');
 
 <tfoot class=" table-secondary fw-semibold shadow-sm" id="th_1">
   <tr class="align-middle" >
-    <td id="Barangay" style="min-width: 100px;"></td>
+    <td id="Barangay" style="min-width: 130px;"></td>
     <td id="First Name" style="min-width: 100px;"></td>
     <td id="Middle Name" style="min-width: 125px;"></td>
     <td id="Last Name" style="min-width: 100px;"></td>

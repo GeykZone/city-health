@@ -10,7 +10,12 @@
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-    $resident_names[] = $row['first_name']." ".$row['middle_name']." ".$row['last_name']." ".$row['resident_id'];
+
+    $fname = str_replace(' ', '_', $row['first_name']);
+    $mname = str_replace(' ', '_', $row['middle_name']);
+    $lname = str_replace(' ', '_', $row['last_name']);
+
+    $resident_names[] = $fname." ".$mname." ".$lname." ".$row['resident_id'];
     }
         print json_encode($resident_names);
     }

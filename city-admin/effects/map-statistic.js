@@ -33,10 +33,32 @@ $(document).ready(function()
     $("#nav_hp").addClass("active");
     date_range()
     select_with_search_box()
-    display_map();
-
+    
     $( "#range_from" ).val(current_year_from);
     $( "#range_to" ).val(current_year_to);
+
+    if (Cookies.get('dashboard_map') != undefined) {
+                
+        active_inactive = "(Active)";
+        query_click = "clicked";
+
+        date_range_from = current_year_from;
+        date_range_to = current_year_to;
+
+        if(active_inactive === "default")
+        {
+         active_inactive_validator = "default"
+        }
+        else
+        {
+          active_inactive_validator = "(Active)"
+        }
+        $("#active_only_btn").removeClass("d-none")
+        $("#all_cases").addClass("d-none")
+        current_status()
+    }
+
+    display_map();
 
     oneTip();
 
@@ -217,7 +239,7 @@ function display_map()
     container: 'map', // container ID
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/light-v10', // style URL
-    center: [123.7206, 8.4548], // starting position [lng, lat]
+    center: [123.765389, 8.465992], // starting position [lng, lat]
     zoom: 12,
     pitch: 0,
     bearing: -17.6,
@@ -549,6 +571,112 @@ function display_map()
                 
                 $('#show_details').modal('toggle');
             });
+
+            if (Cookies.get('dashboard_map') != undefined) {
+                
+                var divId = Cookies.get('dashboard_map');
+                divId = parseInt(divId)
+                var cont = locations.features[divId]
+                var mark;
+                var details_title;
+                var cluster;
+
+                if(cont.description <= 1)
+                {
+                    mark= 'green';
+                    cluster = 'Low'
+                }
+                else if(cont.description <= 2)
+                {
+                    mark = 'yellow';
+                    cluster = 'Moderate'
+
+                }
+                else if(cont.description <= 3)
+                {
+                    mark = 'orange';
+                    cluster = 'High'
+                }
+                else
+                {
+                    mark= 'red';
+                    cluster = 'Critical'
+                }
+
+                $("#details_title").text(cont.title)
+
+                if(active_inactive_validator === "default")
+                {
+                    if(cont.description != 1)
+                    {
+                      details_title = "There are "+cont.description+" health cases in total.";
+                    }
+                    else
+                    {
+                      details_title = "There is only "+cont.description+" health case in total.";
+                    }
+                }
+                else
+                {
+                  if(cont.description != 1)
+                  {
+                    details_title = "There are "+cont.description+" currently active health cases in total.";
+                  }
+                  else
+                  {
+                    details_title = "There is only "+cont.description+" currently active health case in total.";
+                  }
+                }
+
+                $('.details_content_label').remove();
+                $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
+                
+                $('.details_category_content').remove();
+                $("#details_category").append('<div class="details_category_content border-0 shadow-sm align-middle d-flex pt-2 bg-info mb-3 rounded-2 text-white px-2"><div style="width:30px; height:30px; margin-bottom:8px;" class="rounded-circle bg-white">'+
+                '<div style="width:20px; height:20px; margin-top:4px; margin-left:4px;" class="'+mark+'"></div></div><label style="margin-top: 3px;" class="form-label ms-2">'+cluster+' number of health cases.</label></div>');
+
+                //to get the occuring diseases in that area
+                var all_diseases_that_occured = cont.title;
+                var display_diseases_that_occured = "";
+    
+                $.ajaxSetup({async:false});
+                $.getJSON('functions/display-functions/get-occuring-diseases.php', 
+                {
+                    query_click:query_click,
+    
+                    disease_type:disease_type,
+                    date_range_from:date_range_from,
+                    date_range_to:date_range_to,
+                    active_inactive:active_inactive,
+                    gender:gender,
+    
+                    current_year_from:current_year_from,
+                    current_year_to:current_year_to,
+    
+                    all_diseases_that_occured: all_diseases_that_occured
+                    
+                },     
+                function (data, textStatus, jqXHR) 
+                {
+                    //display_diseases_that_occured = objToString (data);
+                    //display_diseases_that_occured = display_diseases_that_occured.slice(0, -2);
+                    display_diseases_that_occured = data;
+                });
+                //to get the occuring diseases in that area end
+
+                $('.details_list').remove();
+                $.each(display_diseases_that_occured, function( index,value ) {
+        
+                  $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label"><span class="fa-solid me-2"></span>'+value+'</label></div>');
+              
+                });
+                
+                
+                $('#show_details').modal('toggle');
+
+                Cookies.remove('dashboard_map')
+            }
+
            }
            markers()
            

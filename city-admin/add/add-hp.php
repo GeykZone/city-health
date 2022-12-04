@@ -37,7 +37,7 @@
         </div>
 
         <div class="mb-3" id="add_hp_select_diseases_list">
-        <label for="add_hp_select_diseases" class="form-label">Type of Diseases*</label>
+        <label for="add_hp_select_diseases" class="form-label">Select Diagnosis*</label>
         <select id="add_hp_select_diseases"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm">
             <option value="">Select Type.</option>
             <?php

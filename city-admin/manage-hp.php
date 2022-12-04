@@ -24,6 +24,7 @@ include('includes/sidebar.php');
 </header>
 <!--header end-->
 
+
 <!-- add hp -->
 <?php include "add/add-hp.php" ?>
 <!-- add hp end -->
@@ -32,13 +33,25 @@ include('includes/sidebar.php');
 <?php include "update/update-hp.php" ?>
 <!-- update hp end -->
 
-<!-- delete hp -->
-<?php include "update/inactive-hp.php" ?>
-<!-- delete hp end -->
-
 <!-- active hp -->
 <?php include "update/active-hp.php" ?>
 <!-- active hp end -->
+
+<!-- delete hp -->
+<?php include "delete/delete-hp.php" ?>
+<!-- delete hp end -->
+
+<!-- occurence hp -->
+<?php include "add/add-hp-occurrence.php" ?>
+<!-- occurence hp end -->
+
+<!-- detail hp -->
+<?php include "display/detail-resident-hp.php" ?>
+<!-- detail hp end -->
+
+<!-- filter hp -->
+<?php include "update/filter-table.php" ?>
+<!-- filter hp end -->
 
 <div class="body flex-grow-1 px-5 pt-3 pb-3"> 
 <div class="container-fluid">
@@ -57,30 +70,17 @@ include('includes/sidebar.php');
 
   <div class=" container-fluid">
   <div class=" dataTables_wrapper dt-bootstrap5 row" id="buttons">
-  <div class="col-lg-2  mb-3 text-sm-start  hide_first_load">
-    <label for="range_from"  class="mb-1 text-secondary">Start Date : </label>
-  <input type="date" id="range_from" class="form-control birthdate text-sm-start shadow-sm"  placeholder="From">
-  <label class="invalid-feedback">Invalid start date.</label>
+
+  <div class="col-12 mb-2" id="search_result"></div>
+
+  <div class="col-lg-6  mt-1 mb-2 mb-lg-0 mb-md-2 mb-sm-2 align-content-center hide_first_load dropdown-center">
+  <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="filter_this_table" data-coreui-toggle="modal" href="#filter_table" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
   </div>
 
-  <div class="col-lg-2 mb-3 text-sm-start  hide_first_load">
-  <label for="range_to"  class="mb-1 text-secondary">End Date : </label>
-  <input type="date" id="range_to" class="form-control birthdate  text-sm-start shadow-sm" placeholder="From">
-  <label class="invalid-feedback">Invalid end date.</label>
-  </div>
-
-  <div class="col-lg-2 mb-3 mt-1 text-sm-start  hide_first_load">
-    <br class=" d-sm-none d-lg-block d-none">
-  <button  class="filter_btn rounded-2 border-0 shadow-sm" id="date_range_btn" type="button" style="width:115px; font-weight:bold; padding-top: 7px; padding-bottom: 7px; padding-right:20px; padding-left:20px;">
-      <span class="fa-solid me-1"></span> FILTER</button>
-  </div>
-
-  <div class="col-lg-6 col-md-6 text-lg-end mt-1 align-content-center hide_first_load dropdown-center">
-  <br class=" d-sm-none d-lg-block d-none">
+  <div class="col-lg-6  text-lg-end mt-1 align-content-center hide_first_load dropdown-center">
   <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 me-2 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder dropdown-toggle" id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid ms-1"></span></a>
   <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
-    <li  id="show_inactive" type="button" ><a class="dropdown-item"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Inactive List</a></li>
-    <li class="d-none" id="show_active"  type="button"><a class="dropdown-item" ><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Active List</a></li>
+  <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Health Profiles</a></li>
     <li><a class="dropdown-item" href="graphical-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Graphical Statistic</a></li>
     <li><a class="dropdown-item" href="map-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Map Visualization</a></li>
   </ul>
@@ -96,16 +96,16 @@ include('includes/sidebar.php');
       <table class="table table-striped table-borderless rounded-3 table-condensed w-100" id="hp_table"> 
       <thead class="table-info  fw-semibold shadow-sm">
           <tr class="align-middle ">
-            <th id="th">Disease</th>
+          <th id="th">Occurrence</th>
+            <th id="th">Diagnosis</th>
             <th id="th">First Name</th>
             <th id="th" >Middle Name</th>
             <th id="th">Last Name</th>
             <th id="th">Barangay</th>
             <th >Gender</th>
             <th >Age</th>
-            <th id="th">PhilHealth</th>
             <th>Contact</th>
-            <th id="th">Date Created</th>
+            <th id="th">Date of Diagnosis</th>
             <th >Status</th>
             <th class="text-end px-4">Settings</th>
           </tr>
@@ -116,16 +116,16 @@ include('includes/sidebar.php');
 
         <tfoot class=" table-secondary fw-semibold shadow-sm" id="th_1">
           <tr class="align-middle" >
-            <td id="Disease" style="min-width: 100px;"></td>
+            <td id="Occurrence"style="min-width: 100px;" ></td>
+            <td id="Diagnosis" style="min-width: 100px;"></td>
             <td id="First Name" style="min-width: 100px;"></td>
             <td id="Middle Name" style="min-width: 125px;"></td>
             <td id="Last Name" style="min-width: 100px;"></td>
             <td id="Barangay" style="min-width: 130px;"></td>
             <td id="Gender" style="min-width: 73px;"></td>
             <td id="Age"  style="min-width: 55px;"></td>
-            <td id="PhilHealth"style="min-width: 100px;" ></td>
             <td id="Contact" style="min-width: 100px;"></td>
-            <td id="Date created" style="min-width: 100px;"></td>
+            <td id="Data of Diagnosis" style="min-width: 137px;"></td>
             <td id="status" style="min-width: 70px;"></td>
             <td id="settings" style="min-width:100px;"></td>
           </tr>

@@ -448,7 +448,17 @@ table.columns().every(function () {
   dob = new Date(dob);
   today = new Date();
   age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
-  resident_age = "-"+age+"-";
+  age = age.toString()
+      
+  if(age.length === 1)
+  {
+    resident_age = "0"+age;
+  }
+  else
+  {
+    resident_age = age;
+  }
+
 
   var contact = $("#contact").val();
   var thisemail = $("#email").val();
@@ -650,7 +660,17 @@ table.columns().every(function () {
       dob = new Date(dob);
       today = new Date();
       upadateage = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
-      update_resident_age = "-"+upadateage+"-";
+      upadateage = upadateage.toString()
+      
+      if(upadateage.length === 1)
+      {
+        update_resident_age = "0"+upadateage;
+      }
+      else
+      {
+        update_resident_age = upadateage;
+      }
+
       var new_age = update_resident_age;
 
       var new_civil = $('#update_civil_status').val();

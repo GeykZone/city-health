@@ -473,7 +473,7 @@ function number_of_resident_chart()
       x: {
         beginAtZero: true,
         grid: {
-          display: false,
+          display: true,
           drawBorder: false
         },
         ticks: {
@@ -485,7 +485,7 @@ function number_of_resident_chart()
         beginAtZero: true,
         grid: {
           display: true,
-          drawBorder: true
+          drawBorder: false
         },
         ticks: {
           padding: 10,
