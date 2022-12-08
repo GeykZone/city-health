@@ -32,8 +32,12 @@ var data_set_handler = [];
 var tittle_barangay = "";
 var active_inactive_validator = "default"
 var details_title;
+var title_diagnosis;
 
 var sort = "names";
+
+var min_age = "default";
+var max_age = "default";
 
 
 $(document).ready(function()
@@ -99,33 +103,92 @@ function current_status()
 
     if(active_inactive === "default")
     {
-        $("#map_cases").text("All documented diseases ")
-        $(".details_head_status").text("All documented diseases.")
+        $("#map_cases").text("All documented diseases, ")
+        
     }
     else
     {
-        $("#map_cases").text("All diseases that are currently active and were documented ") 
-        $(".details_head_status").text("Health cases that are currently active.") 
+        $("#map_cases").text("All diseases that are currently active, and were documented ") 
+     
     }
     
     if(gender === "default")
     {
         $("#map_gender").text("")
-        $(".details_head_gender").text("Male and female records.")
+        $(".details_head_gender").text("Male and female records")
     }
     else
     {   
         if(gender === "F (Female)")
         {
             $("#map_gender").text(", female records")
-            $(".details_head_gender").text("Female records.")
+            $(".details_head_gender").text("Female records")
         }
         else if(gender === "M (Male)")
         {
             $("#map_gender").text(", male records")
-            $(".details_head_gender").text("Male records.")
+            $(".details_head_gender").text("Male records")
         }
           
+    }
+
+    if(min_age != "default")
+    {
+       
+        $("#map_min_age").text(", minimum age of "+min_age)
+        $(".details_head_age").text("Minimum age of "+min_age)
+    }
+    else
+    {
+        if(max_age != "default")
+        {
+    
+            $("#map_max_age").text(", maximum age of "+max_age) 
+            $(".details_head_age").text("Maximum age of "+max_age)
+        }
+        else
+        {
+            $("#map_min_age").text("")
+            $(".details_head_age").text("All ages")
+        }
+    }
+
+    if(max_age != "default")
+    {
+
+        $("#map_max_age").text(", maximum age of "+max_age) 
+        $(".details_head_age").text("Maximum age of "+max_age)
+    }
+    else
+    {
+        if(min_age != "default")
+        {
+        
+            $("#map_min_age").text(", minimum age of "+min_age)
+            $(".details_head_age").text("Minimum age of "+min_age)
+        }
+        else
+        {
+            $("#map_max_age").text("")
+            $(".details_head_age").text("All ages")
+        }
+    }
+
+    if(min_age != "default" && max_age != "default") 
+    {
+      
+        if(min_age === max_age )
+        {
+            $("#map_min_age").text(", all "+min_age+" years old")
+            $("#map_max_age").text("")
+            $(".details_head_age").text("All "+min_age+" years old.")
+        }
+        else
+        {
+            $("#map_min_age").text(", minimum age of "+min_age)
+            $("#map_max_age").text(", maximum age of "+max_age)
+            $(".details_head_age").text("Minimum age of "+min_age+", maximum age of "+max_age+".")
+        }
     }
 }
 //tittle page cureent status end
@@ -220,6 +283,8 @@ function chart_array()
     date_range_to:date_range_to,
     active_inactive:active_inactive,
     gender:gender,
+    max_age:max_age,
+    min_age:min_age,
 
     current_year_from:current_year_from,
     current_year_to:current_year_to
@@ -231,7 +296,7 @@ function chart_array()
     
   });
 
-  console.log(x_y_value)
+  //console.log(x_y_value)
   
   var textArr = x_y_value;
   var hpTotal_arr = [];
@@ -339,27 +404,27 @@ function chart_array()
 
     if(value <= 1){
        myColors[index]="#b3e6ffff";
-       myPoints[index]=  15;
+       myPoints[index]=  5;
 
       data_set_handler.push(data_set_handler_single)
     }
     else if(value <= 2)
     {
       myColors[index]="#80d5ffff";
-      myPoints[index]=  20 ;
+      myPoints[index]=  10 ;
 
       data_set_handler.push(data_set_handler_single)
     }
     else if(value <= 4)
     {
       myColors[index]="#4dc4ffff";
-      myPoints[index]= 25;
+      myPoints[index]= 15;
 
       data_set_handler.push(data_set_handler_single)
     }
     else{
       myColors[index]="#07a3f1ff";
-      myPoints[index]=  35;
+      myPoints[index]=  20;
     }
 
   });
@@ -371,19 +436,23 @@ function chart_array()
 function number_of_resident_chart()
 {
   chart_array()
-  console.log(x_value)
+  //console.log(x_value)
   const data_sets = [{
     label: "",
     data: yValues,
-    backgroundColor: myColors,
-    borderColor: "#80d5ffff",
+    backgroundColor: "#67c2ff1a",
+    pointBackgroundColor: myColors,
+    pointHoverBackgroundColor: myColors,
+    borderColor: myColors,
     borderWidth: 0,
-    //borderRadius: 8,
+    borderRadius: 8,
     pointRadius: myPoints,
     hoverRadius:myPoints,
     borderSkipped: false,
     barPercentage: 0.8,
     categoryPercentage:0.8,
+    tension: 0.3,
+    fill: true,
    // stepped: true,
   },]
 
@@ -399,10 +468,30 @@ function number_of_resident_chart()
       {
         var current_index = elements[0].index;
 
-        $("#details_title").text(x_value[current_index])
+        title_diagnosis = x_value[current_index];
+        $("#details_title").text(x_value[current_index]+" Health Statistic")
         var all_diseases_that_occured = xValues[current_index];
         var display_diseases_that_occured = "";
         var details_title;
+
+        if(active_inactive === "default")
+        {
+            $(".details_head_status").text("All documented health cases caused by "+title_diagnosis+"")
+
+            if(barangay_name != "default")
+            {
+              $(".details_head_status").text("All documented health cases caused by "+title_diagnosis+" disease in barangay "+tittle_barangay)
+            }
+        }
+        else
+        {
+            $(".details_head_status").text("All documented health cases that are currently active caused by "+title_diagnosis+"") 
+
+            if(barangay_name != "default")
+            {
+              $(".details_head_status").text("All documented health cases that are currently active caused by "+title_diagnosis+" disease in barangay "+tittle_barangay)
+            }
+        }
 
         if(active_inactive_validator === "default")
         {
@@ -445,6 +534,8 @@ function number_of_resident_chart()
           date_range_to:date_range_to,
           active_inactive:active_inactive,
           gender:gender,
+          max_age:max_age,
+          min_age:min_age,
 
           current_year_from:current_year_from,
           current_year_to:current_year_to,
@@ -461,7 +552,7 @@ function number_of_resident_chart()
         $('.details_list').remove();
         $.each(display_diseases_that_occured, function( index,value ) {
 
-          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label"><span class="fa-solid me-2"></span>'+value+'</label></div>');
+          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 d-flex align-items-center text-white px-2"><label class="form-label">'+value+'</label></div>');
       
         });
 
@@ -604,50 +695,66 @@ $("#disease_all_cases").click(function()
 })
 //active and all-time cases end
 
-//select deseases and gender
-$("#disease_selecte_barangay").change(function(){ 
-    
-  var barangay_id = $("#disease_selecte_barangay").val();
-  tittle_barangay = $("#disease_selecte_barangay").text();
-
-  if(barangay_id.trim().length != 0)
-  {
-      barangay_name = barangay_id;
-  }
-  else
-  {
-      barangay_name = "default"
-      tittle_barangay = ""
-  }
-  
-});
-
-$("#disease_select_gender").change(function(){ 
-
-  var gender_selected = $("#disease_select_gender").val();
-
-  if(gender_selected.trim().length != 0)
-  {
-      gender = gender_selected;
-  }
-  else
-  {
-      gender = "default"
-  }
-  
-});
-//select deseases and gender end
-
 //filter chart
 $("#disease_date_range_btn").click(function()
 {
     
      var from_input = $("#disease_range_from").val()
      var to_input = $("#disease_range_to").val()
-
+     var barangay_id = $("#disease_selecte_barangay").val();
+     tittle_barangay = $("#disease_selecte_barangay").text();
+     var gender_selected = $("#disease_select_gender").val();
+     var click_min_age = $("#age_min").val();
+     var click_max_age = $("#age_max").val();
+   
      var d_from = new Date(from_input)
      var d_to = new  Date(to_input)
      var validator = true
+
+     click_min_age = parseInt(click_min_age);
+     click_max_age = parseInt(click_max_age);
+
+     if(!isNaN(click_max_age) && click_min_age > click_max_age)
+     {
+       $("#age_max").addClass("is-invalid");
+       $("#age_max").val("");
+       validator =false
+     }
+     if(isNaN(click_min_age))
+     {
+         min_age =  "default";
+     }
+     else
+     {
+         min_age = click_min_age;
+     }
+     if(isNaN(click_max_age))
+     {
+         max_age =  "default";
+     }
+     else
+     {
+         max_age = click_max_age;
+     }      
+
+     if(barangay_id.trim().length != 0)
+     {
+         barangay_name = barangay_id;
+     }
+     else
+     {
+         barangay_name = "default"
+         tittle_barangay = ""
+     }
+     if(gender_selected.trim().length != 0)
+     {
+         gender = gender_selected;
+     }
+     else
+     {
+         gender = "default"
+     }
+     
 
      if(from_input.trim().length === 0)
      {
@@ -720,8 +827,12 @@ $("#current_year").click(function()
      date_range_from = "default";
      date_range_to = "default";
      gender = "default";
+     min_age = "default";
+     max_age = "default";
      query_click = "unclicked"
 
+     $("#age_min").val("");
+     $("#age_max").val("");
      $( "#disease_range_from" ).val(current_year_from);
      $( "#disease_range_from" ).removeClass("is-invalid");
      $( "#disease_range_to" ).val(current_year_to);

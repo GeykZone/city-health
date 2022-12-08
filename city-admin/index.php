@@ -36,7 +36,7 @@ include('includes/sidebar.php');
 
 #map_container
 {
-min-height: 455px;
+min-height: 524px;
 }
 
 .mapboxgl-ctrl-bottom-right
@@ -150,36 +150,52 @@ min-height: 455px;
 
   <div class="col-lg-6 col-sm-12">
   <div class="row ">
-      <div class="col-lg-4 col-sm mb-4">
-        <div class="card bg-primary border-0 rounded-4 shadow-sm order-card"  style="height:100px;">
+    <div class="col-lg-12 col-sm-12 rounded-3 mb-4">
+        <div class="card border-0 rounded-3 shadow-sm order-card" >
+          <div class=" card-header rounded-top-3 bg-info p-0  border-0 shadow-sm ">
+          <h6 class="float-lg-start mt-2 mb-2 ms-3 float-md-start adjust_font_size  order-card">Shortcuts</h6>
+          </div>
+          <div class=" card-body row pb-3">
+          <div class="col-lg-3 col-sm ">
+        <div class="card bg-c-dark_blue border-0 rounded-4 shadow-sm order-card"  style="height:100px;">
         <div class="card-body adjust_font_size">
             Barangay Health Satatistic
           </div>
         </div>
       </div>
-
-      <div class="col-lg-4 col-sm mb-4">
-        <div class="card bg-info border-0 rounded-4 shadow-sm order-card"  style="height:100px ;">
+      <div class="col-lg-3 col-sm">
+        <div class="card bg-c-blue  border-0 rounded-4 shadow-sm order-card"  style="height:100px ;">
           <div class=" card-body adjust_font_size">
              Disease Statistic
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-sm mb-4">
-        <div class="card bg-c-blue  border-0 rounded-4 shadow-sm order-card"  style="height:100px ;">
+      <div class="col-lg-3 col-sm">
+        <div class="card  bg-c-light_blue border-0 rounded-4 shadow-sm order-card"  style="height:100px ;">
           <div class=" card-body adjust_font_size">
            Time Span
           </div>
         </div>
       </div>
+      <div class="col-lg-3 col-sm">
+        <div class="card   bg-c-medium_blue  border-0 rounded-4 shadow-sm order-card"  style="height:100px ;">
+          <div class=" card-body adjust_font_size">
+           Recoveries & Deaths
+          </div>
+        </div>
+      </div>
+          </div>
+        </div>
+      </div>
+     
       <div class="col-lg-12 col-sm-12 mb-4">
         <div class="card border-0 rounded-3 shadow-sm order-card" style="height:400px ;" >
-          <div class=" card-header rounded-top-4 bg-info p-0  border-0 rounded-top-3 shadow-sm ">
+          <div class=" card-header rounded-top-3 bg-info p-0  border-0 rounded-top-3 shadow-sm ">
           <h6 class="float-lg-start mt-2 mb-2 ms-3 float-md-start adjust_font_size  order-card">Current number of residents in each barangays</h6>
           </div>
           <div class=" card-body adjust_font_size">
             <div>
-            <div  class="mb-3" id="hp_chart_row" style="height:325px;  min-width:100%;">
+            <div  class="mb-3" id="hp_chart_row" style="height:335px;  min-width:100%;">
               <canvas class=""  id="myChart"></canvas> 
               </div>
             </div>
@@ -193,12 +209,12 @@ min-height: 455px;
   <div class="col-lg-6 col-sm-12">
   <div class="row ">
     <div class="col  col-sm-12 mb-4">
-      <div class="card border-0 shadow-sm border-0 rounded-4 shadow-sm" style="min-height:523px ;">
-        <div class=" card-header py-0  bg-info border-0 rounded-top-4 shadow-sm order-card" >
+      <div class="card border-0 shadow-sm border-0 rounded-3 shadow-sm">
+        <div class=" card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card" >
           <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card"> Active health cases <span id="map_from"></span><span id="map_to"></span>.</h6>
         </div>
         <div class=" card-body">
-        <div id="map_container" class=" card  rounded-4 border-0 shadow-sm">
+        <div id="map_container" class=" card  rounded-3 border-0 shadow-sm">
         <div id="map" class=" w-100 rounded-4"></div>
 
         </div>

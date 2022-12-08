@@ -9,7 +9,7 @@
       <div class="modal-body border-0 shadow-sm">
 
         
-      <form action="" id="update_hp_form" name="add_hp_form" method="post">
+      <form action="" id="show_deails" name="show_deails" method="post">
 
       <div class="mb-3" id="d_c">
         <label for="update_hp_date_created" id="wwww" class="form-label">Date of Diagnosis</label>
@@ -19,7 +19,7 @@
         </div>
         </div>
 
-        <div class="mb-3" id="update_hp_select_brg_list">
+        <div class="mb-3" id="diag_title">
         <label for="update_hp_diagnosis" id="wwww" class="form-label">Diagnosis</label>
         <div class="bg-light py-2  rounded-3" id="update_hp_diagnosis"  style="padding-left: 10px;"></div>
         <div class="invalid-feedback">
@@ -27,7 +27,7 @@
         </div>
         </div>
 
-        <div class="mb-3" id="update_hp_select_brg_list">
+        <div class="mb-3" id="occurr">
         <label for="update_hp_occurrence" id="wwww" class="form-label">Occurrence</label>
         <div class="bg-light py-2  rounded-3" id="update_hp_occurrence"  style="padding-left: 10px;"></div>
         <div class="invalid-feedback">
@@ -42,7 +42,14 @@
         Invalid selection.
         </div>
         </div>
-
+        
+        <div class="mb-3" id="i_i">
+        <label for="info_rec" id="wwww" class="form-label">Recovery Status</label>
+        <div class="bg-light py-2 rounded-3" id="info_rec" style="padding-left: 10px;"></div>
+        <div class="invalid-feedback">
+        Invalid selection.
+        </div>
+        </div>
 
         <div class="mb-3" id="d_r">
         <label for="update_hp_recover_date" id="wwww" class="form-label">Date of Recovery</label>

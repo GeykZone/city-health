@@ -9,7 +9,7 @@
       <div class="modal-body border-0 shadow-sm">
 
         
-      <form action="" id="edit_disease_form" name="edit_disease_form" method="post">
+      <form action="" id="uppdate_disease_form" name="edit_disease_form" method="post">
         <div class="mb-3">
           <label for="edited_disease" class="form-label">Disease*</label>
           <input type="text" name="edited_disease" class="shadow-sm form-control barangay-form" id="edited_disease" placeholder="Name of Disease">

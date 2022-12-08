@@ -335,6 +335,11 @@ class SSP {
             $sql = $bindings;
         }
 
+        /**
+         * 
+         * @var db $db
+         */
+
         $stmt = $db->prepare( $sql );
         //echo $sql;
 

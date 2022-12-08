@@ -14,18 +14,34 @@
       <fieldset>
 
       <div class="mb-3">
-        <label for="range_from" class="form-label">Date Start:</label>
-        <input  type="date" id="range_from" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="From">
+        <label for="age_min" class="form-label">Min Age:</label>
+        <input  type="number" id="age_min" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="Min Age">
         <div class="invalid-feedback">
-        Invalid start date.
+        Invalid min age.
         </div>
         </div>
 
         <div class="mb-3">
-        <label for="range_to" class="form-label">Date End:</label>
-        <input  type="date" id="range_to" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="To">
+        <label for="age_max" class="form-label">Max Age:</label>
+        <input  type="number" id="age_max" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="Max Age">
         <div class="invalid-feedback">
-        Invalid end date.
+        Invalid max age.
+        </div>
+        </div>
+
+      <div class="mb-3">
+        <label for="range_from" class="form-label">Min Date:</label>
+        <input  type="date" id="range_from" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="Min Date">
+        <div class="invalid-feedback">
+        Invalid min date.
+        </div>
+        </div>
+
+        <div class="mb-3">
+        <label for="range_to" class="form-label">Max Date:</label>
+        <input  type="date" id="range_to" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="Max Date">
+        <div class="invalid-feedback">
+        Invalid max date.
         </div>
         </div>
 

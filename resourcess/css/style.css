@@ -138,8 +138,21 @@ body {
   color: #fff;
 }
 
+
+.bg-c-light_blue {
+  background: linear-gradient(45deg,#40a3ff,#73bbff);
+}
+
 .bg-c-blue {
   background: linear-gradient(45deg,#4099ff,#73b4ff);
+}
+
+.bg-c-medium_blue {
+  background: linear-gradient(45deg,#40b3ff,#73d3ff);
+}
+
+.bg-c-dark_blue {
+  background: linear-gradient(45deg,#4053ff,#73b4ff);
 }
 
 .bg-c-green {
@@ -6908,6 +6921,7 @@ html:not([dir=rtl]) .modal-header .btn-close {
   }
   .modal-dialog {
     max-width: var(--cui-modal-width);
+    min-width: 300px;
     margin-right: auto;
     margin-left: auto;
   }
@@ -6918,7 +6932,8 @@ html:not([dir=rtl]) .modal-header .btn-close {
 @media (min-width: 992px) {
   .modal-lg,
 .modal-xl {
-    --cui-modal-width: 800px;
+    --cui-modal-width: 570px;
+      min-width: 300px;
   }
 }
 @media (min-width: 1200px) {

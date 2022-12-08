@@ -27,6 +27,33 @@
         </div>
         </div>
 
+        <div class="mb-3 d-none" id="co_d">
+        <label for="select_cause_of_death" class="form-label">Cause of Death:</label>
+        <select id="select_cause_of_death"  name="select_cause_of_death" class="form-control gender barangay-form shadow-sm">
+            <option value="">All Deaths</option>
+            <?php
+              include('functions/display-functions/select_diseases.php');
+            ?>
+            <option value="Other">Other</option>
+        </select>
+        <div class="invalid-feedback">
+        Invalid selection.
+        </div>
+        </div>
+
+        <div class="mb-3 d-none" id="o_co_d">
+        <label for="select_other_causes" class="form-label">Other Cause of Death:</label>
+        <select id="select_other_causes"  name="select_other_causes" class="form-control gender barangay-form shadow-sm">
+            <option value="">All Other Deaths (Not related to diseases)</option>
+            <?php
+              include('functions/display-functions/select_other_cause_of_death.php');
+            ?>
+        </select>
+        <div class="invalid-feedback">
+        Invalid selection.
+        </div>
+        </div>
+
         <div class="mb-3">
         <label for="age_min" class="form-label">Min Age:</label>
         <input  type="number" id="age_min" class="form-control birthdate  barangay-form text-sm-start shadow-sm"  placeholder="Min Age">

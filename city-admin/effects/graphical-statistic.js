@@ -32,8 +32,12 @@ var tittle_disease_type;
 
 var active_inactive_validator = "default"
 var details_title;
+var title_barangay;
 
 var sort = "names";
+
+var min_age = "default";
+var max_age = "default";
 
 
 $(document).ready(function()
@@ -128,7 +132,6 @@ function date_range()
 //tittle page current status
 function current_status()
 {
-
     if(query_click != "clicked")
     {
         $("#map_from").text("between "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " and ")
@@ -176,33 +179,90 @@ function current_status()
 
     if(active_inactive === "default")
     {
-        $("#map_cases").text("health cases documented ")
-        $(".details_head_status").text("All documented health cases.")
+        $("#map_cases").text("health cases, documented ")
     }
     else
     {
-        $("#map_cases").text("health cases that are currently active and were documented ") 
-        $(".details_head_status").text("Health cases that are currently active.") 
+        $("#map_cases").text("health cases that are currently active, and were documented ") 
     }
 
     if(gender === "default")
     {
         $("#map_gender").text("")
-        $(".details_head_gender").text("Male and female records.")
+        $(".details_head_gender").text("Male and female records")
     }
     else
     {   
         if(gender === "F (Female)")
         {
             $("#map_gender").text(", female records")
-            $(".details_head_gender").text("Female records.")
+            $(".details_head_gender").text("Female records")
         }
         else if(gender === "M (Male)")
         {
             $("#map_gender").text(", male records")
-            $(".details_head_gender").text("Male records.")
+            $(".details_head_gender").text("Male records")
         }
           
+    }
+
+    if(min_age != "default")
+    {
+       
+        $("#map_min_age").text(", minimum age of "+min_age)
+        $(".details_head_age").text("Minimum age of "+min_age)
+    }
+    else
+    {
+        if(max_age != "default")
+        {
+    
+            $("#map_max_age").text(", maximum age of "+max_age) 
+            $(".details_head_age").text("Maximum age of "+max_age)
+        }
+        else
+        {
+            $("#map_min_age").text("")
+            $(".details_head_age").text("All ages")
+        }
+    }
+
+    if(max_age != "default")
+    {
+
+        $("#map_max_age").text(", maximum age of "+max_age) 
+        $(".details_head_age").text("Maximum age of "+max_age)
+    }
+    else
+    {
+        if(min_age != "default")
+        {
+        
+            $("#map_min_age").text(", minimum age of "+min_age)
+            $(".details_head_age").text("Minimum age of "+min_age)
+        }
+        else
+        {
+            $("#map_max_age").text("")
+            $(".details_head_age").text("All ages")
+        }
+    }
+
+    if(min_age != "default" && max_age != "default") 
+    {
+      
+        if(min_age === max_age )
+        {
+            $("#map_min_age").text(", all "+min_age+" years old")
+            $("#map_max_age").text("")
+            $(".details_head_age").text("All "+min_age+" years old")
+        }
+        else
+        {
+            $("#map_min_age").text(", minimum age of "+min_age)
+            $("#map_max_age").text(", maximum age of "+max_age)
+            $(".details_head_age").text("Minimum age of "+min_age+", maximum age of "+max_age+"")
+        }
     }
 }
 //tittle page cureent status end
@@ -222,6 +282,8 @@ function chart_array()
     date_range_to:date_range_to,
     active_inactive:active_inactive,
     gender:gender,
+    max_age:max_age,
+    min_age:min_age,
 
     current_year_from:current_year_from,
     current_year_to:current_year_to
@@ -233,7 +295,7 @@ function chart_array()
     
   });
 
-  console.log(x_y_value)
+ // console.log(x_y_value)
   
   var textArr = x_y_value;
   var hpTotal_arr = [];
@@ -373,7 +435,7 @@ function chart_array()
 function number_of_resident_chart()
 {
   chart_array()
-  console.log(x_value)
+  //console.log(x_value)
   const data_sets = [{
     label: "",
     data: yValues,
@@ -400,10 +462,30 @@ function number_of_resident_chart()
       {
         var current_index = elements[0].index;
 
-        $("#details_title").text(x_value[current_index])
+        title_barangay = x_value[current_index];
+        $("#details_title").text("Barangay "+title_barangay+" Health Statistic")
         var all_diseases_that_occured = xValues[current_index];
         var display_diseases_that_occured = "";
         var details_title;
+
+        if(active_inactive === "default")
+        {
+            $(".details_head_status").text("All documented health cases in barangay "+title_barangay)
+    
+            if(disease_type != "default")
+            {
+              $(".details_head_status").text("All documented health cases caused by "+tittle_disease_type+" in barangay "+title_barangay)
+            }
+        }
+        else
+        {
+            $(".details_head_status").text("All documented health cases that are currently active in barangay "+title_barangay) 
+    
+            if(disease_type != "default")
+            {
+              $(".details_head_status").text("All documented health cases that are currently active caused by "+tittle_disease_type+" in barangay "+title_barangay)
+            }
+        }
 
         if(active_inactive_validator === "default")
         {
@@ -445,6 +527,8 @@ function number_of_resident_chart()
           date_range_to:date_range_to,
           active_inactive:active_inactive,
           gender:gender,
+          max_age:max_age,
+          min_age:min_age,
 
           current_year_from:current_year_from,
           current_year_to:current_year_to,
@@ -461,7 +545,7 @@ function number_of_resident_chart()
         $('.details_list').remove();
         $.each(display_diseases_that_occured, function( index,value ) {
 
-          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label"><span class="fa-solid me-2"></span>'+value+'</label></div>');
+          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 d-flex align-items-center text-white px-2"><label class="form-label">'+value+'</label></div>');
       
         });
 
@@ -625,41 +709,6 @@ $("#all_cases").click(function()
 })
 //active and all-time cases end
 
-//select deseases and gender
-$("#select_diseases").change(function(){ 
-    
-  var hp_selected = $("#select_diseases").val();
-  tittle_disease_type = $("#select_diseases").text();
-
-  if(hp_selected.trim().length != 0)
-  {
-      disease_type = hp_selected;
-  }
-  else
-  {
-      disease_type = "default"
-      tittle_disease_type = ""
-  }
-  
-});
-
-$("#select_gender").change(function(){ 
-
-  var gender_selected = $("#select_gender").val();
-  tittle_gender = $("#select_gender").text();
-
-  if(gender_selected.trim().length != 0)
-  {
-      gender = gender_selected;
-  }
-  else
-  {
-      gender = "default"
-      tittle_gender = "";
-  }
-  
-});
-//select deseases and gender end
 
 //filter chart
 $("#date_range_btn").click(function()
@@ -667,10 +716,63 @@ $("#date_range_btn").click(function()
     
      var from_input = $("#range_from").val()
      var to_input = $("#range_to").val()
+     var hp_selected = $("#select_diseases").val();
+     tittle_disease_type = $("#select_diseases").text();
+     var gender_selected = $("#select_gender").val();
+     tittle_gender = $("#select_gender").text();
+     var click_min_age = $("#age_min").val();
+     var click_max_age = $("#age_max").val();
 
      var d_from = new Date(from_input)
      var d_to = new  Date(to_input)
      var validator = true
+
+     click_min_age = parseInt(click_min_age);
+     click_max_age = parseInt(click_max_age);
+
+     if(!isNaN(click_max_age) && click_min_age > click_max_age)
+      {
+        $("#age_max").addClass("is-invalid");
+        $("#age_max").val("");
+        validator =false
+      }
+      if(isNaN(click_min_age))
+      {
+          min_age =  "default";
+      }
+      else
+      {
+          min_age = click_min_age;
+      }
+      if(isNaN(click_max_age))
+      {
+          max_age =  "default";
+      }
+      else
+      {
+          max_age = click_max_age;
+      }                                                            
+
+
+     if(gender_selected.trim().length != 0)
+     {
+         gender = gender_selected;
+     }
+     else
+     {
+         gender = "default"
+         tittle_gender = "";
+     }
+   
+     if(hp_selected.trim().length != 0)
+     {
+         disease_type = hp_selected;
+     }
+     else
+     {
+         disease_type = "default"
+         tittle_disease_type = ""
+     }
 
      if(from_input.trim().length === 0)
      {
@@ -726,8 +828,12 @@ $("#current_year").click(function()
      date_range_to = "default";
      tittle_disease_type = "All Diseases"
      gender = "default";
+     min_age = "default";
+     max_age = "default";
      query_click = "unclicked"
 
+     $("#age_min").val("");
+     $("#age_max").val("");
      $( "#range_from" ).val(current_year_from);
      $( "#range_from" ).removeClass("is-invalid");
      $( "#range_to" ).val(current_year_to);

@@ -12,7 +12,7 @@
 
       </style>
         
-      <form action="" id="edit_disease_form" name="edit_disease_form" method="post" autocomplete="off">
+      <form action="" id="update_password" name="update_password" method="post" autocomplete="off">
 
       <div class="mb-2">
           <label for="old_pass" class="form-label">Password*</label>

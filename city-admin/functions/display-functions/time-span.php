@@ -9,6 +9,8 @@
     $date_range_to = $_GET['date_range_to'];
     $case_status = $_GET['active_inactive'];
     $gender = $_GET['gender'];
+    $min_age = $_GET['min_age'];
+    $max_age = $_GET['max_age'];
 
     $current_year_from = $_GET['current_year_from'];
     $current_year_to = $_GET['current_year_to'];
@@ -36,6 +38,15 @@
         {
             $conditions[] = "`gender`='$gender'";
         }
+        if($min_age != "default")
+        {
+            $conditions[] = "`age` >= '$min_age'";
+        }
+        if($max_age != "default")
+        {
+            $conditions[] = "`age` <= '$max_age'";
+        }
+        
 
         $sql = $query;
         if (count($conditions) > 0) {
@@ -83,6 +94,14 @@
             if($gender != "default")
             {
                 $conditions2[] = "`gender`='$gender'";
+            }
+            if($min_age != "default")
+            {
+                $conditions2[] = "`age` >= '$min_age'";
+            }
+            if($max_age != "default")
+            {
+                $conditions2[] = "`age` <= '$max_age'";
             }
     
             $new_sql = $query2;

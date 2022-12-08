@@ -4,7 +4,7 @@
     
     $hp_id_value = $_GET['hp_id_value'];  
 
-    $sql = "SELECT *,  `c_o_d`.`disease_name` AS `death_cause` 
+    $sql = "SELECT *,  `c_o_d`.`disease_name` AS `death_cause`,  `d`.`disease_name` AS `diagnosis` 
     FROM `health_profiles` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`)
     LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
     LEFT JOIN `diseases` AS `c_o_d` ON (`hp`.`cause_of_death` = `c_o_d`.`id`)  WHERE `hp_id` = '$hp_id_value'";
@@ -27,6 +27,8 @@
     $recover_date[] = $row['date_of_recovery'];
     $death_date[] = $row['date_of_death'];
     $occurrence[] = $row['occurrence_number'];
+    $date_created[] = $row['date'];
+    $diagnosis[] = $row['diagnosis'];
     }     
     }
 
@@ -48,11 +50,18 @@
     }
     if(isset($_GET['cause_of_death']))
     {
-
         print json_encode($cause_of_death);
     }
     if(isset($_GET['recovery']))
     {
         print json_encode($recovery);
+    }
+    if(isset($_GET['date_created']))
+    {
+        print json_encode($date_created);
+    }
+    if(isset($_GET['diagnosis']))
+    {
+        print json_encode($diagnosis);
     }
 ?>

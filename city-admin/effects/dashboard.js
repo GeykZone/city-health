@@ -5,6 +5,8 @@ var active_inactive = "(Active)"
 var query_click = "clicked";
 var gender = "default";
 var barangay_name = "default";
+var min_age = "default";
+var max_age = "default";
 
 var current_year = new Date();
 var current_year_dd = String(current_year.getDate()).padStart(2, '0');
@@ -130,19 +132,19 @@ function display_map()
          $.ajaxSetup({async:false});
          $.getJSON('functions/display-functions/map-statistic.php', 
          {
-             long_lat:'set',
-             
-             query_click:query_click,
+          long_lat:'set',
+    
+          query_click:query_click,
+          disease_type:disease_type,
+          date_range_from:date_range_from,
+          date_range_to:date_range_to,
+          active_inactive:active_inactive,
+          gender:gender,
+          max_age:max_age,
+          min_age:min_age,
 
-
-             disease_type:disease_type,
-             date_range_from:date_range_from,
-             date_range_to:date_range_to,
-             active_inactive:active_inactive,
-             gender:gender,
-
-             current_year_from:current_year_from,
-             current_year_to:current_year_to
+          current_year_from:current_year_from,
+          current_year_to:current_year_to
 
          },     
          function (data, textStatus, jqXHR) 

@@ -344,7 +344,7 @@ margin-top: 10px;
 <div class=" container-fluid mb-3 px-4">
   <div class="row ">
   <div class=" col-lg-12 col-md-12 rounded-3 d-flex text-dark text-opacity-50">
-  <span class="fa-regular me-3" style="padding-top:7px;"></span><h6 class=" mt-1"><span id="map_disease"></span><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_gender"></span>.</h6>
+  <span class="fa-regular me-3" style="padding-top:7px;"></span><h6 class=" mt-1"><span id="map_disease"></span><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_gender"></span><span id="map_min_age"></span><span id="map_max_age"></span>.</h6>
   </div>
   </div>
 </div>
