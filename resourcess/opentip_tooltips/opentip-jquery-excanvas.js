@@ -1615,6 +1615,16 @@ Opentip.styles = {
     shadowColor: "rgba(0, 0, 0, 0.3)",
     shadowOffset: [2, 2],
     background: [[0, "rgba(203, 15, 19, 0.7)"], [0.5, "rgba(203, 15, 19, 0.8)"], [0.5, "rgba(189, 14, 18, 0.8)"], [1, "rgba(179, 14, 17, 0.9)"]]
+  },
+  infor_details: {
+    "extends": "standard",
+    className: "infor_details",
+    borderRadius: 1,
+    borderColor: "#ffffff",
+    closeButtonCrossColor: "rgba(0, 0, 0, 1)",
+    shadowColor: "rgba(0, 0, 0, 0.3)",
+    shadowOffset: [2, 2],
+    background: [[0, "rgba(255, 255, 255, 1)"], [0.5, "rgba(255, 255, 255, 1)"], [0.5, "rgba(255, 255, 255, 1)"], [1, "rgba(255, 255, 255, 1)"]]
   }
 };
 

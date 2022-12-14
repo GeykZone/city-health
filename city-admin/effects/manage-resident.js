@@ -30,13 +30,15 @@
 
   $(document).ready(function () {
   $(document).attr("title", "HPCS | Manage Residents"); 
-  select_with_search_box(); 
-  enable_form();  
-  generate_age();
+  select_with_search_box()
+  enable_form()
+  generate_age()
   get_resident_table_cell_value()
   
-  load_data_tables();
+  load_data_tables()
   opentip_tooltip()
+
+  load_chart_from_dashboard()
   });
 
   //set do some stuff when confiramtion variable is changed
@@ -1059,7 +1061,7 @@ table.columns().every(function () {
         x: {
           beginAtZero: true,
           grid: {
-            display: false,
+            display: true,
             drawBorder: false
           },
           ticks: {
@@ -1117,7 +1119,7 @@ table.columns().every(function () {
           enabled: true
        },
         datasets: [{
-            label: 'Total Number of Residents: ',
+            label: 'Total Number of Residents ',
             data: yValues,
             backgroundColor: myColors,
             borderColor: "#80d5ffff",
@@ -1231,4 +1233,46 @@ $("#sort_cases").click(function(e){
 
 })
 //sort chart end
+
+//auto load chart from dashboard
+function load_chart_from_dashboard()
+{
+  if (Cookies.get('dashboard_residentChart') != undefined) { 
+    
+    $("#show_graph_txt").text("ClOSE CHART")
+    if(chart_show_variable === "close")
+    {
+      if(chart_shower === "firstime")
+      {
+        chart_array()
+        number_of_resident_chart();
+        myChart.destroy();
+        $(".chart_container").slideDown("slow", function()
+        {
+  
+        });
+        number_of_resident_chart();
+       
+      }
+      
+      $(".chart_container").slideDown("slow", function()
+      {
+      });
+      chart_show_variable = "open"
+      chart_shower = "!firstime"
+    }
+    else
+    {
+      $("#show_graph_txt").text("OPEN CHART")
+      $(".chart_container").slideUp("slow", function()
+      {
+        chart_show_variable = "close"
+      })
+  
+    }
+
+    Cookies.remove('dashboard_residentChart')
+}
+}
+//auto load chart from dashboard end
 

@@ -40,27 +40,6 @@ $(document).ready(function()
     $( "#range_from" ).val(current_year_from);
     $( "#range_to" ).val(current_year_to);
 
-    if (Cookies.get('dashboard_map') != undefined) {
-                
-        active_inactive = "(Active)";
-        query_click = "clicked";
-
-        date_range_from = current_year_from;
-        date_range_to = current_year_to;
-
-        if(active_inactive === "default")
-        {
-         active_inactive_validator = "default"
-        }
-        else
-        {
-          active_inactive_validator = "(Active)"
-        }
-        $("#active_only_btn").removeClass("d-none")
-        $("#all_cases").addClass("d-none")
-        current_status()
-    }
-
     display_map();
 
     oneTip();

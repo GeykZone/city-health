@@ -127,6 +127,15 @@ font-size: 10px !important;
 }
 
 }
+
+@media (min-width: 2000px) {
+
+  .adjust_font_size
+  {
+  font-size: 15px !important;
+  }
+  
+  }
 /*adjust font*/
 
 body {
@@ -138,6 +147,9 @@ body {
   color: #fff;
 }
 
+.shortCut_btn{
+  cursor: pointer;
+}
 
 .bg-c-light_blue {
   background: linear-gradient(45deg,#40a3ff,#73bbff);
@@ -159,8 +171,12 @@ body {
   background: linear-gradient(45deg,#2ed8b6,#59e0c5);
 }
 
+.bg-c-orange {
+  background: linear-gradient(45deg,#f85408,#ffa424);
+}
+
 .bg-c-yellow {
-  background: linear-gradient(45deg,#FFB64D,#ffcb80);
+  background: linear-gradient(45deg,#eba13a,#ffcb80);
 }
 
 .bg-c-pink {
@@ -11737,7 +11753,7 @@ html:not([dir=rtl]) .rounded-start {
   visibility: hidden !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 100px) {
   html:not([dir=rtl]) .float-sm-start {
     float: left !important;
   }

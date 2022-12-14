@@ -148,6 +148,12 @@
   color: #f8f8f8;
   text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
 }
+.opentip-container.style-dark .opentip,
+.opentip-container.style-infor_details .opentip {
+  padding: 15px 5px 15px 10px;
+  color: #000000b7;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0);
+}
 .opentip-container.style-glass .opentip {
   padding: 15px 25px;
   color: #317cc5;

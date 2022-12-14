@@ -52,8 +52,8 @@ min-height: 524px;
 .green {
   background-image: url('../resourcess/images/green.png');
   background-size: cover;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -61,8 +61,8 @@ min-height: 524px;
 .yellow {
   background-image: url('../resourcess/images/yellow.png');
   background-size: cover;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -70,8 +70,8 @@ min-height: 524px;
 .orange {
   background-image: url('../resourcess/images/orange.png');
   background-size: cover;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
   
@@ -80,8 +80,8 @@ min-height: 524px;
 .red {
   background-image: url('../resourcess/images/red.png');
   background-size: cover;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -104,44 +104,47 @@ min-height: 524px;
 <div class="container-fluid">
 
 <!--first-->
-<div class="row mb-3">
+<div class="row mb-1">
 
   <div class="col-lg-12 col-sm-12">
   <div class="row ">
-      <div class="col-lg-3 col-sm-6 mb-4">
-        <div class="card bg-c-pink border-0 rounded-4 shadow-sm order-card"  style="height:150px;">
-        <div class="card-body adjust_font_size">
-        <h6 class="mb-3">New Cases</h6>
-          <h2 class="text-end"><i class="fa-solid float-start"></i><span>455</span></h2>
-          <p class="mb-2"><span>December 1, 2022 </span></p>
+      <div class="col-lg-3 card-group col-sm-6 mb-4">
+        <div class="card bg-c-pink border-0 rounded-4 shadow-sm order-card">
+        <div class="card-body adjust_font_size row">
+          <h4 >New Health Cases</h4>
+          <p class="adjust_font_size fw-lighter opacity-75" ><span class="sevenDaysFrom"></span> - <span class="sevenDaysTo"></span></p>
+          <h1><i class="fa-solid float-start"></i><span id="total_new_cases" style="margin-right: 10px;" class="float-end" >0</span></h1>
+          <p  class="adjust_font_size"><span id="newCasesPercent"></span></p>
           </div>
         </div>
       </div>
-
-      <div class="col-lg-3 col-sm-6 mb-4">
-        <div class="card bg-c-green  border-0 rounded-4 shadow-sm order-card"  style="height:150px ;">
-          <div class=" card-body adjust_font_size">
-          <h6 class="mb-3">Inactive Cases</h6>
-          <h2 class="text-end"><i class="fa-solid float-start"></i><span>455</span></h2>
-          <p class="mb-2"><span>December 1, 2022 </span</p>
+      <div class="col-lg-3 card-group col-sm-6 mb-4">
+        <div class="card bg-c-yellow border-0 rounded-4 shadow-sm order-card">
+        <div class="card-body adjust_font_size row">
+          <h4 >New Deaths</h4>
+          <p class="adjust_font_size fw-lighter opacity-75" ><span class="sevenDaysFrom"></span> - <span class="sevenDaysTo"></span></p>
+          <h1><i class="fa-solid float-start"></i><span id="total_new_cases" style="margin-right: 10px;" class="float-end" >0</span></h1>
+          <p  class="adjust_font_size"><span id="newCasesPercent"></span></p>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-sm-6 mb-4">
-        <div class="card bg-c-yellow  border-0 rounded-4 shadow-sm order-card"  style="height:150px ;">
-          <div class=" card-body adjust_font_size">
-          <h6 class="mb-3">Total Active Cases</h6>
-          <h2 class="text-end"><i class="fa-solid float-start"></i><span>455</span></h2>
-          <p class="mb-2"><span>December 1, 2022 </span> - <span>December 1, 2022</span></p>
+      <div class="col-lg-3 card-group col-sm-6 mb-4">
+        <div class="card bg-c-green border-0 rounded-4 shadow-sm order-card">
+        <div class="card-body adjust_font_size row">
+          <h4 >New Recoveries</h4>
+          <p class="adjust_font_size fw-lighter opacity-75" ><span class="sevenDaysFrom"></span> - <span class="sevenDaysTo"></span></p>
+          <h1><i class="fa-solid float-start"></i><span id="total_new_cases" style="margin-right: 10px;" class="float-end" >0</span></h1>
+          <p  class="adjust_font_size"><span id="newCasesPercent"></span></p>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-sm-6 mb-4">
-        <div class="card bg-c-blue  border-0 rounded-4 shadow-sm order-card"  style="height:150px ;">
-          <div class=" card-body adjust_font_size">
-          <h6 class="mb-3">Total Active Diseases</h6>
-          <h2 class="text-end"><i class="fa-solid float-start"></i><span>455</span></h2>
-          <p class="mb-2"> <span>December 1, 2022 </span> - <span>December 1, 2022</span> </p>
+      <div class="col-lg-3 card-group col-sm-6 mb-4">
+        <div class="card bg-c-blue border-0 rounded-4 shadow-sm order-card">
+        <div class="card-body adjust_font_size row">
+          <h4 >Total Health Cases</h4>
+          <p class="adjust_font_size fw-lighter opacity-75" ><span class="sevenDaysFrom"></span> - <span class="sevenDaysTo"></span></p>
+          <h1><i class="fa-solid float-start"></i><span id="total_new_cases" style="margin-right: 10px;" class="float-end" >0</span></h1>
+          <p  class="adjust_font_size"><span id="newCasesPercent"></span></p>
           </div>
         </div>
       </div>
@@ -155,32 +158,36 @@ min-height: 524px;
           <div class=" card-header rounded-top-3 bg-info p-0  border-0 shadow-sm ">
           <h6 class="float-lg-start mt-2 mb-2 ms-3 float-md-start adjust_font_size  order-card">Shortcuts</h6>
           </div>
-          <div class=" card-body row pb-3">
-          <div class="col-lg-3 col-sm ">
-        <div class="card bg-c-dark_blue border-0 rounded-4 shadow-sm order-card"  style="height:100px;">
-        <div class="card-body adjust_font_size">
-            Barangay Health Satatistic
+          <div class=" card-body  row pb-3">
+          <div id = "barangay_health_statistic_shorcut" class="col-lg-3 mt-lg-0 mt-sm-3 col-sm shortCut_btn">
+        <div class="card bg-c-dark_blue border-0 rounded-4 shadow-sm order-card"  style="max-height:120px; height:100px; min-height:100px;">
+        <div class="card-body adjust_font_size row">
+            <p class="adjust_font_size col-12">Barangay Health Statistic</p>
+            <p class="adjust_font_size" style="position:absolute; bottom:0; margin-left:-3px;"><span class="fa-solid float-start"></span> <span class="fa-solid float-end"></span></p>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-sm">
-        <div class="card bg-c-blue  border-0 rounded-4 shadow-sm order-card"  style="height:100px ;">
-          <div class=" card-body adjust_font_size">
-             Disease Statistic
+      <div id = "disease_statistic_shorcut"  class="col-lg-3 mt-lg-0 col-sm mt-sm-3 shortCut_btn">
+        <div class="card bg-c-blue  border-0 rounded-4 shadow-sm order-card"  style="max-height:120px; height:100px; min-height:100px;">
+          <div class=" card-body adjust_font_size row">
+            <p class="adjust_font_size">Disease Statistic</p>
+            <p class="adjust_font_size" style="position:absolute; bottom:0; margin-left:-3px;"><span class="fa-solid float-start"></span> <span class="fa-solid float-end"></span></p>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-sm">
-        <div class="card  bg-c-light_blue border-0 rounded-4 shadow-sm order-card"  style="height:100px ;">
-          <div class=" card-body adjust_font_size">
-           Time Span
+      <div id = "timespan_statistic_shorcut" class="col-lg-3 mt-lg-0 col-sm mt-sm-3 shortCut_btn">
+        <div class="card  bg-c-light_blue border-0 rounded-4 shadow-sm order-card"  style="max-height:120px; height:100px; min-height:100px;">
+          <div class=" card-body adjust_font_size row">
+            <p class="adjust_font_size">Time Span</p>
+            <p class="adjust_font_size" style="position:absolute; bottom:0; margin-left:-3px;"><span class="fa-solid float-start"></span> <span class="fa-solid float-end"></span></p>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-sm">
-        <div class="card   bg-c-medium_blue  border-0 rounded-4 shadow-sm order-card"  style="height:100px ;">
-          <div class=" card-body adjust_font_size">
-           Recoveries & Deaths
+      <div id = "rec_death_statistic_shorcut" class="col-lg-3 mt-lg-0 col-sm mt-sm-3 shortCut_btn">
+        <div class="card bg-c-medium_blue  border-0 rounded-4 shadow-sm order-card"   style="max-height:120px; height:100px; min-height:100px;">
+          <div class=" card-body adjust_font_size row">
+           <p class="adjust_font_size">Deaths & Recoveries</p>
+           <p class="adjust_font_size" style="position:absolute; bottom:0; margin-left:-3px;"><span class="fa-solid float-start"></span> <span class="fa-solid float-end"></span></p>
           </div>
         </div>
       </div>
@@ -193,7 +200,7 @@ min-height: 524px;
           <div class=" card-header rounded-top-3 bg-info p-0  border-0 rounded-top-3 shadow-sm ">
           <h6 class="float-lg-start mt-2 mb-2 ms-3 float-md-start adjust_font_size  order-card">Current number of residents in each barangays</h6>
           </div>
-          <div class=" card-body adjust_font_size">
+          <div id="myChart_container" class=" card-body adjust_font_size shortCut_btn">
             <div>
             <div  class="mb-3" id="hp_chart_row" style="height:335px;  min-width:100%;">
               <canvas class=""  id="myChart"></canvas> 
@@ -211,7 +218,7 @@ min-height: 524px;
     <div class="col  col-sm-12 mb-4">
       <div class="card border-0 shadow-sm border-0 rounded-3 shadow-sm">
         <div class=" card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card" >
-          <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card"> Active health cases <span id="map_from"></span><span id="map_to"></span>.</h6>
+          <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card"> Total health cases, <span id="map_from"></span><span id="map_to"></span></h6>
         </div>
         <div class=" card-body">
         <div id="map_container" class=" card  rounded-3 border-0 shadow-sm">
@@ -229,94 +236,75 @@ min-height: 524px;
 
 <!--Second-->
 <div class="row">
-<div class="col-md-12">
-<div class="card mb-4">
-<div class="card-header">Charts</div>
-<div class="card-body">
 
+  <div class="col-lg-6 col-sm-12">
+  <div class="card border-0 rounded-3 shadow-sm mb-4">
+  <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 most prevalent diseases in the past 30 days</h6></div>
+  <div class="card-body">
+  <div class="container-fluid table-responsive">
+  <div class="row">
 
-
-<div class="container-fluid table-responsive">
-<div class="row">
-  <!--health diseases chart-->
-  <div class="col-lg col-md-12" style="min-width: 400px ;">
-    <hr class="mt-0">
-    <div class="card-body">For chart health disease</div>
+  <div class="table-responsive">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th style="width:130px;">
+          Disease Name
+        </th>
+        <th>
+          Progress
+        </th>
+        <th style="min-width: 130px;">
+          Total Infected
+        </th>
+      </tr>
+    </thead>
+    <tbody id="top_three_diseases">
+    </tbody>
+  </table>
   </div>
-    <!--health diseases chart end-->
-
-
-  <!--prevalence chart-->
-  <div class="col-lg col-md-12" style="min-width: 400px ;">
-    <hr class="mt-0">
-    <div class="card-body">For chart health disease</div>
-  </div>
-  <!--prevalence chart end-->
-
-    <!--prevalence chart-->
-    <div class="col-lg col-md-12" style="min-width: 400px ;">
-    <hr class="mt-0">
-    <div class="card-body">For chart health disease</div>
-  </div>
-  <!--prevalence chart end-->
 
   </div>
-</div>
+  </div>
+  </div>
+  </div>
+  </div>
 
+  <div class="col-lg-6 col-sm-12">
+  <div class="card border-0 rounded-3 shadow-sm mb-4">
+  <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 barangays with the highest number of health cases in the past 30 days</h6></div>
+  <div class="card-body">
+  <div class="container-fluid table-responsive">
+  <div class="row">
 
-</div>
-</div>
-</div>
+  <div class="table-responsive">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th style="width:130px;">
+          Barangay Name
+        </th>
+        <th>
+          Progress
+        </th>
+        <th style="min-width: 150px;">
+          Total Health Cases
+        </th>
+      </tr>
+    </thead>
+    <tbody id="top_three_barangays">
+    </tbody>
+  </table>
+  </div>
+
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
 </div>
 <!--Second -->
-
-
-<!--Third-->
-<div class="row">
-<div class="col-md-12">
-<div class="card mb-4">
-<div class="card-header">Charts</div>
-<div class="card-body">
-
-
-
-<div class="container-fluid table-responsive">
-<div class="row">
-  <!--health diseases chart-->
-  <div class="col-lg col-md-12" style="min-width: 400px ;">
-    <hr class="mt-0">
-    <div class="card-body">For chart health disease</div>
-  </div>
-    <!--health diseases chart end-->
-
-
-  <!--prevalence chart-->
-  <div class="col-lg col-md-12" style="min-width: 400px ;">
-    <hr class="mt-0">
-    <div class="card-body">For chart health disease</div>
-  </div>
-  <!--prevalence chart end-->
-
-    <!--prevalence chart-->
-    <div class="col-lg col-md-12" style="min-width: 400px ;">
-    <hr class="mt-0">
-    <div class="card-body">For chart health disease</div>
-  </div>
-  <!--prevalence chart end-->
-
-  </div>
-</div>
-
-
-</div>
-</div>
-</div>
-</div>
-<!--Third-->
-
-
-
-
 </div>
 </div>
 
