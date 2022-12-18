@@ -27,21 +27,21 @@
   <fieldset id="fieldset1" disabled>
   <div class="mb-3">
     <label for="firstname" class="form-label">First Name*</label>
-    <input type="text" name="firstname" class=" form-control barangay-form" id="firstname" placeholder="First name.">
+    <input type="text" name="firstname" maxlength="45" class=" form-control barangay-form" id="firstname" placeholder="First name.">
     <div class="invalid-feedback">
     Invalid input.
     </div>
   </div>
   <div class="mb-3">
     <label for="middlename" class="form-label">Middle Name*</label>
-    <input type="text" name="middlename" class=" form-control barangay-form" id="middlename" placeholder="Middle name.">
+    <input type="text" maxlength="45" name="middlename" class=" form-control barangay-form" id="middlename" placeholder="Middle name.">
     <div class="invalid-feedback">
     Invalid input.
     </div>
   </div>
   <div class="mb-3">
     <label for="lastname" class="form-label">Last Name*</label>
-    <input type="text" name="lastname" class=" form-control barangay-form" id="lastname" placeholder="Last name.">
+    <input type="text" maxlength="45" name="lastname" class=" form-control barangay-form" id="lastname" placeholder="Last name.">
     <div class="invalid-feedback">
     Invalid input.
     </div>
@@ -88,7 +88,7 @@
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email Address</label>
-    <input type="email" name="contact" class=" form-control barangay-form" id="email" placeholder="Email Address (Optional).">
+    <input type="email" maxlength="45" name="contact" class=" form-control barangay-form" id="email" placeholder="Email Address (Optional).">
     <div class="invalid-feedback">
       Invalid email address, email address must look like this (e.g. freed@email.com).
     </div>

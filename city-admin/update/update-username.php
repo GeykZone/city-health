@@ -16,7 +16,7 @@
 
       <div class="mb-2">
           <label for="update_username_old_pass" class="form-label">Password*</label>
-          <input autocomplete="off" type="password" name="update_username_old_pass" class="shadow-sm form-control barangay-form" id="update_username_old_pass" placeholder="Password">
+          <input autocomplete="off" type="password" maxlength="20"  name="update_username_old_pass" class="shadow-sm form-control barangay-form" id="update_username_old_pass" placeholder="Password">
           <div class="user_old invalid-feedback">
           </div>
           <label id="update_username_old_pass_lbl" class="form-label mt-2 opacity-50"><input id="update_username_old_pass_checkbox" type="checkbox" onclick="showPassword('update_username_old_pass','update_username_old_pass_lbl','update_username_old_pass_span')" class="me-1"><span id="update_username_old_pass_span">Show Password</span></label>
@@ -24,7 +24,7 @@
 
         <div class="mb-3">
           <label for="new_user" class="form-label">New Username</label>
-          <input autocomplete="off" type="text" name="new_user" class="shadow-sm form-control barangay-form" id="new_user" placeholder="New Username">
+          <input autocomplete="off" type="text" maxlength="45" name="new_user" class="shadow-sm form-control barangay-form" id="new_user" placeholder="New Username">
           <div class="user invalid-feedback">
           </div>
         </div>

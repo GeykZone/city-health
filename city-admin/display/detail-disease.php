@@ -1,7 +1,7 @@
 <div class="modal fade" id="show_details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable" >
     <div class="modal-content">
-      <div class="modal-header bg-info border-0 shadow-sm px-3 py-2">
+      <div class="modal-header bg-c-blue border-0 shadow-sm px-3 py-2">
       <span class=" fa-solid me-2" style="width: 15px; height:15px; color:#ffff;"></span>
         <h6 class="modal-title" id="details_title" style="color: #ffff; font-weight:500;"></h6>
         <button id="close_edit_disease" type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>

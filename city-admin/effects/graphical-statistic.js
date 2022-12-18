@@ -134,7 +134,7 @@ function current_status()
 {
     if(query_click != "clicked")
     {
-        $("#map_from").text("between "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " and ")
+        $("#map_from").text("from "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " to ")
         $("#map_to").text(getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
 
         $(".details_head_from").text(getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " - "+getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
@@ -157,7 +157,7 @@ function current_status()
         }
         else
         {
-          $("#map_from").text("between "+getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " and ")
+          $("#map_from").text("from "+getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " to ")
           $("#map_to").text(getMonthName(array_date_range_to[1]) + ' ' + array_date_range_to[2] + ", "+ array_date_range_to[0])
 
           $(".details_head_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " - "+getMonthName(array_date_range_to[1]) + ' ' + array_date_range_to[2] + ", "+ array_date_range_to[0])
@@ -513,7 +513,7 @@ function number_of_resident_chart()
         
 
         $('.details_content_label').remove();
-        $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
+        $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
         
 
         //to get the occuring diseases in that area
@@ -545,7 +545,7 @@ function number_of_resident_chart()
         $('.details_list').remove();
         $.each(display_diseases_that_occured, function( index,value ) {
 
-          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 d-flex align-items-center text-white px-2"><label class="form-label">'+value+'</label></div>');
+          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 d-flex align-items-center text-white px-2"><label class="form-label">'+value+'</label></div>');
       
         });
 

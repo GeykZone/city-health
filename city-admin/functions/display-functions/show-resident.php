@@ -27,7 +27,7 @@ $columns = array(
     array( 'db' => 'last_name',      'dt' => 3, 'field' => 'last_name' ), 
     array( 'db' => 'age',     'dt' => 4, 'field' => 'age' ), 
     array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender' ),
-    array( 'db' => 'birthdate',      'dt' => 6, 'field' => 'birthdate' ), 
+    array( 'db' => "DATE_FORMAT(birthdate,'%M %d, %Y')",      'dt' => 6, 'field' => "DATE_FORMAT(birthdate,'%M %d, %Y')" ), 
     array( 'db' => 'civil',    'dt' => 7, 'field' => 'civil'),
     array( 'db' => 'contact',     'dt' => 8, 'field' => 'contact' ), 
     array( 'db' => 'email',    'dt' => 9, 'field' => 'email' ), 
@@ -37,7 +37,7 @@ $columns = array(
 // Include SQL query processing class 
 require '../ssp.class.php'; 
 
-$joinQuery = "FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
+$joinQuery = ", DATE_FORMAT(birthdate,'%M %d, %Y') FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
 
 
  

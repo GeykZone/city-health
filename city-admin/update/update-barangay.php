@@ -12,7 +12,7 @@
 <form action="" id="update_barangay_form" name="update_barangay_form" method="post">
 <div class="mb-3">
   <label for="update_barangay" class="form-label">Barangay*</label>
-  <input type="text" name="update_barangay" class="form-control barangay-form" id="update_barangay" placeholder="Barangay">
+  <input type="text" name="update_barangay" maxlength="45" class="form-control barangay-form" id="update_barangay" placeholder="Barangay">
   <div class="invalid-feedback">
   Invalid input.
   </div>

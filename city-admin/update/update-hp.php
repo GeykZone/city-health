@@ -42,7 +42,7 @@
 
         <div class="mb-3 d-none" id="o_c_d">
         <label for="update_hp_select_other" class="form-label">Other Cause of Death*</label>
-        <input type="name" name="update_hp_select_other" class=" form-control barangay-form" id="update_hp_select_other" placeholder="Other cause if death.">
+        <input type="name" name="update_hp_select_other" maxlength="45" class=" form-control barangay-form" id="update_hp_select_other" placeholder="Other cause if death.">
         <div class="invalid-feedback">
         Invalid input.
         </div>

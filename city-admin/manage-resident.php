@@ -134,7 +134,7 @@ include('includes/sidebar.php');
     <td id="Last Name" style="min-width: 100px;"></td>
     <td id="Age" ></td>
     <td id="Gender"></td>
-    <td id="Date of Birth"></td>
+    <td id="Date of Birth" style="min-width: 130px;"></td>
     <td id="Status"></td>
     <td id="Contact" style="min-width: 100px;"></td>
     <td id="Email" class="text-center" style="min-width: 100px;"></td>

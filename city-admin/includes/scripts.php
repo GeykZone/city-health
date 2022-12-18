@@ -35,7 +35,7 @@
 
         var manage_diseases_Type_icon_tooltip = $("#manage_diseases_Type_icon")
         var myOpentip = new Opentip(manage_diseases_Type_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_diseases_Type_icon_tooltip, delay:0.50 });
-        myOpentip.setContent("Manage Diseases Type"); // Updates Opentips content
+        myOpentip.setContent("Manage Disease Types"); // Updates Opentips content
 
         var manage_hp_icon_tooltip = $("#manage_hp_icon")
         var myOpentip = new Opentip(manage_hp_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_hp_icon_tooltip, delay:0.50 });
@@ -44,6 +44,14 @@
         var account_menu_tooltip = $("#account_menu")
         var myOpentip = new Opentip(account_menu_tooltip, { showOn:"mouseover", tipJoint: "right", target:account_menu_tooltip, delay:0.50 });
         myOpentip.setContent("Account Options"); // Updates Opentips content
+
+        var account_menu_tooltip = $(".sidebar-toggler")
+        var myOpentip = new Opentip(account_menu_tooltip, { showOn:"mouseover", tipJoint: "left", target:account_menu_tooltip, delay:0.50 }); 
+        myOpentip.setContent("Sidebar-toggler Minimize/Maximize"); // Updates Opentips content 
+
+        var account_menu_tooltip = $(".header-toggler")
+        var myOpentip = new Opentip(account_menu_tooltip, { showOn:"mouseover", tipJoint: "left", target:account_menu_tooltip, delay:0.50 }); 
+        myOpentip.setContent("Sidebar-toggler Hide/Show"); // Updates Opentips content 
 
        })
       </script>

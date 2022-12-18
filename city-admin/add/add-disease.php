@@ -12,7 +12,7 @@
       <form action="" id="add_disease_form" name="add_disease_form" method="post">
         <div class="mb-3">
           <label for="disease" class="form-label">Disease*</label>
-          <input type="text" name="disease" class="shadow-sm form-control barangay-form" id="disease" placeholder="Name of Disease">
+          <input type="text" maxlength="45" name="disease" class="shadow-sm form-control barangay-form" id="disease" placeholder="Name of Disease">
           <div class="invalid-feedback">
           Invalid input.
           </div>

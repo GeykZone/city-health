@@ -98,28 +98,6 @@ function date_range()
 }
 //date picker end
 
-
-//progress bar
-function move() {
-  if (i == 0) {
-    i = 1;
-    var elem = document.getElementById("myBar");
-    var width = 10;
-    var id = setInterval(frame, 30);
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id);
-        i = 0;
-      } else {
-        width++;
-        elem.style.width = width + "%";
-        elem.innerHTML ="Loading " + width  + "%";
-      }
-    }
-  }
-}
-//progress bar end
-
 // for select
 function select_with_search_box()
 {
@@ -1044,7 +1022,8 @@ $("#date_range_btn").click(function()
   var click_max_age = $("#age_max").val();
   var click_filter_status = $("#filter_status").val(); 
   var filter_cause_of_death = $("#select_cause_of_death").val();
-  var filter_other_cause = $("#select_other_causes").val();
+  var filter_cause_of_death_search_title = $("#select_cause_of_death").text();
+  var filter_other_cause = $("#select_other_causes").text();
 
   var d_from = new Date(from_input)
   var d_to = new  Date(to_input)
@@ -1140,7 +1119,7 @@ $("#date_range_btn").click(function()
           }
           else
           {
-            results[a] = "  Cause of Death: "+cause_of_death+""
+            results[a] = "  Cause of Death: "+filter_cause_of_death_search_title+""
           }
           a+=1
         }

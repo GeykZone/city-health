@@ -156,7 +156,7 @@ body {
 }
 
 .bg-c-blue {
-  background: linear-gradient(45deg,#4099ff,#73b4ff);
+  background: linear-gradient(45deg,#328bf0,#57a6ff);
 }
 
 .bg-c-medium_blue {
@@ -164,23 +164,23 @@ body {
 }
 
 .bg-c-dark_blue {
-  background: linear-gradient(45deg,#4053ff,#73b4ff);
+  background: linear-gradient(45deg,#006af5,rgb(82, 163, 255));
 }
 
 .bg-c-green {
-  background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+  background: linear-gradient(45deg,#21bba6,#61dfc5);
 }
 
 .bg-c-orange {
-  background: linear-gradient(45deg,#f85408,#ffa424);
+  background: linear-gradient(45deg,#ff8251,#ffac68);
 }
 
 .bg-c-yellow {
-  background: linear-gradient(45deg,#eba13a,#ffcb80);
+  background: linear-gradient(45deg,#f1a740,#ffcb5c);
 }
 
 .bg-c-pink {
-  background: linear-gradient(45deg,#FF5370,#ff869a);
+  background: linear-gradient(45deg,#f04a66,#ff869a);
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

@@ -123,6 +123,11 @@
             $brgy = str_replace(' ', '_', $row['barangay_name']);
             $long_lat[] = $total_hp." ".$brgy." ".$row['long']." ".$row['lat'];
 
+    }    
+    }
+    else
+    {
+        $long_lat[] = "0"." "."0"." "."0"." "."0";
     }
 
     $long_lat = array_unique($long_lat);
@@ -130,9 +135,6 @@
     if(isset($_GET['long_lat']))
     {
         print json_encode($long_lat);
-    }
-
-    
     }
 
 

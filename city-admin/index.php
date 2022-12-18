@@ -100,6 +100,10 @@ min-height: 524px;
 }
 </style>
 
+<!-- more details dashboard -->
+<?php include "display/detail-dashboard.php" ?>
+<!-- more details dashboard  end -->
+
 <div class="body flex-grow-1 px-5 pt-3  pb-3"> 
 <div class="container-fluid">
 
@@ -108,43 +112,36 @@ min-height: 524px;
 
   <div class="col-lg-12 col-sm-12">
   <div class="row ">
-      <div class="col-lg-3 card-group col-sm-6 mb-4">
-        <div class="card bg-c-pink border-0 rounded-4 shadow-sm order-card">
+      <div class="col-lg card-group mb-4 shortCut_btn" id="new_health_cases_btn">
+        <div class="card bg-c-yellow border-0 rounded-4 shadow-sm order-card">
         <div class="card-body adjust_font_size row">
           <h4 >New Health Cases</h4>
           <p class="adjust_font_size fw-lighter opacity-75" ><span class="sevenDaysFrom"></span> - <span class="sevenDaysTo"></span></p>
           <h1><i class="fa-solid float-start"></i><span id="total_new_cases" style="margin-right: 10px;" class="float-end" >0</span></h1>
           <p  class="adjust_font_size"><span id="newCasesPercent"></span></p>
+          <p  class="adjust_font_size fw-lighter opacity-75"><span class="click_to_see_more"></span></p>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 card-group col-sm-6 mb-4">
-        <div class="card bg-c-yellow border-0 rounded-4 shadow-sm order-card">
+      <div class="col-lg card-group mb-4 shortCut_btn" id="new_deaths_btn">
+        <div class="card bg-c-pink border-0 rounded-4 shadow-sm order-card">
         <div class="card-body adjust_font_size row">
-          <h4 >New Deaths</h4>
+          <h4 >New Health-related Deaths</h4>
           <p class="adjust_font_size fw-lighter opacity-75" ><span class="sevenDaysFrom"></span> - <span class="sevenDaysTo"></span></p>
-          <h1><i class="fa-solid float-start"></i><span id="total_new_cases" style="margin-right: 10px;" class="float-end" >0</span></h1>
-          <p  class="adjust_font_size"><span id="newCasesPercent"></span></p>
+          <h1><i class="fa-solid float-start"></i><span id="total_new_deaths" style="margin-right: 10px;" class="float-end" >0</span></h1>
+          <p  class="adjust_font_size"><span id="newDeathsPercent"></span></p>
+          <p  class="adjust_font_size fw-lighter opacity-75"><span class="click_to_see_more"></span></p>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 card-group col-sm-6 mb-4">
+      <div class="col-lg card-group mb-4 shortCut_btn" id="new_recoveries_btn">
         <div class="card bg-c-green border-0 rounded-4 shadow-sm order-card">
         <div class="card-body adjust_font_size row">
-          <h4 >New Recoveries</h4>
+          <h4 >New Health Recoveries</h4>
           <p class="adjust_font_size fw-lighter opacity-75" ><span class="sevenDaysFrom"></span> - <span class="sevenDaysTo"></span></p>
-          <h1><i class="fa-solid float-start"></i><span id="total_new_cases" style="margin-right: 10px;" class="float-end" >0</span></h1>
-          <p  class="adjust_font_size"><span id="newCasesPercent"></span></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 card-group col-sm-6 mb-4">
-        <div class="card bg-c-blue border-0 rounded-4 shadow-sm order-card">
-        <div class="card-body adjust_font_size row">
-          <h4 >Total Health Cases</h4>
-          <p class="adjust_font_size fw-lighter opacity-75" ><span class="sevenDaysFrom"></span> - <span class="sevenDaysTo"></span></p>
-          <h1><i class="fa-solid float-start"></i><span id="total_new_cases" style="margin-right: 10px;" class="float-end" >0</span></h1>
-          <p  class="adjust_font_size"><span id="newCasesPercent"></span></p>
+          <h1><i class="fa-solid float-start"></i><span id="total_newRecoveries" style="margin-right: 10px;" class="float-end" >0</span></h1>
+          <p  class="adjust_font_size"><span id="newRecoveries_percent"></span></p>
+          <p  class="adjust_font_size fw-lighter opacity-75"><span class="click_to_see_more"></span></p>
           </div>
         </div>
       </div>
@@ -218,7 +215,7 @@ min-height: 524px;
     <div class="col  col-sm-12 mb-4">
       <div class="card border-0 shadow-sm border-0 rounded-3 shadow-sm">
         <div class=" card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card" >
-          <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card"> Total health cases, <span id="map_from"></span><span id="map_to"></span></h6>
+          <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Map visualization<span id="map_record_info" class=" shortCut_btn"></span></h6>
         </div>
         <div class=" card-body">
         <div id="map_container" class=" card  rounded-3 border-0 shadow-sm">
@@ -239,7 +236,7 @@ min-height: 524px;
 
   <div class="col-lg-6 col-sm-12">
   <div class="card border-0 rounded-3 shadow-sm mb-4">
-  <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 most prevalent diseases in the past 30 days</h6></div>
+  <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 diseases that has the most infected individuals</h6></div>
   <div class="card-body">
   <div class="container-fluid table-responsive">
   <div class="row">
@@ -272,7 +269,7 @@ min-height: 524px;
 
   <div class="col-lg-6 col-sm-12">
   <div class="card border-0 rounded-3 shadow-sm mb-4">
-  <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 barangays with the highest number of health cases in the past 30 days</h6></div>
+  <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 barangays with the highest number of health cases</h6></div>
   <div class="card-body">
   <div class="container-fluid table-responsive">
   <div class="row">

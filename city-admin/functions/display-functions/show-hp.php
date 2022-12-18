@@ -34,7 +34,7 @@ $columns = array(
     array( 'db' => 'gender',    'dt' => 6, 'field' => 'gender'),
     array( 'db' => 'age',    'dt' => 7, 'field' => 'age'),
     array( 'db' => 'contact',    'dt' => 8, 'field' => 'contact'),
-    array( 'db' => 'date',    'dt' => 9, 'field' => 'date'),
+    array( 'db' => "DATE_FORMAT(date,'%M %d, %Y')",    'dt' => 9, 'field' => "DATE_FORMAT(date,'%M %d, %Y')"),
     array( 'db' => 'case_status',    'dt' => 10, 'field' => 'case_status'),
     array( 'db' => 'hp_id',    'dt' => 11, 'field' => 'hp_id'),
 ); 
@@ -50,13 +50,13 @@ if($query_btn === "clicked")
     $cause_of_death = $_GET['cause_of_death'];
     $other_cause = $_GET['other_cause'];
 
-    $joinQuery = ", DATE_FORMAT(date,'%M %d, %Y') AS date FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
+    $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
     ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
     $where = "";
 
     if($filter_status === "Inactive (Recovered)")
     {
-        $joinQuery = ", DATE_FORMAT(date_of_recovery,'%M %d, %Y') AS date_of_recovery FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
+        $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
         ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
         $where = "";
 
@@ -70,7 +70,7 @@ if($query_btn === "clicked")
             array( 'db' => 'gender',    'dt' => 6, 'field' => 'gender'),
             array( 'db' => 'age',    'dt' => 7, 'field' => 'age'),
             array( 'db' => 'contact',    'dt' => 8, 'field' => 'contact'),
-            array( 'db' => 'date_of_recovery',    'dt' => 9, 'field' => 'date_of_recovery'),
+            array( 'db' => "DATE_FORMAT(date_of_recovery,'%M %d, %Y')",    'dt' => 9, 'field' => "DATE_FORMAT(date_of_recovery,'%M %d, %Y')"),
             array( 'db' => 'case_status',    'dt' => 10, 'field' => 'case_status'),
             array( 'db' => 'hp_id',    'dt' => 11, 'field' => 'hp_id'),
         ); 
@@ -81,7 +81,7 @@ if($query_btn === "clicked")
         {
             if($cause_of_death != "Other")
             {
-                $joinQuery = ", DATE_FORMAT(date_of_death,'%M %d, %Y') AS date_of_death FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
+                $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
                 ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)  LEFT JOIN `diseases` AS `c_o_d` ON (`hp`.`cause_of_death` = `c_o_d`.`id`)";
                 $where = "";
         
@@ -95,14 +95,14 @@ if($query_btn === "clicked")
                     array( 'db' => 'gender',    'dt' => 6, 'field' => 'gender'),
                     array( 'db' => 'age',    'dt' => 7, 'field' => 'age'),
                     array( 'db' => 'contact',    'dt' => 8, 'field' => 'contact'),
-                    array( 'db' => 'date_of_death',    'dt' => 9, 'field' => 'date_of_death'),
+                    array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 9, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
                     array( 'db' => 'case_status',    'dt' => 10, 'field' => 'case_status'),
                     array( 'db' => 'hp_id',    'dt' => 11, 'field' => 'hp_id'),
                 );
             }
             else
             {
-                $joinQuery = ", DATE_FORMAT(date_of_death,'%M %d, %Y') AS date_of_death FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
+                $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
                 ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
                 $where = "";
         
@@ -116,7 +116,7 @@ if($query_btn === "clicked")
                     array( 'db' => 'gender',    'dt' => 6, 'field' => 'gender'),
                     array( 'db' => 'age',    'dt' => 7, 'field' => 'age'),
                     array( 'db' => 'contact',    'dt' => 8, 'field' => 'contact'),
-                    array( 'db' => 'date_of_death',    'dt' => 9, 'field' => 'date_of_death'),
+                    array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 9, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
                     array( 'db' => 'case_status',    'dt' => 10, 'field' => 'case_status'),
                     array( 'db' => 'hp_id',    'dt' => 11, 'field' => 'hp_id'),
                 );
@@ -124,7 +124,7 @@ if($query_btn === "clicked")
         }
         else
         {
-            $joinQuery = ", hp.resident_id, COUNT(*),  DATE_FORMAT(date_of_death,'%M %d, %Y') AS date_of_death FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
+            $joinQuery = ", hp.resident_id, COUNT(*) FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
             ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) LEFT JOIN `diseases` AS `c_o_d` ON (`hp`.`cause_of_death` = `c_o_d`.`id`)";
             $where = "";
     
@@ -138,7 +138,7 @@ if($query_btn === "clicked")
                 array( 'db' => 'gender',    'dt' => 6, 'field' => 'gender'),
                 array( 'db' => 'age',    'dt' => 7, 'field' => 'age'),
                 array( 'db' => 'contact',    'dt' => 8, 'field' => 'contact'),
-                array( 'db' => 'date_of_death',    'dt' => 9, 'field' => 'date_of_death'),
+                array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 9, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
                 array( 'db' => 'case_status',    'dt' => 10, 'field' => 'case_status'),
                 array( 'db' => 'hp_id',    'dt' => 11, 'field' => 'hp_id'),
             );
@@ -146,7 +146,7 @@ if($query_btn === "clicked")
     }
     else  if($filter_status === "Inactive (All)")
     {
-        $joinQuery = ", COALESCE(DATE_FORMAT(date_of_recovery,'%M %d, %Y'), DATE_FORMAT(date_of_death,'%M %d, %Y')) AS date FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
+        $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
         ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
         $where = "";
 
@@ -160,7 +160,7 @@ if($query_btn === "clicked")
             array( 'db' => 'gender',    'dt' => 6, 'field' => 'gender'),
             array( 'db' => 'age',    'dt' => 7, 'field' => 'age'),
             array( 'db' => 'contact',    'dt' => 8, 'field' => 'contact'),
-            array( 'db' => 'date',    'dt' => 9, 'field' => 'date'),
+            array( 'db' => "COALESCE(DATE_FORMAT(date_of_recovery,'%M %d, %Y'), DATE_FORMAT(date_of_death,'%M %d, %Y'))",    'dt' => 9, 'field' => "COALESCE(DATE_FORMAT(date_of_recovery,'%M %d, %Y'), DATE_FORMAT(date_of_death,'%M %d, %Y'))"),
             array( 'db' => 'case_status',    'dt' => 10, 'field' => 'case_status'),
             array( 'db' => 'hp_id',    'dt' => 11, 'field' => 'hp_id'),
         );
@@ -283,7 +283,7 @@ if($query_btn === "clicked")
 }
 else
 {
-    $joinQuery = ",  DATE_FORMAT(date,'%M %d, %Y') AS date FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
+    $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
     ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
     $where = "";
 }

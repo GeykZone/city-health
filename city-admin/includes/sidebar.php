@@ -25,7 +25,7 @@ if(!isset($_COOKIE["sidebar"])) {
         <i id="manage_users_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Users</a>
         </li>
         <li class="nav-item" ><a class="nav-link" href="manage-disease.php" id="nav_diseases">
-        <i id="manage_diseases_Type_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Diseases Type</a>
+        <i id="manage_diseases_Type_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Disease Types</a>
         </li>
         <li class="nav-item" ><a class="nav-link" href="manage-hp.php" id="nav_hp">
         <i id="manage_hp_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Health Profiles</a>

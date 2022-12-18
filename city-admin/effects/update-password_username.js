@@ -73,8 +73,7 @@ $("#update_pass_btn").click(function () {
 
       pass_validator = false;
     }
-
-
+  
 
     if (pass_validator === true)
     {

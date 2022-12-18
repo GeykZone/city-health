@@ -62,7 +62,7 @@ function current_status()
 
     if(query_click != "clicked")
     {
-      $("#map_from").text("between "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " and ")
+      $("#map_from").text("from "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " to ")
         $("#map_to").text(getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
 
     }
@@ -81,7 +81,7 @@ function current_status()
         }
         else
         {
-          $("#map_from").text("between "+getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " and ")
+          $("#map_from").text("from "+getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " to ")
           $("#map_to").text(getMonthName(array_date_range_to[1]) + ' ' + array_date_range_to[2] + ", "+ array_date_range_to[0])
         }
 
@@ -105,39 +105,39 @@ function current_status()
     }
     else
     {
-        $("#map_disease").text("All documented health recoveries from "+recoveries_diseases_title+"") 
+        $("#map_disease").text("All health recoveries from "+recoveries_diseases_title+"") 
       
     }
 
     if(hp_status === "default" || hp_status === "Recoveries")
     {
-        $("#map_cases").text("documented health recoveries from all types of diseases, ")
+        $("#map_cases").text("health recoveries from all types of diseases, documented ")
 
         if(recover_from_disease_type != "default")
         {
-          $("#map_cases").text(", ")
+          $("#map_cases").text(", documented ")
         } 
     }
     else
     {
-        $("#map_cases").text("documented deaths, ")
+        $("#map_cases").text("deaths, documented ")
 
         if(cause_of_death === "Other")
         {  
           if(other_cause === "default")
           { $("#map_disease").text("All ")  
-            $("#map_cases").text("documented non-health-related deaths, ")
+            $("#map_cases").text("non-health-related deaths, documented ")
           }
           else
           {
             $("#map_disease").text("All Non-health-related deaths caused by "+other_cause_title+"") 
-            $("#map_cases").text(", ") 
+            $("#map_cases").text(", documented ") 
           }
         }
         else if(cause_of_death != "default")
         {
-          $("#map_disease").text("All documented deaths caused by "+cause_of_death_title+"") 
-          $("#map_cases").text(", ")
+          $("#map_disease").text("All deaths caused by "+cause_of_death_title+"") 
+          $("#map_cases").text(", documented ")
         }
 
     }
@@ -588,11 +588,11 @@ function number_of_resident_chart()
 
            $(".report_labels").text("Recoveries")
 
-           $(".rec_dead").removeClass("bg-danger")
-           $(".rec_dead").addClass("bg-success")
+           $(".rec_dead").removeClass("bg-c-pink")
+           $(".rec_dead").addClass("bg-c-green")
 
            $('.details_content_label').remove();
-           $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-success mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
+           $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-c-green mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
        }
        else
        {
@@ -657,11 +657,11 @@ function number_of_resident_chart()
         }
 
 
-         $(".rec_dead").removeClass("bg-success")
-         $(".rec_dead").addClass("bg-danger")
+         $(".rec_dead").removeClass("bg-c-green")
+         $(".rec_dead").addClass("bg-c-pink")
          
          $('.details_content_label').remove();
-         $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-danger mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
+         $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-c-pink mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
        }
        
        
@@ -701,11 +701,11 @@ function number_of_resident_chart()
 
         if(hp_status === "default" || hp_status === "Recoveries")
         {
-          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-success mb-3 rounded-2 text-white px-2 d-flex align-items-center"><label class="form-label">'+value+'</label></div>');
+          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-c-green mb-3 rounded-2 text-white px-2 d-flex align-items-center"><label class="form-label">'+value+'</label></div>');
         }
         else
         {
-          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-danger mb-3 rounded-2 text-white px-2 d-flex align-items-center"><label class="form-label">'+value+'</label></div>');
+          $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-c-pink mb-3 rounded-2 text-white px-2 d-flex align-items-center"><label class="form-label">'+value+'</label></div>');
         }
 
        });

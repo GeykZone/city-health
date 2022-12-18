@@ -77,7 +77,7 @@ function current_status()
 
     if(query_click != "clicked")
     {
-        $("#map_from").text("between "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " and ")
+        $("#map_from").text("from "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " to ")
         $("#map_to").text(getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
 
         $(".details_head_from").text(getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " - "+getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
@@ -100,7 +100,7 @@ function current_status()
         }
         else
         {
-          $("#map_from").text("between "+getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " and ")
+          $("#map_from").text("from "+getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " to ")
           $("#map_to").text(getMonthName(array_date_range_to[1]) + ' ' + array_date_range_to[2] + ", "+ array_date_range_to[0])
 
           $(".details_head_from").text(getMonthName(array_date_range_form[1]) + ' ' + array_date_range_form[2] + ", "+ array_date_range_form[0] + " - "+getMonthName(array_date_range_to[1]) + ' ' + array_date_range_to[2] + ", "+ array_date_range_to[0])
@@ -353,6 +353,7 @@ function display_map()
          
              var textArr = long_lat;
              var newObjectArr = [];
+
          
              $.each(textArr,function(index,lat_long){
          
@@ -596,10 +597,10 @@ function display_map()
                 }
 
                 $('.details_content_label').remove();
-                $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
+                $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
                 
                 $('.details_category_content').remove();
-                $("#details_category").append('<div class="details_category_content border-0 shadow-sm align-middle d-flex pt-2 bg-info mb-3 rounded-2 text-white px-2"><div style="width:30px; height:30px; margin-bottom:8px;" class="rounded-circle bg-white">'+
+                $("#details_category").append('<div class="details_category_content border-0 shadow-sm align-middle d-flex pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><div style="width:30px; height:30px; margin-bottom:8px;" class="rounded-circle bg-white">'+
                 '<div style="width:20px; height:20px; margin-top:4px; margin-left:4px;" class="'+mark+'"></div></div><label style="margin-top: 3px;" class="form-label ms-2">'+cluster+' number of health cases.</label></div>');
 
                 //to get the occuring diseases in that area
@@ -636,7 +637,7 @@ function display_map()
                 $('.details_list').remove();
                 $.each(display_diseases_that_occured, function( index,value ) {
         
-                  $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label">'+value+'</label></div>');
+                  $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><label class="form-label">'+value+'</label></div>');
               
                 });
                 
@@ -720,10 +721,10 @@ function display_map()
                 }
 
                 $('.details_content_label').remove();
-                $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
+                $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
                 
                 $('.details_category_content').remove();
-                $("#details_category").append('<div class="details_category_content border-0 shadow-sm align-middle d-flex pt-2 bg-info mb-3 rounded-2 text-white px-2"><div style="width:30px; height:30px; margin-bottom:8px;" class="rounded-circle bg-white">'+
+                $("#details_category").append('<div class="details_category_content border-0 shadow-sm align-middle d-flex pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><div style="width:30px; height:30px; margin-bottom:8px;" class="rounded-circle bg-white">'+
                 '<div style="width:20px; height:20px; margin-top:4px; margin-left:4px;" class="'+mark+'"></div></div><label style="margin-top: 3px;" class="form-label ms-2">'+cluster+' number of health cases.</label></div>');
 
                 //to get the occuring diseases in that area
@@ -760,7 +761,7 @@ function display_map()
                 $('.details_list').remove();
                 $.each(display_diseases_that_occured, function( index,value ) {
         
-                  $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-info mb-3 rounded-2 text-white px-2"><label class="form-label"><span class="fa-solid me-2"></span>'+value+'</label></div>');
+                  $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><label class="form-label"><span class="fa-solid me-2"></span>'+value+'</label></div>');
               
                 });
                 
@@ -768,6 +769,16 @@ function display_map()
                 $('#show_details').modal('toggle');
 
                 Cookies.remove('dashboard_map')
+            }
+
+
+            if(long_lat[0] === "0 0 0 0")
+            {
+                $("#map_record_info").text(" (No Records Found)")
+            }
+            else
+            {
+                $("#map_record_info").text("")
             }
 
            }
@@ -991,6 +1002,8 @@ function display_map()
             map.addControl(new mapboxgl.NavigationControl());// Add zoom and rotation controls to the map. 
 
             $(".mapboxgl-ctrl-group").addClass("d-none d-lg-block d-sm-none")
+
+
 
         });
     

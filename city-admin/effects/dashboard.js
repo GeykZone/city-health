@@ -56,21 +56,8 @@ var past7Days_yyy = past7Days.getFullYear();
 var past7Days_from = past7Days_yyy + '-' + past7Days_mm + '-' + past7Days_dd;
 var past7Days_to = current_year_yyyy + '-' + current_year_mm + '-' + current_year_dd;
 
-var past7Days_date = new Date(past7Days);
-var lastWeek = new Date(past7Days_date.getTime() - 7 * 24 * 60 * 60 * 1000);
-var lastWeek_dd = String(lastWeek.getDate()).padStart(2, '0');
-var lastWeek_mm = String(lastWeek.getMonth() + 1).padStart(2, '0');
-var lastWeek_yyy = lastWeek.getFullYear();
-
-var last_last_week_from = lastWeek_yyy + '-' + lastWeek_mm + '-' + lastWeek_dd;
-var last_last_week_to = past7Days_yyy + '-' + past7Days_mm + '-' + past7Days_dd;
-
-
 $(document).ready(function()
 {
-    $("#map_from").text("between "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " and ")
-    $("#map_to").text(getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
-
     $(".sevenDaysFrom").text(getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy)
     $(".sevenDaysTo").text(getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
 
@@ -85,8 +72,9 @@ $(document).ready(function()
 
     shurctuMenu()
     newCases()
-    newCasesPercentage()
-
+    newDeaths()
+    newRecoveries()
+    
 })
 
 //remove first word from string
@@ -342,6 +330,19 @@ function display_map()
 
             location.href = 'map-statistic.php';
         });
+        if(long_lat[0] === "0 0 0 0")
+        {
+            $("#map_record_info").text(" (No Records Found)")
+
+            $("#map_record_info").click(function()
+            {
+              location.href = 'map-statistic.php';
+            })
+        }
+        else
+        {
+            $("#map_record_info").text("")
+        }
        }
        markers()
 
@@ -585,6 +586,8 @@ $("#myChart_container").click(function()
 function top_3_diseases_function()  
 {
   var top_3_diseases;
+  var top_3_diseases_date_start = getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy
+  var top_3_diseases_date_end = getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy
 
   $.ajaxSetup({async:false});
   $.getJSON('functions/display-functions/get_top_3.php', 
@@ -651,7 +654,7 @@ function top_3_diseases_function()
     var current_year_tooltip = $("#top_3_disease_progress"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("Approximately "+top_3_total_disease_title+"% of health cases in Oroquieta City were caused by "+top_3_disease_name_title+"."); // Updates Opentips content
+    myOpentip.setContent("Approximately, from "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+", "+top_3_total_disease_title+"% of health cases in Oroquieta City were caused by "+top_3_disease_name_title+"."); // Updates Opentips content
   }
 
 
@@ -681,6 +684,8 @@ function total_hp_count_function()
 function top_3_barangays_functions()
 {
   var top_3_barangays;
+  var top_3_barangays_date_start = getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy
+  var top_3_barangays_date_end = getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy
 
   $.ajaxSetup({async:false});
   $.getJSON('functions/display-functions/get_top_3.php', 
@@ -747,7 +752,7 @@ function top_3_barangays_functions()
     var current_year_tooltip = $("#top_3_barangay_progress"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("Approximately "+top_3_total_barangay_title+"% of reported health cases in Oroquieta City were located in Barangay "+top_3_barangay_name_title+"."); // Updates Opentips content
+    myOpentip.setContent("Approximately, from "+top_3_barangays_date_start+" to "+top_3_barangays_date_end+", "+top_3_total_barangay_title+"% of reported health cases in Oroquieta City were located in Barangay "+top_3_barangay_name_title+"."); // Updates Opentips content
   }
 }
 //top 3 barangays end
@@ -809,57 +814,271 @@ function newCases()
 
   $("#total_new_cases").text(newCases_variable);
 
+  if(parseInt(newCases_variable)>0)
+  {
+    $("#newCasesPercent").text("From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there have been "+parseInt(newCases_variable)+
+    " new health cases reported in Oroquieta City.");
+
+    if(parseInt(newCases_variable) === 1)
+    {
+      $("#newCasesPercent").text("From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", only "+parseInt(newCases_variable)+
+      " new health case has been reported in Oroquieta City.");
+    }
+  }
+  else
+  {
+    $("#newCasesPercent").text("From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there were no new health cases reported in Oroquieta City.");
+  }
+ 
+
+  $('.click_to_see_more').text("(Click to see more details)");
+
+  $("#new_health_cases_btn").click(function(){
+
+    var details_for_newCases;
+
+    if(parseInt(newCases_variable)>0)
+    {
+      $('.generated_report_content').remove();
+      $(".generated_report").append('<div class="generated_report_content border-0 shadow-sm align-middle pt-2 bg-c-yellow mb-3 rounded-2 text-white px-2"><label class="form-label">'+"From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there have been "+parseInt(newCases_variable)+
+      " new health cases reported in Oroquieta City."+'</label></div>');
+
+      if(parseInt(newCases_variable) === 1)
+      {
+        $('.generated_report_content').remove();
+        $(".generated_report").append('<div class="generated_report_content border-0 shadow-sm align-middle pt-2 bg-c-yellow mb-3 rounded-2 text-white px-2"><label class="form-label">'+"From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there has been only "+parseInt(newCases_variable)+
+        " new health case reported in Oroquieta City."+'</label></div>');  
+      }
+    }
+    else
+    {
+      $('.generated_report_content').remove();
+      $(".generated_report").append('<div class="generated_report_content border-0 shadow-sm align-middle pt-2 bg-c-yellow mb-3 rounded-2 text-white px-2"><label class="form-label">'+"From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there were no new health cases reported in Oroquieta City."+'</label></div>');
+    }
+
+   
+
+    $.ajaxSetup({async:false});
+    $.getJSON('functions/display-functions/get_top_3.php', 
+    {
+      details_for_newCases:'set',
+      top_from:past7Days_from,
+      top_to:past7Days_to
+    },     
+    function (data, textStatus, jqXHR) 
+    {
+      details_for_newCases = data;
+    });
+
+    $("#report_lbl").text("List of New Health Cases")
+    $(".dashboard_reports_modal").removeClass("bg-c-pink")
+    $(".dashboard_reports_modal").removeClass("bg-c-yellow")
+    $(".dashboard_reports_modal").removeClass("bg-c-green")
+    $(".dashboard_reports_modal").addClass("bg-c-yellow")
+    $("#details_title").text("New Health Cases")
+    $('.new_health_icon').remove();
+    $("#header_icon").append('<span style="width: 15px; height:15px; color:#ffff;" class="new_health_icon fa-solid"></span>')
+
+    $('.new_health_cases_list').remove();
+    $.each(details_for_newCases, function( index,value ) {
+
+      $("#details_form").append('<div  class="new_health_cases_list border-0 shadow-sm align-middle pt-2 bg-c-yellow mb-3 rounded-2 d-flex align-items-center text-white px-2"><label class="form-label">'+value+'</label></div>');
+  
+    });
+
+    $('#show_details').modal('toggle')
+  })
+
 }
 //new cases end
 
-//last last week cases
-function newCasesPercentage()
+//new deaths
+function newDeaths()
 {
-   var last_week_total_cases
-   var current_week_total_cases
+  var new_deaths_variable;
 
   $.ajaxSetup({async:false});
   $.getJSON('functions/display-functions/get_top_3.php', 
   {
-    last_week_total_cases:'set',
-    top_from:last_last_week_from,
-    top_to:last_last_week_to
-  },     
-  function (data, textStatus, jqXHR) 
-  {
-    last_week_total_cases = data;
-  });
-
-  $.ajaxSetup({async:false});
-  $.getJSON('functions/display-functions/get_top_3.php', 
-  {
-    current_week_total_cases:'set',
+    newDeaths:'set',
     top_from:past7Days_from,
     top_to:past7Days_to
   },     
   function (data, textStatus, jqXHR) 
   {
-    current_week_total_cases = data;
+    new_deaths_variable = data;
   });
 
-  console.log(last_week_total_cases+" - "+current_week_total_cases)
+  $("#total_new_deaths").text(new_deaths_variable);
 
-  var percent_increased = ((parseInt(current_week_total_cases) - parseInt(last_week_total_cases)) / parseInt(last_week_total_cases)) * 100;
-  var increase_dicrease;
-
-  if(percent_increased >= 0)
+  if(parseInt(new_deaths_variable)>0)
   {
-    increase_dicrease = "increase"
+    $("#newDeathsPercent").text("From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there have been "+parseInt(new_deaths_variable)+
+    " new health-related deaths reported in Oroquieta City.");
+
+    if(parseInt(new_deaths_variable) === 1)
+    {
+      $("#newDeathsPercent").text("From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", only "+parseInt(new_deaths_variable)+
+    " new health-related death has been reported in Oroquieta City.");
+    }
   }
   else
   {
-    increase_dicrease = "dicrease"
-    percent_increased = Math.abs(percent_increased);
+    $("#newDeathsPercent").text("From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there were no new health-related deaths reported in Oroquieta City.");
   }
 
-  $("#newCasesPercent").text("Over the past week, we have observed a "+percent_increased+"% "+increase_dicrease+" in the number of new health cases, from "+parseInt(last_week_total_cases)+" cases to "+parseInt(current_week_total_cases)+" cases.");
+  $('.click_to_see_more').text("(Click to see more details)");
+
+  $("#new_deaths_btn").click(function(){
+
+    var details_for_newDeaths;
+
+    if(parseInt(new_deaths_variable)>0)
+    {
+      $('.generated_report_content').remove();
+      $(".generated_report").append('<div class="generated_report_content border-0 shadow-sm align-middle pt-2 bg-c-pink mb-3 rounded-2 text-white px-2"><label class="form-label">'+"From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there have been "+parseInt(new_deaths_variable)+
+      " new health-related deaths reported in Oroquieta City."+'</label></div>');
+
+      if(parseInt(new_deaths_variable) === 1)
+      {
+        $('.generated_report_content').remove();
+        $(".generated_report").append('<div class="generated_report_content border-0 shadow-sm align-middle pt-2 bg-c-pink mb-3 rounded-2 text-white px-2"><label class="form-label">'+"From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", only "+parseInt(new_deaths_variable)+
+        " new health-related death has been reported in Oroquieta City."+'</label></div>');  
+      }
+    }
+    else
+    {
+      $('.generated_report_content').remove();
+      $(".generated_report").append('<div class="generated_report_content border-0 shadow-sm align-middle pt-2 bg-c-pink mb-3 rounded-2 text-white px-2"><label class="form-label">'+"From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there were no new health-related deaths reported in Oroquieta City."+'</label></div>');
+    }
+
+   
+    $.ajaxSetup({async:false});
+    $.getJSON('functions/display-functions/get_top_3.php', 
+    {
+      details_for_newDeaths:'set',
+      top_from:past7Days_from,
+      top_to:past7Days_to
+    },     
+    function (data, textStatus, jqXHR) 
+    {
+      details_for_newDeaths = data;
+    });
+
+    $("#report_lbl").text("List of New Health-related Deaths")
+    $(".dashboard_reports_modal").removeClass("bg-c-pink")
+    $(".dashboard_reports_modal").removeClass("bg-c-yellow")
+    $(".dashboard_reports_modal").removeClass("bg-c-green")
+    $(".dashboard_reports_modal").addClass("bg-c-pink")
+    $("#details_title").text("New Health-related Deaths")
+    $('.new_health_icon').remove();
+    $("#header_icon").append('<span style="width: 15px; height:15px; color:#ffff;" class="new_health_icon fa-solid"></span>')
+
+    $('.new_health_cases_list').remove();
+    $.each(details_for_newDeaths, function( index,value ) {
+
+      $("#details_form").append('<div  class="new_health_cases_list border-0 shadow-sm align-middle pt-2 bg-c-pink mb-3 rounded-2 d-flex align-items-center text-white px-2"><label class="form-label">'+value+'</label></div>');
+  
+    });
+
+    $('#show_details').modal('toggle')
+  })
 }
-//last last week cases end
+//new deaths end
 
+//new recoveries
+function newRecoveries()
+{
 
+  var newRecoveries_variable;
 
+  $.ajaxSetup({async:false});
+  $.getJSON('functions/display-functions/get_top_3.php', 
+  {
+    newRecoveries:'set',
+    top_from:past7Days_from,
+    top_to:past7Days_to
+  },     
+  function (data, textStatus, jqXHR) 
+  {
+    newRecoveries_variable = data;
+  });
+
+  $("#total_newRecoveries").text(newRecoveries_variable);
+
+  
+  if(parseInt(newRecoveries_variable)>0)
+  {
+    $("#newRecoveries_percent").text("From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there have been "+parseInt(newRecoveries_variable)+
+    " new health recoveries reported in Oroquieta City.");
+
+    if(parseInt(newRecoveries_variable) === 1)
+    {
+      $("#newRecoveries_percent").text("From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there has been only "+parseInt(newRecoveries_variable)+
+      " new health recovery reported in Oroquieta City.");
+    }
+  }
+  else
+  {
+    $("#newRecoveries_percent").text("From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there were no new health recoveries reported in Oroquieta City.");
+  }
+ 
+  $('.click_to_see_more').text("(Click to see more details)");
+
+  $("#new_recoveries_btn").click(function(){
+
+    var details_for_recoveries;
+
+    if(parseInt(newRecoveries_variable)>0)
+    {
+      $('.generated_report_content').remove();
+      $(".generated_report").append('<div class="generated_report_content border-0 shadow-sm align-middle pt-2 bg-c-green mb-3 rounded-2 text-white px-2"><label class="form-label">'+"From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there have been "+parseInt(newRecoveries_variable)+
+      " new health recoveries reported in Oroquieta City."+'</label></div>');
+
+      if(parseInt(newRecoveries_variable) === 1)
+      {
+        $('.generated_report_content').remove();
+        $(".generated_report").append('<div class="generated_report_content border-0 shadow-sm align-middle pt-2 bg-c-green mb-3 rounded-2 text-white px-2"><label class="form-label">'+"From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", only "+parseInt(newRecoveries_variable)+
+        " new health recovery has been reported in Oroquieta City."+'</label></div>');
+      }
+    }
+    else
+    {
+      $('.generated_report_content').remove();
+      $(".generated_report").append('<div class="generated_report_content border-0 shadow-sm align-middle pt-2 bg-c-green mb-3 rounded-2 text-white px-2"><label class="form-label">'+"From "+getMonthName(past7Days_mm) + ' ' + past7Days_dd+', ' + past7Days_yyy+" to "+getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy+", there were no new health recoveries reported in Oroquieta City."+'</label></div>');
+    }
+
+   
+    $.ajaxSetup({async:false});
+    $.getJSON('functions/display-functions/get_top_3.php', 
+    {
+      details_for_recoveries:'set',
+      top_from:past7Days_from,
+      top_to:past7Days_to
+    },     
+    function (data, textStatus, jqXHR) 
+    {
+      details_for_recoveries = data;
+    });
+
+    $("#report_lbl").text("List of New Health Recoveries")
+    $(".dashboard_reports_modal").removeClass("bg-c-pink")
+    $(".dashboard_reports_modal").removeClass("bg-c-yellow")
+    $(".dashboard_reports_modal").removeClass("bg-c-green")
+    $(".dashboard_reports_modal").addClass("bg-c-green")
+    $("#details_title").text("New Health Recoveries")
+    $('.new_health_icon').remove();
+    $("#header_icon").append('<span style="width: 15px; height:15px; color:#ffff;" class="new_health_icon fa-solid"></span>')
+
+    $('.new_health_cases_list').remove();
+    $.each(details_for_recoveries, function( index,value ) {
+
+      $("#details_form").append('<div  class="new_health_cases_list border-0 shadow-sm align-middle pt-2 bg-c-green mb-3 rounded-2 d-flex align-items-center text-white px-2"><label class="form-label">'+value+'</label></div>');
+  
+    });
+
+    $('#show_details').modal('toggle')
+  })
+
+}
+//new recoveries end

@@ -17,7 +17,7 @@
                       <svg class="icon">
                         <use xlink:href="resourcess/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
                       </svg></span>
-                    <input name="username" id="username" class="form-control" type="text" placeholder="Username">
+                    <input name="username" maxlength="45" id="username" class="form-control" type="text" placeholder="Username">
                     <div class="invalid-feedback" id="invalid_username">
                       Please don't leave this area empty.
                     </div>
@@ -26,7 +26,7 @@
                       <svg class="icon">
                         <use xlink:href="resourcess/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
                       </svg></span>
-                    <input name="password" id="password" class="form-control" type="password" placeholder="Password">
+                    <input name="password" maxlength="25" id="password" class="form-control" type="password" placeholder="Password">
                     <div class="invalid-feedback" id="invalid_password">
                     </div>
                   </div>
