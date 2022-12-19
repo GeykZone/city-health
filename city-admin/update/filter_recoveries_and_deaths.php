@@ -15,7 +15,7 @@
 
       <div class="mb-3" id="s_t">
         <label for="select_deaths_recoveries" class="form-label">Status:</label>
-        <select id="select_deaths_recoveries"  name="select_deaths_recoveries" class="form-control gender barangay-form shadow-sm">
+        <select id="select_deaths_recoveries"  name="select_deaths_recoveries" class="form-control gender barangay-form shadow-sm select_list">
             <option value="">Select Status</option>
             <option value="Recoveries">Recoveries</option>
             <option value="Deaths">Deaths</option>
@@ -29,9 +29,6 @@
           <label for="disease_select_diseases" class="form-label">Recoveries From Diseases Type:</label>
           <select id="disease_select_diseases"  name="disease_select_diseases" class="form-control gender barangay-form shadow-sm">
             <option value="">All Diseases</option>
-            <?php
-            include('functions/display-functions/select_diseases.php');
-            ?>
         </select>
           <div class="invalid-feedback" id="PhilHealth_validator_label">
           Invalid Selection.
@@ -42,10 +39,6 @@
         <label for="select_cause_of_death" class="form-label">Cause of Death:</label>
         <select id="select_cause_of_death"  name="select_cause_of_death" class="form-control gender barangay-form shadow-sm">
             <option value="">All Deaths</option>
-            <?php
-              include('functions/display-functions/select_diseases.php');
-            ?>
-            <option value="Other">Other</option>
         </select>
         <div class="invalid-feedback">
         Invalid selection.
@@ -56,9 +49,6 @@
         <label for="select_other_causes" class="form-label">Other Cause of Death:</label>
         <select id="select_other_causes"  name="select_other_causes" class="form-control gender barangay-form shadow-sm">
             <option value="">All Other Deaths (Not related to diseases)</option>
-            <?php
-              include('functions/display-functions/select_other_cause_of_death.php');
-            ?>
         </select>
         <div class="invalid-feedback">
         Invalid selection.
@@ -99,7 +89,7 @@
 
         <div class="mb-3" >
         <label for="disease_select_gender" class="form-label">Gender:</label>
-        <select id="disease_select_gender"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm"> 
+        <select id="disease_select_gender"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm select_list"> 
         <option value="">All Gender</option>
         <option value="M (Male)">M (Male)</option>
         <option value="F (Female)">F (Female)</option>
@@ -111,7 +101,7 @@
 
         <div class="mb-3">
           <label for="disease_selecte_barangay" class="form-label">Select Barangay:</label>
-          <select id="disease_selecte_barangay"  name="disease_selecte_barangay" class="form-control gender barangay-form shadow-sm">
+          <select id="disease_selecte_barangay"  name="disease_selecte_barangay" class="form-control gender barangay-form shadow-sm select_list">
             <option value="">All Barangays</option>
             <?php
             include('functions/display-functions/select_barangays.php');

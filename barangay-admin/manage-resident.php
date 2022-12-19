@@ -1,146 +1,136 @@
 <?php 
-  include('includes/header.php');
-  include('includes/sidebar.php');
+include('includes/header.php');
+include('includes/sidebar.php');
 ?>
+<!--side bar-->
 
-    <!--side bar-->
-    
-    <!--side bar end-->
+<!--side bar end-->
 
-    <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+<div class="wrapper d-flex flex-column min-vh-100" style="background-color: #e2e7e9;">
 
-      <!--header-->
-      <?php   include('includes/navhead.php'); ?>
-              <li class="breadcrumb-item active"><span>Manage Residents</span></li>
-            </ol>
-          </nav>
-        </div>
-      </header>
-      <!--header end-->
+<!--header-->
+<?php   include('includes/navhead.php'); ?>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb my-0 ms-2">
+<li class="breadcrumb-item active">
+<!-- if breadcrumb is single--><span>Barangay Admin</span>
+</li>
+<li class="breadcrumb-item active"><span>Manage Residents</span></li>
+<li class="breadcrumb-item active"><span>Barangay <?php echo ucwords(strtolower($admin_location)); ?> Residents</span></li>
+</ol>
+</nav>
+</div>
+</header>
+<!--header end-->
 
-      <div class="body flex-grow-1 px-3">
-        <div class="container-lg">
-          
-          <!--for map-->
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h4 class="card-title mb-0">For Map</h4>
-                  <div class="small text-medium-emphasis">Sample Text</div>
-                </div>
-                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                  <div class="btn-group btn-group-toggle mx-3" data-coreui-toggle="buttons">
-                    <input class="btn-check" id="option1" type="radio" name="options" autocomplete="off">
-                    <label class="btn btn-outline-secondary"> Day</label>
-                    <input class="btn-check" id="option2" type="radio" name="options" autocomplete="off" checked="">
-                    <label class="btn btn-outline-secondary active"> Month</label>
-                    <input class="btn-check" id="option3" type="radio" name="options" autocomplete="off">
-                    <label class="btn btn-outline-secondary"> Year</label>
-                  </div>
-                  <button class="btn btn-primary" type="button">
-                    <svg class="icon">
-                      <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-cloud-download"></use>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div class="c-chart-wrapper" style="height:300px;margin-top:40px;">
-                <canvas class="chart" id="main-chart" height="300"></canvas><!--MAP HERE-->
-              </div>
-            </div>
-          </div>
-          <!--for map end-->
-
-          <!--Charts-->
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4">
-                <div class="card-header">Charts</div>
-                <div class="card-body">
-
-                  <div class="row">
-
-                    <!--health diseases chart-->
-                    <div class="col-sm-6">
-                      <hr class="mt-0">
-                      <div class="card-header">For chart health disease</div>
-                    </div>
-                     <!--health diseases chart end-->
+<!--add barangay resident modal-->
+<?php include('add/add-resident.php'); ?>
+<!--add barangay resident modal end-->
 
 
-                    <!--prevalence chart-->
-                    <div class="col-sm-6">
-                      <hr class="mt-0">
-                      <div class="card-header">For chart health disease</div>
-                    </div>
-                    <!--prevalence chart end-->
+<!--delete barangay resident modal-->
+<?php include('delete/delete-resident.php'); ?>
+<!--delete barangay resident modal end-->
 
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Charts end-->
+<!--update barangay resident modal-->
+<?php include('update/update-resident.php'); ?>
+<!--update barangay resident modal end-->
 
 
-          <!--Admins-->
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4">
-                <div class="card-header">Barangay Admins</div>
-                <div class="card-body">
-                <hr class="mt-0">
-                  <!-- /.row-->
-                  <div class="table-responsive">
-                    <table class="table border mb-0">
+<div class="body flex-grow-1 px-5 pt-3  pb-3"> 
+<div class="container-fluid">
 
-                      <thead class="table-light fw-semibold">
-                        <tr class="align-middle">
-                          <th>Barangay</th>
-                          <th>Email</th>
-                          <th></th>
-                        </tr>
-                      </thead>
+<!--Admins-->
+<div class="row">
+<div class="col-md-12">
+<div class="card border-0 mb-4 shadow-sm ">
 
-                      <tbody>
-                        <tr class="align-middle">
-                          <td>
-                            <div>Sample Barangay Name</div>
-                          </td>
-                          <td>
-                            <div>Sample Email for Barangay</div>
-                          </td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <svg class="icon">
-                                  <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-options"></use>
-                                </svg>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Info</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
+<div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
+<button type="button" id="refresh_resident_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay <?php echo ucwords(strtolower($admin_location)); ?> Residents
+</div>
 
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Admins end-->
+<div class="card-body border-0 shadow-sm "  id="wrapper" >
 
-        </div>
-      </div>
+<div class=" container-fluid">
+  <div class=" dataTables_wrapper dt-bootstrap5 row" id="buttons">
+
+  <div class="col-lg-12 ">
+      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder"  data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">NEW <span class="fa-solid ms-1 fa-circle-plus"></a>
+  </div>
+
+  </div>
+</div>
+
+<div  class="table-responsive container-fluid">
+
+<table class="table table-striped table-borderless  table-condensed w-100" id="resident_table" > 
+<thead class="table-info fw-semibold shadow-sm">
+<tr class="align-middle">
+      <th id="th">First Name</th>
+      <th id="th">Middle Name</th>
+      <th id="th">Last Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th id="th">Date of Birth</th>
+      <th>Status</th>
+      <th id="th">Contact</th>
+      <th id="th">Email</th>
+      <th class="text-end px-4">Settings</th>
+    </tr>
+</thead>
+
+  <tbody class="align-middle shadow-sm" > 
+</tbody>
+
+<tfoot class=" table-secondary fw-semibold shadow-sm" id="th_1">
+  <tr class="align-middle" >
+    <td id="First Name" style="min-width: 100px;"></td>
+    <td id="Middle Name" style="min-width: 125px;"></td>
+    <td id="Last Name" style="min-width: 100px;"></td>
+    <td id="Age" ></td>
+    <td id="Gender"></td>
+    <td id="Date of Birth" style="min-width: 130px;"></td>
+    <td id="Status"></td>
+    <td id="Contact" style="min-width: 100px;"></td>
+    <td id="Email" class="text-center" style="min-width: 100px;"></td>
+    <td id="settings" style="min-width:100px;"></td>
+  </tr>
+</tfoot>
+</table>
+   
+</div>
+
+<div class="table-responsive container-fluid" >
+  <div class="dataTables_wrapper dt-bootstrap5 row" id="table_page">
+  </div>
+</div>
+  
+</div>
+  
+</div>
+</div>
+</div>
+<!--Admins end-->
 
 
-      <!-- footer-->
-      <?php   include('includes/footer.php'); ?>
-      <!--Footer end-->
 
-      <!--scripts-->
-      <?php include('includes/scripts.php'); ?>
-      <!--scripts end-->
+</div>
+</div>
+
+
+<!-- footer-->
+<?php   include('includes/footer.php'); ?>
+<!--Footer end-->
+
+<!--scripts-->
+<script>
+  var my_barangay_name = <?php echo json_encode(ucwords(strtolower($admin_location))); ?>;
+  var my_barangay_id = <?php echo json_encode($admin_brg_id); ?> 
+</script>
+
+<script  src="effects/manage-resident.js" ></script>
+<!--scripts end-->
+
+<!--scripts-->
+<?php include('includes/scripts.php'); ?>
+<!--scripts end-->

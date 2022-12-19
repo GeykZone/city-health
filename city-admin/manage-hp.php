@@ -127,7 +127,7 @@ include('includes/sidebar.php');
             <td id="Contact" style="min-width: 100px;"></td>
             <td id="Date of Diagnosis" style="min-width: 137px;"></td>
             <td id="status" style="min-width: 70px;"></td>
-            <td id="settings" style="min-width:100px;"></td>
+            <td id="settings" style="min-width:91px;"></td>
           </tr>
         </tfoot>
       

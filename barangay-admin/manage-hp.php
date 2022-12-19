@@ -1,146 +1,165 @@
 <?php 
-  include('includes/header.php');
-  include('includes/sidebar.php');
+include('includes/header.php');
+include('includes/sidebar.php');
 ?>
 
-    <!--side bar-->
-    
-    <!--side bar end-->
+<!--side bar-->
+<!--side bar end-->
 
-    <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+<div class="wrapper d-flex flex-column min-vh-100" style="background-color: #e2e7e9;">
 
-      <!--header-->
-      <?php   include('includes/navhead.php'); ?>
-              <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
-            </ol>
-          </nav>
-        </div>
-      </header>
-      <!--header end-->
+<!--header-->
+<?php   include('includes/navhead.php'); ?>
 
-      <div class="body flex-grow-1 px-3">
-        <div class="container-lg">
-          
-          <!--for map-->
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h4 class="card-title mb-0">For Map</h4>
-                  <div class="small text-medium-emphasis">Sample Text</div>
-                </div>
-                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                  <div class="btn-group btn-group-toggle mx-3" data-coreui-toggle="buttons">
-                    <input class="btn-check" id="option1" type="radio" name="options" autocomplete="off">
-                    <label class="btn btn-outline-secondary"> Day</label>
-                    <input class="btn-check" id="option2" type="radio" name="options" autocomplete="off" checked="">
-                    <label class="btn btn-outline-secondary active"> Month</label>
-                    <input class="btn-check" id="option3" type="radio" name="options" autocomplete="off">
-                    <label class="btn btn-outline-secondary"> Year</label>
-                  </div>
-                  <button class="btn btn-primary" type="button">
-                    <svg class="icon">
-                      <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-cloud-download"></use>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div class="c-chart-wrapper" style="height:300px;margin-top:40px;">
-                <canvas class="chart" id="main-chart" height="300"></canvas><!--MAP HERE-->
-              </div>
-            </div>
-          </div>
-          <!--for map end-->
-
-          <!--Charts-->
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4">
-                <div class="card-header">Charts</div>
-                <div class="card-body">
-
-                  <div class="row">
-
-                    <!--health diseases chart-->
-                    <div class="col-sm-6">
-                      <hr class="mt-0">
-                      <div class="card-header">For chart health disease</div>
-                    </div>
-                     <!--health diseases chart end-->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 ms-2">
+    <li class="breadcrumb-item active">
+      <!-- if breadcrumb is single--><span>City Admin</span>
+    </li>
+    <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
+    <li class="breadcrumb-item active"><span> Barangay <?php echo ucwords(strtolower($admin_location)); ?> Health Profiles</span></li>
+  </ol>
+</nav>
+</div>
+</header>
+<!--header end-->
 
 
-                    <!--prevalence chart-->
-                    <div class="col-sm-6">
-                      <hr class="mt-0">
-                      <div class="card-header">For chart health disease</div>
-                    </div>
-                    <!--prevalence chart end-->
+<!-- add hp -->
+<?php include "add/add-hp.php" ?>
+<!-- add hp end -->
 
-                  </div>
+<!-- update hp -->
+<?php include "update/update-hp.php" ?>
+<!-- update hp end -->
 
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Charts end-->
+<!-- active hp -->
+<?php include "update/active-hp.php" ?>
+<!-- active hp end -->
+
+<!-- delete hp -->
+<?php include "delete/delete-hp.php" ?>
+<!-- delete hp end -->
+
+<!-- occurence hp -->
+<?php include "add/add-hp-occurrence.php" ?>
+<!-- occurence hp end -->
+
+<!-- detail hp -->
+<?php include "display/detail-resident-hp.php" ?>
+<!-- detail hp end -->
+
+<!-- filter hp -->
+<?php include "update/filter-table.php" ?>
+<!-- filter hp end -->
+
+<div class="body flex-grow-1 px-5 pt-3 pb-3"> 
+<div class="container-fluid">
+
+<!--Admins-->
+<div class="row">
+<div class="col-md-12">
+<div class="card border-0 mb-4 shadow-sm remove_rounded">
+
+  <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
+  <button type="button" id="refresh_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button> Barangay <?php echo ucwords(strtolower($admin_location)); ?> Health Profiles
+  </div>
+
+  <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >
 
 
-          <!--Admins-->
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4">
-                <div class="card-header">Barangay Admins</div>
-                <div class="card-body">
-                <hr class="mt-0">
-                  <!-- /.row-->
-                  <div class="table-responsive">
-                    <table class="table border mb-0">
+  <div class=" container-fluid">
+  <div class=" dataTables_wrapper dt-bootstrap5 row" id="buttons">
 
-                      <thead class="table-light fw-semibold">
-                        <tr class="align-middle">
-                          <th>Barangay</th>
-                          <th>Email</th>
-                          <th></th>
-                        </tr>
-                      </thead>
+  <div class="col-12 mb-2" id="search_result"></div>
 
-                      <tbody>
-                        <tr class="align-middle">
-                          <td>
-                            <div>Sample Barangay Name</div>
-                          </td>
-                          <td>
-                            <div>Sample Email for Barangay</div>
-                          </td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <svg class="icon">
-                                  <use xlink:href="../resourcess/vendors/@coreui/icons/svg/free.svg#cil-options"></use>
-                                </svg>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Info</a><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item text-danger" href="#">Delete</a></div>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
+  <div class="col-lg-6  mt-1 mb-2 mb-lg-0 mb-md-2 mb-sm-2 align-content-center hide_first_load dropdown-center">
+  <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="filter_this_table" data-coreui-toggle="modal" href="#filter_table" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
+  </div>
 
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Admins end-->
+  <div class="col-lg-6  text-lg-end mt-1 align-content-center hide_first_load dropdown-center">
+  <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 me-2 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder dropdown-toggle" id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid ms-1"></span></a>
+  <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
+  <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Health Profiles</a></li>
+    <li><a class="dropdown-item"  href="graphical-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Graphical Statistic</a></li>
+  </ul>
+  
+  <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="add_hp" data-coreui-toggle="modal" href="#add-hp" role="button" >NEW <span class="fa-solid ms-1 fa-circle-plus"></span></a>
+  </div>
+  </div> 
+  </div>
 
-        </div>
+
+  <div class=" table-responsive container-fluid" >
+
+      <table class="table table-striped table-borderless rounded-3 table-condensed w-100" id="hp_table"> 
+      <thead class="table-info  fw-semibold shadow-sm">
+          <tr class="align-middle ">
+            <th class="th_occurrence" style="min-width: 110px;">Occurrence</th>
+            <th style="min-width: 105px;" class="th_diag">Diagnosis</th>
+            <th id="th">First Name</th>
+            <th id="th" >Middle Name</th>
+            <th id="th">Last Name</th>
+            <th >Gender</th>
+            <th >Age</th>
+            <th>Contact</th>
+            <th class="th_date" style="min-width: 137px;">Date of Diagnosis</th>
+            <th >Status</th>
+            <th class="text-end px-4">Settings</th>
+          </tr>
+        </thead>
+
+        <tbody class="align-middle shadow-sm "  id="health_profiles_table"> 
+        </tbody>
+
+        <tfoot class=" table-secondary fw-semibold shadow-sm" id="th_1">
+          <tr class="align-middle" >
+            <td id="Occurrence"style="min-width: 100px;" ></td>
+            <td id="Diagnosis" style="min-width: 110px; font-size:8px;"></td>
+            <td id="First Name" style="min-width: 100px;"></td>
+            <td id="Middle Name" style="min-width: 125px;"></td>
+            <td id="Last Name" style="min-width: 100px;"></td>
+            <td id="Gender" style="min-width: 73px;"></td>
+            <td id="Age"  style="min-width: 55px;"></td>
+            <td id="Contact" style="min-width: 100px;"></td>
+            <td id="Date of Diagnosis" style="min-width: 137px;"></td>
+            <td id="status" style="min-width: 70px;"></td>
+            <td id="settings" style="min-width:91px;"></td>
+          </tr>
+        </tfoot>
+      
+      </table>
+
       </div>
 
+    <div class=" container-fluid" >
+      <div class="dataTables_wrapper dt-bootstrap5 row" id="table_page">
+      </div>
+    </div>
+    
+  </div>
+</div>
+</div>
+</div>
+<!--Admins end-->
 
-      <!-- footer-->
-      <?php   include('includes/footer.php'); ?>
-      <!--Footer end-->
+</div>
+</div>
 
-      <!--scripts-->
-      <?php include('includes/scripts.php'); ?>
-      <!--scripts end-->
+
+<!-- footer-->
+<?php   include('includes/footer.php'); ?>
+<!--Footer end-->
+
+<!--scripts  -->
+<script>
+  var my_barangay_name = <?php echo json_encode(ucwords(strtolower($admin_location))); ?>;
+  var my_barangay_id = <?php echo json_encode($admin_brg_id); ?> 
+</script>
+
+<script src="effects/manage-hp.js" ></script>
+<!--scripts end-->
+
+<!--scripts-->
+<?php include('includes/scripts.php'); ?>
+<!--scripts end-->

@@ -133,7 +133,7 @@ if(isset($_GET['details_for_newCases']))
 
     if($total_newCases_count > 1)
     {
-        $total_newCases_number[] = $total_newCases_count." new health cases caused by ".$disease_name." in barangay ".$barangay_name." on ".$date_created;
+        $total_newCases_number[] = $total_newCases_count." new health cases caused by ".$disease_name." on ".$date_created." in barangay ".$barangay_name.".";
     }
     else if($total_newCases_count < 1)
     {
@@ -141,7 +141,7 @@ if(isset($_GET['details_for_newCases']))
     }
     else
     {
-        $total_newCases_number[] = $total_newCases_count." new health case caused by ".$disease_name." in barangay ".$barangay_name." on ".$date_created;
+        $total_newCases_number[] = $total_newCases_count." new health case caused by ".$disease_name." on ".$date_created." in barangay ".$barangay_name.".";
     }
 
     }
@@ -219,7 +219,7 @@ if(isset($_GET['details_for_newDeaths']))
    
     if($total_new_deaths_count > 1)
     {
-        $total_new_deaths_number[] = $total_new_deaths_count." new deaths caused by ".$cause_of_death_disease." in barangay ".$barangay_name." on ".$date_created;
+        $total_new_deaths_number[] = $total_new_deaths_count." new health-related deaths caused by ".$cause_of_death_disease." on ".$date_created." in barangay ".$barangay_name.".";
     }
     else if($total_new_deaths_count < 1)
     {
@@ -227,7 +227,7 @@ if(isset($_GET['details_for_newDeaths']))
     }
     else
     {
-        $total_new_deaths_number[] = $total_new_deaths_count." new death caused by ".$cause_of_death_disease." in barangay ".$barangay_name." on ".$date_created;
+        $total_new_deaths_number[] = $total_new_deaths_count." new health-related death caused by ".$cause_of_death_disease." on ".$date_created." in barangay ".$barangay_name.".";
 
     }
 
@@ -305,7 +305,7 @@ if(isset($_GET['details_for_recoveries']))
    
     if($total_newRecoveries_count > 1)
     {
-        $total_newRecoveries_number[] = $total_newRecoveries_count." new health recoveries from ".$disease_name." in barangay ".$barangay_name." on ".$date_created;
+        $total_newRecoveries_number[] = $total_newRecoveries_count." new health recoveries from ".$disease_name." on ".$date_created." in barangay ".$barangay_name.".";
     }
     else if($total_newRecoveries_count < 1)
     {
@@ -313,7 +313,7 @@ if(isset($_GET['details_for_recoveries']))
     }
     else
     {
-        $total_newRecoveries_number[] = $total_newRecoveries_count." new health recovery from ".$disease_name." in barangay ".$barangay_name." on ".$date_created;
+        $total_newRecoveries_number[] = $total_newRecoveries_count." new health recovery from ".$disease_name." on ".$date_created." in barangay ".$barangay_name.".";
 
     }
 

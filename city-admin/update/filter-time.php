@@ -47,7 +47,7 @@
 
         <div class="mb-3" >
         <label for="disease_select_gender" class="form-label">Gender:</label>
-        <select id="disease_select_gender"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm"> 
+        <select id="disease_select_gender"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm select_list"> 
         <option value="">All Gender</option>
         <option value="M (Male)">M (Male)</option>
         <option value="F (Female)">F (Female)</option>
@@ -59,7 +59,7 @@
 
         <div class="mb-3">
           <label for="disease_selecte_barangay" class="form-label">Select Barangay:</label>
-          <select id="disease_selecte_barangay"  name="disease_selecte_barangay" class="form-control gender barangay-form shadow-sm">
+          <select id="disease_selecte_barangay"  name="disease_selecte_barangay" class="form-control gender barangay-form shadow-sm select_list">
             <option value="">All Barangays</option>
             <?php
             include('functions/display-functions/select_barangays.php');
@@ -74,9 +74,6 @@
           <label for="disease_select_diseases" class="form-label">Diseases Type:</label>
           <select id="disease_select_diseases"  name="disease_select_diseases" class="form-control gender barangay-form shadow-sm">
             <option value="">All Diseases</option>
-            <?php
-            include('functions/display-functions/select_diseases.php');
-            ?>
         </select>
           <div class="invalid-feedback" id="PhilHealth_validator_label">
           Invalid Selection.

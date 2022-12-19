@@ -13,7 +13,7 @@
 
       <div class="mb-3" id="add_hp_select_brg_list">
         <label for="add_hp_select_barangay" class="form-label">Barangay*</label>
-        <select id="add_hp_select_barangay"  name="add_hp_select_barangay" class="form-control barangay-form shadow-sm">
+        <select id="add_hp_select_barangay"  name="add_hp_select_barangay" class="form-control barangay-form shadow-sm select_list">
             <option value="">Pick a barangay.</option>
           <?php
           include('functions/display-functions/select_barangays.php');
@@ -40,9 +40,6 @@
         <label for="add_hp_select_diseases" class="form-label">Select Diagnosis*</label>
         <select id="add_hp_select_diseases"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm">
             <option value="">Select Type.</option>
-            <?php
-              include('functions/display-functions/select_diseases.php');
-            ?>
         </select>
         <div class="invalid-feedback">
         Invalid selection.

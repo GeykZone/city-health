@@ -143,6 +143,42 @@ body {
   font-size: 15px !important;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #959aa14d;
+}
+
+/* Mozilla */
+::-moz-scrollbar {
+  width: 10px;
+  height: 5px;
+  background-color: #f5f5f5;
+}
+
+::-moz-scrollbar-thumb  {
+  border-radius: 10px;
+  background-color:  #959aa14d;
+}
+
+/* Microsoft */
+::-ms-scrollbar {
+  width: 10px;
+  height: 5px;
+  background-color: #f5f5f5;
+}
+
+::-ms-scrollbar-thumb  {
+  border-radius: 10px;
+  background-color: #959aa14d;
+}
+
 .order-card {
   color: #fff;
 }
@@ -183,16 +219,6 @@ body {
   background: linear-gradient(45deg,#f04a66,#ff869a);
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-body::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
 
 #hp_option::after {
   content: none;

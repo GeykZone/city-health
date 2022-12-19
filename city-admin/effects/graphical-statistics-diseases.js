@@ -480,7 +480,7 @@ function number_of_resident_chart()
 
             if(barangay_name != "default")
             {
-              $(".details_head_status").text("All documented health cases caused by "+title_diagnosis+" disease in barangay "+tittle_barangay)
+              $(".details_head_status").text("All documented health cases caused by "+title_diagnosis+" in barangay "+tittle_barangay)
             }
         }
         else
@@ -489,7 +489,7 @@ function number_of_resident_chart()
 
             if(barangay_name != "default")
             {
-              $(".details_head_status").text("All documented health cases that are currently active caused by "+title_diagnosis+" disease in barangay "+tittle_barangay)
+              $(".details_head_status").text("All documented health cases that are currently active caused by "+title_diagnosis+" in barangay "+tittle_barangay)
             }
         }
 

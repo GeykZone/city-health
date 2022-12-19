@@ -49,7 +49,8 @@ $(document).ready(function()
     $( "#range_to" ).val(current_year_to);
     oneTip()
     current_status()
-    select_with_search_box()
+    select_list()
+    select_for_disease()
     date_range()
     number_of_resident_chart()
 })
@@ -103,15 +104,67 @@ function getMonthName(monthNumber) {
 }
 //convert month number into words end
 
-// for select
-function select_with_search_box()
+// selectize ordinary
+function select_list() 
 {
-$('select').selectize({
-// maxItems: '1',
+  $('.select_list').selectize({
+    // maxItems: '1',
+    sortField: 'text'
+    });
+}
+// selectize ordinary end
+
+// for select diseases
+function select_for_disease()
+{  
+var selectize_diseases ;
+$.ajaxSetup({async:false});
+$.getJSON('functions/display-functions/select_diseases.php', 
+{
+}, 
+function (data, textStatus, jqXHR) 
+{
+  selectize_diseases = data;
 });
+
+var selectize_diseases_data = selectize_diseases;
+var items = selectize_diseases_data.map(function(x) 
+{ 
+    //remove the first words
+    var one = x.substr(x.indexOf(" ") + 1);
+
+    //remove last word
+    function removeLastWord(str) 
+    {
+      const lastIndexOfSpace = str.lastIndexOf(' ');
+    
+      if (lastIndexOfSpace === -1) {
+        return str;
+      }
+      return str.substring(0, lastIndexOfSpace);
+    }
+
+    var text_label = removeLastWord(x)
+    text_label = text_label.split('_').join(' ') 
+
+    return {
+      item: one,
+      field: text_label
+    };
+  
+});
+
+$('#select_diseases').selectize
+({
+    options: items,
+    labelField: "field",
+    valueField: "item",
+    searchField: "field"
+});
+
 $(".selectize-control").removeClass("form-control barangay-form")
 }
-// for select  end
+// for select diseases  end
 
 //date picker
 function date_range()

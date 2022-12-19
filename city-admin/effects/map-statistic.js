@@ -35,7 +35,8 @@ $(document).ready(function()
     $(document).attr("title", "HPCS | Manage Health Profiles");
     $("#nav_hp").addClass("active");
     date_range()
-    select_with_search_box()
+    select_list()
+    select_for_disease()
     
     $( "#range_from" ).val(current_year_from);
     $( "#range_to" ).val(current_year_to);
@@ -45,6 +46,68 @@ $(document).ready(function()
     oneTip();
 
 })
+
+// selectize ordinary
+function select_list() 
+{
+  $('.select_list').selectize({
+    // maxItems: '1',
+    sortField: 'text'
+    });
+}
+// selectize ordinary end
+
+// for select diseases
+function select_for_disease()
+{  
+var selectize_diseases ;
+$.ajaxSetup({async:false});
+$.getJSON('functions/display-functions/select_diseases.php', 
+{
+}, 
+function (data, textStatus, jqXHR) 
+{
+  selectize_diseases = data;
+});
+
+var selectize_diseases_data = selectize_diseases;
+var items = selectize_diseases_data.map(function(x) 
+{ 
+    //remove the first words
+    var one = x.substr(x.indexOf(" ") + 1);
+
+    //remove last word
+    function removeLastWord(str) 
+    {
+      const lastIndexOfSpace = str.lastIndexOf(' ');
+    
+      if (lastIndexOfSpace === -1) {
+        return str;
+      }
+      return str.substring(0, lastIndexOfSpace);
+    }
+
+    var text_label = removeLastWord(x)
+    text_label = text_label.split('_').join(' ') 
+
+    return {
+      item: one,
+      field: text_label
+    };
+  
+});
+
+$('#select_diseases').selectize
+({
+    options: items,
+    labelField: "field",
+    valueField: "item",
+    searchField: "field"
+});
+
+$(".selectize-control").removeClass("form-control barangay-form")
+}
+// for select diseases  end
 
 function oneTip()
 {
@@ -210,16 +273,6 @@ function current_status()
 
 }
 //tittle page cureent status end
-
-// for select
-function select_with_search_box()
-{
-$('select').selectize({
-// maxItems: '1',
-});
-$(".selectize-control").removeClass("form-control barangay-form")
-}
-// for select  end
 
 //date picker
 function date_range()
@@ -761,7 +814,7 @@ function display_map()
                 $('.details_list').remove();
                 $.each(display_diseases_that_occured, function( index,value ) {
         
-                  $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><label class="form-label"><span class="fa-solid me-2"></span>'+value+'</label></div>');
+                  $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><label class="form-label">'+value+'</label></div>');
               
                 });
                 

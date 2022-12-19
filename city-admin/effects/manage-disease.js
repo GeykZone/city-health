@@ -270,7 +270,7 @@ function load_data_tables() {
       if(title === "settings" )
       {
       
-        $(this).html('<div class="text-end" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid fa-magnifying-glass me-2"></span>Search Area</span></div>');
+        $(this).html('<div class="text-end" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid me-2"></span>Settings</span></div>');
       }
       else
       {

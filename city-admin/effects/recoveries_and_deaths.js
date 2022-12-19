@@ -49,12 +49,188 @@ $(document).ready(function()
     $( "#disease_range_to" ).val(current_year_to);
     $(document).attr("title", "HPCS | Manage Health Profiles");
     $("#nav_hp").addClass("active");
+    select_list() 
+    select_for_disease()
+    select_for_Health_related_deaths()
+    seletize_other_deaths()
     oneTip()
-    select_with_search_box()
     date_range()
     current_status()
     number_of_resident_chart()
 })
+
+// selectize ordinary
+function select_list() 
+{
+  $('.select_list').selectize({
+    // maxItems: '1',
+    sortField: 'text'
+    });
+}
+// selectize ordinary end
+
+// for select diseases
+function select_for_disease()
+{  
+var selectize_diseases ;
+$.ajaxSetup({async:false});
+$.getJSON('functions/display-functions/select_diseases.php', 
+{
+}, 
+function (data, textStatus, jqXHR) 
+{
+  selectize_diseases = data;
+});
+
+var selectize_diseases_data = selectize_diseases;
+var items = selectize_diseases_data.map(function(x) 
+{ 
+    //remove the first words
+    var one = x.substr(x.indexOf(" ") + 1);
+
+    //remove last word
+    function removeLastWord(str) 
+    {
+      const lastIndexOfSpace = str.lastIndexOf(' ');
+    
+      if (lastIndexOfSpace === -1) {
+        return str;
+      }
+      return str.substring(0, lastIndexOfSpace);
+    }
+
+    var text_label = removeLastWord(x)
+    text_label = text_label.split('_').join(' ') 
+
+    return {
+      item: one,
+      field: text_label
+    };
+  
+});
+
+$('#disease_select_diseases').selectize
+({
+    options: items,
+    labelField: "field",
+    valueField: "item",
+    searchField: "field"
+});
+
+$(".selectize-control").removeClass("form-control barangay-form")
+}
+// for select diseases  end
+
+//selecttize health related deaths
+function select_for_Health_related_deaths()
+{
+var selectize_diseases ;
+$.ajaxSetup({async:false});
+$.getJSON('functions/display-functions/select_diseases.php', 
+{
+  deaths: "set"
+}, 
+function (data, textStatus, jqXHR) 
+{
+  selectize_diseases = data;
+});
+
+var selectize_diseases_data = selectize_diseases;
+var items = selectize_diseases_data.map(function(x) 
+{ 
+    //remove the first words
+    var one = x.substr(x.indexOf(" ") + 1);
+
+    //remove last word
+    function removeLastWord(str) 
+    {
+      const lastIndexOfSpace = str.lastIndexOf(' ');
+    
+      if (lastIndexOfSpace === -1) {
+        return str;
+      }
+      return str.substring(0, lastIndexOfSpace);
+    }
+
+    var text_label = removeLastWord(x)
+    text_label = text_label.split('_').join(' ') 
+
+    return {
+      item: one,
+      field: text_label
+    };
+  
+});
+
+$('#select_cause_of_death').selectize
+({
+    options: items,
+    labelField: "field",
+    valueField: "item",
+    searchField: "field"
+});
+
+
+$(".selectize-control").removeClass("form-control barangay-form")
+
+}
+//selecttize health related deaths end
+
+//selectize death_cause_by_other_list
+function seletize_other_deaths()
+{
+var selectize_diseases ;
+$.ajaxSetup({async:false});
+$.getJSON('functions/display-functions/select_other_cause_of_death.php', 
+{
+}, 
+function (data, textStatus, jqXHR) 
+{
+  selectize_diseases = data;
+});
+
+console.log(selectize_diseases)
+
+var selectize_diseases_data = selectize_diseases;
+var items = selectize_diseases_data.map(function(x) 
+{ 
+    //remove the first words
+    var one = x.substr(x.indexOf(" ") + 1);
+
+    //remove last word
+    function removeLastWord(str) 
+    {
+      const lastIndexOfSpace = str.lastIndexOf(' ');
+    
+      if (lastIndexOfSpace === -1) {
+        return str;
+      }
+      return str.substring(0, lastIndexOfSpace);
+    }
+
+    var text_label = removeLastWord(x)
+    text_label = text_label.split('_').join(' ') 
+
+    one = one.split('_').join(' ')
+
+    return {
+      item: one,
+      field: text_label
+    };
+  
+});
+
+$('#select_other_causes').selectize
+({
+    options: items,
+    labelField: "field",
+    valueField: "item",
+    searchField: "field"
+});
+
+$(".selectize-control").removeClass("form-control barangay-form")
+}
+//selectize death_cause_by_other_list end
 
 //tittle page current status
 function current_status()
@@ -271,16 +447,6 @@ function removeLastWord(str) {
     return date.toLocaleString('en-US', { month: 'long' });
   }
   //convert month number into words end
-  
-  // for select
-  function select_with_search_box()
-  {
-  $('select').selectize({
-  // maxItems: '1',
-  });
-  $(".selectize-control").removeClass("form-control barangay-form")
-  }
-  // for select  end
   
   //date picker
   function date_range()
