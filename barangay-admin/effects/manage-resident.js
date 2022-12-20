@@ -535,6 +535,7 @@ table.columns().every(function () {
     }
     else
     {
+      thisemail = 'N/A';
       submit_new_resident();
     }
 
@@ -739,6 +740,7 @@ table.columns().every(function () {
         }
         else
         {
+          new_email = 'N/A';
           update_resident()
         }
 
@@ -811,6 +813,10 @@ table.columns().every(function () {
   var trimm_version_phone_number = trim_the_63_phone_number.substring(2);
   $("#update_contact").val(trimm_version_phone_number)
 
+  if(col8 === "N/A")
+  {
+    col8 = ""
+  }
   $("#update_email").val(col8);
 
   });

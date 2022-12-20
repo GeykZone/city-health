@@ -100,7 +100,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<p>If you click "Reactivate", this record will be marked as active again. If you click "Delete", you will permanently remove this record. This option should only be used if the user mistakenly adds incorrect records.</p>
+				<p>If you click "Reactivate", this record will be marked as active again. If you click "Delete", you will permanently remove this record.</p>
 			</div>
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="border-0 shadow-sm btn btn-secondary fw-bolder" data-coreui-dismiss="modal" aria-label="Close">Cancel</button>

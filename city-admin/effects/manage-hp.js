@@ -158,6 +158,14 @@ $('#add_hp_select_diseases').selectize
     searchField: "field"
 });
 
+$('#update_hp_Diagnosis').selectize
+({
+    options: items,
+    labelField: "field",
+    valueField: "item",
+    searchField: "field"
+});
+
 $(".selectize-control").removeClass("form-control barangay-form")
 }
 // for select diseases  end
@@ -642,6 +650,8 @@ control.clear();
  control = $select[0].selectize;
 control.clear();
 
+$("#philhealth").val("");
+
 toastMixin.fire({
 animation: true,
 title: 'A new health profile has been added in the list.'
@@ -717,7 +727,7 @@ else if(confirmation.a == 9)
 {
 toastMixin.fire({
 animation: true,
-title: 'The individual in the new health profile that you are attempting to record already exists and has not yet been fully recovered.',
+title: 'You are trying to duplicate a health profile that is still active.',
 icon: 'error'
 });
 }
@@ -734,6 +744,19 @@ else if(confirmation.a == 11)
 toastMixin.fire({
 animation: true,
 title: "It is not possible to add a reoccurrence on the same date as the person's recovery date.",
+icon: 'error'
+});
+}
+else if(confirmation.a == 12)
+{
+  $('#update-hp').modal('toggle'); 
+  $('#update_occurence').modal('toggle');
+}
+else if(confirmation.a == 13)
+{
+toastMixin.fire({
+animation: true,
+title: 'It is not possible to delete a health profile whose occurrence number is not the most recent.',
 icon: 'error'
 });
 }
@@ -840,7 +863,7 @@ $("#add_hp_btn").click(function () {
         }
         else if (philhealth_number.trim().length === 0)
         {
-            philhealth_number = "No PhilHealth"
+            philhealth_number = "N/A"
             submit_new_hp_lists()
         }
         else
@@ -875,10 +898,33 @@ $("#accept").click(function()
 })
 //occurrence end
 
-//update hp
-$("#update_hp_btn").click(function () {
-
+//update_occurrence
+$("#update_occurence_yes").click(function()
+{
+  created_at = yyyy + '-' + mm + '-' + dd;
   var new_hp_philhealth = $("#update_philhealth").val();
+  var new_diagnosis = $("#update_hp_Diagnosis").val();
+  var hp_update_id = hp_id_value;
+
+  $.post("functions/update-functions/update-hp.php", {
+    created_at: created_at,
+    hp_update_id: hp_update_id,
+    new_diagnosis: new_diagnosis,
+    new_hp_philhealth: new_hp_philhealth,
+    occurrence:'set'
+  },
+  function (data, status) {
+   
+    confirmation.a = data;
+
+  });
+
+})
+//update_occurrence end
+
+//update hp status
+$("#update_hp_btn_status").click(function () {
+
   var hp_update_id = hp_id_value;
   created_at = yyyy + '-' + mm + '-' + dd;
   var update_validator = true;
@@ -889,8 +935,9 @@ $("#update_hp_btn").click(function () {
   function submit_update_hp_lists()
   {
       $.post("functions/update-functions/update-hp.php", {
+
+        change_status:'set',
         hp_update_id: hp_update_id,
-        new_hp_philhealth: new_hp_philhealth,
         status:update_hp_select_new_stats,
         death:update_hp_select_cause_of_death,
         other_death:update_hp_select_other,
@@ -918,14 +965,51 @@ $("#update_hp_btn").click(function () {
     $("#update_hp_select_other").addClass("is-invalid");
     update_validator = false;
   }
+
+  if(update_validator === true)
+  {
+    submit_update_hp_lists()
+  }
+
+});
+//update hp status end
+
+//update hp details
+$("#update_hp_btn_edit").click(function () {
+
+  var new_hp_philhealth = $("#update_philhealth").val();
+  var new_diagnosis = $("#update_hp_Diagnosis").val();
+  var hp_update_id = hp_id_value;
+  var update_validator = true;
+
+  function submit_update_hp_lists_details()
+  {
+      $.post("functions/update-functions/update-hp.php", {
+
+        change_details:'set',
+        hp_update_id: hp_update_id,
+        new_diagnosis:new_diagnosis,
+        new_hp_philhealth: new_hp_philhealth,
+        },
+        function (data, status) {
+         confirmation.a = data;
+        });
+  }
+
+  if(new_diagnosis.trim().length === 0)
+  {
+    $("#update_hp_Diagnosis").addClass("is-invalid");
+    $("#u_p_d .selectize-control").addClass("is-invalid");
+    update_validator = false;
+  }
   else if (new_hp_philhealth.trim().length != 0 && new_hp_philhealth.length === 12)
   {
-    var update_validator = true;
+    update_validator = true;
   }
   else if (new_hp_philhealth.trim().length === 0)
   {
-    new_hp_philhealth = "No PhilHealth";
-    var update_validator = true;
+    new_hp_philhealth = "N/A";
+    update_validator = true;
   }
   else
   {
@@ -936,14 +1020,11 @@ $("#update_hp_btn").click(function () {
 
   if(update_validator === true)
   {
-    submit_update_hp_lists()
+    submit_update_hp_lists_details()
   }
 
-
-
-
 });
-//update hp end
+//update hp details end
 
 //active hp
 $("#active_hp_btn").click(function()
@@ -958,6 +1039,7 @@ $("#active_hp_btn").click(function()
 })
 //active hp end
 
+// delete final
 $("#delete_hp_btn_final").click(function()
 {
   $.post("functions/update-functions/update-hp.php", {
@@ -968,6 +1050,15 @@ $("#delete_hp_btn_final").click(function()
       confirmation.a = data;
     });
 })
+// delete final end
+
+// update delete
+$("#update_hp_btn_delete").click(function()
+{
+  $('#update-hp').modal('toggle'); 
+  $('#delete_hp_permanently').modal('toggle');
+})
+// update delete end
 
 //turn 123 into 1st 2nd 3rd
 function getOrdinal(n) {
@@ -1013,9 +1104,14 @@ function get_hp_table_cell_value()
     fullname_txt = col2 + " " + col3+ " " +col4;
     disease_txt = col0;
     select_brgy = col5;
-    philhealth_number = col7;
-    
 
+    
+    var $select = $("#select_options").selectize();
+    var selectize = $select[0].selectize;
+    selectize.setValue(selectize.search("Update health profile details").items[0].id);
+
+
+  
     $.ajaxSetup({async:false});
     $.getJSON('functions/display-functions/get_hp_dates.php', 
     {
@@ -1134,7 +1230,11 @@ function get_hp_table_cell_value()
     var selectize = $select[0].selectize;
     selectize.setValue(selectize.search("Active").items[0].id);
 
-    $("#info_rec").text("Ongoing Medication")
+    var $select = $("#update_hp_Diagnosis").selectize();
+    var selectize = $select[0].selectize;
+    selectize.setValue(selectize.search(col1).items[0].id);
+
+    $("#info_rec").text("Receiving treatment with medication")
     $("#i_i").removeClass("d-none")
 
     if($("#update_hp_recover_date").text() != "Invalid Date")
@@ -1154,7 +1254,7 @@ function get_hp_table_cell_value()
     {
         $("#d_d").removeClass("d-none")
         $("#c_d").removeClass("d-none")
-        $("#info_rec").text("This health profile is no longer active because the individual has passed away.")
+        $("#info_rec").text("This health profile is no longer active because the individual has passed away")
         $("#i_i").removeClass("d-none")
     }
     else
@@ -1461,6 +1561,41 @@ $("#select_cause_of_death").change(function()
    }
 })
 //change recoveries to cause of death if the status is death end
+
+//update options
+$("#select_options").change(function()
+{
+  var option_selector = $('#select_options').val();
+
+  if(option_selector === "Status")
+  {
+    $("#fieldset_edit").addClass("d-none")
+    $("#fieldset_status").removeClass("d-none")
+
+    $("#update_hp_btn_status").removeClass("d-none")
+    $("#update_hp_btn_edit").addClass("d-none")
+    $("#update_hp_btn_delete").addClass("d-none")
+  }
+  else if (option_selector === "Details")
+  {
+    $("#fieldset_edit").removeClass("d-none")
+    $("#fieldset_status").addClass("d-none")
+
+    $("#update_hp_btn_status").addClass("d-none")
+    $("#update_hp_btn_edit").removeClass("d-none")
+    $("#update_hp_btn_delete").addClass("d-none")
+  }
+  else if (option_selector === "Delete")
+  {
+    $("#fieldset_edit").addClass("d-none")
+    $("#fieldset_status").addClass("d-none")
+
+    $("#update_hp_btn_status").addClass("d-none")
+    $("#update_hp_btn_edit").addClass("d-none")
+    $("#update_hp_btn_delete").removeClass("d-none")
+  }
+})
+//update options end
 
 
 

@@ -194,19 +194,19 @@ function current_status()
     if(gender === "default")
     {
         $("#map_gender").text("")
-        $(".details_head_gender").text("Male and female records.")
+        $(".details_head_gender").text("Male and female records")
     }
     else
     {   
         if(gender === "F (Female)")
         {
             $("#map_gender").text(", female records")
-            $(".details_head_gender").text("Female records.")
+            $(".details_head_gender").text("Female records")
         }
         else if(gender === "M (Male)")
         {
             $("#map_gender").text(", male records")
-            $(".details_head_gender").text("Male records.")
+            $(".details_head_gender").text("Male records")
         }
           
     }
@@ -260,13 +260,13 @@ function current_status()
         {
             $("#map_min_age").text(", all "+min_age+" years old")
             $("#map_max_age").text("")
-            $(".details_head_age").text("All "+min_age+" years old.")
+            $(".details_head_age").text("All "+min_age+" years old")
         }
         else
         {
             $("#map_min_age").text(", minimum age of "+min_age)
             $("#map_max_age").text(", maximum age of "+max_age)
-            $(".details_head_age").text("Minimum age of "+min_age+", maximum age of "+max_age+".")
+            $(".details_head_age").text("Minimum age of "+min_age+", maximum age of "+max_age+"")
         }
     }
 
@@ -544,7 +544,7 @@ function display_map()
 
                 if(active_inactive_validator === "default")
                 {
-                  var modified_label = cont.description+" health cases in total."
+                  var modified_label = cont.description+" health cases in total"
                   if(cont.description == 1)
                   {
                     var modified_label = cont.description+" health case in total."
@@ -552,10 +552,10 @@ function display_map()
                 }
                 else
                 {
-                  var modified_label = cont.description+" currently active health cases in total."
+                  var modified_label = cont.description+" currently active health cases in total"
                   if(cont.description == 1)
                   {
-                    var modified_label = cont.description+" currently active health case in total."
+                    var modified_label = cont.description+" currently active health case in total"
                   }
                 }
 
@@ -630,22 +630,22 @@ function display_map()
                 {
                     if(cont.description != 1)
                     {
-                      details_title = "There are "+cont.description+" health cases in total.";
+                      details_title = "There are "+cont.description+" health cases in total";
                     }
                     else
                     {
-                      details_title = "There is only "+cont.description+" health case in total.";
+                      details_title = "There is only "+cont.description+" health case in total";
                     }
                 }
                 else
                 {
                   if(cont.description != 1)
                   {
-                    details_title = "There are "+cont.description+" currently active health cases in total.";
+                    details_title = "There are "+cont.description+" currently active health cases in total";
                   }
                   else
                   {
-                    details_title = "There is only "+cont.description+" currently active health case in total.";
+                    details_title = "There is only "+cont.description+" currently active health case in total";
                   }
                 }
 
@@ -654,7 +654,7 @@ function display_map()
                 
                 $('.details_category_content').remove();
                 $("#details_category").append('<div class="details_category_content border-0 shadow-sm align-middle d-flex pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><div style="width:30px; height:30px; margin-bottom:8px;" class="rounded-circle bg-white">'+
-                '<div style="width:20px; height:20px; margin-top:4px; margin-left:4px;" class="'+mark+'"></div></div><label style="margin-top: 3px;" class="form-label ms-2">'+cluster+' number of health cases.</label></div>');
+                '<div style="width:20px; height:20px; margin-top:4px; margin-left:4px;" class="'+mark+'"></div></div><label style="margin-top: 3px;" class="form-label ms-2">'+cluster+' number of health cases</label></div>');
 
                 //to get the occuring diseases in that area
                 var all_diseases_that_occured = cont.title;
@@ -754,22 +754,22 @@ function display_map()
                 {
                     if(cont.description != 1)
                     {
-                      details_title = "There are "+cont.description+" health cases in total.";
+                      details_title = "There are "+cont.description+" health cases in total";
                     }
                     else
                     {
-                      details_title = "There is only "+cont.description+" health case in total.";
+                      details_title = "There is only "+cont.description+" health case in total";
                     }
                 }
                 else
                 {
                   if(cont.description != 1)
                   {
-                    details_title = "There are "+cont.description+" currently active health cases in total.";
+                    details_title = "There are "+cont.description+" currently active health cases in total";
                   }
                   else
                   {
-                    details_title = "There is only "+cont.description+" currently active health case in total.";
+                    details_title = "There is only "+cont.description+" currently active health case in total";
                   }
                 }
 
@@ -778,7 +778,7 @@ function display_map()
                 
                 $('.details_category_content').remove();
                 $("#details_category").append('<div class="details_category_content border-0 shadow-sm align-middle d-flex pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><div style="width:30px; height:30px; margin-bottom:8px;" class="rounded-circle bg-white">'+
-                '<div style="width:20px; height:20px; margin-top:4px; margin-left:4px;" class="'+mark+'"></div></div><label style="margin-top: 3px;" class="form-label ms-2">'+cluster+' number of health cases.</label></div>');
+                '<div style="width:20px; height:20px; margin-top:4px; margin-left:4px;" class="'+mark+'"></div></div><label style="margin-top: 3px;" class="form-label ms-2">'+cluster+' number of health cases</label></div>');
 
                 //to get the occuring diseases in that area
                 var all_diseases_that_occured = cont.title;

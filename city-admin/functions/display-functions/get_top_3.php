@@ -133,22 +133,22 @@ if(isset($_GET['details_for_newCases']))
 
     if($total_newCases_count > 1)
     {
-        $total_newCases_number[] = $total_newCases_count." new health cases caused by ".$disease_name." on ".$date_created." in barangay ".$barangay_name.".";
+        $total_newCases_number[] = $total_newCases_count." new health cases caused by ".$disease_name." on ".$date_created." in barangay ".$barangay_name."";
     }
     else if($total_newCases_count < 1)
     {
-        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City.";
+        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
     }
     else
     {
-        $total_newCases_number[] = $total_newCases_count." new health case caused by ".$disease_name." on ".$date_created." in barangay ".$barangay_name.".";
+        $total_newCases_number[] = $total_newCases_count." new health case caused by ".$disease_name." on ".$date_created." in barangay ".$barangay_name."";
     }
 
     }
     }
     else
     {
-        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City.";
+        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
     }
 
     $total_newCases_number = array_unique($total_newCases_number);
@@ -219,15 +219,15 @@ if(isset($_GET['details_for_newDeaths']))
    
     if($total_new_deaths_count > 1)
     {
-        $total_new_deaths_number[] = $total_new_deaths_count." new health-related deaths caused by ".$cause_of_death_disease." on ".$date_created." in barangay ".$barangay_name.".";
+        $total_new_deaths_number[] = $total_new_deaths_count." new health-related deaths caused by ".$cause_of_death_disease." on ".$date_created." in barangay ".$barangay_name."";
     }
     else if($total_new_deaths_count < 1)
     {
-        $total_new_deaths_number[] = "There were no new health-related deaths reported in Oroquieta City.";
+        $total_new_deaths_number[] = "There were no new health-related deaths reported in Oroquieta City";
     }
     else
     {
-        $total_new_deaths_number[] = $total_new_deaths_count." new health-related death caused by ".$cause_of_death_disease." on ".$date_created." in barangay ".$barangay_name.".";
+        $total_new_deaths_number[] = $total_new_deaths_count." new health-related death caused by ".$cause_of_death_disease." on ".$date_created." in barangay ".$barangay_name."";
 
     }
 
@@ -235,7 +235,7 @@ if(isset($_GET['details_for_newDeaths']))
     }
     else
     {
-        $total_new_deaths_number[] = "There were no new health-related deaths reported in Oroquieta City.";
+        $total_new_deaths_number[] = "There were no new health-related deaths reported in Oroquieta City";
     }
     $total_new_deaths_number = array_unique($total_new_deaths_number);
     print json_encode($total_new_deaths_number);
@@ -305,15 +305,15 @@ if(isset($_GET['details_for_recoveries']))
    
     if($total_newRecoveries_count > 1)
     {
-        $total_newRecoveries_number[] = $total_newRecoveries_count." new health recoveries from ".$disease_name." on ".$date_created." in barangay ".$barangay_name.".";
+        $total_newRecoveries_number[] = $total_newRecoveries_count." new health recoveries from ".$disease_name." on ".$date_created." in barangay ".$barangay_name."";
     }
     else if($total_newRecoveries_count < 1)
     {
-        $total_newRecoveries_number[] = "There were no new recoveries from health-related issues in Oroquieta City.";
+        $total_newRecoveries_number[] = "There were no new recoveries from health-related issues in Oroquieta City";
     }
     else
     {
-        $total_newRecoveries_number[] = $total_newRecoveries_count." new health recovery from ".$disease_name." on ".$date_created." in barangay ".$barangay_name.".";
+        $total_newRecoveries_number[] = $total_newRecoveries_count." new health recovery from ".$disease_name." on ".$date_created." in barangay ".$barangay_name."";
 
     }
 
@@ -321,7 +321,7 @@ if(isset($_GET['details_for_recoveries']))
     }
     else
     {
-        $total_newRecoveries_number[] = "There were no new recoveries from health-related issues in Oroquieta City.";
+        $total_newRecoveries_number[] = "There were no new recoveries from health-related issues in Oroquieta City";
     }
     $total_newRecoveries_number = array_unique($total_newRecoveries_number);
     print json_encode($total_newRecoveries_number);

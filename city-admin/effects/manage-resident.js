@@ -617,6 +617,7 @@ else
   }
   else
   {
+    thisemail = 'N/A'
     submit_new_resident();
   }
 
@@ -826,6 +827,7 @@ $("#delete_resident_record").click(function()
       }
       else
       {
+        new_email = 'N/A'
         update_resident()
       }
 
@@ -903,6 +905,10 @@ var trim_the_63_phone_number = $("#update_contact").val();
 var trimm_version_phone_number = trim_the_63_phone_number.substring(2);
 $("#update_contact").val(trimm_version_phone_number)
 
+if(col9 === "N/A")
+{
+  col9 = ""
+}
 $("#update_email").val(col9);
 
 });

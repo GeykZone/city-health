@@ -14,10 +14,10 @@ include('includes/sidebar.php');
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb my-0 ms-2">
     <li class="breadcrumb-item active">
-      <!-- if breadcrumb is single--><span>City Admin</span>
+      <!-- if breadcrumb is single--><span>Barangay Admin</span>
     </li>
     <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
-    <li class="breadcrumb-item active"><span> Barangay <?php echo ucwords(strtolower($admin_location)); ?> Health Profiles</span></li>
+    <li class="breadcrumb-item active"><span>Barangay <?php echo ucwords(strtolower($admin_location)); ?> Health Profiles</span></li>
   </ol>
 </nav>
 </div>
@@ -53,6 +53,10 @@ include('includes/sidebar.php');
 <?php include "update/filter-table.php" ?>
 <!-- filter hp end -->
 
+<!-- update occurence hp -->
+<?php include "update/update-hp-occurrence.php" ?>
+<!-- update occurence hp end -->
+
 <div class="body flex-grow-1 px-5 pt-3 pb-3"> 
 <div class="container-fluid">
 
@@ -62,7 +66,7 @@ include('includes/sidebar.php');
 <div class="card border-0 mb-4 shadow-sm remove_rounded">
 
   <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-  <button type="button" id="refresh_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button> Barangay <?php echo ucwords(strtolower($admin_location)); ?> Health Profiles
+  <button type="button" id="refresh_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay <?php echo ucwords(strtolower($admin_location)); ?> Health Profiles
   </div>
 
   <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >

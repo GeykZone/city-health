@@ -1,4 +1,4 @@
-var barangay_name = "default";
+var barangay_name = my_barangay_id;
 var disease_type = "default";
 var date_range_from = "default";
 var date_range_to = "default";
@@ -31,7 +31,7 @@ var myColors=[];
 var myPoints=[]
 var data_set_handler = [];
 
-var barangay_title
+var barangay_title = my_barangay_name;
 var disease_title
 var active_inactive_validator = "default"
 var details_title;
@@ -797,8 +797,6 @@ $("#disease_date_range_btn").click(function()
     
      var from_input = $("#disease_range_from").val()
      var to_input = $("#disease_range_to").val()
-     var barangay_id = $("#disease_selecte_barangay").val();
-     barangay_title = $("#disease_selecte_barangay").text();
      var hp_selected = $("#disease_select_diseases").val();
      disease_title = $("#disease_select_diseases").text();
      var gender_selected = $("#disease_select_gender").val();
@@ -853,15 +851,6 @@ $("#disease_date_range_btn").click(function()
      {
          disease_type = "default"
      }
-        
-     if(barangay_id.trim().length != 0)
-     {
-         barangay_name = barangay_id;
-     }
-     else
-     {
-         barangay_name = "default"
-     }
 
      if(from_input.trim().length === 0)
      {
@@ -912,7 +901,6 @@ $("#current_year").click(function()
 
      active_inactive = "default"
      active_inactive_validator = "default"
-     barangay_name = "default"
      date_range_from = "default";
      date_range_to = "default";
      gender = "default";
@@ -927,9 +915,6 @@ $("#current_year").click(function()
      $( "#disease_range_from" ).removeClass("is-invalid");
      $( "#disease_range_to" ).val(current_year_to);
      $( "#disease_range_to" ).removeClass("is-invalid");
-     var $select = $('#disease_selecte_barangay').selectize();
-     var control = $select[0].selectize;
-     control.clear();
 
      var $select = $('#disease_select_gender').selectize();
      var control = $select[0].selectize;

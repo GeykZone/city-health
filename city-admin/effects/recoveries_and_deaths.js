@@ -745,11 +745,11 @@ function number_of_resident_chart()
 
            if(yValues[current_index] != 1)
            {
-             details_title = "There are "+yValues[current_index]+" health recoveries in total.";
+             details_title = "There are "+yValues[current_index]+" health recoveries in total";
            }
            else
            {
-            details_title = "There is only "+yValues[current_index]+" health recovery in total.";
+            details_title = "There is only "+yValues[current_index]+" health recovery in total";
            }
 
            $(".report_labels").text("Recoveries")
@@ -766,11 +766,11 @@ function number_of_resident_chart()
          if(yValues[current_index] != 1)
          {
            
-           details_title = "There are "+yValues[current_index]+" deaths in total.";
+           details_title = "There are "+yValues[current_index]+" deaths in total";
          }
          else
          {
-          details_title = "There is only "+yValues[current_index]+" death in total.";
+          details_title = "There is only "+yValues[current_index]+" death in total";
          }
          $(".report_labels").text("Deaths")
 
@@ -781,11 +781,11 @@ function number_of_resident_chart()
           if(yValues[current_index] != 1)
           {
             
-            details_title = "There are "+yValues[current_index]+" non-health-related deaths in total.";
+            details_title = "There are "+yValues[current_index]+" non-health-related deaths in total";
           }
           else
           {
-           details_title = "There is only "+yValues[current_index]+" non-health-related death in total.";
+           details_title = "There is only "+yValues[current_index]+" non-health-related death in total";
           }
 
           $(".report_labels").text("Non-health-related Deaths") 
@@ -930,18 +930,18 @@ function number_of_resident_chart()
 
                  if(hp_status === "default" || hp_status === "Recoveries")
                  {
-                   var modified_label = context.parsed.y+" health recoveries in total."
+                   var modified_label = context.parsed.y+" health recoveries in total"
                    if(context.parsed.y == 1)
                    {
-                     var modified_label = context.parsed.y+" health recovery in total."
+                     var modified_label = context.parsed.y+" health recovery in total"
                    }
                  }
                  else
                  {
-                   var modified_label = context.parsed.y+" deaths in total."
+                   var modified_label = context.parsed.y+" deaths in total"
                    if(context.parsed.y == 1)
                    {
-                     var modified_label = context.parsed.y+" death in total."
+                     var modified_label = context.parsed.y+" death in total"
                    }
                  }
                   

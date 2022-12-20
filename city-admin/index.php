@@ -215,7 +215,7 @@ min-height: 524px;
     <div class="col  col-sm-12 mb-4">
       <div class="card border-0 shadow-sm border-0 rounded-3 shadow-sm">
         <div class=" card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card" >
-          <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Map visualization<span id="map_record_info" class=" shortCut_btn"></span></h6>
+          <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Map Visualization<span id="map_record_info" class=" shortCut_btn"></span></h6>
         </div>
         <div class=" card-body">
         <div id="map_container" class=" card  rounded-3 border-0 shadow-sm">

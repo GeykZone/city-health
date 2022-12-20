@@ -181,13 +181,13 @@ function current_status()
         {
             $("#map_min_age").text(", all "+min_age+" years old")
             $("#map_max_age").text("")
-            $(".details_head_age").text("All "+min_age+" years old.")
+            $(".details_head_age").text("All "+min_age+" years old")
         }
         else
         {
             $("#map_min_age").text(", minimum age of "+min_age)
             $("#map_max_age").text(", maximum age of "+max_age)
-            $(".details_head_age").text("Minimum age of "+min_age+", maximum age of "+max_age+".")
+            $(".details_head_age").text("Minimum age of "+min_age+", maximum age of "+max_age+"")
         }
     }
 }
@@ -497,7 +497,7 @@ function number_of_resident_chart()
         {
             if(yValues[current_index] != 1)
             {
-              details_title = "There are "+yValues[current_index]+" health cases in total.";
+              details_title = "There are "+yValues[current_index]+" health cases in total";
             }
             else
             {
@@ -508,11 +508,11 @@ function number_of_resident_chart()
         {
           if(yValues[current_index] != 1)
           {
-            details_title = "There are "+yValues[current_index]+" currently active health cases in total.";
+            details_title = "There are "+yValues[current_index]+" currently active health cases in total";
           }
           else
           {
-            details_title = "There is only "+yValues[current_index]+" currently active health case in total.";
+            details_title = "There is only "+yValues[current_index]+" currently active health case in total";
           }
           
         }
@@ -611,18 +611,18 @@ function number_of_resident_chart()
 
                 if(active_inactive_validator === "default")
                 {
-                  var modified_label = context.parsed.y+" health cases in total."
+                  var modified_label = context.parsed.y+" health cases in total"
                   if(context.parsed.y == 1)
                   {
-                    var modified_label = context.parsed.y+" health case in total."
+                    var modified_label = context.parsed.y+" health case in total"
                   }
                 }
                 else
                 {
-                  var modified_label = context.parsed.y+" currently active health cases in total."
+                  var modified_label = context.parsed.y+" currently active health cases in total"
                   if(context.parsed.y == 1)
                   {
-                    var modified_label = context.parsed.y+" currently active health case in total."
+                    var modified_label = context.parsed.y+" currently active health case in total"
                   }
                 }
 

@@ -44,8 +44,25 @@ if(isset($_POST['new_hp']))
           VALUES ('$resident_name_id', '$disease_name_id', '$philhealth_id', '$created_at')";
           if ($conn->query($sql2) === TRUE)
           {
-            $confirmation = 1;
-            echo $confirmation;
+            /////////////////////////////////////////////////////////
+            $set2 ="UPDATE `health_profiles` SET  ";
+            $where2 = " WHERE `resident_id` = '$resident_name_id'";
+            $condition2 = array();
+            $condition2[] = "`phil_health_number`='$philhealth_id'";
+            $new_sql2 = $set2;
+            if (count($condition2) > 0){ $new_sql2 .= implode(', ', $condition2).$where2;}
+            if ($conn->query($new_sql2) === TRUE)
+            {
+              $confirmation = 1;
+               echo $confirmation;
+            }
+            else {
+          
+              $confirmation = 2;
+              echo $new_sql2; 
+            }
+            /////////////////////////////////////////////////////////////
+
           }
           else {
         
@@ -94,8 +111,24 @@ if(isset($_POST['occurrence']))
       VALUES ('$resident_name_id', '$disease_name_id', '$philhealth_id', '$created_at', '$total_hp')";
       if ($conn->query($sql2) === TRUE)
       {
-        $confirmation = 1;
-        echo $confirmation;
+            /////////////////////////////////////////////////////////
+            $set2 ="UPDATE `health_profiles` SET  ";
+            $where2 = " WHERE `resident_id` = '$resident_name_id'";
+            $condition2 = array();
+            $condition2[] = "`phil_health_number`='$philhealth_id'";
+            $new_sql2 = $set2;
+            if (count($condition2) > 0){ $new_sql2 .= implode(', ', $condition2).$where2;}
+            if ($conn->query($new_sql2) === TRUE)
+            {
+              $confirmation = 1;
+               echo $confirmation;
+            }
+            else {
+          
+              $confirmation = 2;
+              echo $new_sql2; 
+            }
+            /////////////////////////////////////////////////////////////
       }
       else {
     

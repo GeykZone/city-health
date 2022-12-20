@@ -53,6 +53,10 @@ include('includes/sidebar.php');
 <?php include "update/filter-table.php" ?>
 <!-- filter hp end -->
 
+<!-- update occurence hp -->
+<?php include "update/update-hp-occurrence.php" ?>
+<!-- update occurence hp end -->
+
 <div class="body flex-grow-1 px-5 pt-3 pb-3"> 
 <div class="container-fluid">
 

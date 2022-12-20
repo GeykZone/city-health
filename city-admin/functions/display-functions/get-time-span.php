@@ -135,11 +135,11 @@ if ($result->num_rows > 0)
 
         if($total_hp == 1)
         {
-            $get_disease_names[] = $total_hp." documented health case caused by ".$row['disease_name']." in barangay ".$row['barangay_name'].".";
+            $get_disease_names[] = $total_hp." documented health case caused by ".$row['disease_name']." in barangay ".$row['barangay_name']."";
         }
         else{
 
-            $get_disease_names[] = $total_hp." documented health cases caused by ".$row['disease_name']." in barangay ".$row['barangay_name'].".";
+            $get_disease_names[] = $total_hp." documented health cases caused by ".$row['disease_name']." in barangay ".$row['barangay_name']."";
         }
 
        

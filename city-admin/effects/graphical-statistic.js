@@ -544,7 +544,7 @@ function number_of_resident_chart()
         {
             if(yValues[current_index] != 1)
             {
-              details_title = "There are "+yValues[current_index]+" health cases in total.";
+              details_title = "There are "+yValues[current_index]+" health cases in total";
             }
             else
             {
@@ -555,11 +555,11 @@ function number_of_resident_chart()
         {
           if(yValues[current_index] != 1)
           {
-            details_title = "There are "+yValues[current_index]+" currently active health cases in total.";
+            details_title = "There are "+yValues[current_index]+" currently active health cases in total";
           }
           else
           {
-            details_title = "There is only "+yValues[current_index]+" currently active health case in total.";
+            details_title = "There is only "+yValues[current_index]+" currently active health case in total";
           }
           
         }
@@ -656,7 +656,7 @@ function number_of_resident_chart()
 
                  if(active_inactive_validator === "default")
                  {
-                   var modified_label = context.parsed.y+" health cases in total."
+                   var modified_label = context.parsed.y+" health cases in total"
                    if(context.parsed.y == 1)
                    {
                      var modified_label = context.parsed.y+" health case in total."
@@ -664,10 +664,10 @@ function number_of_resident_chart()
                  }
                  else
                  {
-                   var modified_label = context.parsed.y+" currently active health cases in total."
+                   var modified_label = context.parsed.y+" currently active health cases in total"
                    if(context.parsed.y == 1)
                    {
-                     var modified_label = context.parsed.y+" currently active health case in total."
+                     var modified_label = context.parsed.y+" currently active health case in total"
                    }
                  }
                   

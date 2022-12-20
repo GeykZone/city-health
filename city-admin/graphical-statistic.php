@@ -89,7 +89,7 @@ include('includes/sidebar.php');
 <div class=" container-fluid mt-3">
   <div class="row ">
     <div class="col-12 d-flex text-dark" style=" opacity: 0.65;">
-    <span class="fa-regular me-3" style="margin-top: 2px;"></span><h6 class=""><span id="map_disease"></span><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_gender"></span><span id="map_min_age"></span><span id="map_max_age"></span>.</h6>
+    <span class="fa-regular me-3" style="margin-top: 2px;"></span><h6 class=""><span id="map_disease"></span><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_gender"></span><span id="map_min_age"></span><span id="map_max_age"></span></h6>
     </div>
   </div>
 </div>

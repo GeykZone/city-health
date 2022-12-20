@@ -254,7 +254,7 @@
             {
                 if($total_hp == 1)
                 {
-                    $get_disease_names[] = $total_hp." documented health recovery from ".$row['diagnosis']." in barangay ".$row['barangay_name'].".";
+                    $get_disease_names[] = $total_hp." documented health recovery from ".$row['diagnosis']." in barangay ".$row['barangay_name']."";
                 }
                 else{
         
@@ -270,22 +270,22 @@
                     {
                         if($total_hp == 1)
                         {
-                            $get_disease_names[] =  $total_hp." documented death caused by ".$row['death_cause']." in barangay ".$row['barangay_name'].".";
+                            $get_disease_names[] =  $total_hp." documented death caused by ".$row['death_cause']." in barangay ".$row['barangay_name']."";
                         }
                         else{
                 
-                            $get_disease_names[] =  $total_hp." documented deaths caused by ".$row['death_cause']." in barangay ".$row['barangay_name'].".";
+                            $get_disease_names[] =  $total_hp." documented deaths caused by ".$row['death_cause']." in barangay ".$row['barangay_name']."";
                         }
                     }
                     else
                     {
                         if($total_hp == 1)
                         {
-                            $get_disease_names[] =  $total_hp." documented non-health-related death caused by ".$row['other_cause_of_death']." in barangay ".$row['barangay_name'].".";
+                            $get_disease_names[] =  $total_hp." documented non-health-related death caused by ".$row['other_cause_of_death']." in barangay ".$row['barangay_name']."";
                         }
                         else{
                 
-                            $get_disease_names[] =  $total_hp." documented non-health-related deaths caused by ".$row['other_cause_of_death']." in barangay ".$row['barangay_name'].".";
+                            $get_disease_names[] =  $total_hp." documented non-health-related deaths caused by ".$row['other_cause_of_death']." in barangay ".$row['barangay_name']."";
                         }
                     }    
                 }
@@ -298,11 +298,11 @@
 
                         if($total_hp == 1)
                         {
-                            $get_disease_names[] =  $total_hp." documented death caused by ".$row['all_deaths']." in barangay ".$row['barangay_name'].".";
+                            $get_disease_names[] =  $total_hp." documented death caused by ".$row['all_deaths']." in barangay ".$row['barangay_name']."";
                         }
                         else{
                 
-                            $get_disease_names[] =  $total_hp." documented deaths caused by ".$row['all_deaths']." in barangay ".$row['barangay_name'].".";
+                            $get_disease_names[] =  $total_hp." documented deaths caused by ".$row['all_deaths']." in barangay ".$row['barangay_name']."";
                         }
 
                     }
@@ -310,11 +310,11 @@
                     {
                         if($total_hp == 1)
                         {
-                            $get_disease_names[] =  $total_hp." documented non-health-related death caused by ".$row['all_deaths']." in barangay ".$row['barangay_name'].".";
+                            $get_disease_names[] =  $total_hp." documented non-health-related death caused by ".$row['all_deaths']." in barangay ".$row['barangay_name']."";
                         }
                         else{
                 
-                            $get_disease_names[] =  $total_hp." documented non-health-related deaths caused by ".$row['all_deaths']." in barangay ".$row['barangay_name'].".";
+                            $get_disease_names[] =  $total_hp." documented non-health-related deaths caused by ".$row['all_deaths']." in barangay ".$row['barangay_name']."";
                         }
                     }
                 }
@@ -324,11 +324,11 @@
         {
             if($total_hp == 1)
             {
-                $get_disease_names[] = $total_hp." documented health recovery from ".$row['diagnosis']." in barangay ".$row['barangay_name'].".";
+                $get_disease_names[] = $total_hp." documented health recovery from ".$row['diagnosis']." in barangay ".$row['barangay_name']."";
             }
             else{
     
-                $get_disease_names[] = $total_hp." documented health recoveries from ".$row['diagnosis']." in barangay ".$row['barangay_name'].".";
+                $get_disease_names[] = $total_hp." documented health recoveries from ".$row['diagnosis']." in barangay ".$row['barangay_name']."";
             }
         }
         
