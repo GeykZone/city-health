@@ -191,6 +191,10 @@ body {
   background: linear-gradient(45deg,#40a3ff,#73bbff);
 }
 
+.bg-c-opposite_blue {
+  background: linear-gradient(45deg,#73bbff,#40a3ff);
+}
+
 .bg-c-blue {
   background: linear-gradient(45deg,#328bf0,#57a6ff);
 }
@@ -207,16 +211,32 @@ body {
   background: linear-gradient(45deg,#21bba6,#61dfc5);
 }
 
+.bg-c-dark_green {
+  background: linear-gradient(45deg,#61dfc5,#21bba6);
+}
+
 .bg-c-orange {
   background: linear-gradient(45deg,#ff8251,#ffac68);
+}
+
+.bg-c-dark_orange {
+  background: linear-gradient(45deg,#ffac68,#ff8251);
 }
 
 .bg-c-yellow {
   background: linear-gradient(45deg,#f1a740,#ffcb5c);
 }
 
+.bg-c-dark_yellow {
+  background: linear-gradient(45deg,#ffcb5c,#f1a740);
+}
+
 .bg-c-pink {
   background: linear-gradient(45deg,#f04a66,#ff869a);
+}
+
+.bg-c-dark_pink {
+  background: linear-gradient(45deg,#ff869a,#f04a66);
 }
 
 

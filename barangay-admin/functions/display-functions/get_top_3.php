@@ -4,6 +4,7 @@
 
 $top_from = $_GET['top_from'];
 $top_to = $_GET['top_to'];
+$barangay_id = $_GET['barangay_id'];
 
 if(isset($_GET['total_hp']))
 {
@@ -11,7 +12,7 @@ if(isset($_GET['total_hp']))
     LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
     LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
     LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-    WHERE date BETWEEN '$top_from' AND '$top_to' 
+    WHERE `barangay_id` = '$barangay_id' AND date BETWEEN '$top_from' AND '$top_to' 
     ORDER BY total_hp DESC";
 
     $result = $conn->query($sql);
@@ -31,7 +32,7 @@ if(isset($_GET['top_3_diseases']))
     LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
     LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
     LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-    WHERE date BETWEEN '$top_from' AND '$top_to' 
+    WHERE `barangay_id` = '$barangay_id' AND date BETWEEN '$top_from' AND '$top_to' 
     GROUP BY `hp`.`disease_id` ORDER BY number_of_diseases DESC LIMIT 3";
 
     $result = $conn->query($sql);
@@ -48,36 +49,13 @@ if(isset($_GET['top_3_diseases']))
     print json_encode($total_disease_number);
 }
 
-if(isset($_GET['top_3_barangays']))
-{
-    $sql = "SELECT `r`.`barangay_id`,barangay_name, COUNT(*) AS number_of_barangays FROM `health_profiles` AS `hp` 
-    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
-    LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
-    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-    WHERE date BETWEEN '$top_from' AND '$top_to' 
-    GROUP BY `r`.`barangay_id` ORDER BY number_of_barangays DESC LIMIT 3";
-
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-
-    $barangay = str_replace(' ', '_', $row['barangay_name']);
-    $total_barangay_count = $row['number_of_barangays'];
-
-    $total_barangay_number[] = $barangay." ".$total_barangay_count;
-
-    }
-    }
-    print json_encode($total_barangay_number);
-}
-
 if(isset($_GET['newCases']))
 {
     $sql = "SELECT COUNT(*) AS new_cases FROM `health_profiles` AS `hp` 
     LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
     LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
     LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-    WHERE date BETWEEN '$top_from' AND '$top_to'";
+    WHERE `barangay_id` = '$barangay_id' AND date BETWEEN '$top_from' AND '$top_to'";
 
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -102,7 +80,7 @@ if(isset($_GET['details_for_newCases']))
     LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
     LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
     LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
-    WHERE date BETWEEN '$top_from' AND '$top_to' ORDER BY created_date DESC";
+    WHERE `barangay_id` = '$barangay_id' AND date BETWEEN '$top_from' AND '$top_to' ORDER BY created_date DESC";
 
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -125,7 +103,7 @@ if(isset($_GET['details_for_newCases']))
         $new_cases =  $rowcount;
     }
 
-    $total_newCases_count = number_format($new_cases, 0, '', ',');
+    $total_newCases_count =  number_format($new_cases, 0, '', ',');
     $disease_name = $row['disease_name'];
     $barangay_name = $row['barangay_name'];
     $date_created = $row['created_date'];
@@ -161,7 +139,7 @@ if(isset($_GET['newDeaths']))
     LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
     LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
     LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-    WHERE cause_of_death IS NOT NULL AND date_of_death BETWEEN '$top_from' AND '$top_to' ";
+    WHERE `barangay_id` = '$barangay_id' AND  cause_of_death IS NOT NULL AND date_of_death BETWEEN '$top_from' AND '$top_to' ";
 
     $result = $conn->query($sql);
     if($result->num_rows > 0)
@@ -188,7 +166,7 @@ if(isset($_GET['details_for_newDeaths']))
     LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
     LEFT JOIN `diseases` AS `d` ON (`hp`.`cause_of_death` = `d`.`id`) 
     LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
-    WHERE cause_of_death IS NOT NULL AND date_of_death BETWEEN '$top_from' AND '$top_to' GROUP BY hp.resident_id ORDER BY created_date DESC";
+    WHERE `barangay_id` = '$barangay_id' AND  cause_of_death IS NOT NULL AND date_of_death BETWEEN '$top_from' AND '$top_to' GROUP BY hp.resident_id ORDER BY created_date DESC";
 
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -210,8 +188,8 @@ if(isset($_GET['details_for_newDeaths']))
         $rowcount=mysqli_num_rows($result2);
         $new_deaths =  $rowcount;
     }
-
-    $total_new_deaths_count = number_format($new_deaths, 0, '', ',');
+    
+    $total_new_deaths_count =  number_format($new_deaths, 0, '', ',');
     $cause_of_death_disease = $row['disease_name'];
     $barangay_name = $row['barangay_name'];
     $date_created = $row['created_date'];
@@ -247,7 +225,7 @@ if(isset($_GET['newRecoveries']))
     LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
     LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
     LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-    WHERE `recovery` IS NOT NULL AND date_of_recovery BETWEEN '$top_from' AND '$top_to'";
+    WHERE `barangay_id` = '$barangay_id' AND  `recovery` IS NOT NULL AND date_of_recovery BETWEEN '$top_from' AND '$top_to'";
 
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -273,7 +251,7 @@ if(isset($_GET['details_for_recoveries']))
     LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
     LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
     LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
-    WHERE `recovery` IS NOT NULL AND date_of_recovery BETWEEN '$top_from' AND '$top_to' ORDER BY created_date DESC";
+    WHERE `barangay_id` = '$barangay_id' AND  `recovery` IS NOT NULL AND date_of_recovery BETWEEN '$top_from' AND '$top_to' ORDER BY created_date DESC";
 
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -297,7 +275,7 @@ if(isset($_GET['details_for_recoveries']))
         $new_recoveries =  $rowcount;
     }
 
-    $total_newRecoveries_count = number_format($new_recoveries, 0, '', ',');
+    $total_newRecoveries_count =  number_format($new_recoveries, 0, '', ',');
     $disease_name = $row['disease_name'];
     $barangay_name = $row['barangay_name'];
     $date_created = $row['created_date'];
@@ -326,6 +304,23 @@ if(isset($_GET['details_for_recoveries']))
     $total_newRecoveries_number = array_unique($total_newRecoveries_number);
     print json_encode($total_newRecoveries_number);
 }
+
+if(isset($_GET['display_total_residents']))
+{
+    $sql = "SELECT COUNT(*) AS total_resident FROM `residents`
+    WHERE `barangay_id` = '$barangay_id' ";
+
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+
+    $total_resident[] = $row['total_resident'];
+
+    }
+    }
+    print json_encode($total_resident);
+}
+
 
 
 

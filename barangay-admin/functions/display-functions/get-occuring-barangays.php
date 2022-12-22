@@ -119,12 +119,13 @@ if ($result->num_rows > 0)
         {
             $new_result = mysqli_query($conn,$new_sql);
             $rowcount=mysqli_num_rows($new_result);
-            $total_hp =  $rowcount;
+            $total_hp = number_format($rowcount, 0, '', ',');
         }
         else
         {
             $total_hp =  0;
         }
+        
 
         if($total_hp == 1)
         {

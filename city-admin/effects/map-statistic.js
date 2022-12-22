@@ -544,18 +544,18 @@ function display_map()
 
                 if(active_inactive_validator === "default")
                 {
-                  var modified_label = cont.description+" health cases in total"
+                  var modified_label = parseInt(cont.description).toLocaleString('en-US')+" health cases in total"
                   if(cont.description == 1)
                   {
-                    var modified_label = cont.description+" health case in total."
+                    var modified_label = parseInt(cont.description).toLocaleString('en-US')+" health case in total."
                   }
                 }
                 else
                 {
-                  var modified_label = cont.description+" currently active health cases in total"
+                  var modified_label = parseInt(cont.description).toLocaleString('en-US')+" currently active health cases in total"
                   if(cont.description == 1)
                   {
-                    var modified_label = cont.description+" currently active health case in total"
+                    var modified_label = parseInt(cont.description).toLocaleString('en-US')+" currently active health case in total"
                   }
                 }
 
@@ -630,22 +630,22 @@ function display_map()
                 {
                     if(cont.description != 1)
                     {
-                      details_title = "There are "+cont.description+" health cases in total";
+                      details_title = "There are "+parseInt(cont.description).toLocaleString('en-US')+" health cases in total";
                     }
                     else
                     {
-                      details_title = "There is only "+cont.description+" health case in total";
+                      details_title = "There is only "+parseInt(cont.description).toLocaleString('en-US')+" health case in total";
                     }
                 }
                 else
                 {
                   if(cont.description != 1)
                   {
-                    details_title = "There are "+cont.description+" currently active health cases in total";
+                    details_title = "There are "+parseInt(cont.description).toLocaleString('en-US')+" currently active health cases in total";
                   }
                   else
                   {
-                    details_title = "There is only "+cont.description+" currently active health case in total";
+                    details_title = "There is only "+parseInt(cont.description).toLocaleString('en-US')+" currently active health case in total";
                   }
                 }
 
@@ -754,22 +754,22 @@ function display_map()
                 {
                     if(cont.description != 1)
                     {
-                      details_title = "There are "+cont.description+" health cases in total";
+                      details_title = "There are "+parseInt(cont.description).toLocaleString('en-US')+" health cases in total";
                     }
                     else
                     {
-                      details_title = "There is only "+cont.description+" health case in total";
+                      details_title = "There is only "+parseInt(cont.description).toLocaleString('en-US')+" health case in total";
                     }
                 }
                 else
                 {
                   if(cont.description != 1)
                   {
-                    details_title = "There are "+cont.description+" currently active health cases in total";
+                    details_title = "There are "+parseInt(cont.description).toLocaleString('en-US')+" currently active health cases in total";
                   }
                   else
                   {
-                    details_title = "There is only "+cont.description+" currently active health case in total";
+                    details_title = "There is only "+parseInt(cont.description).toLocaleString('en-US')+" currently active health case in total";
                   }
                 }
 

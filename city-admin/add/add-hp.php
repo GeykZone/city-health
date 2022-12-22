@@ -14,7 +14,7 @@
       <div class="mb-3" id="add_hp_select_brg_list">
         <label for="add_hp_select_barangay" class="form-label">Barangay*</label>
         <select id="add_hp_select_barangay"  name="add_hp_select_barangay" class="form-control barangay-form shadow-sm select_list">
-            <option value="">Pick a barangay.</option>
+            <option value="">Pick a barangay</option>
           <?php
           include('functions/display-functions/select_barangays.php');
             ?>
@@ -29,7 +29,7 @@
         <div class="mb-3" id="add_hp_select_resident_list">
         <label for="add_hp_select_resident" class="form-label">Resident Name*</label>
         <select id="add_hp_select_resident"  name="add_hp_select_resident" class="form-control gender barangay-form shadow-sm">
-            <option value="">Select Resident.</option>
+            <option value="">Select Resident</option>
         </select>
         <div class="invalid-feedback">
         Invalid input.
@@ -39,7 +39,7 @@
         <div class="mb-3" id="add_hp_select_diseases_list">
         <label for="add_hp_select_diseases" class="form-label">Select Diagnosis*</label>
         <select id="add_hp_select_diseases"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm">
-            <option value="">Select Type.</option>
+            <option value="">Select Type</option>
         </select>
         <div class="invalid-feedback">
         Invalid selection.
@@ -50,7 +50,7 @@
           <label for="philhealth" class="form-label">PhilHealth Id</label>
           <input type="number" name="philhealth" class="  form-control barangay-form" id="philhealth"
           onkeypress='return event.charCode>=48 && event.charCode<=57' ondrop="return false;" onpaste="return false;"
-          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="12" placeholder="PhilHealth Id (Optional).">
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="12" placeholder="PhilHealth Id (Optional)">
           <div class="invalid-feedback" id="PhilHealth_validator_label">
           PhilHealth identification numbers should be 12 digits long.
           </div>

@@ -61,8 +61,8 @@ function generate_default_username_password()
     }
     else
     {
-        $("#default_username").val("Please select a barangay.");
-        $("#default_password").val("Please select a barangay.");
+        $("#default_username").val("Please select a barangay");
+        $("#default_password").val("Please select a barangay");
     }
     
 });
@@ -175,8 +175,8 @@ $("#deactivate_barangay_admin_record").click(function()
 //add barangay
 $("#close_add_barangay_admin").click(function()
 { 
-  $("#default_username").val("Please select a barangay.");
-  $("#default_password").val("Please select a barangay.");
+  $("#default_username").val("Please select a barangay");
+  $("#default_password").val("Please select a barangay");
   $("#select_barangay").val("");
   var $select = $('#select_barangay').selectize();
   var control = $select[0].selectize;
@@ -206,8 +206,8 @@ if(confirmation.a == 1)
 {
   $('#add-barangay-admin').modal('toggle');
 
-  $("#default_username").val("Please select a barangay.");
-  $("#default_password").val("Please select a barangay.");
+  $("#default_username").val("Please select a barangay");
+  $("#default_password").val("Please select a barangay");
   $("#select_barangay").val("");
   var $select = $('#select_barangay').selectize();
   var control = $select[0].selectize;

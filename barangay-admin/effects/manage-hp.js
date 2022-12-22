@@ -57,10 +57,23 @@ $(document).ready(function()
     select_for_disease();
     select_for_Health_related_deaths()
     seletize_other_deaths()
+    
+
     load_data_tables()
     get_hp_table_cell_value();
     date_range();
     opentip_tooltip();
+
+    if (Cookies.get('dashboard_month_from') != undefined && Cookies.get('dashboard_month_to') != undefined) {
+      
+      $("#range_from").val(Cookies.get('dashboard_month_from'))
+      $("#range_to").val(Cookies.get('dashboard_month_to'))
+
+      $("#date_range_btn").click();
+      Cookies.remove('dashboard_month_from')
+      Cookies.remove('dashboard_month_to')
+    }
+
 })
 
 //set do some stuff when confiramtion variable is changed
@@ -614,6 +627,7 @@ function load_data_tables(){
 
   $(".form-control").addClass("shadow-sm");
   $(".form-select").addClass("shadow-sm");
+
   };
 //show data tables end
 
@@ -1303,7 +1317,10 @@ $("#date_range_btn").click(function()
         $(".dataTables_paginate ").remove();
 
         load_data_tables()
-        $("#filter_table").modal("toggle");
+        if (Cookies.get('dashboard_month_from') === undefined && Cookies.get('dashboard_month_to') === undefined)
+        {
+          $("#filter_table").modal("toggle");
+        }
 
         var result_tittle = "Filtered results for: "
         var results =  [];

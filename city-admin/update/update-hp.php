@@ -43,7 +43,7 @@
         <div class="mb-3 d-none" id="co_l">
         <label for="update_hp_select_cause_of_death" class="form-label">Cause of Death*</label>
         <select id="update_hp_select_cause_of_death"  name="update_hp_select_cause_of_death" class="form-control gender barangay-form shadow-sm">
-            <option value="">Select Type.</option>
+            <option value="">Select Type</option>
         </select>
         <div class="invalid-feedback">
         Invalid selection.
@@ -52,7 +52,7 @@
 
         <div class="mb-3 d-none" id="o_c_d">
         <label for="update_hp_select_other" class="form-label">Other Cause of Death*</label>
-        <input type="name" name="update_hp_select_other" maxlength="45" class=" form-control barangay-form" id="update_hp_select_other" placeholder="Other cause if death.">
+        <input type="name" name="update_hp_select_other" maxlength="45" class=" form-control barangay-form" id="update_hp_select_other" placeholder="Other cause if death">
         <div class="invalid-feedback">
         Invalid input.
         </div>
@@ -63,7 +63,7 @@
         <div class="mb-3" id="u_p_d">
         <label for="update_hp_Diagnosis" class="form-label">Diagnosis*</label>
         <select id="update_hp_Diagnosis"  name="update_hp_Diagnosis" class="form-control gender barangay-form shadow-sm">
-            <option value="">Select Type.</option>
+            <option value="">Select Type</option>
         </select>
         <div class="invalid-feedback">
         Invalid selection.
@@ -74,7 +74,7 @@
           <label for="update_philhealth" class="form-label">PhilHealth Number</label>
           <input type="number" name="update_philhealth" class="  form-control barangay-form" id="update_philhealth"
           onkeypress='return event.charCode>=48 && event.charCode<=57' ondrop="return false;" onpaste="return false;"
-          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="12" placeholder="PhilHealth Id (Optional).">
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="12" placeholder="PhilHealth Id (Optional)">
           <div class="invalid-feedback" id="update_PhilHealth_validator_label">
           PhilHealth identification numbers should be 12 digits long.
           </div>

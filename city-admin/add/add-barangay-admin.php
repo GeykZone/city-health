@@ -13,7 +13,7 @@
   <div class="mb-3">
   <label for="select_barangay" class="form-label">Barangay*</label>
   <select id="select_barangay"  name="select_barangay" class="form-control barangay-form shadow-sm">
-  <option value="">Pick a barangay.</option>
+  <option value="">Pick a barangay</option>
   <?php
    include('functions/display-functions/select_barangays.php');
     ?>
@@ -26,11 +26,11 @@
   <fieldset disabled >
   <div class="mb-3">
     <label for="default_username" class="form-label">Default username*</label>
-    <input type="text" name="default_username" class="shadow-sm form-control barangay-form" id="default_username" value="Please select a barangay.">
+    <input type="text" name="default_username" class="shadow-sm form-control barangay-form" id="default_username" value="Please select a barangay">
   </div>
   <div class="mb-3">
     <label for="default_password" class="form-label">Default Password*</label>
-    <input type="text" name="default_password" class="shadow-sm form-control barangay-form" id="default_password" value="Please select a barangay.">
+    <input type="text" name="default_password" class="shadow-sm form-control barangay-form" id="default_password" value="Please select a barangay">
   </div>
   </fieldset>
 </form>

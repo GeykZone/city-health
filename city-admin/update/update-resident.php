@@ -14,7 +14,7 @@
   <div class="mb-3" id="update_select_bgy_list">
   <label for="update_select_barangay" class="form-label">Barangay*</label>
   <select id="update_select_barangay"  name="update_select_barangay" class="form-control barangay-form shadow-sm">
-      <option value="">Pick a barangay...</option>
+      <option value="">Pick a barangay</option>
 
   <?php
     $resident_pick = "set";
@@ -30,21 +30,21 @@
   <fieldset id="fieldset2" disabled>
   <div class="mb-3">
     <label for="update_firstname" class="form-label">First Name*</label>
-    <input type="text" name="update_firstname" maxlength="45" class="form-control barangay-form" id="update_firstname" placeholder="First name.">
+    <input type="text" name="update_firstname" maxlength="45" class="form-control barangay-form" id="update_firstname" placeholder="First name">
     <div class="invalid-feedback">
     Invalid input.
     </div>
   </div>
   <div class="mb-3">
     <label for="update_middlename" class="form-label">Middle Name*</label>
-    <input type="text" name="update_middlename" maxlength="45" class="form-control barangay-form" id="update_middlename" placeholder="Middle name.">
+    <input type="text" name="update_middlename" maxlength="45" class="form-control barangay-form" id="update_middlename" placeholder="Middle name">
     <div class="invalid-feedback">
     Invalid input.
     </div>
   </div>
   <div class="mb-3">
     <label for="update_lastname" class="form-label">Last Name*</label>
-    <input type="text" name="update_lastname" maxlength="45" class="form-control barangay-form" id="update_lastname" placeholder="Last name.">
+    <input type="text" name="update_lastname" maxlength="45" class="form-control barangay-form" id="update_lastname" placeholder="Last name">
     <div class="invalid-feedback">
     Invalid input.
     </div>
@@ -59,7 +59,7 @@
   <div class="mb-3" id="update_select_gender">
     <label for="update_gender" class="form-label">Gender*</label>
     <select name="update_gender" id="update_gender" class="form-control gender barangay-form shadow-sm" >
-    <option value="">Pick a gender.</option>
+    <option value="">Pick a gender</option>
     <option value="M (Male)">M (Male)</option>
     <option value="F (Female)">F (Female)</option>
     </select>
@@ -70,7 +70,7 @@
   <div class="mb-3" id="update_select_status">
     <label for="update_civil_status" class="form-label">Civil Status*</label>
     <select name="update_civil_status" id="update_civil_status" class="form-control gender barangay-form shadow-sm" >
-    <option value="">Pick a civil status.</option>
+    <option value="">Pick a civil status</option>
     <option value="Single">Single</option>
     <option value="Married">Married</option>
     <option value="Divorced">Divorced</option>
@@ -84,14 +84,14 @@
     <label for="update_contact" class="form-label">Contact No.*</label>
     <input type="number" name="update_contact" class="form-control barangay-form" id="update_contact"
      onkeypress='return event.charCode>=48 && event.charCode<=57' ondrop="return false;" onpaste="return false;"
-     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="Contact No.">
+     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="Contact No">
     <div class="invalid-feedback" id="update_phno_validator_label">
     Invalid input.
     </div>
   </div>
   <div class="mb-3">
     <label for="update_email" class="form-label">Email Address</label>
-    <input type="email" name="update_email" maxlength="45" class="form-control barangay-form" id="update_email" placeholder="Email Address.">
+    <input type="email" name="update_email" maxlength="45" class="form-control barangay-form" id="update_email" placeholder="Email Address (Optional)">
     <div class="invalid-feedback">
       Invalid email address, email address must look like this (e.g. freed@email.com).
     </div>

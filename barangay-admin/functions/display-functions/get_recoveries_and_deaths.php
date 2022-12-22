@@ -99,14 +99,14 @@
         }
         else
         {
-            $sql .= "`case_status` = '(Inactive)'  AND `recovery` IS NOT NULL AND `date_of_recovery` = '$all_dates' ORDER BY `date_of_recovery` ASC ";
+            $sql .= " `b`.`id`='$barangay_name' AND `case_status` = '(Inactive)'  AND `recovery` IS NOT NULL AND `date_of_recovery` = '$all_dates' ORDER BY `date_of_recovery` ASC ";
         }
     }
     else
     {
         $sql = "SELECT *, `c_d`.`disease_name` AS death_cause, `d`.`disease_name` AS diagnosis  FROM `health_profiles` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
         ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) LEFT JOIN `diseases` AS `c_d` ON (`hp`.`cause_of_death` = `c_d`.`id`)
-        WHERE `case_status` = '(Inactive)'  AND `recovery` IS NOT NULL 
+        WHERE `b`.`id`='$barangay_name' AND `case_status` = '(Inactive)'  AND `recovery` IS NOT NULL 
         AND `date_of_recovery` = '$all_dates' ORDER BY `date_of_recovery` ASC";
     }
 
@@ -225,13 +225,13 @@
             }
             else
             {
-                $sql2 .= "`case_status` = '(Inactive)'  AND `recovery` IS NOT NULL AND `date_of_recovery` = '$all_dates'  AND `barangay_name`= '$_barangay_namme' AND `disease_name`= '$_diseases_name' ORDER BY `date_of_recovery` ASC ";
+                $sql2 .= " `b`.`id`='$barangay_name' AND `case_status` = '(Inactive)'  AND `recovery` IS NOT NULL AND `date_of_recovery` = '$all_dates'  AND `barangay_name`= '$_barangay_namme' AND `disease_name`= '$_diseases_name' ORDER BY `date_of_recovery` ASC ";
             }
         }
         else
         {
             $sql2 = "SELECT * FROM `health_profiles` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
-            ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) WHERE `case_status` = '(Inactive)'  AND `recovery` IS NOT NULL 
+            ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) WHERE `b`.`id`='$barangay_name' AND `case_status` = '(Inactive)'  AND `recovery` IS NOT NULL 
             AND `date_of_recovery` = '$all_dates' AND `barangay_name`= '$_barangay_namme' AND `disease_name`= '$_diseases_name' ORDER BY `date_of_recovery` ASC";
         }
         
@@ -240,7 +240,7 @@
         {
             $result2 = mysqli_query($conn,$sql2);
             $rowcount=mysqli_num_rows($result2);
-            $total_hp =  number_format($rowcount, 0, '', ',');
+            $total_hp = number_format($rowcount, 0, '', ',');
         }
         else
         {

@@ -1,4 +1,4 @@
-var barangay_name = "default";
+var barangay_name = my_barangay_id;
 var recover_from_disease_type = "default";
 var date_range_from = "default";
 var date_range_to = "default";
@@ -13,6 +13,7 @@ var query_click = "unclicked";
 var recoveries_diseases_title = "";
 var other_cause_title = "";
 var cause_of_death_title = "";
+var barangay_title = my_barangay_name;
 
 var current_year = new Date();
 var current_year_dd = String(current_year.getDate()).padStart(2, '0');
@@ -1019,8 +1020,6 @@ $("#disease_date_range_btn").click(function()
 {
      var from_input = $("#disease_range_from").val()
      var to_input = $("#disease_range_to").val()
-     var barangay_id = $("#disease_selecte_barangay").val();
-     barangay_title = $("#disease_selecte_barangay").text();
      var recoveries_diseases = $("#disease_select_diseases").val();
      recoveries_diseases_title = $("#disease_select_diseases").text();
      var filter_cause_of_death = $("#select_cause_of_death").val();
@@ -1108,14 +1107,6 @@ $("#disease_date_range_btn").click(function()
         recover_from_disease_type = "default"
      }
         
-     if(barangay_id.trim().length != 0)
-     {
-         barangay_name = barangay_id;
-     }
-     else
-     {
-         barangay_name = "default"
-     }
 
      if(from_input.trim().length === 0)
      {
@@ -1171,7 +1162,6 @@ $("#current_year").click(function()
  $("#disease_active_only_btn").addClass("d-none")
  $("#disease_all_cases").removeClass("d-none")
 
-     barangay_name = "default"
      date_range_from = "default";
      date_range_to = "default";
      gender = "default";
@@ -1202,10 +1192,6 @@ $("#current_year").click(function()
      control.clear();
 
      var $select = $('#select_deaths_recoveries').selectize();
-     var control = $select[0].selectize;
-     control.clear();
-
-     var $select = $('#disease_selecte_barangay').selectize();
      var control = $select[0].selectize;
      control.clear();
 

@@ -23,7 +23,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="new_user" class="form-label">New Username</label>
+          <label for="new_user" class="form-label">New Username*</label>
           <input autocomplete="off" type="text" maxlength="45" name="new_user" class="shadow-sm form-control barangay-form" id="new_user" placeholder="New Username">
           <div class="user invalid-feedback">
           </div>
