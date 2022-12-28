@@ -229,19 +229,19 @@ function display_map()
          
              // create a HTML element for each feature
              const el = document.createElement('div');
-             if(feature.description <= 1)
+             if(parseInt(feature.description) <= 1)
              {
                  el.className = 'green';
                  clusterCategory = "Low"
                  el.id = i
              }
-             else if(feature.description <= 2)
+             else if(parseInt(feature.description) <= 2)
              {
                  el.className = 'yellow';
                  clusterCategory = "Moderate"
                  el.id = i
              }
-             else if(feature.description <= 3)
+             else if(parseInt(feature.description) <= 3)
              {
                  el.className = 'orange';
                  clusterCategory = "High"
@@ -269,16 +269,16 @@ function display_map()
             var cont = locations.features[divId]
             var mark;
 
-            if(cont.description <= 1)
+            if(parseInt(cont.description) <= 1)
             {
                 mark= 'green';
             }
-            else if(cont.description <= 2)
+            else if(parseInt(cont.description) <= 2)
             {
                 mark = 'yellow';
 
             }
-            else if(cont.description <= 3)
+            else if(parseInt(cont.description) <= 3)
             {
                 mark = 'orange';
 

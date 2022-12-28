@@ -1409,7 +1409,6 @@ $("#date_range_btn").click(function()
           a+=1
         }
 
-
         if (results.length > 0) 
         {
           $("#search_result").html("<a><span class='me-2 fw-semibold' >"+result_tittle+"</span><span>"+results+"</span></a>")
@@ -1596,6 +1595,95 @@ $("#select_options").change(function()
   }
 })
 //update options end
+
+
+
+// cange color of date field when value is not 0
+$("#range_from").change(function()
+{
+
+  if($("#range_from").val().trim().length === 0)
+  {
+    $('#range_from').css(
+      {
+          'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#range_from').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+    );
+
+  }
+
+})
+
+
+$("#range_to").change(function()
+{
+
+  if($("#range_to").val().trim().length === 0)
+  {
+    $('#range_to').css(
+      {
+        'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#range_to').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+      );
+  }
+
+})
+// cange color of date field when value is not 0 end
+
+//go to filter button
+$("#filter_this_table").click(function()
+{
+if($("#range_from").val().trim().length === 0)
+{
+$('#range_from').css(
+  {
+      'cssText': 'color:#818a99 !important'
+  }
+  );
+}
+else
+{
+$('#range_from').css(
+  {
+      'cssText': 'color: #333 !important'
+  }
+);
+
+}
+if($("#range_to").val().trim().length === 0)
+{
+$('#range_to').css(
+  {
+    'cssText': 'color:#818a99 !important'
+  }
+  );
+}
+else
+{
+$('#range_to').css(
+  {
+      'cssText': 'color: #333 !important'
+  }
+  );
+}
+})
+// go to filter button end
 
 
 

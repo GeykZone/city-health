@@ -187,7 +187,7 @@ $("#close_add_barangay_admin").click(function()
 //trigger error messages
 function alert_message()
 {
-  var toastMixin = Swal.mixin({
+    var toastMixin = Swal.mixin({
     toast: true,
     icon: 'success',
     title: 'General Title',
@@ -200,65 +200,65 @@ function alert_message()
       toast.addEventListener('mouseenter', Swal.stopTimer)
       toast.addEventListener('mouseleave', Swal.resumeTimer) 
     }
-  });
+    });
 
-if(confirmation.a == 1)
-{
-  $('#add-barangay-admin').modal('toggle');
+    if(confirmation.a == 1)
+    {
+    $('#add-barangay-admin').modal('toggle');
 
-  $("#default_username").val("Please select a barangay");
-  $("#default_password").val("Please select a barangay");
-  $("#select_barangay").val("");
-  var $select = $('#select_barangay').selectize();
-  var control = $select[0].selectize;
-  control.clear();
-  
-  toastMixin.fire({
+    $("#default_username").val("Please select a barangay");
+    $("#default_password").val("Please select a barangay");
+    $("#select_barangay").val("");
+    var $select = $('#select_barangay').selectize();
+    var control = $select[0].selectize;
+    control.clear();
+
+    toastMixin.fire({
     animation: true,
     title: 'A new barangay admin has been added in the list.'
-  });
-  table.ajax.reload( null, false);
-}
-else if(confirmation.a == 2)
-{
-  toastMixin.fire({
+    });
+    table.ajax.reload( null, false);
+    }
+    else if(confirmation.a == 2)
+    {
+    toastMixin.fire({
     animation: true,
     title: 'An admin is already assigned in the barangay.',
     icon: 'error'
-  });
-}
-else if(confirmation.a == 3)
-{
-  toastMixin.fire({
+    });
+    }
+    else if(confirmation.a == 3)
+    {
+    toastMixin.fire({
     animation: true,
     title: 'A default username and password has been restored.'
-  });
-  table.ajax.reload( null, false);
-}
-else if(confirmation.a == 4)
-{
-  toastMixin.fire({
+    });
+    table.ajax.reload( null, false);
+    }
+    else if(confirmation.a == 4)
+    {
+    toastMixin.fire({
     animation: true,
     title: 'A barangay admin record has been deleted.'
-  });
-  table.ajax.reload( null, false);
-}
-else if(confirmation.a == 5)
-{
-  toastMixin.fire({
+    });
+    table.ajax.reload( null, false);
+    }
+    else if(confirmation.a == 5)
+    {
+    toastMixin.fire({
     animation: true,
     title: 'A barangay admin record has been activated.'
-  });
-  table.ajax.reload( null, false);
-}
-else if(confirmation.a == 6)
-{
-  toastMixin.fire({
+    });
+    table.ajax.reload( null, false);
+    }
+    else if(confirmation.a == 6)
+    {
+    toastMixin.fire({
     animation: true,
     title: 'A barangay admin record has been deactivated.'
-  });
-  table.ajax.reload( null, false);
-}
+    });
+    table.ajax.reload( null, false);
+    }
 }
 //trigger error messages
 
@@ -285,14 +285,14 @@ function load_data_tables() {
           "render": function ( data, type, row, meta ) {
 
 
-            if(data === "0")
+            if(data === "Admin Deactivated")
             {active_data = data;
-              return  "<div class='shadow-sm align-middle bg-dark text-white rounded-2 d-flex justify-content-start ps-4' type='button'  style='width:9rem'>(0) Deactivated</div> ";
+              return  "<div class='shadow-sm align-middle bg-dark text-white rounded-2 d-flex justify-content-start justify-content-center'  style='width:11rem'>Admin Deactivated</div> ";
               
             }
             else
             {active_data = data;
-              return "<div class='shadow-sm align-middle bg-success text-white rounded-2 d-flex justify-content-start ps-4' type='button' style='width:9rem'>(1) Activated</div>";
+              return "<div class='shadow-sm align-middle bg-success text-white rounded-2 d-flex justify-content-start justify-content-center' type='button' style='width:11rem'>Admin Activated</div>";
             }
             
           },
@@ -302,7 +302,7 @@ function load_data_tables() {
           "targets": 3,
           "render": function ( data, type, row, meta ) {
 
-            if(active_data === "0")
+            if(active_data === "Admin Deactivated")
             {
               return  "<div class='text-end px-1'> <i class='shadow-sm align-middle edit_barangay_value reset_btn fas fa-undo-alt' data-coreui-toggle='modal' href='#reset_barangay' id='update_barangay_value' role='button' ></i> "+
               "<i class='shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_barangay_admin' data-coreui-toggle='modal' id='delete_barangay_admin_value' role='button' ></i> "+

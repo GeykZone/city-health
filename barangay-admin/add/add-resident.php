@@ -1,5 +1,5 @@
 <div class="modal fade" id="add-barangay-resident" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-scrollable" >
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
 <div class="modal-content">
 <div class="modal-header bg-warning border-0 px-3 py-2 shadow-sm">
   <span class=" fa-solid me-2" style="width: 15px; height:15px; color:#ffff;"></span>

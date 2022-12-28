@@ -1215,3 +1215,50 @@ $("#current_year").click(function()
 
 })
 //back to default record end' 
+
+// cange color of date field when value is not 0
+$("#disease_range_from").change(function()
+{
+
+  if($("#disease_range_from").val().trim().length === 0)
+  {
+    $('#disease_range_from').css(
+      {
+          'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#disease_range_from').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+    );
+
+  }
+
+})
+
+$("#disease_range_to").change(function()
+{
+
+  if($("#disease_range_to").val().trim().length === 0)
+  {
+    $('#disease_range_to').css(
+      {
+        'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#disease_range_to').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+      );
+  }
+
+})
+// cange color of date field when value is not 0 end

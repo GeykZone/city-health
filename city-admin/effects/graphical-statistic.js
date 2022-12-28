@@ -24,10 +24,7 @@ var y_value = [];
 var x_y_value = "";
 var xValues = "";
 var yValues = ""; 
-var largets_total = Math.max(...y_value) //get the largest element of the brg resident array
 var myColors=[];
-var myPoints=[]
-var data_set_handler = [];
 var tittle_disease_type;
 
 var active_inactive_validator = "default"
@@ -447,37 +444,21 @@ function chart_array()
   //generate a color base on percentage
   $.each(yValues, function( index,value ) {
 
-    var b =100
-    var percentage = b * value;
-    percentage = percentage / largets_total;
-    percentage = parseFloat(percentage).toFixed(2)
-
-    var data_set_handler_single
-
-    if(value <= 1){
+    if(parseInt(value) <= 1){
        myColors[index]="#b3e6ffff";
-       myPoints[index]=  15;
-
-      data_set_handler.push(data_set_handler_single)
     }
-    else if(value <= 2)
+    else if(parseInt(value) <= 2)
     {
       myColors[index]="#80d5ffff";
-      myPoints[index]=  20 ;
-
-      data_set_handler.push(data_set_handler_single)
     }
-    else if(value <= 4)
+    else if(parseInt(value) <= 4)
     {
       myColors[index]="#4dc4ffff";
-      myPoints[index]= 25;
-
-      data_set_handler.push(data_set_handler_single)
     }
     else{
       myColors[index]="#07a3f1ff";
-      myPoints[index]=  30;
     }
+    
 
   });
 
@@ -496,7 +477,6 @@ function number_of_resident_chart()
     borderColor: "#80d5ffff",
     borderWidth: 1,
     borderRadius: 8,
-    pointRadius: myPoints,
     borderSkipped: false,
     barPercentage: 0.8,
     categoryPercentage:0.8,
@@ -906,6 +886,53 @@ $("#current_year").click(function()
 
 })
 //back to default record end'
+
+// cange color of date field when value is not 0
+$("#range_from").change(function()
+{
+
+  if($("#range_from").val().trim().length === 0)
+  {
+    $('#range_from').css(
+      {
+          'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#range_from').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+    );
+
+  }
+
+})
+
+$("#range_to").change(function()
+{
+
+  if($("#range_to").val().trim().length === 0)
+  {
+    $('#range_to').css(
+      {
+        'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#range_to').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+      );
+  }
+
+})
+// cange color of date field when value is not 0 end
 
 
 

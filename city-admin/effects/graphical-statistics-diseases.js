@@ -24,10 +24,8 @@ var y_value = [];
 var x_y_value = "";
 var xValues = "";
 var yValues = ""; 
-var largets_total = Math.max(...y_value) //get the largest element of the brg resident array
 var myColors=[];
 var myPoints=[]
-var data_set_handler = [];
 
 var tittle_barangay = "";
 var active_inactive_validator = "default"
@@ -234,203 +232,190 @@ function removeLastWord(str) {
 }
 //remove last word from a string end
   
-  //convert month number into words
-  function getMonthName(monthNumber) {
-    const date = new Date();
-    date.setMonth(monthNumber - 1);
-    return date.toLocaleString('en-US', { month: 'long' });
-  }
-  //convert month number into words end
+//convert month number into words
+function getMonthName(monthNumber) {
+  const date = new Date();
+  date.setMonth(monthNumber - 1);
+  return date.toLocaleString('en-US', { month: 'long' });
+}
+//convert month number into words end
   
-  // for select
-  function select_with_search_box()
-  {
-  $('select').selectize({
-  // maxItems: '1',
-  });
-  $(".selectize-control").removeClass("form-control barangay-form")
-  }
-  // for select  end
-  
-  //date picker
-  function date_range()
-  {
-  
-    $("#disease_range_from").datepicker({
-      dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
-      });
-  
-  
-      $("#disease_range_to").datepicker({
-          dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
-          });
-  
-  }
-  //date picker end
-
-  //initalize chart values
-function chart_array()
+// for select
+function select_with_search_box()
 {
-  $.ajaxSetup({async:false});
-  $.getJSON('functions/display-functions/graphical-statistic-diseases.php', 
-  {
-    total_hp:'set',
-
-    query_click:query_click,
-    
-    barangay_name:barangay_name,
-    date_range_from:date_range_from,
-    date_range_to:date_range_to,
-    active_inactive:active_inactive,
-    gender:gender,
-    max_age:max_age,
-    min_age:min_age,
-
-    current_year_from:current_year_from,
-    current_year_to:current_year_to
-  }, 
+$('select').selectize({
+// maxItems: '1',
+});
+$(".selectize-control").removeClass("form-control barangay-form")
+}
+// for select  end
   
-  function (data, textStatus, jqXHR) 
-  {
-    x_y_value = data;
-    
-  });
+//date picker
+function date_range()
+{
 
-  //console.log(x_y_value)
-  
-  var textArr = x_y_value;
-  var hpTotal_arr = [];
-  var brgy_arr = [];
-  $.each(textArr,function(index,x_y){
+  $("#disease_range_from").datepicker({
+    dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+    });
 
-  hpTotal =  removeFirstWord(x_y) 
 
-  barangay = removeLastWord(x_y)
-  barangay = barangay.split('_').join(' ') 
-
-  var single_hp_total = hpTotal
-  var single_brgy = barangay
-
-  hpTotal_arr.push(single_hp_total);
-  brgy_arr.push(single_brgy);
-  
-  });
-
-  x_value = brgy_arr
-  y_value = hpTotal_arr
-
-  if(sort === "asc")
-  {
-      //sorting algorithm
-      arrayOfObj = x_value.map(function(d, i) {
-        return {
-          label: d,
-          data: y_value[i] || 0
-        };
-      });
-      
-      sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
-        return a.data - b.data;
-      });
-      
-      newArrayLabel = [];
-      newArrayData = [];
-      sortedArrayOfObj.forEach(function(d){
-        newArrayLabel.push(d.label);
-        newArrayData.push(d.data);
-      });
-      ////sorting algorithm
-  }
-  else if(sort === "desc")
-  {
-      //sorting algorithm
-      arrayOfObj = x_value.map(function(d, i) {
-        return {
-          label: d,
-          data: y_value[i] || 0
-        };
-      });
-      
-      sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
-        return b.data - a.data ;
-      });
-      
-      newArrayLabel = [];
-      newArrayData = [];
-      sortedArrayOfObj.forEach(function(d){
-        newArrayLabel.push(d.label);
-        newArrayData.push(d.data);
-      });
-      ////sorting algorithm
-  }
-  else if(sort === "names")
-  {
-          //sorting algorithm
-          arrayOfObj = x_value.map(function(d, i) {
-            return {
-              label: d,
-              data: y_value[i] || 0
-            };
-          });
-          
-          sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
-            return a.label - b.label;
-          });
-          
-          newArrayLabel = [];
-          newArrayData = [];
-          sortedArrayOfObj.forEach(function(d){
-            newArrayLabel.push(d.label);
-            newArrayData.push(d.data);
-          });
-          ////sorting algorithm
-  }
-
-  x_value = newArrayLabel;
-  y_value = newArrayData;
-
-  xValues = x_value;
-  yValues = y_value; 
-
-  //generate a color base on percentage
-  $.each(yValues, function( index,value ) {
-
-    var b =100
-    var percentage = b * value;
-    percentage = percentage / largets_total;
-    percentage = parseFloat(percentage).toFixed(2)
-
-    var data_set_handler_single
-
-    if(value <= 1){
-       myColors[index]="#b3e6ffff";
-       myPoints[index]=  5;
-
-      data_set_handler.push(data_set_handler_single)
-    }
-    else if(value <= 2)
-    {
-      myColors[index]="#80d5ffff";
-      myPoints[index]=  10 ;
-
-      data_set_handler.push(data_set_handler_single)
-    }
-    else if(value <= 4)
-    {
-      myColors[index]="#4dc4ffff";
-      myPoints[index]= 15;
-
-      data_set_handler.push(data_set_handler_single)
-    }
-    else{
-      myColors[index]="#07a3f1ff";
-      myPoints[index]=  20;
-    }
-
-  });
+    $("#disease_range_to").datepicker({
+        dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+        });
 
 }
- //initalize chart values end
+//date picker end
+
+//initalize chart values
+function chart_array()
+{
+$.ajaxSetup({async:false});
+$.getJSON('functions/display-functions/graphical-statistic-diseases.php', 
+{
+  total_hp:'set',
+
+  query_click:query_click,
+  
+  barangay_name:barangay_name,
+  date_range_from:date_range_from,
+  date_range_to:date_range_to,
+  active_inactive:active_inactive,
+  gender:gender,
+  max_age:max_age,
+  min_age:min_age,
+
+  current_year_from:current_year_from,
+  current_year_to:current_year_to
+}, 
+
+function (data, textStatus, jqXHR) 
+{
+  x_y_value = data;
+  
+});
+
+//console.log(x_y_value)
+
+var textArr = x_y_value;
+var hpTotal_arr = [];
+var brgy_arr = [];
+$.each(textArr,function(index,x_y){
+
+hpTotal =  removeFirstWord(x_y) 
+
+barangay = removeLastWord(x_y)
+barangay = barangay.split('_').join(' ') 
+
+var single_hp_total = hpTotal
+var single_brgy = barangay
+
+hpTotal_arr.push(single_hp_total);
+brgy_arr.push(single_brgy);
+
+});
+
+x_value = brgy_arr
+y_value = hpTotal_arr
+
+if(sort === "asc")
+{
+    //sorting algorithm
+    arrayOfObj = x_value.map(function(d, i) {
+      return {
+        label: d,
+        data: y_value[i] || 0
+      };
+    });
+    
+    sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
+      return a.data - b.data;
+    });
+    
+    newArrayLabel = [];
+    newArrayData = [];
+    sortedArrayOfObj.forEach(function(d){
+      newArrayLabel.push(d.label);
+      newArrayData.push(d.data);
+    });
+    ////sorting algorithm
+}
+else if(sort === "desc")
+{
+    //sorting algorithm
+    arrayOfObj = x_value.map(function(d, i) {
+      return {
+        label: d,
+        data: y_value[i] || 0
+      };
+    });
+    
+    sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
+      return b.data - a.data ;
+    });
+    
+    newArrayLabel = [];
+    newArrayData = [];
+    sortedArrayOfObj.forEach(function(d){
+      newArrayLabel.push(d.label);
+      newArrayData.push(d.data);
+    });
+    ////sorting algorithm
+}
+else if(sort === "names")
+{
+        //sorting algorithm
+        arrayOfObj = x_value.map(function(d, i) {
+          return {
+            label: d,
+            data: y_value[i] || 0
+          };
+        });
+        
+        sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
+          return a.label - b.label;
+        });
+        
+        newArrayLabel = [];
+        newArrayData = [];
+        sortedArrayOfObj.forEach(function(d){
+          newArrayLabel.push(d.label);
+          newArrayData.push(d.data);
+        });
+        ////sorting algorithm
+}
+
+x_value = newArrayLabel;
+y_value = newArrayData;
+
+xValues = x_value;
+yValues = y_value; 
+
+//generate a color base on percentage
+$.each(yValues, function( index,value ) {
+
+  if(parseInt(value) <= 1){
+      myColors[index]="#b3e6ffff";
+      myPoints[index]=  5;
+  }
+  else if(parseInt(value) <= 2)
+  {
+    myColors[index]="#80d5ffff";
+    myPoints[index]=  10 ;
+  }
+  else if(parseInt(value) <= 4)
+  {
+    myColors[index]="#4dc4ffff";
+    myPoints[index]= 15;
+  }
+  else{
+    myColors[index]="#07a3f1ff";
+    myPoints[index]=  20;
+  }
+
+});
+
+}
+//initalize chart values end
 
 //number of residents chart
 function number_of_resident_chart()
@@ -852,3 +837,50 @@ $("#current_year").click(function()
 
 })
 //back to default record end'
+
+// cange color of date field when value is not 0
+$("#disease_range_from").change(function()
+{
+
+  if($("#disease_range_from").val().trim().length === 0)
+  {
+    $('#disease_range_from').css(
+      {
+          'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#disease_range_from').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+    );
+
+  }
+
+})
+
+$("#disease_range_to").change(function()
+{
+
+  if($("#disease_range_to").val().trim().length === 0)
+  {
+    $('#disease_range_to').css(
+      {
+        'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#disease_range_to').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+      );
+  }
+
+})
+// cange color of date field when value is not 0 end

@@ -23,13 +23,13 @@ $primaryKey = 'id';
 $columns = array( 
     array( 'db' => 'barangay_name',    'dt' => 0, 'field' => 'barangay_name'),
     array( 'db' => 'username', 'dt' => 1, 'field' => 'username' ), 
-    array( 'db' => 'activated',  'dt' => 2, 'field' => 'activated' ), 
+    array( 'db' => "(CASE WHEN activated = 1 THEN 'Admin Activated' WHEN activated = 0 THEN 'Admin Deactivated' END)",  'dt' => 2, 'field' => "(CASE WHEN activated = 1 THEN 'Admin Activated' WHEN activated = 0 THEN 'Admin Deactivated' END)" ), 
 ); 
  
 // Include SQL query processing class 
 require '../ssp.class.php'; 
 
-$joinQuery = "FROM `users` ";
+$joinQuery = ", (CASE WHEN activated = 1 THEN 'Admin Activated' WHEN activated = 0 THEN 'Admin Deactivated' END) FROM `users` ";
 $where = "`role`=2";
 
 

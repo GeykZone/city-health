@@ -1,4 +1,8 @@
-<?php   include('../../../route.php'); ?>
+<?php   
+include('../../../route.php'); 
+include ('../barangay-admin-location.php'); 
+?>
+
 
 <?php
 
@@ -115,7 +119,7 @@ if(isset($_GET['details_for_newCases']))
     }
     else if($total_newCases_count < 1)
     {
-        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
+        $total_newCases_number[] = "There were no new health cases reported in barangay ".ucwords(strtolower($admin_location));
     }
     else
     {
@@ -126,7 +130,7 @@ if(isset($_GET['details_for_newCases']))
     }
     else
     {
-        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
+        $total_newCases_number[] = "There were no new health cases reported in barangay ".ucwords(strtolower($admin_location));
     }
 
     $total_newCases_number = array_unique($total_newCases_number);
@@ -201,7 +205,7 @@ if(isset($_GET['details_for_newDeaths']))
     }
     else if($total_new_deaths_count < 1)
     {
-        $total_new_deaths_number[] = "There were no new health-related deaths reported in Oroquieta City";
+        $total_new_deaths_number[] = "There were no new health-related deaths reported in barangay ".ucwords(strtolower($admin_location));
     }
     else
     {
@@ -213,7 +217,7 @@ if(isset($_GET['details_for_newDeaths']))
     }
     else
     {
-        $total_new_deaths_number[] = "There were no new health-related deaths reported in Oroquieta City";
+        $total_new_deaths_number[] = "There were no new health-related deaths reported in barangay ".ucwords(strtolower($admin_location));
     }
     $total_new_deaths_number = array_unique($total_new_deaths_number);
     print json_encode($total_new_deaths_number);
@@ -287,7 +291,7 @@ if(isset($_GET['details_for_recoveries']))
     }
     else if($total_newRecoveries_count < 1)
     {
-        $total_newRecoveries_number[] = "There were no new recoveries from health-related issues in Oroquieta City";
+        $total_newRecoveries_number[] = "There were no new recoveries from health-related issues in barangay ".ucwords(strtolower($admin_location));
     }
     else
     {
@@ -299,7 +303,7 @@ if(isset($_GET['details_for_recoveries']))
     }
     else
     {
-        $total_newRecoveries_number[] = "There were no new recoveries from health-related issues in Oroquieta City";
+        $total_newRecoveries_number[] = "There were no new recoveries from health-related issues in barangay ".ucwords(strtolower($admin_location));
     }
     $total_newRecoveries_number = array_unique($total_newRecoveries_number);
     print json_encode($total_newRecoveries_number);

@@ -19,13 +19,83 @@ var x_value = "";
 var y_value = "";
 var xValues = "";
 var yValues = "";
-var largets_total = "";
 var myColors=[];
-
 var sort = "names";
-
 var myChart ="";
+
 var res_id_value ="";
+
+//phone validation
+function allCharactersSame(s)
+{
+    let n = s.length;
+    for (let i = 1; i < n; i++)
+        if (s[i] != s[0])
+            return false;
+
+    return true;
+}
+
+function line1(s)
+{
+    let n = s.length;
+    for (let i = 2; i < n; i++)
+        if (s[i] != s[1])
+            return false;
+
+    return true;
+}
+
+function line2(s)
+{
+    let n = s.length;
+    for (let i = 3; i < n; i++)
+        if (s[i] != s[2])
+            return false;
+
+    return true;
+}
+
+function line3(s)
+{
+    let n = s.length;
+    for (let i = 4; i < n; i++)
+        if (s[i] != s[3])
+            return false;
+
+    return true;
+}
+
+function line4(s)
+{
+    let n = s.length;
+    for (let i = 5; i < n; i++)
+        if (s[i] != s[4])
+            return false;
+
+    return true;
+}
+
+function line5(s)
+{
+    let n = s.length;
+    for (let i = 6; i < n; i++)
+        if (s[i] != s[5])
+            return false;
+
+    return true;
+}
+
+function line6(s)
+{
+    let n = s.length;
+    for (let i = 7; i < n; i++)
+        if (s[i] != s[6])
+            return false;
+
+    return true;
+}
+//phone validation end
 
 
 $(document).ready(function () {
@@ -367,24 +437,12 @@ if(barangay_name.trim().length != 0)
 $('#fieldset1').removeAttr("disabled");
 $('#gender')[0].selectize.enable(); 
 $('#civil_status')[0].selectize.enable(); 
-$('.birthdate').css(
-  {
-      'cssText': 'color: #333 !important'
-  }
-);
 }
 else
 {
-$('.birthdate').css(
-{
-    'cssText': 'color:#818a99 !important'
-}
-);
-
 $('#fieldset1').attr("disabled", true);
 $('#gender')[0].selectize.disable(); 
 $('#civil_status')[0].selectize.disable(); 
-
 }
 });
 
@@ -397,20 +455,9 @@ if(barangay_name.trim().length != 0)
 $('#fieldset2').removeAttr("disabled");
 $('#update_gender')[0].selectize.enable(); 
 $('#update_civil_status')[0].selectize.enable(); 
-$('.birthdate2').css(
-{
-    'cssText': 'color: #333 !important'
-}
-);
 }
 else
 {
-$('.birthdate2').css(
-{
-  'cssText': 'color:#818a99 !important'
-}
-);
-
 $('#fieldset2').attr("disabled", true);
 $('#update_gender')[0].selectize.disable(); 
 $('#update_civil_status')[0].selectize.disable(); 
@@ -436,7 +483,7 @@ dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
 }
 //create date picker end
 
-//submit new barangay
+//submit new resident
 $("#add_resident_btn").click(function () {
 
 var barangay_id = $("#select_barangay").val();
@@ -498,81 +545,10 @@ else
 
   function submit_new_resident()
   { 
-
-    function allCharactersSame(s)
-        {
-            let n = s.length;
-            for (let i = 1; i < n; i++)
-                if (s[i] != s[0])
-                    return false;
-      
-            return true;
-        }
-
-        function line1(s)
-        {
-            let n = s.length;
-            for (let i = 2; i < n; i++)
-                if (s[i] != s[1])
-                    return false;
-      
-            return true;
-        }
-
-        function line2(s)
-        {
-            let n = s.length;
-            for (let i = 3; i < n; i++)
-                if (s[i] != s[2])
-                    return false;
-      
-            return true;
-        }
-
-        function line3(s)
-        {
-            let n = s.length;
-            for (let i = 4; i < n; i++)
-                if (s[i] != s[3])
-                    return false;
-      
-            return true;
-        }
-
-        function line4(s)
-        {
-            let n = s.length;
-            for (let i = 5; i < n; i++)
-                if (s[i] != s[4])
-                    return false;
-      
-            return true;
-        }
-
-        function line5(s)
-        {
-            let n = s.length;
-            for (let i = 6; i < n; i++)
-                if (s[i] != s[5])
-                    return false;
-      
-            return true;
-        }
-
-        function line6(s)
-        {
-            let n = s.length;
-            for (let i = 7; i < n; i++)
-                if (s[i] != s[6])
-                    return false;
-      
-            return true;
-        }
-
         if(contact.charAt(0) === "9" && contact.length === 10 && allCharactersSame(contact) != true && line1(contact) != true && line2(contact) != true
         && line3(contact) != true && line4(contact) != true && line5(contact) != true  && line6(contact) != true) 
       {
-        contact = "63"+contact;
+        contact = "+63"+contact;
         $.post("functions/add-functions/add-resident.php", {
 
           barangay_id: barangay_id,
@@ -624,7 +600,7 @@ else
 }
 
 });
-//submit new barangay end
+//submit new resident end
 
 //delete resident
 $("#delete_resident_record").click(function()
@@ -704,80 +680,11 @@ $("#delete_resident_record").click(function()
 
       function update_resident()
       {
-        function allCharactersSame(s)
-        {
-            let n = s.length;
-            for (let i = 1; i < n; i++)
-                if (s[i] != s[0])
-                    return false;
       
-            return true;
-        }
-
-        function line1(s)
-        {
-            let n = s.length;
-            for (let i = 2; i < n; i++)
-                if (s[i] != s[1])
-                    return false;
-      
-            return true;
-        }
-
-        function line2(s)
-        {
-            let n = s.length;
-            for (let i = 3; i < n; i++)
-                if (s[i] != s[2])
-                    return false;
-      
-            return true;
-        }
-
-        function line3(s)
-        {
-            let n = s.length;
-            for (let i = 4; i < n; i++)
-                if (s[i] != s[3])
-                    return false;
-      
-            return true;
-        }
-
-        function line4(s)
-        {
-            let n = s.length;
-            for (let i = 5; i < n; i++)
-                if (s[i] != s[4])
-                    return false;
-      
-            return true;
-        }
-
-        function line5(s)
-        {
-            let n = s.length;
-            for (let i = 6; i < n; i++)
-                if (s[i] != s[5])
-                    return false;
-      
-            return true;
-        }
-
-        function line6(s)
-        {
-            let n = s.length;
-            for (let i = 7; i < n; i++)
-                if (s[i] != s[6])
-                    return false;
-      
-            return true;
-        }
-
           if(new_contact.charAt(0) === "9" && new_contact.length === 10 && allCharactersSame(new_contact) != true && line1(new_contact) != true && line2(new_contact) != true
           && line3(new_contact) != true && line4(new_contact) != true && line5(new_contact) != true  && line6(new_contact) != true) 
           {
-            new_contact = "63"+new_contact; //639276003238
+            new_contact = "+63"+new_contact; //639276003238
 
             $.post("functions/update-functions/update-resident.php", {
               resident_id: res_id_value,
@@ -870,7 +777,6 @@ control.clear();
 //get the table cell value when selected
 function get_resident_table_cell_value()
 {
-
 //update
 $("#resident_table").on('click','.update_resident_value',function(){
 // get the current row
@@ -897,13 +803,26 @@ $('#update_gender').data('selectize').setValue(col5);
 var update_birthdate = new Date(col6)
 update_birthdate = update_birthdate.getFullYear()+"-"+String(update_birthdate.getMonth() + 1).padStart(2, '0')+"-"+String(update_birthdate.getDate()).padStart(2, '0');
 $("#update_birthdate").val(update_birthdate);
+if($("#update_birthdate").val().trim().length === 0)
+{
+  $('#update_birthdate').css(
+    {
+      'cssText': 'color:#818a99 !important'
+    }
+    );
+}
+else
+{
+  $('#update_birthdate').css(
+    {
+        'cssText': 'color: #333 !important'
+    }
+    );
+}
 
 $('#update_civil_status').data('selectize').setValue(col7);
 
-$("#update_contact").val(col8);
-var trim_the_63_phone_number = $("#update_contact").val();
-var trimm_version_phone_number = trim_the_63_phone_number.substring(2);
-$("#update_contact").val(trimm_version_phone_number)
+$("#update_contact").val(col8.substring(3));
 
 if(col9 === "N/A")
 {
@@ -1014,28 +933,25 @@ function chart_array()
       xValues = x_value;
       yValues = y_value; 
 
-      //generate a color base on percentage
-      largets_total = Math.max(...y_value) //get the largest element of the brg resident array
-      $.each(yValues, function( index,value ) {
-          var b =100
-          var percentage = b * value;
-          percentage = percentage / largets_total;
+  //generate a color base on percentage
+  $.each(yValues, function( index,value ) {
 
-        if(percentage<=10){
-            myColors[index]="#b3e6ffff";
-        }
-        else if(percentage<=30)
-        {
-          myColors[index]="#80d5ffff";
-        }
-        else if(percentage<=50)
-        {
-          myColors[index]="#4dc4ffff";
-        }
-        else{
-          myColors[index]="#07a3f1ff";
-        }
-      });
+    if(parseInt(value) <= 1000){
+       myColors[index]="#b3e6ffff";
+    }
+    else if(parseInt(value) <= 3000)
+    {
+      myColors[index]="#80d5ffff";
+    }
+    else if(parseInt(value) <= 5000)
+    {
+      myColors[index]="#4dc4ffff";
+    }
+    else{
+      myColors[index]="#07a3f1ff";
+    }
+    
+  });
 
 }
 //initalize chart values end
@@ -1268,3 +1184,50 @@ if (Cookies.get('dashboard_residentChart') != undefined) {
 }
 //auto load chart from dashboard end
 
+// cange color of birthdate field when value is not 0
+$("#birthdate").change(function()
+{
+
+  if($("#birthdate").val().trim().length === 0)
+  {
+    $('#birthdate').css(
+      {
+          'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#birthdate').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+    );
+
+  }
+
+})
+
+
+$("#update_birthdate").change(function()
+{
+
+  if($("#update_birthdate").val().trim().length === 0)
+  {
+    $('#update_birthdate').css(
+      {
+        'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#update_birthdate').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+      );
+  }
+
+})
+// cange color of birthdate field when value is not 0 end
