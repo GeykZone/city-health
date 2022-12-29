@@ -28,17 +28,16 @@ $date_range_to = $_GET['date_range_to'];
 // The `dt` parameter represents the DataTables column identifier. 
 
 $columns = array(
-    array( 'db' => 'occurrence_number',    'dt' => 0, 'field' => 'occurrence_number'),
-    array( 'db' => 'disease_name',    'dt' => 1, 'field' => 'disease_name'),
-    array( 'db' => 'first_name',    'dt' => 2, 'field' => 'first_name'),
-    array( 'db' => 'middle_name',    'dt' => 3, 'field' => 'middle_name'),
-    array( 'db' => 'last_name',    'dt' => 4, 'field' => 'last_name'),
-    array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-    array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-    array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
-    array( 'db' => "DATE_FORMAT(date,'%M %d, %Y')",    'dt' => 8, 'field' => "DATE_FORMAT(date,'%M %d, %Y')"),
-    array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-    array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
+    array( 'db' => 'disease_name',    'dt' => 0, 'field' => 'disease_name'),
+    array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
+    array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
+    array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
+    array( 'db' => 'gender',    'dt' => 4, 'field' => 'gender'),
+    array( 'db' => 'age',    'dt' => 5, 'field' => 'age'),
+    array( 'db' => 'contact',    'dt' => 6, 'field' => 'contact'),
+    array( 'db' => "DATE_FORMAT(date,'%M %d, %Y')",    'dt' => 7, 'field' => "DATE_FORMAT(date,'%M %d, %Y')"),
+    array( 'db' => 'case_status',    'dt' => 8, 'field' => 'case_status'),
+    array( 'db' => 'hp_id',    'dt' => 9, 'field' => 'hp_id'),
 ); 
  
 // Include SQL query processing class 
@@ -63,17 +62,16 @@ if($query_btn === "clicked")
         $where = "";
 
         $columns = array(
-            array( 'db' => 'occurrence_number',    'dt' => 0, 'field' => 'occurrence_number'),
-            array( 'db' => 'disease_name',    'dt' => 1, 'field' => 'disease_name'),
-            array( 'db' => 'first_name',    'dt' => 2, 'field' => 'first_name'),
-            array( 'db' => 'middle_name',    'dt' => 3, 'field' => 'middle_name'),
-            array( 'db' => 'last_name',    'dt' => 4, 'field' => 'last_name'),
-            array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-            array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-            array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
-            array( 'db' => "DATE_FORMAT(date_of_recovery,'%M %d, %Y')",    'dt' => 8, 'field' => "DATE_FORMAT(date_of_recovery,'%M %d, %Y')"),
-            array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-            array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
+            array( 'db' => 'disease_name',    'dt' => 0, 'field' => 'disease_name'),
+            array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
+            array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
+            array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
+            array( 'db' => 'gender',    'dt' => 4, 'field' => 'gender'),
+            array( 'db' => 'age',    'dt' => 5, 'field' => 'age'),
+            array( 'db' => 'contact',    'dt' => 6, 'field' => 'contact'),
+            array( 'db' => "DATE_FORMAT(date_of_recovery,'%M %d, %Y')",    'dt' => 7, 'field' => "DATE_FORMAT(date_of_recovery,'%M %d, %Y')"),
+            array( 'db' => 'case_status',    'dt' => 8, 'field' => 'case_status'),
+            array( 'db' => 'hp_id',    'dt' => 9, 'field' => 'hp_id'),
         ); 
     }
     else  if($filter_status === "Inactive (Dead)")
@@ -87,17 +85,16 @@ if($query_btn === "clicked")
                 $where = "";
         
                 $columns = array(
-                    array( 'db' => 'phil_health_number',    'dt' => 0, 'field' => 'phil_health_number'),
-                    array( 'db' => 'COALESCE(c_o_d.disease_name)',    'dt' => 1, 'field' => 'COALESCE(c_o_d.disease_name)'),
-                    array( 'db' => 'first_name',    'dt' => 2, 'field' => 'first_name'),
-                    array( 'db' => 'middle_name',    'dt' => 3, 'field' => 'middle_name'),
-                    array( 'db' => 'last_name',    'dt' => 4, 'field' => 'last_name'),
-                    array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-                    array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-                    array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
-                    array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 8, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
-                    array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-                    array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
+                    array( 'db' => 'COALESCE(c_o_d.disease_name)',    'dt' => 0, 'field' => 'COALESCE(c_o_d.disease_name)'),
+                    array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
+                    array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
+                    array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
+                    array( 'db' => 'gender',    'dt' => 4, 'field' => 'gender'),
+                    array( 'db' => 'age',    'dt' => 5, 'field' => 'age'),
+                    array( 'db' => 'contact',    'dt' => 6, 'field' => 'contact'),
+                    array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 7, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
+                    array( 'db' => 'case_status',    'dt' => 8, 'field' => 'case_status'),
+                    array( 'db' => 'hp_id',    'dt' => 9, 'field' => 'hp_id'),
                 );
             }
             else
@@ -107,17 +104,16 @@ if($query_btn === "clicked")
                 $where = "";
         
                 $columns = array(
-                    array( 'db' => 'phil_health_number',    'dt' => 0, 'field' => 'phil_health_number'),
-                    array( 'db' => 'other_cause_of_death',    'dt' => 1, 'field' => 'other_cause_of_death'),
-                    array( 'db' => 'first_name',    'dt' => 2, 'field' => 'first_name'),
-                    array( 'db' => 'middle_name',    'dt' => 3, 'field' => 'middle_name'),
-                    array( 'db' => 'last_name',    'dt' => 4, 'field' => 'last_name'),
-                    array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-                    array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-                    array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
-                    array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 8, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
-                    array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-                    array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
+                    array( 'db' => 'other_cause_of_death',    'dt' => 0, 'field' => 'other_cause_of_death'),
+                    array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
+                    array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
+                    array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
+                    array( 'db' => 'gender',    'dt' => 4, 'field' => 'gender'),
+                    array( 'db' => 'age',    'dt' => 5, 'field' => 'age'),
+                    array( 'db' => 'contact',    'dt' => 6, 'field' => 'contact'),
+                    array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 7, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
+                    array( 'db' => 'case_status',    'dt' => 8, 'field' => 'case_status'),
+                    array( 'db' => 'hp_id',    'dt' => 9, 'field' => 'hp_id'),
                 );
             }    
         }
@@ -128,17 +124,16 @@ if($query_btn === "clicked")
             $where = "";
     
             $columns = array(
-                array( 'db' => 'phil_health_number',    'dt' => 0, 'field' => 'phil_health_number'),
-                array( 'db' => "COALESCE(c_o_d.disease_name, other_cause_of_death)",    'dt' => 1, 'field' => "COALESCE(c_o_d.disease_name, other_cause_of_death)"),
-                array( 'db' => 'first_name',    'dt' => 2, 'field' => 'first_name'),
-                array( 'db' => 'middle_name',    'dt' => 3, 'field' => 'middle_name'),
-                array( 'db' => 'last_name',    'dt' => 4, 'field' => 'last_name'),
-                array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-                array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-                array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
-                array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 8, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
-                array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-                array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
+                array( 'db' => "COALESCE(c_o_d.disease_name, other_cause_of_death)",    'dt' => 0, 'field' => "COALESCE(c_o_d.disease_name, other_cause_of_death)"),
+                array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
+                array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
+                array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
+                array( 'db' => 'gender',    'dt' => 4, 'field' => 'gender'),
+                array( 'db' => 'age',    'dt' => 5, 'field' => 'age'),
+                array( 'db' => 'contact',    'dt' => 6, 'field' => 'contact'),
+                array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 7, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
+                array( 'db' => 'case_status',    'dt' => 8, 'field' => 'case_status'),
+                array( 'db' => 'hp_id',    'dt' => 9, 'field' => 'hp_id'),
             );
         }
     }
@@ -149,17 +144,16 @@ if($query_btn === "clicked")
         $where = "";
 
         $columns = array(
-            array( 'db' => 'occurrence_number',    'dt' => 0, 'field' => 'occurrence_number'),
-            array( 'db' => 'disease_name',    'dt' => 1, 'field' => 'disease_name'),
-            array( 'db' => 'first_name',    'dt' => 2, 'field' => 'first_name'),
-            array( 'db' => 'middle_name',    'dt' => 3, 'field' => 'middle_name'),
-            array( 'db' => 'last_name',    'dt' => 4, 'field' => 'last_name'),
-            array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-            array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-            array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
-            array( 'db' => "COALESCE(DATE_FORMAT(date_of_recovery,'%M %d, %Y'), DATE_FORMAT(date_of_death,'%M %d, %Y'))",    'dt' => 8, 'field' => "COALESCE(DATE_FORMAT(date_of_recovery,'%M %d, %Y'), DATE_FORMAT(date_of_death,'%M %d, %Y'))"),
-            array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-            array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
+            array( 'db' => 'disease_name',    'dt' => 0, 'field' => 'disease_name'),
+            array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
+            array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
+            array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
+            array( 'db' => 'gender',    'dt' => 4, 'field' => 'gender'),
+            array( 'db' => 'age',    'dt' => 5, 'field' => 'age'),
+            array( 'db' => 'contact',    'dt' => 6, 'field' => 'contact'),
+            array( 'db' => "COALESCE(DATE_FORMAT(date_of_recovery,'%M %d, %Y'), DATE_FORMAT(date_of_death,'%M %d, %Y'))",    'dt' => 7, 'field' => "COALESCE(DATE_FORMAT(date_of_recovery,'%M %d, %Y'), DATE_FORMAT(date_of_death,'%M %d, %Y'))"),
+            array( 'db' => 'case_status',    'dt' => 8, 'field' => 'case_status'),
+            array( 'db' => 'hp_id',    'dt' => 9, 'field' => 'hp_id'),
         );
     }
 

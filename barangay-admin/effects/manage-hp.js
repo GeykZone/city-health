@@ -390,7 +390,7 @@ function load_data_tables(){
       }      
       
     },
-    order: [[9,'asc']],
+    order: [[8,'asc']],
     
     "autoWidth": false,
       scrollCollapse: true,
@@ -400,26 +400,11 @@ function load_data_tables(){
 
     //disable the sorting of colomn
     "columnDefs": [ {
-      "targets": 10,
+      "targets": 9,
       "orderable": false
       } ],
 
     "columns": [
-      {
-        "targets": 0,
-        "render": function(data)
-        {
-          if(filter_status === "Inactive (Dead)")
-          {
-            return "Dead Individual"
-          }
-          else
-          {
-            return data+getOrdinal(data)+" Occurrence"
-          }
-          
-        }
-      },
       null,
       null,
       null,
@@ -428,33 +413,32 @@ function load_data_tables(){
       null,
       null,
       {
-        "targets": 8,
+        "targets": 7,
         "render": function(data)
         {
           return data
         }
       },
       {
-        "targets": 9,
+        "targets": 8,
         "render": function(data)
         {
-
           if(data === "(Active)")
           {active_data = data;
 
-            return data
+            return '<div class = "bg-c-yellow text-white rounded-5 d-flex justify-content-center">Active</div>'
             
           }
           else
           {active_data = data;
 
-            return data
+            return '<div class = "bg-dark text-white rounded-5 d-flex justify-content-center">Inactive</div>'
           }
          
         }
       },
       {
-        "targets": 10,
+        "targets": 9,
         "render": function ( data, type, row, meta ) {
 
           if(active_data === "(Active)")
@@ -495,7 +479,7 @@ function load_data_tables(){
             page: 'current'
         },
           //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-          columns: [0,1,2,3,4,5,6,7,8,9],
+          columns: [0,1,2,3,4,5,6,7,8],
           // optional space between columns
           columnGap: 1
         }
@@ -516,7 +500,7 @@ function load_data_tables(){
             page: 'current'
         },
           //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-          columns: [0,1,2,3,4,5,6,7,8,9],
+          columns: [0,1,2,3,4,5,6,7,8],
           // optional space between columns
           columnGap: 1
         }
@@ -537,7 +521,7 @@ function load_data_tables(){
             page: 'current'
         },
           //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-          columns: [0,1,2,3,4,5,6,7,8,9],
+          columns: [0,1,2,3,4,5,6,7,8],
           // optional space between columns
           columnGap: 1
         },
@@ -1067,9 +1051,8 @@ function get_hp_table_cell_value()
     var col6=currentRow.find("td:eq(6)").text().trim($(this).text()); // get current row 1st TD value
     var col7=currentRow.find("td:eq(7)").text().trim($(this).text()); // get current row 1st TD value
     var col8=currentRow.find("td:eq(8)").text().trim($(this).text()); // get current row 1st TD value
-    var col9=currentRow.find("td:eq(9)").text().trim($(this).text()); // get current row 1st TD value
 
-    fullname_txt = col2 + " " + col3+ " " +col4;
+    fullname_txt = col1 + " " + col2+ " " +col3;
 
     var $select = $("#select_options").selectize();
     var selectize = $select[0].selectize;
@@ -1184,10 +1167,10 @@ function get_hp_table_cell_value()
 
     $("#update_hp_select_barangay").text(my_barangay_name);
     $("#update_hp_select_resident").text(fullname_txt);
-    $("#update_hp_select_contact").text(col7); 
-    $("#update_hp_status").text(col9);
-    $("#update_hp_age").text(col6);
-    $("#update_hp_gender").text(col5);
+    $("#update_hp_select_contact").text(col6); 
+    $("#update_hp_status").text(col8);
+    $("#update_hp_age").text(col5);
+    $("#update_hp_gender").text(col4);
   
     var $select = $("#update_hp_select_new_stats").selectize();
     var selectize = $select[0].selectize;
@@ -1195,7 +1178,7 @@ function get_hp_table_cell_value()
 
     var $select = $("#update_hp_Diagnosis").selectize();
     var selectize = $select[0].selectize;
-    selectize.setValue(selectize.search(col1).items[0].id);
+    selectize.setValue(selectize.search(col0).items[0].id);
 
     $("#info_rec").text("Receiving treatment with medication")
     $("#i_i").removeClass("d-none")

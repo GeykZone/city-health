@@ -59,17 +59,17 @@
         </div>
         </div>
 
-        <div class="mb-3" id="c_d">
-        <label for="update_hp_death" id="wwww" class="form-label">Cause of Death</label>
-        <div class="bg-light py-2  rounded-3" id="update_hp_death"  style="padding-left: 10px;"></div>
+        <div class="mb-3" id="d_d">
+        <label for="update_hp_death_date" id="wwww" class="form-label">Date of Death</label>
+        <div class="bg-light py-2 rounded-3" id="update_hp_death_date" style="padding-left: 10px;"></div>
         <div class="invalid-feedback">
         Invalid selection.
         </div>
         </div>
 
-        <div class="mb-3" id="d_d">
-        <label for="update_hp_death_date" id="wwww" class="form-label">Date of Death</label>
-        <div class="bg-light py-2 rounded-3" id="update_hp_death_date" style="padding-left: 10px;"></div>
+        <div class="mb-3" id="c_d">
+        <label for="update_hp_death" id="wwww" class="form-label">Cause of Death</label>
+        <div class="bg-light py-2  rounded-3" id="update_hp_death"  style="padding-left: 10px;"></div>
         <div class="invalid-feedback">
         Invalid selection.
         </div>

@@ -100,7 +100,6 @@ include('includes/sidebar.php');
       <table class="table table-striped table-borderless rounded-3 table-condensed w-100" id="hp_table"> 
       <thead class="table-info  fw-semibold shadow-sm">
           <tr class="align-middle ">
-            <th class="th_occurrence" style="min-width: 110px;">Occurrence</th>
             <th style="min-width: 105px;" class="th_diag">Diagnosis</th>
             <th id="th">First Name</th>
             <th id="th" >Middle Name</th>
@@ -109,7 +108,7 @@ include('includes/sidebar.php');
             <th >Gender</th>
             <th >Age</th>
             <th>Contact</th>
-            <th class="th_date" style="min-width: 137px;">Date of Diagnosis</th>
+            <th class="th_date" style="min-width: 137px; font-size:15px;">Date of Diagnosis</th>
             <th >Status</th>
             <th class="text-end px-4">Settings</th>
           </tr>
@@ -120,14 +119,13 @@ include('includes/sidebar.php');
 
         <tfoot class=" table-secondary fw-semibold shadow-sm" id="th_1">
           <tr class="align-middle" >
-            <td id="Occurrence"style="min-width: 100px;" ></td>
             <td id="Diagnosis" style="min-width: 110px; font-size:8px;"></td>
             <td id="First Name" style="min-width: 100px;"></td>
             <td id="Middle Name" style="min-width: 125px;"></td>
             <td id="Last Name" style="min-width: 100px;"></td>
             <td id="Barangay" style="min-width: 130px;"></td>
             <td id="Gender" style="min-width: 73px;"></td>
-            <td id="Age"  style="min-width: 55px;"></td>
+            <td id="Age"  style="min-width: 54px;"></td>
             <td id="Contact" style="min-width: 100px;"></td>
             <td id="Date of Diagnosis" style="min-width: 137px;"></td>
             <td id="status" style="min-width: 70px;"></td>
