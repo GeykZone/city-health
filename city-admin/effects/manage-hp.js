@@ -123,32 +123,37 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
-var selectize_diseases_data = selectize_diseases;
-var items = selectize_diseases_data.map(function(x) 
-{ 
-    //remove the first words
-    var one = x.substr(x.indexOf(" ") + 1);
-
-    //remove last word
-    function removeLastWord(str) 
-    {
-      const lastIndexOfSpace = str.lastIndexOf(' ');
-    
-      if (lastIndexOfSpace === -1) {
-        return str;
-      }
-      return str.substring(0, lastIndexOfSpace);
-    }
-
-    var text_label = removeLastWord(x)
-    text_label = text_label.split('_').join(' ') 
-
-    return {
-      item: one,
-      field: text_label
-    };
+if(selectize_diseases != undefined)
+{
+  var selectize_diseases_data = selectize_diseases;
+  var items = selectize_diseases_data.map(function(x) 
+  { 
+      //remove the first words
+      var one = x.substr(x.indexOf(" ") + 1);
   
-});
+      //remove last word
+      function removeLastWord(str) 
+      {
+        const lastIndexOfSpace = str.lastIndexOf(' ');
+      
+        if (lastIndexOfSpace === -1) {
+          return str;
+        }
+        return str.substring(0, lastIndexOfSpace);
+      }
+  
+      var text_label = removeLastWord(x)
+      text_label = text_label.split('_').join(' ') 
+  
+      return {
+        item: one,
+        field: text_label
+      };
+    
+  });
+}
+
+
 
 $('#add_hp_select_diseases').selectize
 ({
@@ -184,32 +189,36 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
-var selectize_diseases_data = selectize_diseases;
-var items = selectize_diseases_data.map(function(x) 
-{ 
-    //remove the first words
-    var one = x.substr(x.indexOf(" ") + 1);
-
-    //remove last word
-    function removeLastWord(str) 
-    {
-      const lastIndexOfSpace = str.lastIndexOf(' ');
-    
-      if (lastIndexOfSpace === -1) {
-        return str;
-      }
-      return str.substring(0, lastIndexOfSpace);
-    }
-
-    var text_label = removeLastWord(x)
-    text_label = text_label.split('_').join(' ') 
-
-    return {
-      item: one,
-      field: text_label
-    };
+if(selectize_diseases != undefined)
+{
+  var selectize_diseases_data = selectize_diseases;
+  var items = selectize_diseases_data.map(function(x) 
+  { 
+      //remove the first words
+      var one = x.substr(x.indexOf(" ") + 1);
   
-});
+      //remove last word
+      function removeLastWord(str) 
+      {
+        const lastIndexOfSpace = str.lastIndexOf(' ');
+      
+        if (lastIndexOfSpace === -1) {
+          return str;
+        }
+        return str.substring(0, lastIndexOfSpace);
+      }
+  
+      var text_label = removeLastWord(x)
+      text_label = text_label.split('_').join(' ') 
+  
+      return {
+        item: one,
+        field: text_label
+      };
+    
+  });
+}
+
 
 $('#update_hp_select_cause_of_death').selectize
 ({
@@ -245,9 +254,10 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
-console.log(selectize_diseases)
+if(selectize_diseases != undefined)
+{
 
-var selectize_diseases_data = selectize_diseases;
+  var selectize_diseases_data = selectize_diseases;
 var items = selectize_diseases_data.map(function(x) 
 { 
     //remove the first words
@@ -273,6 +283,10 @@ var items = selectize_diseases_data.map(function(x)
     };
   
 });
+
+}
+
+
 
 $('#select_other_causes').selectize
 ({
@@ -305,34 +319,39 @@ function (data, textStatus, jqXHR)
     selectize_residents = data;
 });
 
-var selectize_residents_data = selectize_residents;
-var items = selectize_residents_data.map(function(x) 
-{ 
-    //remove the first words
-    var one = x.substr(x.indexOf(" ") + 1);
-    var two = one.substr(one.indexOf(" ") + 1);
-    var three = two.substr(two.indexOf(" ") + 1);
-    //remove last word
+if(selectize_residents != undefined)
+{
 
-    function removeLastWord(str) 
-    {
-      const lastIndexOfSpace = str.lastIndexOf(' ');
-    
-      if (lastIndexOfSpace === -1) {
-        return str;
+  var selectize_residents_data = selectize_residents;
+  var items = selectize_residents_data.map(function(x) 
+  { 
+      //remove the first words
+      var one = x.substr(x.indexOf(" ") + 1);
+      var two = one.substr(one.indexOf(" ") + 1);
+      var three = two.substr(two.indexOf(" ") + 1);
+      //remove last word
+
+      function removeLastWord(str) 
+      {
+        const lastIndexOfSpace = str.lastIndexOf(' ');
+      
+        if (lastIndexOfSpace === -1) {
+          return str;
+        }
+        return str.substring(0, lastIndexOfSpace);
       }
-      return str.substring(0, lastIndexOfSpace);
-    }
 
-    var text_label = removeLastWord(x)
-    text_label = text_label.split('_').join(' ') 
+      var text_label = removeLastWord(x)
+      text_label = text_label.split('_').join(' ') 
 
-    return {
-     item: three,
-     field: text_label
-    };
-  
-});
+      return {
+      item: three,
+      field: text_label
+      };
+    
+  });
+
+}
 
 $('#add_hp_select_resident').selectize
 ({

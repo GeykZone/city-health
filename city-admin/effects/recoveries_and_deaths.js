@@ -80,7 +80,10 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
-var selectize_diseases_data = selectize_diseases;
+if (selectize_diseases != undefined)
+{
+
+  var selectize_diseases_data = selectize_diseases;
 var items = selectize_diseases_data.map(function(x) 
 { 
     //remove the first words
@@ -106,6 +109,10 @@ var items = selectize_diseases_data.map(function(x)
     };
   
 });
+
+}
+
+
 
 $('#disease_select_diseases').selectize
 ({
@@ -133,7 +140,10 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
-var selectize_diseases_data = selectize_diseases;
+if( selectize_diseases != undefined)
+{
+
+  var selectize_diseases_data = selectize_diseases;
 var items = selectize_diseases_data.map(function(x) 
 { 
     //remove the first words
@@ -159,6 +169,10 @@ var items = selectize_diseases_data.map(function(x)
     };
   
 });
+
+}
+
+
 
 $('#select_cause_of_death').selectize
 ({
@@ -187,9 +201,10 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
-console.log(selectize_diseases)
+if (selectize_diseases != undefined)
+{
 
-var selectize_diseases_data = selectize_diseases;
+  var selectize_diseases_data = selectize_diseases;
 var items = selectize_diseases_data.map(function(x) 
 { 
     //remove the first words
@@ -217,6 +232,8 @@ var items = selectize_diseases_data.map(function(x)
     };
   
 });
+
+}
 
 $('#select_other_causes').selectize
 ({

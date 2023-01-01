@@ -70,6 +70,8 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
+if(selectize_diseases != undefined)
+{
 var selectize_diseases_data = selectize_diseases;
 var items = selectize_diseases_data.map(function(x) 
 { 
@@ -96,6 +98,9 @@ var items = selectize_diseases_data.map(function(x)
     };
   
 });
+
+}
+
 
 $('#select_diseases').selectize
 ({

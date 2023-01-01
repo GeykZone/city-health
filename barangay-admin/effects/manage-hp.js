@@ -97,7 +97,6 @@ alert_message();
 });
 //set do some stuff when confiramtion variable is changed end
 
-
 //date picker
 function date_range()
 {
@@ -137,7 +136,10 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
-var selectize_diseases_data = selectize_diseases;
+if(selectize_diseases != undefined)
+{
+
+  var selectize_diseases_data = selectize_diseases;
 var items = selectize_diseases_data.map(function(x) 
 { 
     //remove the first words
@@ -163,6 +165,8 @@ var items = selectize_diseases_data.map(function(x)
     };
   
 });
+
+}
 
 $('#add_hp_select_diseases').selectize
 ({
@@ -198,7 +202,10 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
-var selectize_diseases_data = selectize_diseases;
+if( selectize_diseases != undefined)
+{
+
+  var selectize_diseases_data = selectize_diseases;
 var items = selectize_diseases_data.map(function(x) 
 { 
     //remove the first words
@@ -224,6 +231,8 @@ var items = selectize_diseases_data.map(function(x)
     };
   
 });
+
+}
 
 $('#update_hp_select_cause_of_death').selectize
 ({
@@ -259,9 +268,10 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
-console.log(selectize_diseases)
+if( selectize_diseases !=  undefined)
+{
 
-var selectize_diseases_data = selectize_diseases;
+  var selectize_diseases_data = selectize_diseases;
 var items = selectize_diseases_data.map(function(x) 
 { 
     //remove the first words
@@ -287,6 +297,8 @@ var items = selectize_diseases_data.map(function(x)
     };
   
 });
+  
+}
 
 $('#select_other_causes').selectize
 ({
@@ -316,7 +328,10 @@ function (data, textStatus, jqXHR)
     selectize_residents = data;
 });
 
-var selectize_residents_data = selectize_residents;
+if (selectize_residents != undefined)
+{
+
+  var selectize_residents_data = selectize_residents;
 var items = selectize_residents_data.map(function(x) 
 { 
     //remove the first words
@@ -344,6 +359,9 @@ var items = selectize_residents_data.map(function(x)
     };
   
 });
+
+
+}
 
 $('#add_hp_select_resident').selectize
 ({
@@ -1226,7 +1244,6 @@ function get_hp_table_cell_value()
     });
 }
 //get cell value when selected end
-
 
 //filter date range
 $("#date_range_btn").click(function()
