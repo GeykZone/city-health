@@ -33,29 +33,13 @@ include('includes/sidebar.php');
 <?php include "update/update-hp.php" ?>
 <!-- update hp end -->
 
-<!-- active hp -->
-<?php include "update/active-hp.php" ?>
-<!-- active hp end -->
-
 <!-- delete hp -->
 <?php include "delete/delete-hp.php" ?>
 <!-- delete hp end -->
 
-<!-- occurence hp -->
-<?php include "add/add-hp-occurrence.php" ?>
-<!-- occurence hp end -->
-
-<!-- detail hp -->
-<?php include "display/detail-resident-hp.php" ?>
-<!-- detail hp end -->
-
 <!-- filter hp -->
 <?php include "update/filter-table.php" ?>
 <!-- filter hp end -->
-
-<!-- update occurence hp -->
-<?php include "update/update-hp-occurrence.php" ?>
-<!-- update occurence hp end -->
 
 <div class="body flex-grow-1 px-5 pt-3 pb-3"> 
 <div class="container-fluid">
@@ -107,7 +91,7 @@ include('includes/sidebar.php');
             <th >Age</th>
             <th>Contact</th>
             <th class="th_date" style="min-width: 137px;">Date of Diagnosis</th>
-            <th >Status</th>
+            <th >PhilHealth</th>
             <th class="text-end px-4">Settings</th>
           </tr>
         </thead>
@@ -117,7 +101,7 @@ include('includes/sidebar.php');
 
         <tfoot class=" table-secondary fw-semibold shadow-sm" id="th_1">
           <tr class="align-middle" >
-            <td id="Diagnosis" style="min-width: 110px; font-size:8px;"></td>
+            <td id="Diagnosis" style="min-width: 160px; font-size:8px;"></td>
             <td id="First Name" style="min-width: 100px;"></td>
             <td id="Middle Name" style="min-width: 125px;"></td>
             <td id="Last Name" style="min-width: 100px;"></td>
@@ -125,7 +109,7 @@ include('includes/sidebar.php');
             <td id="Age"  style="min-width: 55px;"></td>
             <td id="Contact" style="min-width: 100px;"></td>
             <td id="Date of Diagnosis" style="min-width: 137px;"></td>
-            <td id="status" style="min-width: 70px;"></td>
+            <td id="PhilHealth" style="min-width: 70px;"></td>
             <td id="settings" style="min-width:91px;"></td>
           </tr>
         </tfoot>

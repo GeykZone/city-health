@@ -393,16 +393,16 @@ yValues = y_value;
 //generate a color base on percentage
 $.each(yValues, function( index,value ) {
 
-  if(parseInt(value) <= 1){
+  if(parseInt(value) <= 10){
       myColors[index]="#b3e6ffff";
       myPoints[index]=  5;
   }
-  else if(parseInt(value) <= 2)
+  else if(parseInt(value) <= 40)
   {
     myColors[index]="#80d5ffff";
     myPoints[index]=  10 ;
   }
-  else if(parseInt(value) <= 4)
+  else if(parseInt(value) <= 70)
   {
     myColors[index]="#4dc4ffff";
     myPoints[index]= 15;

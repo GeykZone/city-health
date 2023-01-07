@@ -32,12 +32,17 @@ if(isset($_GET['total_hp']))
 
 if(isset($_GET['top_3_diseases']))
 {
-    $sql = "SELECT `hp`.`disease_id`,`d`.`disease_name`, COUNT(*) AS number_of_diseases FROM `health_profiles` AS `hp` 
-    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
-    LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
-    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-    WHERE `barangay_id` = '$barangay_id' AND date BETWEEN '$top_from' AND '$top_to' 
-    GROUP BY `hp`.`disease_id` ORDER BY number_of_diseases DESC LIMIT 3";
+    $sql = "SELECT t.c AS number_of_diseases, GROUP_CONCAT(t.disease_name SEPARATOR ', ') AS disease_name
+    FROM (SELECT `hp`.`disease_id`, `d`.`disease_name`, COUNT(*) AS c
+          FROM `health_profiles` AS `hp` 
+          LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
+          LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
+          LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
+          WHERE `barangay_id` = '$barangay_id' AND date BETWEEN '$top_from' AND '$top_to' 
+          GROUP BY `hp`.`disease_id`) t
+    GROUP BY t.c
+    ORDER BY t.c DESC
+    limit 3";
 
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {

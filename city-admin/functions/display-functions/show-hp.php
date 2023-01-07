@@ -15,10 +15,9 @@ $table = 'health_profiles';
  
 // Table's primary key 
 $primaryKey = 'hp_id'; 
-
 $query_btn = $_GET['query_btn'];
-$date_range_from = $_GET['date_range_from'];
-$date_range_to = $_GET['date_range_to'];
+
+
  
 // Array of database columns which should be read and sent back to DataTables. 
 // The `db` parameter represents the column name in the database.  
@@ -34,7 +33,7 @@ $columns = array(
     array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
     array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
     array( 'db' => "DATE_FORMAT(date,'%M %d, %Y')",    'dt' => 8, 'field' => "DATE_FORMAT(date,'%M %d, %Y')"),
-    array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
+    array( 'db' => 'phil_health_number',    'dt' => 9, 'field' => 'phil_health_number'),
     array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
 ); 
  
@@ -43,122 +42,16 @@ require '../ssp.class.php';
 
 if($query_btn === "clicked")
 {
-    $filter_status = $_GET['filter_status'];
+    $gender = $_GET['gender'];
     $min_age = $_GET['min_age'];
     $max_age = $_GET['max_age'];
-    $cause_of_death = $_GET['cause_of_death'];
-    $other_cause = $_GET['other_cause'];
+    $date_range_from = $_GET['date_range_from'];
+    $date_range_to = $_GET['date_range_to'];
+ 
 
     $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
     ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
     $where = "";
-
-    if($filter_status === "Inactive (Recovered)")
-    {
-        $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
-        ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
-        $where = "";
-
-        $columns = array(
-            array( 'db' => 'disease_name',    'dt' => 0, 'field' => 'disease_name'),
-            array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
-            array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
-            array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
-            array( 'db' => 'barangay_name',    'dt' => 4, 'field' => 'barangay_name'),
-            array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-            array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-            array( 'db' => 'contact',    'dt' => 7,'field' => 'contact'),
-            array( 'db' => "DATE_FORMAT(date_of_recovery,'%M %d, %Y')",    'dt' => 8, 'field' => "DATE_FORMAT(date_of_recovery,'%M %d, %Y')"),
-            array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-            array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
-        ); 
-    }
-    else  if($filter_status === "Inactive (Dead)")
-    {
-        if($cause_of_death != "")
-        {
-            if($cause_of_death != "Other")
-            {
-                $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
-                ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)  LEFT JOIN `diseases` AS `c_o_d` ON (`hp`.`cause_of_death` = `c_o_d`.`id`)";
-                $where = "";
-        
-                $columns = array(
-                    array( 'db' => 'COALESCE(c_o_d.disease_name)',    'dt' => 0, 'field' => 'COALESCE(c_o_d.disease_name)'),
-                    array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
-                    array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
-                    array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
-                    array( 'db' => 'barangay_name',    'dt' => 4, 'field' => 'barangay_name'),
-                    array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-                    array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-                    array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
-                    array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 8, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
-                    array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-                    array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
-                );
-            }
-            else
-            {
-                $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
-                ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
-                $where = "";
-        
-                $columns = array(
-                    array( 'db' => 'other_cause_of_death',    'dt' => 0, 'field' => 'other_cause_of_death'),
-                    array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
-                    array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
-                    array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
-                    array( 'db' => 'barangay_name',    'dt' => 4, 'field' => 'barangay_name'),
-                    array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-                    array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-                    array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
-                    array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 8, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
-                    array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-                    array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
-                );
-            }    
-        }
-        else
-        {
-            $joinQuery = ", hp.resident_id, COUNT(*) FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
-            ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) LEFT JOIN `diseases` AS `c_o_d` ON (`hp`.`cause_of_death` = `c_o_d`.`id`)";
-            $where = "";
-    
-            $columns = array(
-                array( 'db' => "COALESCE(c_o_d.disease_name, other_cause_of_death)",    'dt' => 0, 'field' => "COALESCE(c_o_d.disease_name, other_cause_of_death)"),
-                array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
-                array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
-                array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
-                array( 'db' => 'barangay_name',    'dt' => 4, 'field' => 'barangay_name'),
-                array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-                array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-                array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
-                array( 'db' => "DATE_FORMAT(date_of_death,'%M %d, %Y')",    'dt' => 8, 'field' => "DATE_FORMAT(date_of_death,'%M %d, %Y')"),
-                array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-                array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
-            );
-        }
-    }
-    else  if($filter_status === "Inactive (All)")
-    {
-        $joinQuery = "FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
-        ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
-        $where = "";
-
-        $columns = array(
-            array( 'db' => 'disease_name',    'dt' => 0, 'field' => 'disease_name'),
-            array( 'db' => 'first_name',    'dt' => 1, 'field' => 'first_name'),
-            array( 'db' => 'middle_name',    'dt' => 2, 'field' => 'middle_name'),
-            array( 'db' => 'last_name',    'dt' => 3, 'field' => 'last_name'),
-            array( 'db' => 'barangay_name',    'dt' => 4, 'field' => 'barangay_name'),
-            array( 'db' => 'gender',    'dt' => 5, 'field' => 'gender'),
-            array( 'db' => 'age',    'dt' => 6, 'field' => 'age'),
-            array( 'db' => 'contact',    'dt' => 7, 'field' => 'contact'),
-            array( 'db' => "COALESCE(DATE_FORMAT(date_of_recovery,'%M %d, %Y'), DATE_FORMAT(date_of_death,'%M %d, %Y'))",    'dt' => 8, 'field' => "COALESCE(DATE_FORMAT(date_of_recovery,'%M %d, %Y'), DATE_FORMAT(date_of_death,'%M %d, %Y'))"),
-            array( 'db' => 'case_status',    'dt' => 9, 'field' => 'case_status'),
-            array( 'db' => 'hp_id',    'dt' => 10, 'field' => 'hp_id'),
-        );
-    }
 
     $conditions = array();
 
@@ -172,106 +65,24 @@ if($query_btn === "clicked")
         $conditions[] = "`age` <= '$max_age'";
     }
 
-    if($filter_status === "Inactive (Recovered)")
+    if($gender != "")
     {
-        $conditions[] = "`recovery` IS NOT NULL";
-
-        if($date_range_from != "")
-        {
-            $conditions[] = "`date_of_recovery` >= '$date_range_from'";
-        }
-        if($date_range_to != "")
-        {
-            $conditions[] = "`date_of_recovery` <= '$date_range_to'";
-        }
+        $conditions[] = "`gender` = '$gender'";
     }
-    else  if($filter_status === "Inactive (Dead)")
+
+    if($date_range_from != "")
     {
-        $conditions[] = "(`cause_of_death` IS NOT NULL OR `other_cause_of_death` IS NOT NULL)";
-
-        if($cause_of_death != "")
-        {
-            if($cause_of_death != "Other")
-            {
-                $conditions[] = "`cause_of_death` = '$cause_of_death'";
-            }
-            else
-            {
-                if($other_cause != "")
-                {
-                    $conditions[] = "`other_cause_of_death` = '$other_cause'";
-                }
-                else
-                {
-                    $conditions[] = "`other_cause_of_death` IS NOT NULL";
-                }
-            }    
-        }
-
-        if($date_range_from != "")
-        {
-            $conditions[] = "`date_of_death` >= '$date_range_from'";
-        }
-
-        if($date_range_to != "")
-        {
-            $conditions[] = "`date_of_death` <= '$date_range_to'";
-        }
-
+        $conditions[] = "`date` >= '$date_range_from'";
     }
-    else  if($filter_status === "Inactive (All)")
+
+    if($date_range_to != "")
     {
-        $conditions[] = "`case_status` = '(Inactive)'";
-
-        if($date_range_from != "")
-        {
-            $conditions[] = "(`date_of_recovery` >= '$date_range_from' OR `date_of_death` >= '$date_range_from')";
-        }
-
-        if($date_range_to != "")
-        {
-            $conditions[] = "(`date_of_recovery` <= '$date_range_to' OR `date_of_death` <= '$date_range_to')";
-        }
-    }
-    else  if($filter_status === "Active")
-    {
-        $conditions[] = "`case_status` = '(Active)'";
-
-        if($date_range_from != "")
-        {
-            $conditions[] = "`date` >= '$date_range_from'";
-        }
-
-        if($date_range_to != "")
-        {
-            $conditions[] = "`date` <= '$date_range_to'";
-        }
-    }
-    else
-    {
-        $conditions[] = "`case_status` IS NOT NULL";
-
-        if($date_range_from != "")
-        {
-            $conditions[] = "`date` >= '$date_range_from'";
-        }
-
-        if($date_range_to != "")
-        {
-            $conditions[] = "`date` <= '$date_range_to'";
-        }
+        $conditions[] = "`date` <= '$date_range_to'";
     }
 
 
     if (count($conditions) > 0) {
-        if($filter_status ==  "Inactive (Dead)")
-        {
-            $where = implode(' AND ', $conditions)." GROUP BY hp.resident_id";
-        }
-        else
-        {
-            $where = implode(' AND ', $conditions);
-        }
+        $where = implode(' AND ', $conditions);
     }
   
 }

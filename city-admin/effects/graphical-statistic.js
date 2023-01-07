@@ -448,14 +448,14 @@ function chart_array()
   //generate a color base on percentage
   $.each(yValues, function( index,value ) {
 
-    if(parseInt(value) <= 1){
+    if(parseInt(value) <= 10){
        myColors[index]="#b3e6ffff";
     }
-    else if(parseInt(value) <= 2)
+    else if(parseInt(value) <= 40)
     {
       myColors[index]="#80d5ffff";
     }
-    else if(parseInt(value) <= 4)
+    else if(parseInt(value) <= 70)
     {
       myColors[index]="#4dc4ffff";
     }

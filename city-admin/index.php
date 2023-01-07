@@ -52,8 +52,8 @@ min-height: 524px;
 .green {
   background-image: url('../resourcess/images/green.png');
   background-size: cover;
-  width: 30px;
-  height: 30px;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -61,8 +61,8 @@ min-height: 524px;
 .yellow {
   background-image: url('../resourcess/images/yellow.png');
   background-size: cover;
-  width: 30px;
-  height: 30px;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -70,8 +70,8 @@ min-height: 524px;
 .orange {
   background-image: url('../resourcess/images/orange.png');
   background-size: cover;
-  width: 30px;
-  height: 30px;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
   cursor: pointer;
   
@@ -80,8 +80,8 @@ min-height: 524px;
 .red {
   background-image: url('../resourcess/images/red.png');
   background-size: cover;
-  width: 30px;
-  height: 30px;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -234,18 +234,18 @@ min-height: 524px;
 <!--Second-->
 <div class="row">
 
-  <div class="col-lg-6 col-sm-12">
+  <div class="col-lg-6 card-group   col-sm-12">
   <div class="card border-0 rounded-3 shadow-sm mb-4">
   <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 diseases that has the most infected individuals</h6></div>
   <div class="card-body">
   <div class="container-fluid table-responsive">
   <div class="row">
 
-  <div class="table-responsive">
+  <div class="table-responsive ">
   <table class="table table-condensed">
     <thead>
       <tr>
-        <th style="width:130px;">
+        <th style="min-width:160px;">
           Disease Name
         </th>
         <th>
@@ -267,14 +267,14 @@ min-height: 524px;
   </div>
   </div>
 
-  <div class="col-lg-6 col-sm-12">
+  <div class="col-lg-6 card-group col-sm-12">
   <div class="card border-0 rounded-3 shadow-sm mb-4">
   <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 barangays with the highest number of health cases</h6></div>
   <div class="card-body">
   <div class="container-fluid table-responsive">
   <div class="row">
 
-  <div class="table-responsive">
+  <div class="table-responsive ">
   <table class="table table-condensed">
     <thead>
       <tr>

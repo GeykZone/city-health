@@ -46,8 +46,8 @@ margin-right: 20px !important;
 .green {
   background-image: url('../resourcess/images/green.png');
   background-size: cover;
-  width: 50px;
-  height: 50px;
+  width: 2.6em;
+  height: 2.6em;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -55,8 +55,8 @@ margin-right: 20px !important;
 .yellow {
   background-image: url('../resourcess/images/yellow.png');
   background-size: cover;
-  width: 50px;
-  height: 50px;
+  width: 2.6em;
+  height: 2.6em;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -64,8 +64,8 @@ margin-right: 20px !important;
 .orange {
   background-image: url('../resourcess/images/orange.png');
   background-size: cover;
-  width: 50px;
-  height: 50px;
+  width: 2.6em;
+  height: 2.6em;
   border-radius: 50%;
   cursor: pointer;
   
@@ -74,8 +74,8 @@ margin-right: 20px !important;
 .red {
   background-image: url('../resourcess/images/red.png');
   background-size: cover;
-  width: 50px;
-  height: 50px;
+  width: 2.6em;
+  height: 2.6em;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -103,7 +103,7 @@ margin-right: 15px;
 font-family: Arial, sans-serif;
 overflow: auto;
 border-radius: 3px;
-width: 305px !important;
+width: 340px !important;
 height: 180px !important;
 margin-bottom: 15px !important;
 padding-left: 20px !important;
@@ -233,7 +233,7 @@ margin-top: 8px;
 
 @media (min-width: 992px) {
 .map-overlay {
-  width: 305px !important;
+  width: 340px !important;
   height: 190px !important;
   font-size: 15px !important;
 }

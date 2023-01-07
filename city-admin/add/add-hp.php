@@ -47,6 +47,14 @@
         </div>
 
         <div class="mb-3">
+        <label for="date_of_diagnosis" class="form-label">Date of Diagnosis*</label>
+        <input type="date" class=" form-control barangay-form text-sm-start" id="date_of_diagnosis" name="date_of_diagnosis" placeholder="Date of Diagnosis">
+        <div class="invalid-feedback">
+        Invalid date.
+        </div>
+        </div>
+
+        <div class="mb-3">
           <label for="philhealth" class="form-label">PhilHealth Id</label>
           <input type="number" name="philhealth" class="  form-control barangay-form" id="philhealth"
           onkeypress='return event.charCode>=48 && event.charCode<=57' ondrop="return false;" onpaste="return false;"

@@ -35,7 +35,6 @@ include('includes/sidebar.php');
 <div class="body flex-grow-1 px-5 pt-3  pb-3"> 
 <div class="container-fluid">
 
-
 <!--chart-->
 <div class="row chart_container mb-3" style="display: block;">
 <div class="col-md-12">

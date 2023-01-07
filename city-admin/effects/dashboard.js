@@ -121,8 +121,8 @@ function display_map()
     container: 'map', // container ID
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/light-v10', // style URL
-    center: [123.767099, 8.467180], // starting position [lng, lat]
-    zoom: 11,  // starting zoom
+    center: [123.749176, 8.467180], // starting position [lng, lat]
+    zoom: 11.8,  // starting zoom
     pitch: 0,
     bearing: -17.6,
     container: 'map',
@@ -229,22 +229,22 @@ function display_map()
          
              // create a HTML element for each feature
              const el = document.createElement('div');
-             if(parseInt(feature.description) <= 1)
+             if(parseInt(feature.description) <= 10)
              {
                  el.className = 'green';
                  clusterCategory = "Low"
                  el.id = i
              }
-             else if(parseInt(feature.description) <= 2)
+             else if(parseInt(feature.description) <= 40)
              {
                  el.className = 'yellow';
                  clusterCategory = "Moderate"
                  el.id = i
              }
-             else if(parseInt(feature.description) <= 3)
+             else if(parseInt(feature.description) <= 70)
              {
                  el.className = 'orange';
-                 clusterCategory = "High"
+                 clusterCategory = "Severe"
                  el.id = i
              }
              else
@@ -269,16 +269,16 @@ function display_map()
             var cont = locations.features[divId]
             var mark;
 
-            if(parseInt(cont.description) <= 1)
+            if(parseInt(cont.description) <= 10)
             {
                 mark= 'green';
             }
-            else if(parseInt(cont.description) <= 2)
+            else if(parseInt(cont.description) <= 40)
             {
                 mark = 'yellow';
 
             }
-            else if(parseInt(cont.description) <= 3)
+            else if(parseInt(cont.description) <= 70)
             {
                 mark = 'orange';
 
@@ -627,6 +627,8 @@ function top_3_diseases_function()
       'features': newObjectArr
       };
 
+
+
   // initialization to display markers
   for (var i = 0; i < top_3_disease_object.features.length; i++ ) 
   { 
@@ -636,6 +638,15 @@ function top_3_diseases_function()
     var progress_color;
 
     top_3_disease_name_title = top_3_diseases_results.disease_name;
+
+    var disease_array = top_3_disease_name_title.split(', ');
+    
+    // stored in a variable called "disease_array"
+    var disease_string = disease_array.join(', ');
+
+    // To add "and" between the last two elements in the array
+    disease_string = disease_string.replace(/,([^,]*)$/, ', and$1');
+
     top_3_total_disease_title = parseInt(percentage);
 
     if(i === 0)
@@ -656,7 +667,7 @@ function top_3_diseases_function()
     var current_year_tooltip = $("#top_3_disease_progress"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("Approximately, from "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+", "+parseInt(top_3_total_disease_title).toLocaleString('en-US')+"% of health cases in Oroquieta City were caused by "+top_3_disease_name_title+""); // Updates Opentips content
+    myOpentip.setContent("Approximately, from "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+", "+parseInt(top_3_total_disease_title).toLocaleString('en-US')+"% of health cases in Oroquieta City were caused by "+disease_string+""); // Updates Opentips content
   }
 
 
@@ -733,6 +744,15 @@ function top_3_barangays_functions()
     var percentage = (top_3_barangays_results.total_barangays / total_hp_count) * 100;
     var progress_color;
     top_3_barangay_name_title = top_3_barangays_results.barangay_name;
+
+    var brgy_array = top_3_barangay_name_title.split(', ');
+    
+    // stored in a variable called "brgy_array"
+    var brgy_string = brgy_array.join(', ');
+
+    // To add "and" between the last two elements in the array
+    brgy_string = brgy_string.replace(/,([^,]*)$/, ', and$1');
+
     top_3_total_barangay_title = parseInt(percentage);
 
 
@@ -754,7 +774,7 @@ function top_3_barangays_functions()
     var current_year_tooltip = $("#top_3_barangay_progress"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("Approximately, from "+top_3_barangays_date_start+" to "+top_3_barangays_date_end+", "+parseInt(top_3_total_barangay_title).toLocaleString('en-US')+"% of reported health cases in Oroquieta City were located in Barangay "+top_3_barangay_name_title+""); // Updates Opentips content
+    myOpentip.setContent("Approximately, from "+top_3_barangays_date_start+" to "+top_3_barangays_date_end+", "+parseInt(top_3_total_barangay_title).toLocaleString('en-US')+"% of reported health cases in Oroquieta City were located in Barangay "+brgy_string+""); // Updates Opentips content
   }
 }
 //top 3 barangays end

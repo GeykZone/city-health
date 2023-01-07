@@ -141,6 +141,15 @@ function top_3_diseases_function()
     var progress_color;
 
     top_3_disease_name_title = top_3_diseases_results.disease_name;
+
+    var disease_array = top_3_disease_name_title.split(', ');
+    
+    // stored in a variable called "disease_array"
+    var disease_string = disease_array.join(', ');
+
+    // To add "and" between the last two elements in the array
+    disease_string = disease_string.replace(/,([^,]*)$/, ', and$1');
+
     top_3_total_disease_title = parseInt(percentage);
 
     if(i === 0)
@@ -161,7 +170,7 @@ function top_3_diseases_function()
     var current_year_tooltip = $("#top_3_disease_progress"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("Approximately, from "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+", "+parseInt(top_3_total_disease_title).toLocaleString('en-US')+"% of health cases in barangay "+my_barangay_name+" were caused by "+top_3_disease_name_title+""); // Updates Opentips content
+    myOpentip.setContent("Approximately, from "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+", "+parseInt(top_3_total_disease_title).toLocaleString('en-US')+"% of health cases in barangay "+my_barangay_name+" were caused by "+disease_string+""); // Updates Opentips content
   }
 
 
@@ -523,7 +532,7 @@ function monthly_period_hp_total()
   var indicator_tag
   var case_text
 
-  if(total_hp_count <= 1)
+  if(parseInt(total_hp_count) <= 10)
   {
       mark= 'green';
       cluster = 'Low'
@@ -531,7 +540,7 @@ function monthly_period_hp_total()
       indicator = 'bg-c-dark_green'
       indicator_tag = 'Low'
   }
-  else if(total_hp_count <= 2)
+  else if(parseInt(total_hp_count) <= 40)
   {
       mark = 'yellow';
       cluster = 'Moderate'
@@ -540,7 +549,7 @@ function monthly_period_hp_total()
       indicator_tag = 'Moderate'
 
   }
-  else if(total_hp_count <= 3)
+  else if(parseInt(total_hp_count) <= 70)
   {
       mark = 'orange';
       cluster = 'High'
@@ -559,11 +568,11 @@ function monthly_period_hp_total()
 
  
 
-  if(total_hp_count <= 1)
+  if(parseInt(total_hp_count) <= 1)
   {
     case_text = ' Total Health Case'
   }
-  else if (total_hp_count > 1)
+  else if (parseInt(total_hp_count) > 1)
   {
     case_text = ' Total Health Cases'
   }

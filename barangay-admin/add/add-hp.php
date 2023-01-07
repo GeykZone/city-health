@@ -10,7 +10,8 @@
 
         
       <form action="" id="add_hp_form" name="add_hp_form" method="post">
-        <fieldset id="fieldset1">
+
+        <fieldset id="fieldset1" >
 
         <div class="mb-3" id="add_hp_select_resident_list">
         <label for="add_hp_select_resident" class="form-label">Resident Name*</label>
@@ -18,7 +19,7 @@
             <option value="">Select Resident</option>
         </select>
         <div class="invalid-feedback">
-        Invalid selection.
+        Invalid input.
         </div>
         </div>
 
@@ -29,6 +30,14 @@
         </select>
         <div class="invalid-feedback">
         Invalid selection.
+        </div>
+        </div>
+
+        <div class="mb-3">
+        <label for="date_of_diagnosis" class="form-label">Date of Diagnosis*</label>
+        <input type="date" class=" form-control barangay-form text-sm-start" id="date_of_diagnosis" name="date_of_diagnosis" placeholder="Date of Diagnosis">
+        <div class="invalid-feedback">
+        Invalid date.
         </div>
         </div>
 

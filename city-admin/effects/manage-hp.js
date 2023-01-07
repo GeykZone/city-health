@@ -19,11 +19,6 @@ var selectize_residents = "";
 var selectize_barangay_id = "";
 var selectize_barangay_id_enabled = "";
 var selectize_barangay_id_disabled = "";
-var update_selectize_residents = "";
-var update_selectize_barangay_id = "";
-var update_selectize_barangay_id_enabled = "";
-var update_selectize_barangay_id_disabled = "";
-var case_status = "";
 var id_full_naame = "";
 var id_disease = "";
 var philhealth_number = "";
@@ -35,27 +30,19 @@ var dd = String(created_at.getDate()).padStart(2, '0');
 var mm = String(created_at.getMonth() + 1).padStart(2, '0');
 var yyyy = created_at.getFullYear();
 var hp_id_value = "";
-
 var date_range_from = "";
 var date_range_to = "";
 var query_btn = "unclicked";
-
-var active_data = "";
-var active_inactive_variable = "(Active)";
-
 var min_age;
 var max_age;
-var cause_of_death = "";
-var other_cause = "";
-var filter_status;
+var gender;
+
 
 $(document).ready(function()
 {
     $(document).attr("title", "HPCS | Manage Health Profiles");
     select_list()
     select_for_disease()
-    select_for_Health_related_deaths()
-    seletize_other_deaths()
     load_data_tables()
     enable_form()
     get_hp_table_cell_value();
@@ -92,10 +79,18 @@ function date_range()
     dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
     });
 
-
+    
     $("#range_to").datepicker({
         dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
         });
+        
+        $("#update_date_of_diagnosis").datepicker({
+          dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+          });
+
+          $("#date_of_diagnosis").datepicker({
+            dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+            });
 
 }
 //date picker end
@@ -174,131 +169,6 @@ $('#update_hp_Diagnosis').selectize
 $(".selectize-control").removeClass("form-control barangay-form")
 }
 // for select diseases  end
-
-//selecttize health related deaths
-function select_for_Health_related_deaths()
-{
-var selectize_diseases ;
-$.ajaxSetup({async:false});
-$.getJSON('functions/display-functions/select_diseases.php', 
-{
-  deaths: "set"
-}, 
-function (data, textStatus, jqXHR) 
-{
-  selectize_diseases = data;
-});
-
-if(selectize_diseases != undefined)
-{
-  var selectize_diseases_data = selectize_diseases;
-  var items = selectize_diseases_data.map(function(x) 
-  { 
-      //remove the first words
-      var one = x.substr(x.indexOf(" ") + 1);
-  
-      //remove last word
-      function removeLastWord(str) 
-      {
-        const lastIndexOfSpace = str.lastIndexOf(' ');
-      
-        if (lastIndexOfSpace === -1) {
-          return str;
-        }
-        return str.substring(0, lastIndexOfSpace);
-      }
-  
-      var text_label = removeLastWord(x)
-      text_label = text_label.split('_').join(' ') 
-  
-      return {
-        item: one,
-        field: text_label
-      };
-    
-  });
-}
-
-
-$('#update_hp_select_cause_of_death').selectize
-({
-    options: items,
-    labelField: "field",
-    valueField: "item",
-    searchField: "field"
-});
-
-$('#select_cause_of_death').selectize
-({
-    options: items,
-    labelField: "field",
-    valueField: "item",
-    searchField: "field"
-});
-
-$(".selectize-control").removeClass("form-control barangay-form")
-
-}
-//selecttize health related deaths end
-
-//selectize death_cause_by_other_list
-function seletize_other_deaths()
-{
-var selectize_diseases ;
-$.ajaxSetup({async:false});
-$.getJSON('functions/display-functions/select_other_cause_of_death.php', 
-{
-}, 
-function (data, textStatus, jqXHR) 
-{
-  selectize_diseases = data;
-});
-
-if(selectize_diseases != undefined)
-{
-
-  var selectize_diseases_data = selectize_diseases;
-var items = selectize_diseases_data.map(function(x) 
-{ 
-    //remove the first words
-    var one = x.substr(x.indexOf(" ") + 1);
-
-    //remove last word
-    function removeLastWord(str) 
-    {
-      const lastIndexOfSpace = str.lastIndexOf(' ');
-    
-      if (lastIndexOfSpace === -1) {
-        return str;
-      }
-      return str.substring(0, lastIndexOfSpace);
-    }
-
-    var text_label = removeLastWord(x)
-    text_label = text_label.split('_').join(' ') 
-
-    return {
-      item: one,
-      field: text_label
-    };
-  
-});
-
-}
-
-
-
-$('#select_other_causes').selectize
-({
-    options: items,
-    labelField: "field",
-    valueField: "item",
-    searchField: "field"
-});
-
-$(".selectize-control").removeClass("form-control barangay-form")
-}
-//selectize death_cause_by_other_list end
 
 // selectized residents
 function selectized_residents_list()
@@ -383,14 +253,12 @@ function load_data_tables(){
     "ajax": {
         url: ajax_url,
         data: {
+          gender:gender,
           date_range_from:date_range_from,
           date_range_to:date_range_to,
           query_btn:query_btn,
           min_age:min_age,
-          max_age:max_age,
-          filter_status:filter_status,
-          cause_of_death:cause_of_death,
-          other_cause:other_cause
+          max_age:max_age
         },
         "dataSrc": function ( json ) {
           //Make your callback here.
@@ -399,7 +267,7 @@ function load_data_tables(){
       }      
       
     },
-    order: [[9,'asc']],
+    order: [[1,'asc']],
     
     "autoWidth": false,
       scrollCollapse: true,
@@ -423,45 +291,15 @@ function load_data_tables(){
       null,
       null,
       null,
-      {
-        "targets": 9,
-        "render": function(data)
-        {
-
-          if(data === "(Active)")
-          {active_data = data;
-
-            return '<div class = "bg-c-yellow text-white rounded-5 d-flex justify-content-center">Active</div>'
-            
-          }
-          else
-          {active_data = data;
-
-            return '<div class = "bg-dark text-white rounded-5 d-flex justify-content-center">Inactive</div>'
-          }
-         
-        }
-      },
+      null,
       {
         "targets": 10,
         "render": function ( data, type, row, meta ) {
 
-          if(active_data === "(Active)")
-          {
-
-            return  "<div class='text-end px-3'>"+
+          return  "<div class='text-end px-3'>"+
             "<i onclick = 'click_value(this.id)' class='update_hp_value shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit' data-coreui-toggle='modal' href='#update-hp' id='update_hp_value "+data+"' role='button'></i> "+
-            "<i onclick = 'click_value(this.id)' class='update_hp_value shadow-sm align-middle edit_barangay_value update deact_btn fas fa-server' data-coreui-toggle='modal' href='#detail_resident_hp' id='update_hp_value "+data+"' role='button'></i>"+
+            "<i onclick = 'click_value(this.id)' class='delete_resident_value shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can' href='#delete_hp_permanently' data-coreui-toggle='modal' id='delete_hp_value "+data+"' role='button'></i>"+
             "</div>"
-
-          }
-          else
-          {
-            return  "<div class='text-end px-3'> "+
-            "<i onclick = 'click_value(this.id)' class='activate_hp shadow-sm align-middle edit_barangay_value filter_btn fa-solid fa-circle-question' data-coreui-toggle='modal' href='#active_hp' id='update_hp_value "+data+"' role='button'></i> "+
-            "<i onclick = 'click_value(this.id)' class='update_hp_value shadow-sm align-middle edit_barangay_value update deact_btn fas fa-server' data-coreui-toggle='modal' href='#detail_resident_hp' id='update_hp_value "+data+"' role='button'></i>"+
-            "</div>"
-          }
           
         },
         
@@ -551,31 +389,6 @@ function load_data_tables(){
       
         $(this).html('<div class="text-center" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid me-2"></span>Settings</span></div>');
       }
-      else if(title === "status" )
-      {
-      
-        $(this).html('<div class="text-end pe-3"><span style="font-size:15px; color:#9eaaad; font-size:13px;" class=" me-2">Status</div>');
-      }
-      else if (title === "Occurrence" && filter_status === "Inactive (Dead)")
-      {
-        $(this).html('<div class="text-end pe-3"><span style="font-size:15px; color:#9eaaad; font-size:13px;" class=" me-3">Individual Satus</div>');
-      }
-      else if (title === "Diagnosis" && filter_status === "Inactive (Dead)")
-      {
-        $(this).html('<input type="text" class="form-control table_search rounded-1 w-100 shadow-sm py-0"  placeholder="Cause of Death" aria-controls="hp_table">');
-      }
-      else if (title === "Date of Diagnosis" && filter_status === "Inactive (Dead)")
-      {
-        $(this).html('<input type="text" class="form-control table_search rounded-1 w-100 shadow-sm py-0"  placeholder="Date of Death" aria-controls="hp_table">');
-      }
-      else if (title === "Date of Diagnosis" && filter_status === "Inactive (Recovered)")
-      {
-        $(this).html('<input type="text" class="form-control table_search rounded-1 w-100 shadow-sm py-0"  placeholder="Date of Recovery" aria-controls="hp_table">');
-      }
-      else if (title === "Date of Diagnosis" && filter_status === "Inactive (All)")
-      {
-        $(this).html('<input type="text" class="form-control table_search rounded-1 w-100 shadow-sm py-0"  placeholder="Date of Inactivity" aria-controls="hp_table">');
-      }
       else
       {
         $(this).html('<input type="text" class="form-control table_search rounded-1 w-100 shadow-sm py-0"  placeholder="'+title+'" aria-controls="hp_table">');
@@ -617,7 +430,7 @@ function load_data_tables(){
   $(".form-control").addClass("shadow-sm");
   $(".form-select").addClass("shadow-sm");
   };
-  //show data tables end
+ //show data tables end
 
 //get the id of health profile
 function click_value(this_value)
@@ -632,9 +445,7 @@ function alert_message()
 if(confirmation.a == 1)
 {
 
-if($('#add-hp').is(":visible") ){
   $('#add-hp').modal('toggle');
-}
 
 var $select = $('#add_hp_select_barangay').selectize();
 var control = $select[0].selectize;
@@ -647,6 +458,8 @@ control.clear();
  $select = $('#add_hp_select_diseases').selectize();
  control = $select[0].selectize;
 control.clear();
+
+$('#date_of_diagnosis').val('')
 
 $("#philhealth").val("");
 
@@ -672,7 +485,6 @@ if($('#update-hp').is(":visible") ){
   $('#update-hp').modal('toggle');
 }
 
-
 toastMixin.fire({
 animation: true,
 title: 'A health profile has been updated.'
@@ -681,39 +493,6 @@ title: 'A health profile has been updated.'
 table.ajax.reload( null, false);
 }
 else if(confirmation.a == 4)
-{
-
-toastMixin.fire({
-animation: true,
-title: 'A record has been added into list of inactive health profiles.'
-});
-table.ajax.reload( null, false);
-
-}
-else if(confirmation.a == 5)
-{ 
-
-toastMixin.fire({
-animation: true,
-title: 'A record has been added into list of active health profiles.'
-});
-table.ajax.reload( null, false);
-
-}
-else if(confirmation.a == 6)
-{
-  $('#add-hp').modal('toggle'); 
-  $('#occurence').modal('toggle');
-}
-else if(confirmation.a == 7)
-{
-toastMixin.fire({
-animation: true,
-title: 'It is not possible to create a new health profile for a deceased individual.',
-icon: 'error'
-});
-}
-else if(confirmation.a == 8)
 { 
 toastMixin.fire({
 animation: true,
@@ -721,43 +500,7 @@ title: 'A record has been successfully deleted.'
 });
 table.ajax.reload( null, false);
 }
-else if(confirmation.a == 9)
-{
-toastMixin.fire({
-animation: true,
-title: 'You are trying to duplicate a health profile that is still active.',
-icon: 'error'
-});
-}
-else if(confirmation.a == 10)
-{
-toastMixin.fire({
-animation: true,
-title: 'It is not possible to reactivate a health profile whose occurrence number is not the most recent.',
-icon: 'error'
-});
-}
-else if(confirmation.a == 11)
-{
-toastMixin.fire({
-animation: true,
-title: "It is not possible to add a reoccurrence on the same date as the person's recovery date.",
-icon: 'error'
-});
-}
-else if(confirmation.a == 12)
-{
-  $('#update-hp').modal('toggle'); 
-  $('#update_occurence').modal('toggle');
-}
-else if(confirmation.a == 13)
-{
-toastMixin.fire({
-animation: true,
-title: 'It is not possible to delete a health profile whose occurrence number is not the most recent.',
-icon: 'error'
-});
-}
+
 }
 //trigger error messages end
 
@@ -777,6 +520,8 @@ selectized_residents_list();
 $('#fieldset1').removeAttr("disabled");
 $('#add_hp_select_resident')[0].selectize.enable();
 $('#add_hp_select_diseases')[0].selectize.enable();  
+
+$('#date_of_diagnosis').val(yyyy + '-' + mm + '-' + dd)
 }
 else
 {
@@ -805,6 +550,8 @@ $('#add_hp_select_diseases')[0].selectize.disable();
    control = $select[0].selectize;
   control.clear();
 
+  $('#date_of_diagnosis').val('')
+
   $("#philhealth").val("");
   })
 //erese input fields when x button is pressed end
@@ -812,7 +559,7 @@ $('#add_hp_select_diseases')[0].selectize.disable();
 //submit new hp
 $("#add_hp_btn").click(function () {
 
-    created_at = yyyy + '-' + mm + '-' + dd;
+    created_at = $("#date_of_diagnosis").val()
     id_full_naame = $("#add_hp_select_resident").val();
     id_disease = $("#add_hp_select_diseases").val();
     philhealth_number = $("#philhealth").val();
@@ -853,6 +600,10 @@ $("#add_hp_btn").click(function () {
       $("#add_hp_select_diseases").addClass("is-invalid");
       $("#add_hp_select_diseases_list .selectize-control").addClass("is-invalid");
     }
+    else if(created_at.trim().length === 0)
+    {
+      $("#date_of_diagnosis").addClass("is-invalid");
+    }
     else 
     {
         if (philhealth_number.trim().length != 0 && philhealth_number.length === 12)
@@ -875,108 +626,12 @@ $("#add_hp_btn").click(function () {
 });
 //submit new hp end
 
-//occurrence
-$("#accept").click(function()
-{
-
-  $.post("functions/add-functions/add-hp.php", {
-    created_at: created_at,
-    id_full_naame: id_full_naame,
-    id_disease: id_disease,
-    philhealth_number: philhealth_number,
-    occurrence:'set'
-
-  },
-  function (data, status) {
-   
-    confirmation.a = data;
-
-  });
-
-})
-//occurrence end
-
-//update_occurrence
-$("#update_occurence_yes").click(function()
-{
-  created_at = yyyy + '-' + mm + '-' + dd;
-  var new_hp_philhealth = $("#update_philhealth").val();
-  var new_diagnosis = $("#update_hp_Diagnosis").val();
-  var hp_update_id = hp_id_value;
-
-  $.post("functions/update-functions/update-hp.php", {
-    created_at: created_at,
-    hp_update_id: hp_update_id,
-    new_diagnosis: new_diagnosis,
-    new_hp_philhealth: new_hp_philhealth,
-    occurrence:'set'
-  },
-  function (data, status) {
-   
-    confirmation.a = data;
-
-  });
-
-})
-//update_occurrence end
-
-//update hp status
-$("#update_hp_btn_status").click(function () {
-
-  var hp_update_id = hp_id_value;
-  created_at = yyyy + '-' + mm + '-' + dd;
-  var update_validator = true;
-  var update_hp_select_new_stats =  $("#update_hp_select_new_stats").val();
-  var update_hp_select_cause_of_death = $("#update_hp_select_cause_of_death").val();
-  var update_hp_select_other = $("#update_hp_select_other").val();
-
-  function submit_update_hp_lists()
-  {
-      $.post("functions/update-functions/update-hp.php", {
-
-        change_status:'set',
-        hp_update_id: hp_update_id,
-        status:update_hp_select_new_stats,
-        death:update_hp_select_cause_of_death,
-        other_death:update_hp_select_other,
-        created_at:created_at
-        },
-        function (data, status) {
-         confirmation.a = data;
-        });
-  }
-
-  if (update_hp_select_new_stats.trim().length === 0) //check if value is empty
-  {
-    $("#update_hp_select_new_stats").addClass("is-invalid");
-    $("#s_t .selectize-control").addClass("is-invalid");
-    update_validator = false;
-  }
-  else if (update_hp_select_new_stats === "Inactive (Dead)" && update_hp_select_cause_of_death.trim().length === 0) //check if value is empty
-  {
-    $("#update_hp_select_cause_of_death").addClass("is-invalid");
-    $("#co_l .selectize-control").addClass("is-invalid");
-    update_validator = false;
-  }
-  else if (update_hp_select_cause_of_death === "Other" && update_hp_select_other.trim().length === 0) //check if value is empty
-  {
-    $("#update_hp_select_other").addClass("is-invalid");
-    update_validator = false;
-  }
-
-  if(update_validator === true)
-  {
-    submit_update_hp_lists()
-  }
-
-});
-//update hp status end
-
 //update hp details
 $("#update_hp_btn_edit").click(function () {
 
   var new_hp_philhealth = $("#update_philhealth").val();
   var new_diagnosis = $("#update_hp_Diagnosis").val();
+  var new_diagnosis_date = $("#update_date_of_diagnosis").val();
   var hp_update_id = hp_id_value;
   var update_validator = true;
 
@@ -987,6 +642,7 @@ $("#update_hp_btn_edit").click(function () {
         change_details:'set',
         hp_update_id: hp_update_id,
         new_diagnosis:new_diagnosis,
+        new_diagnosis_date:new_diagnosis_date,
         new_hp_philhealth: new_hp_philhealth,
         },
         function (data, status) {
@@ -998,6 +654,11 @@ $("#update_hp_btn_edit").click(function () {
   {
     $("#update_hp_Diagnosis").addClass("is-invalid");
     $("#u_p_d .selectize-control").addClass("is-invalid");
+    update_validator = false;
+  }
+  else if(new_diagnosis_date.trim().length === 0)
+  {
+    $("#update_date_of_diagnosis").addClass("is-invalid");
     update_validator = false;
   }
   else if (new_hp_philhealth.trim().length != 0 && new_hp_philhealth.length === 12)
@@ -1024,19 +685,6 @@ $("#update_hp_btn_edit").click(function () {
 });
 //update hp details end
 
-//active hp
-$("#active_hp_btn").click(function()
-{
-  $.post("functions/update-functions/active-hp.php", {
-    hp_id: hp_id_value,
-  },
-  function (data, status) {
-  confirmation.a = data;
-
-  });
-})
-//active hp end
-
 // delete final
 $("#delete_hp_btn_final").click(function()
 {
@@ -1049,35 +697,6 @@ $("#delete_hp_btn_final").click(function()
     });
 })
 // delete final end
-
-// update delete
-$("#update_hp_btn_delete").click(function()
-{
-  $('#update-hp').modal('toggle'); 
-  $('#delete_hp_permanently').modal('toggle');
-})
-// update delete end
-
-//turn 123 into 1st 2nd 3rd
-function getOrdinal(n) {
-  let ord = 'th';
-
-  if (n % 10 == 1 && n % 100 != 11)
-  {
-    ord = 'st';
-  }
-  else if (n % 10 == 2 && n % 100 != 12)
-  {
-    ord = 'nd';
-  }
-  else if (n % 10 == 3 && n % 100 != 13)
-  {
-    ord = 'rd';
-  }
-
-  return ord;
-}
-//turn 123 into 1st 2nd 3rd end
 
 //get cell value when selected
 function get_hp_table_cell_value()
@@ -1099,186 +718,19 @@ function get_hp_table_cell_value()
     var col9=currentRow.find("td:eq(9)").text().trim($(this).text()); // get current row 1st TD value
 
 
-    fullname_txt = col1 + " " + col2+ " " +col3;
-    disease_txt = col0;
-    select_brgy = col4;
-
-    
-    var $select = $("#select_options").selectize();
-    var selectize = $select[0].selectize;
-    selectize.setValue(selectize.search("Update health profile details").items[0].id);
-
-
-  
-    $.ajaxSetup({async:false});
-    $.getJSON('functions/display-functions/get_hp_dates.php', 
-    {
-      hp_id_value:hp_id_value,
-      recover_date:"set"
-    }, 
-    function (data, textStatus, jqXHR) 
-    {
-      let dateStr = data;
-      let dateObj = new Date(dateStr);
-      let readableDate = dateObj.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'}); 
-      $("#update_hp_recover_date").text(readableDate);
-
-    });
-
-    $.ajaxSetup({async:false});
-    $.getJSON('functions/display-functions/get_hp_dates.php', 
-    {
-      hp_id_value:hp_id_value,
-      death_date:"set"
-    }, 
-    function (data, textStatus, jqXHR) 
-    {
-      let dateStr = data;
-      let dateObj = new Date(dateStr);
-      let readableDate = dateObj.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
-      $("#update_hp_death_date").text(readableDate);
-    });
-
-    
-  
-    $.ajaxSetup({async:false});
-    $.getJSON('functions/display-functions/get_hp_dates.php', 
-    {
-      hp_id_value:hp_id_value,
-      occurrence:"set"
-    }, 
-    function (data, textStatus, jqXHR) 
-    {
-      $("#update_hp_occurrence").text(data+getOrdinal(data)+" Occurrence");
-
-    });
-
-    $.ajaxSetup({async:false});
-    $.getJSON('functions/display-functions/get_hp_dates.php', 
-    {
-      hp_id_value:hp_id_value,
-      recovery:"set"
-    }, 
-    function (data, textStatus, jqXHR) 
-    {
-      $("#update_hp_recovery").text(data);
-    });
-
-
-    $.ajaxSetup({async:false});
-    $.getJSON('functions/display-functions/get_hp_dates.php', 
-    {
-      hp_id_value:hp_id_value,
-      cause_of_death:"set"
-    }, 
-    function (data, textStatus, jqXHR) 
-    {
-      $("#update_hp_death").text(data);
-
-    });
-
-    $.ajaxSetup({async:false});
-    $.getJSON('functions/display-functions/get_hp_dates.php', 
-    {
-      hp_id_value:hp_id_value,
-      philnum:"set"
-    }, 
-    function (data, textStatus, jqXHR) 
-    {
-      $("#philNum").text(data);
-      $("#update_philhealth").val(data); 
-
-    });
-
-    $.ajaxSetup({async:false});
-    $.getJSON('functions/display-functions/get_hp_dates.php', 
-    {
-      hp_id_value:hp_id_value,
-      date_created:"set"
-    }, 
-    function (data, textStatus, jqXHR) 
-    {
-      let dateStr = data;
-      let dateObj = new Date(dateStr);
-      let readableDate = dateObj.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
-      $("#date_created").text(readableDate);
-
-    });
-
-    $.ajaxSetup({async:false});
-    $.getJSON('functions/display-functions/get_hp_dates.php', 
-    {
-      hp_id_value:hp_id_value,
-      diagnosis:"set"
-    }, 
-    function (data, textStatus, jqXHR) 
-    {
-      $("#update_hp_diagnosis").text(data);
-    });
-
-
-    $("#update_hp_select_barangay").text(select_brgy);
-    $("#update_hp_select_resident").text(fullname_txt);
-    $("#update_hp_select_contact").text(col8); 
-    $("#update_hp_status").text(col9);
-    $("#update_hp_age").text(col6);
-    $("#update_hp_gender").text(col5);
-  
-    var $select = $("#update_hp_select_new_stats").selectize();
-    var selectize = $select[0].selectize;
-    selectize.setValue(selectize.search("Active").items[0].id);
+    var update_diagnosis_date = new Date(col8)
+    update_diagnosis_date = update_diagnosis_date.getFullYear()+"-"+String(update_diagnosis_date.getMonth() + 1).padStart(2, '0')+"-"+String(update_diagnosis_date.getDate()).padStart(2, '0');
+    $("#update_date_of_diagnosis").val(update_diagnosis_date);
 
     var $select = $("#update_hp_Diagnosis").selectize();
     var selectize = $select[0].selectize;
     selectize.setValue(selectize.search(col0).items[0].id);
 
-    $("#info_rec").text("Receiving treatment with medication")
-    $("#i_i").removeClass("d-none")
-
-    if($("#update_hp_recover_date").text() != "Invalid Date")
-    {
-        $("#d_r").removeClass("d-none") 
-        $("#r_o").removeClass("d-none") 
-        $("#info_rec").text("")
-        $("#i_i").addClass("d-none")
-    }
-    else
-    {
-      $("#d_r").addClass("d-none") 
-      $("#r_o").addClass("d-none")
-    }
-
-    if($("#update_hp_death_date").text() != "Invalid Date")
-    {
-        $("#d_d").removeClass("d-none")
-        $("#c_d").removeClass("d-none")
-        $("#info_rec").text("This health profile is no longer active because the individual has passed away")
-        $("#i_i").removeClass("d-none")
-    }
-    else
-    {
-      $("#d_d").addClass("d-none")
-      $("#c_d").addClass("d-none")
-    }
-
-    if(filter_status === "Inactive (Dead)")
-    {
-      $("#d_c").addClass("d-none")
-      $("#diag_title").addClass("d-none")
-      $("#i_i").addClass("d-none")
-      $("#occurr").addClass("d-none")
-    }
-    else
-    {
-      $("#d_c").removeClass("d-none")
-      $("#diag_title").removeClass("d-none")
-      $("#occurr").removeClass("d-none")
-    }
+    $("#update_philhealth").val(col9);
   
     });
 }
 //get cell value when selected end
-
 
 //filter date range
 $("#date_range_btn").click(function()
@@ -1287,10 +739,7 @@ $("#date_range_btn").click(function()
   var to_input = $("#range_to").val()
   var click_min_age = $("#age_min").val();
   var click_max_age = $("#age_max").val();
-  var click_filter_status = $("#filter_status").val(); 
-  var filter_cause_of_death = $("#select_cause_of_death").val();
-  var filter_cause_of_death_search_title = $("#select_cause_of_death").text();
-  var filter_other_cause = $("#select_other_causes").text();
+  var filter_gender = $("#select_gender").val();
 
   var d_from = new Date(from_input)
   var d_to = new  Date(to_input)
@@ -1319,32 +768,10 @@ $("#date_range_btn").click(function()
   {
         date_range_from = from_input;
         date_range_to = to_input;
-        min_age = click_min_age
-        max_age = click_max_age
-        filter_status = click_filter_status
-        cause_of_death = filter_cause_of_death;
-        other_cause = filter_other_cause;
+        min_age = click_min_age;
+        max_age = click_max_age;
+        gender = filter_gender;
         query_btn = "clicked";
-
-        $(".th_occurrence").text("Occurrence") 
-        $(".th_date").text("Date of Diagnosis")
-        $(".th_diag").text("Diagnosis")
-
-        if(filter_status === "Inactive (Dead)")
-        {
-          $(".th_date").text("Date of Death")
-          $(".th_diag").text("Cause of Death")
-        }
-        else if(filter_status === "Inactive (Recovered)")
-        {
-          $(".th_date").text("Date of Recovery")
-          $(".th_diag").text("Recovered From")
-        }
-        else if(filter_status === "Inactive (All)")
-        {
-          $(".th_date").text("Date of Inactivity")
-        }
-
         
         table.destroy()
         $(".dataTables_length").remove();
@@ -1357,11 +784,13 @@ $("#date_range_btn").click(function()
         var result_tittle = "Filtered results for: "
         var results =  [];
         let a = 0
-        if(filter_status != "")
+
+        if(gender != "")
         {
-          results[a] = " Status: "+filter_status+""
+          results[a] = "  Gender: "+gender+""
           a+=1
         }
+
         if(!isNaN(click_min_age))
         {
           results[a] = "  Min Age: "+min_age+""
@@ -1372,24 +801,7 @@ $("#date_range_btn").click(function()
           results[a] = "  Max Age: "+max_age+""
           a+=1
         }
-        if(cause_of_death != "")
-        {
-          if (cause_of_death === "Other") {
-            if(other_cause != "")
-            {
-              results[a] = "  Cause of Death: Other ("+other_cause+")"
-            }
-            else
-            {
-              results[a] = "  Cause of Death: Other (All)"
-            }
-          }
-          else
-          {
-            results[a] = "  Cause of Death: "+filter_cause_of_death_search_title+""
-          }
-          a+=1
-        }
+
         if(date_range_from != "")
         {
           let dateStr = date_range_from;
@@ -1415,7 +827,6 @@ $("#date_range_btn").click(function()
         {
           $("#search_result").html("")
         }
-
   }
 
 })
@@ -1424,36 +835,17 @@ $("#date_range_btn").click(function()
 //refresh table back to current data
 $("#refresh_table").click(function()
 {
-
-  var $select = $("#update_hp_select_new_stats").selectize();
-  var selectize = $select[0].selectize;
-  selectize.setValue(selectize.search("").items[0].id);
-
-  $(".th_occurrence").text("Occurrence") 
-  $(".th_date").text("Date of Diagnosis")
-  $(".th_diag").text("Diagnosis")
-
-  filter_status = "";
-
-  $("#range_from").val("")
-  $("#range_to").val("")
-  $("#range_from").val("")
-  $("#range_to").val("")
+  $("#range_from").val("");
+  $("#range_to").val("");
+  $("#range_from").val("");
+  $("#range_to").val("");
   $("#age_min").val("");
   $("#age_max").val("");
+  var $select = $('#select_gender').selectize();
+  var control = $select[0].selectize;
+  control.clear();
   $("#search_result").html("")
-
-  var $select = $('#select_cause_of_death').selectize();
-  var control = $select[0].selectize;
-  control.clear();
-
-  var $select = $('#select_other_causes').selectize();
-  var control = $select[0].selectize;
-  control.clear();
-
-  var $select = $('#filter_status').selectize();
-  var control = $select[0].selectize;
-  control.clear();
+ 
 
   query_btn = "unclicked";
   swal.close();
@@ -1474,127 +866,6 @@ function opentip_tooltip()
   myOpentip.setContent("Refresh Table"); // Updates Opentips content
 }
 //generate a tooltip end
-
-
-//permanently delete hp
-$("#delete_hp_btn_permanently").click(function()
-{  
-  $('#delete_hp_permanently').modal('toggle');
-})
-
-//show cause of death field
-$("#update_hp_select_new_stats").on('change', function(){
-
-  if($("#update_hp_select_new_stats").val() === "Inactive (Dead)")
-  {
-    $("#co_l").removeClass("d-none")
-  }
-  else
-  {
-    $("#co_l").addClass("d-none")
-    $("#o_c_d").addClass("d-none")
-
-    var $select = $('#update_hp_select_cause_of_death').selectize();
-    var control = $select[0].selectize;
-    control.clear();
-  }
-  
-});
-
-//show cause of death field
-$("#update_hp_select_cause_of_death").on('change', function(){
-
-  if($("#update_hp_select_cause_of_death").val() === "Other")
-  {
-    $("#o_c_d").removeClass("d-none")
-  }
-  else
-  {
-    $("#o_c_d").addClass("d-none")
-
-    var $select = $('#update_hp_select_other').selectize();
-    var control = $select[0].selectize;
-    control.clear();
-  }
-  
-});
-
-//change recoveries to cause of death if the status is death
-$("#filter_status").change(function()
-{
-   if($(this).val() === "Inactive (Dead)")
-   {
-       $("#d_t").addClass("d-none")
-       $("#co_d").removeClass("d-none")
-       
-   }
-   else
-   {
-       $("#d_t").removeClass("d-none")
-       $("#co_d").addClass("d-none")
-       
-       var $select = $('#select_cause_of_death').selectize();
-       var control = $select[0].selectize;
-       control.clear();
-
-   }
-})
-//change recoveries to cause of death if the status is death end
-
-//change recoveries to cause of death if the status is death
-$("#select_cause_of_death").change(function()
-{
-   if($(this).val() === "Other")
-   {
-       $("#o_co_d").removeClass("d-none")
-   }
-   else
-   {
-       $("#o_co_d").addClass("d-none")
-
-       var $select = $('#select_other_causes').selectize();
-       var control = $select[0].selectize;
-       control.clear();
-   }
-})
-//change recoveries to cause of death if the status is death end
-
-//update options
-$("#select_options").change(function()
-{
-  var option_selector = $('#select_options').val();
-
-  if(option_selector === "Status")
-  {
-    $("#fieldset_edit").addClass("d-none")
-    $("#fieldset_status").removeClass("d-none")
-
-    $("#update_hp_btn_status").removeClass("d-none")
-    $("#update_hp_btn_edit").addClass("d-none")
-    $("#update_hp_btn_delete").addClass("d-none")
-  }
-  else if (option_selector === "Details")
-  {
-    $("#fieldset_edit").removeClass("d-none")
-    $("#fieldset_status").addClass("d-none")
-
-    $("#update_hp_btn_status").addClass("d-none")
-    $("#update_hp_btn_edit").removeClass("d-none")
-    $("#update_hp_btn_delete").addClass("d-none")
-  }
-  else if (option_selector === "Delete")
-  {
-    $("#fieldset_edit").addClass("d-none")
-    $("#fieldset_status").addClass("d-none")
-
-    $("#update_hp_btn_status").addClass("d-none")
-    $("#update_hp_btn_edit").addClass("d-none")
-    $("#update_hp_btn_delete").removeClass("d-none")
-  }
-})
-//update options end
-
-
 
 // cange color of date field when value is not 0
 $("#range_from").change(function()
@@ -1620,7 +891,6 @@ $("#range_from").change(function()
 
 })
 
-
 $("#range_to").change(function()
 {
 
@@ -1635,6 +905,50 @@ $("#range_to").change(function()
   else
   {
     $('#range_to').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+      );
+  }
+
+})
+
+$("#date_of_diagnosis").change(function()
+{
+
+  if($("#date_of_diagnosis").val().trim().length === 0)
+  {
+    $('#date_of_diagnosis').css(
+      {
+        'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#date_of_diagnosis').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+      );
+  }
+
+})
+
+$("#update_date_of_diagnosis").change(function()
+{
+
+  if($("#update_date_of_diagnosis").val().trim().length === 0)
+  {
+    $('#update_date_of_diagnosis').css(
+      {
+        'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#update_date_of_diagnosis').css(
       {
           'cssText': 'color: #333 !important'
       }
@@ -1682,6 +996,9 @@ $('#range_to').css(
 }
 })
 // go to filter button end
+
+
+
 
 
 

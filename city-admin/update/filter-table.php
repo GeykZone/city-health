@@ -13,37 +13,15 @@
 
       <fieldset>
 
-        <div class="mb-3" id="s_t">
-        <label for="filter_status" class="form-label">Status:</label>
-        <select id="filter_status"  name="filter_status" class="form-control gender barangay-form shadow-sm select_list">
-            <option value="">Select Status</option>
-            <option value="Active">Active</option>
-            <option value="Inactive (All)">Inactive (All)</option>
-            <option value="Inactive (Recovered)">Inactive (Recovered)</option>
-            <option value="Inactive (Dead)">Inactive (Dead)</option>
+        <div class="mb-3" >
+        <label for="select_gender" class="form-label">Gender:</label>
+        <select id="select_gender"  name="select_gender" class="form-control gender barangay-form shadow-sm select_list"> 
+        <option value="">All Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
         </select>
         <div class="invalid-feedback">
-        Invalid selection.
-        </div>
-        </div>
-
-        <div class="mb-3 d-none" id="co_d">
-        <label for="select_cause_of_death" class="form-label">Cause of Death:</label>
-        <select id="select_cause_of_death"  name="select_cause_of_death" class="form-control gender barangay-form shadow-sm">
-            <option value="">All Deaths</option>
-        </select>
-        <div class="invalid-feedback">
-        Invalid selection.
-        </div>
-        </div>
-
-        <div class="mb-3 d-none" id="o_co_d">
-        <label for="select_other_causes" class="form-label">Other Cause of Death:</label>
-        <select id="select_other_causes"  name="select_other_causes" class="form-control gender barangay-form shadow-sm">
-            <option value="">All Other Deaths (Not related to diseases)</option>
-        </select>
-        <div class="invalid-feedback">
-        Invalid selection.
+        Invalid Selection.
         </div>
         </div>
 

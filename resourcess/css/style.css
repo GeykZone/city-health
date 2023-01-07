@@ -89,6 +89,10 @@ table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting:
   font-size: .9em;
 }
 
+input::placeholder {
+  color: #818a99 !important;
+}
+
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
@@ -100,6 +104,39 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 {
   font-size: calc(-4px + 1vw) !important;
 }
+
+/*loader*/
+.loader {
+  border: 16px solid #fcc41b;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+.loader_tag
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999999;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 
 @media (min-width: 100px) {
 

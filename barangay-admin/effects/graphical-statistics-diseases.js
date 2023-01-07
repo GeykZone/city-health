@@ -395,27 +395,22 @@ function chart_array()
   //generate a color base on percentage
   $.each(yValues, function( index,value ) {
 
-    var b =100
-    var percentage = b * value;
-    percentage = percentage / largets_total;
-    percentage = parseFloat(percentage).toFixed(2)
-
     var data_set_handler_single
 
-    if(value <= 1){
+    if(parseInt(value) <= 10){
        myColors[index]="#b3e6ffff";
        myPoints[index]=  5;
 
       data_set_handler.push(data_set_handler_single)
     }
-    else if(value <= 2)
+    else if(parseInt(value)  <= 40)
     {
       myColors[index]="#80d5ffff";
       myPoints[index]=  10 ;
 
       data_set_handler.push(data_set_handler_single)
     }
-    else if(value <= 4)
+    else if(parseInt(value)  <= 70)
     {
       myColors[index]="#4dc4ffff";
       myPoints[index]= 15;

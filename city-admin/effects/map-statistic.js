@@ -459,22 +459,22 @@ function display_map()
              
                  // create a HTML element for each feature
                  const el = document.createElement('div');
-                 if(parseInt(feature.description) <= 1)
+                 if(parseInt(feature.description) <= 10)
                  {
                      el.className = 'green';
                      clusterCategory = "Low"
                      el.id = i
                  }
-                 else if(parseInt(feature.description) <= 2)
+                 else if(parseInt(feature.description) <= 40)
                  {
                      el.className = 'yellow';
                      clusterCategory = "Moderate"
                      el.id = i
                  }
-                 else if(parseInt(feature.description) <= 3)
+                 else if(parseInt(feature.description) <= 70)
                  {
                      el.className = 'orange';
-                     clusterCategory = "High"
+                     clusterCategory = "Severe"
                      el.id = i
                  }
                  else
@@ -528,16 +528,16 @@ function display_map()
                 var cont = locations.features[divId]
                 var mark;
 
-                if(parseInt(cont.description) <= 1)
+                if(parseInt(cont.description) <= 10)
                 {
                     mark= 'green';
                 }
-                else if(parseInt(cont.description) <= 2)
+                else if(parseInt(cont.description) <= 40)
                 {
                     mark = 'yellow';
 
                 }
-                else if(parseInt(cont.description) <= 3)
+                else if(parseInt(cont.description) <= 70)
                 {
                     mark = 'orange';
 
@@ -588,21 +588,21 @@ function display_map()
                 var details_title;
                 var cluster;
 
-                if(parseInt(cont.description) <= 1)
+                if(parseInt(cont.description) <= 10)
                 {
                     mark= 'green';
                     cluster = 'Low'
                 }
-                else if(parseInt(cont.description) <= 2)
+                else if(parseInt(cont.description) <= 40)
                 {
                     mark = 'yellow';
                     cluster = 'Moderate'
 
                 }
-                else if(parseInt(cont.description) <= 3)
+                else if(parseInt(cont.description) <= 70)
                 {
                     mark = 'orange';
-                    cluster = 'High'
+                    cluster = 'Severe'
                 }
                 else
                 {
@@ -712,21 +712,21 @@ function display_map()
                 var details_title;
                 var cluster;
 
-                if(parseInt(cont.description) <= 1)
+                if(parseInt(cont.description) <= 10)
                 {
                     mark= 'green';
                     cluster = 'Low'
                 }
-                else if(parseInt(cont.description) <= 2)
+                else if(parseInt(cont.description) <= 40)
                 {
                     mark = 'yellow';
                     cluster = 'Moderate'
 
                 }
-                else if(parseInt(cont.description) <= 3)
+                else if(parseInt(cont.description) <= 70)
                 {
                     mark = 'orange';
-                    cluster = 'High'
+                    cluster = 'Severe'
                 }
                 else
                 {
@@ -1005,10 +1005,10 @@ function display_map()
         
             // define layer for legend
             const layers = [
-            'Low Number of Health Cases',
-            'Moderate Number of Health Cases',
-            'High Number of Health Cases',
-            'Critical Number of Health Cases',
+            'Low Number of Health Cases (1-10)',
+            'Moderate Number of Health Cases (11-40)',
+            'Severe Number of Health Cases (41-70)',
+            'Critical Number of Health Cases (71+)',
             ];
             const colors = [
             'yellowgreen',
