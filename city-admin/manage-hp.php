@@ -59,13 +59,13 @@ include('includes/sidebar.php');
   <div class=" container-fluid">
   <div class=" dataTables_wrapper dt-bootstrap5 row" id="buttons">
 
-  <div class="col-12 mb-2" id="search_result"></div>
+  <div class="col-12 mb-lg-3 mb-sm-3 mt-lg-0 mt-sm-0 d-none" id="search_result"></div>
 
-  <div class="col-lg-6  mt-1 mb-2 mb-lg-0 mb-md-2 mb-sm-2 align-content-center hide_first_load dropdown-center">
+  <div class="col-lg-6  mb-lg-3 mb-md-3 mb-sm-3 mt-lg-0 mt-sm-0 align-content-center hide_first_load dropdown-center">
   <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="filter_this_table" data-coreui-toggle="modal" href="#filter_table" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
   </div>
 
-  <div class="col-lg-6  text-lg-end mt-1 align-content-center hide_first_load dropdown-center">
+  <div class="col-lg-6  text-lg-end align-content-center hide_first_load dropdown-center">
   <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 me-2 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder dropdown-toggle" id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid ms-1"></span></a>
   <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
   <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Health Profiles</a></li>

@@ -36,6 +36,10 @@ include('includes/sidebar.php');
 <?php include('update/update-resident.php'); ?>
 <!--delete barangay resident modal end-->
 
+<!-- filter resident -->
+<?php include "update/filter-table.php" ?>
+<!-- filter resident end -->
+
 
 <div class="body flex-grow-1 px-5 pt-3  pb-3"> 
 <div class="container-fluid">
@@ -93,12 +97,16 @@ include('includes/sidebar.php');
 <div class=" container-fluid">
   <div class=" dataTables_wrapper dt-bootstrap5 row" id="buttons">
 
-  <div class="col-lg-6 ">
-      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder"  data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">NEW <span class="fa-solid ms-1 fa-circle-plus"></a>
+  <div class="col-12 mb-lg-3 mb-sm-3 mt-lg-0 mt-sm-0 d-none" id="search_result"></div>
+
+  <div class="col-lg-6  mb-lg-0  mb-sm-3 align-content-center hide_first_load dropdown-center">
+  <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="filter_this_table" data-coreui-toggle="modal" href="#filter_table" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
   </div>
 
+
   <div class="col-lg-6 text-lg-end">
-      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" type="button" id="show_graph" role="button"><span id="show_graph_txt">OPEN CHART </span><span class=" ms-1 fa-solid"></span></a>
+      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 me-2 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" type="button" id="show_graph" role="button"><span id="show_graph_txt">OPEN CHART </span><span class=" ms-1 fa-solid"></span></a>
+      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder"  data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">NEW <span class="fa-solid ms-1 fa-circle-plus"></a>
   </div>
 
   </div>

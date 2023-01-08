@@ -17,6 +17,7 @@ $table = 'residents';
  
 // Table's primary key 
 $primaryKey = 'resident_id'; 
+$query_btn = $_GET['query_btn'];
  
 // Array of database columns which should be read and sent back to DataTables. 
 // The `db` parameter represents the column name in the database.  
@@ -38,11 +39,58 @@ $columns = array(
 // Include SQL query processing class 
 require '../ssp.class.php'; 
 
-$joinQuery = ", DATE_FORMAT(birthdate,'%M %d, %Y') FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
-$where = " `barangay_id` = '$admin_brg_id' ";
-
-
+if($query_btn === "clicked")
+{
+    $gender = $_GET['gender'];
+    $min_age = $_GET['min_age'];
+    $max_age = $_GET['max_age'];
+    $date_range_from = $_GET['date_range_from'];
+    $date_range_to = $_GET['date_range_to'];
  
+
+    $joinQuery = ", DATE_FORMAT(birthdate,'%M %d, %Y') FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
+    $where = "";
+
+    $conditions = array();
+
+    if($min_age != "NaN")
+    {
+        $conditions[] = "`age` >= '$min_age'";
+    }
+
+    if($max_age != "NaN")
+    {
+        $conditions[] = "`age` <= '$max_age'";
+    }
+
+    if($gender != "")
+    {
+        $conditions[] = "`gender` = '$gender'";
+    }
+
+    if($date_range_from != "")
+    {
+        $conditions[] = "`birthdate` >= '$date_range_from'";
+    }
+
+    if($date_range_to != "")
+    {
+        $conditions[] = "`birthdate` <= '$date_range_to'";
+    }
+
+
+    if (count($conditions) > 0) {
+        $where = implode(' AND ', $conditions)." AND `barangay_id` = '$admin_brg_id'";
+    }
+
+}
+else
+{
+    $joinQuery = ", DATE_FORMAT(birthdate,'%M %d, %Y') FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
+    $where = " `barangay_id` = '$admin_brg_id' ";
+}
+
+
 // Output data as json format 
 echo json_encode( 
     SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns, $joinQuery,$where  ) 

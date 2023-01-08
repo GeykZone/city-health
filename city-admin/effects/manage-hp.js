@@ -822,10 +822,12 @@ $("#date_range_btn").click(function()
         if (results.length > 0) 
         {
           $("#search_result").html("<a><span class='me-2 fw-semibold' >"+result_tittle+"</span><span>"+results+"</span></a>")
+          $("#search_result").removeClass("d-none")
         }
         else
         {
           $("#search_result").html("")
+          $("#search_result").addClass("d-none")
         }
   }
 
@@ -845,6 +847,7 @@ $("#refresh_table").click(function()
   var control = $select[0].selectize;
   control.clear();
   $("#search_result").html("")
+  $("#search_result").addClass("d-none")
  
 
   query_btn = "unclicked";

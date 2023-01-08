@@ -60,8 +60,8 @@
     <label for="update_gender" class="form-label">Gender*</label>
     <select name="update_gender" id="update_gender" class="form-control gender barangay-form shadow-sm" >
     <option value="">Pick a gender</option>
-    <option value="M (Male)">M (Male)</option>
-    <option value="F (Female)">F (Female)</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
     </select>
     <div class="invalid-feedback">
     Invalid selection.

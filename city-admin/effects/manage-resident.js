@@ -25,76 +25,83 @@ var myChart ="";
 
 var res_id_value ="";
 
+var date_range_from = "";
+var date_range_to = "";
+var query_btn = "unclicked";
+var min_age;
+var max_age;
+var gender;
+
 //phone validation
-function allCharactersSame(s)
-{
-    let n = s.length;
-    for (let i = 1; i < n; i++)
-        if (s[i] != s[0])
-            return false;
+    function allCharactersSame(s)
+    {
+        let n = s.length;
+        for (let i = 1; i < n; i++)
+            if (s[i] != s[0])
+                return false;
 
-    return true;
-}
+        return true;
+    }
 
-function line1(s)
-{
-    let n = s.length;
-    for (let i = 2; i < n; i++)
-        if (s[i] != s[1])
-            return false;
+    function line1(s)
+    {
+        let n = s.length;
+        for (let i = 2; i < n; i++)
+            if (s[i] != s[1])
+                return false;
 
-    return true;
-}
+        return true;
+    }
 
-function line2(s)
-{
-    let n = s.length;
-    for (let i = 3; i < n; i++)
-        if (s[i] != s[2])
-            return false;
+    function line2(s)
+    {
+        let n = s.length;
+        for (let i = 3; i < n; i++)
+            if (s[i] != s[2])
+                return false;
 
-    return true;
-}
+        return true;
+    }
 
-function line3(s)
-{
-    let n = s.length;
-    for (let i = 4; i < n; i++)
-        if (s[i] != s[3])
-            return false;
+    function line3(s)
+    {
+        let n = s.length;
+        for (let i = 4; i < n; i++)
+            if (s[i] != s[3])
+                return false;
 
-    return true;
-}
+        return true;
+    }
 
-function line4(s)
-{
-    let n = s.length;
-    for (let i = 5; i < n; i++)
-        if (s[i] != s[4])
-            return false;
+    function line4(s)
+    {
+        let n = s.length;
+        for (let i = 5; i < n; i++)
+            if (s[i] != s[4])
+                return false;
 
-    return true;
-}
+        return true;
+    }
 
-function line5(s)
-{
-    let n = s.length;
-    for (let i = 6; i < n; i++)
-        if (s[i] != s[5])
-            return false;
+    function line5(s)
+    {
+        let n = s.length;
+        for (let i = 6; i < n; i++)
+            if (s[i] != s[5])
+                return false;
 
-    return true;
-}
+        return true;
+    }
 
-function line6(s)
-{
-    let n = s.length;
-    for (let i = 7; i < n; i++)
-        if (s[i] != s[6])
-            return false;
+    function line6(s)
+    {
+        let n = s.length;
+        for (let i = 7; i < n; i++)
+            if (s[i] != s[6])
+                return false;
 
-    return true;
-}
+        return true;
+    }
 //phone validation end
 
 
@@ -254,6 +261,7 @@ res_id_value = this_value.substr(this_value.indexOf(" ") + 1);
 
 //show data tables
 function load_data_tables() {
+  var ajax_url = "functions/display-functions/show-resident.php";
 
 if ( ! $.fn.DataTable.isDataTable( '#resident_table' ) ) { // check if data table is already exist
 
@@ -262,7 +270,23 @@ table = $('#resident_table').DataTable({
   // "processing": true,
   "deferRender": true,
   "serverSide": true,
-  "ajax": "functions/display-functions/show-resident.php",   
+  "ajax": {
+    url: ajax_url,
+    data: {
+      gender:gender,
+      date_range_from:date_range_from,
+      date_range_to:date_range_to,
+      query_btn:query_btn,
+      min_age:min_age,
+      max_age:max_age
+    },
+    "dataSrc": function ( json ) {
+      //Make your callback here.
+     // console.log(json)
+      return json.data;
+  }      
+  
+},
   "autoWidth": false,
   scrollCollapse: true,
   "dom": 'Brltip',     
@@ -473,6 +497,14 @@ function generate_age()
 {
 //adding (first add)
 $("#birthdate").datepicker({
+dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+});
+
+$("#range_from").datepicker({
+dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+});
+
+$("#range_to").datepicker({
 dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
 });
 
@@ -841,17 +873,30 @@ function chart_array()
   $.ajaxSetup({async:false});
   $.getJSON('functions/display-functions/show-number-of-resident.php', 
   {
-    barangay_name:'set'
+    barangay_name:'set',
+    gender:gender,
+    date_range_from:date_range_from,
+    date_range_to:date_range_to,
+    query_btn:query_btn,
+    min_age:min_age,
+    max_age:max_age
   }, 
   
   function (data, textStatus, jqXHR) 
   {
     x_value = data;
+    console.log(x_value)
   });
 
   $.getJSON('functions/display-functions/show-number-of-resident.php', 
   {
-    total_residents_number:'set'
+    total_residents_number:'set',
+    gender:gender,
+    date_range_from:date_range_from,
+    date_range_to:date_range_to,
+    query_btn:query_btn,
+    min_age:min_age,
+    max_age:max_age
   }, 
   
   function (data, textStatus, jqXHR) 
@@ -1101,6 +1146,20 @@ else
 //refresh table back to current data
 $("#refresh_resident_table").click(function(e)
 {
+
+$("#range_from").val("");
+$("#range_to").val("");
+$("#range_from").val("");
+$("#range_to").val("");
+$("#age_min").val("");
+$("#age_max").val("");
+var $select = $('#select_gender').selectize();
+var control = $select[0].selectize;
+control.clear();
+$("#search_result").html("")
+$("#search_result").addClass("d-none")
+query_btn = "unclicked";
+
 swal.close();
 
 table.destroy()
@@ -1109,6 +1168,7 @@ $(".dataTables_info").remove();
 $(".dataTables_paginate ").remove();
 
 load_data_tables()
+update_chart()
 })
 //refresh table back to current data end
 
@@ -1208,7 +1268,6 @@ $("#birthdate").change(function()
 
 })
 
-
 $("#update_birthdate").change(function()
 {
 
@@ -1230,4 +1289,193 @@ $("#update_birthdate").change(function()
   }
 
 })
-// cange color of birthdate field when value is not 0 end
+
+$("#range_from").change(function()
+{
+
+  if($("#range_from").val().trim().length === 0)
+  {
+    $('#range_from').css(
+      {
+          'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#range_from').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+    );
+
+  }
+
+})
+
+$("#range_to").change(function()
+{
+
+  if($("#range_to").val().trim().length === 0)
+  {
+    $('#range_to').css(
+      {
+        'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#range_to').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+      );
+  }
+
+})
+// cange color of birthdate field when value is not 0 end'
+
+
+//go to filter button
+$("#filter_this_table").click(function()
+{
+if($("#range_from").val().trim().length === 0)
+{
+$('#range_from').css(
+  {
+      'cssText': 'color:#818a99 !important'
+  }
+  );
+}
+else
+{
+$('#range_from').css(
+  {
+      'cssText': 'color: #333 !important'
+  }
+);
+
+}
+if($("#range_to").val().trim().length === 0)
+{
+$('#range_to').css(
+  {
+    'cssText': 'color:#818a99 !important'
+  }
+  );
+}
+else
+{
+$('#range_to').css(
+  {
+      'cssText': 'color: #333 !important'
+  }
+  );
+}
+})
+// go to filter button end
+
+//filter date range
+$("#date_range_btn").click(function()
+{
+  var from_input = $("#range_from").val()
+  var to_input = $("#range_to").val()
+  var click_min_age = $("#age_min").val();
+  var click_max_age = $("#age_max").val();
+  var filter_gender = $("#select_gender").val();
+
+  var d_from = new Date(from_input)
+  var d_to = new  Date(to_input)
+  var validator = true
+
+
+  click_min_age = parseInt(click_min_age);
+  click_max_age = parseInt(click_max_age);
+
+  if(d_from > d_to)
+  {
+    $("#range_to").addClass("is-invalid");
+    $("#range_to").val("");
+    validator =false
+  }
+
+  if(!isNaN(click_max_age) && click_min_age > click_max_age)
+  {
+    $("#age_max").addClass("is-invalid");
+    $("#age_max").val("");
+    validator =false
+  }
+
+
+  if(validator === true)
+  {
+        date_range_from = from_input;
+        date_range_to = to_input;
+        min_age = click_min_age;
+        max_age = click_max_age;
+        gender = filter_gender;
+        query_btn = "clicked";
+        
+        table.destroy()
+        $(".dataTables_length").remove();
+        $(".dataTables_info").remove();
+        $(".dataTables_paginate ").remove();
+
+        load_data_tables()
+        $("#filter_table").modal("toggle");
+
+        var result_tittle = "Filtered results for: "
+        var results =  [];
+        let a = 0
+
+        if(gender != "")
+        {
+          results[a] = "  Gender: "+gender+""
+          a+=1
+        }
+
+        if(!isNaN(click_min_age))
+        {
+          results[a] = "  Min Age: "+min_age+""
+          a+=1
+        }
+        if(!isNaN(click_max_age))
+        {
+          results[a] = "  Max Age: "+max_age+""
+          a+=1
+        }
+
+        if(date_range_from != "")
+        {
+          let dateStr = date_range_from;
+          let dateObj = new Date(dateStr);
+          let readableDate = dateObj.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+          results[a]  = "  Min Date: "+readableDate+""
+          a+=1
+        }
+        if(date_range_to != "")
+        {
+          let dateStr = date_range_to;
+          let dateObj = new Date(dateStr);
+          let readableDate = dateObj.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+          results[a] = "  Max Date: "+readableDate+""
+          a+=1
+        }
+
+        if (results.length > 0) 
+        {
+          $("#search_result").html("<a><span class='me-2 fw-semibold' >"+result_tittle+"</span><span>"+results+"</span></a>")
+          $("#search_result").removeClass("d-none")
+        }
+        else
+        {
+          $("#search_result").html("")
+          $("#search_result").addClass("d-none")
+        }
+
+        update_chart()
+  }
+
+})
+//filter date range end

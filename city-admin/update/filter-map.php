@@ -49,8 +49,8 @@
         <label for="select_gender" class="form-label">Gender:</label>
         <select id="select_gender"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm select_list"> 
         <option value="">All Gender</option>
-        <option value="M (Male)">M (Male)</option>
-        <option value="F (Female)">F (Female)</option>
+        <option value="Male">Male</option>
+    <option value="Female">Female</option>
         </select>
         <div class="invalid-feedback">
         Invalid selection.
