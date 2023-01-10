@@ -475,7 +475,7 @@ function top_3_diseases_function()
     var current_year_tooltip = $("#top_3_disease_increase"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("From "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+", the number of health cases caused by "+disease_string+" increased by "+parseInt(all_time_total_percentage).toLocaleString('en-US')+"%"); // Updates Opentips content
+    myOpentip.setContent("From "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+", the number of health cases caused by "+disease_string+" in Oroquieta City, increased by "+parseInt(all_time_total_percentage).toLocaleString('en-US')+"%"); // Updates Opentips content
   }
 
 
@@ -608,7 +608,7 @@ function top_3_barangays_functions()
     var current_year_tooltip = $("#top_3_barangay_increase"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("From "+top_3_barangays_date_start+" to "+top_3_barangays_date_end+", the number of health cases in barangay "+brgy_string+" increased by "+parseInt(all_time_total_percentage).toLocaleString('en-US')+"%"); // Updates Opentips content
+    myOpentip.setContent("From "+top_3_barangays_date_start+" to "+top_3_barangays_date_end+", the number of health cases in barangay "+brgy_string+", Oroquieta City, increased by "+parseInt(all_time_total_percentage).toLocaleString('en-US')+"%"); // Updates Opentips content
   }
 }
 //top 3 barangays end

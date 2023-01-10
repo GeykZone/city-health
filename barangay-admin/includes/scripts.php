@@ -14,6 +14,10 @@
   });
     //remove invalid class
 
+    var cc_date = new Date();
+    var cc_date_year = cc_date.getFullYear();
+    $("#cc").text(cc_date_year)
+
 
     $(document).ready(function()
     {

@@ -10,7 +10,7 @@ if ($result->num_rows > 0)
         $admin_brg_id = $row['barangay_id'];
     }
 
-    $admin_location = strtoupper($admin_location);
+    $admin_location = $admin_location;
 }
 
 ?>

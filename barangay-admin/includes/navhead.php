@@ -5,7 +5,7 @@
           </button>
           
           <ul class="header-nav">
-            <li class="nav-title"><a style="font-weight: bold;">BARANGAY <?php echo $admin_location; ?></a></li>
+            <li class="nav-title"><a style="font-weight: bold;">BARANGAY <?php echo strtoupper($admin_location); ?></a></li>
           </ul>
 
           <div class="header-nav ms-auto ">

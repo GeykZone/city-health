@@ -97,7 +97,7 @@ function current_status()
         $("#map_barangay").text(" in barangay "+tittle_barangay)   
     }
 
-    $("#map_cases").text("All documented diseases, ")
+    $("#map_cases").text("All documented health cases, ")
     
     if(gender === "default")
     {

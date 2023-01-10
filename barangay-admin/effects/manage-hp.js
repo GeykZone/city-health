@@ -47,16 +47,6 @@ $(document).ready(function()
     date_range();
     opentip_tooltip();
 
-    if (Cookies.get('dashboard_month_from') != undefined && Cookies.get('dashboard_month_to') != undefined) {
-      
-      $("#range_from").val(Cookies.get('dashboard_month_from'))
-      $("#range_to").val(Cookies.get('dashboard_month_to'))
-
-      $("#date_range_btn").click();
-      Cookies.remove('dashboard_month_from')
-      Cookies.remove('dashboard_month_to')
-    }
-
 })
 
 //set do some stuff when confiramtion variable is changed

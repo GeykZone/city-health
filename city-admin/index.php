@@ -149,7 +149,7 @@ include('includes/sidebar.php');
 </div>
 
 <!--first-->
-<div class="row ">
+<div class="row">
   <div class="col-lg-4 card-group col-sm-12">
   <div class="row ">
 
@@ -184,15 +184,13 @@ include('includes/sidebar.php');
 
   </div>
 
-
-
   </div>
   </div>
 
   <div class="col-lg-8 card-group mb-4">
     <div class="card border-0 rounded-3 shadow-sm">
     <div class=" card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card" >
-        <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Map Visualization<span id="map_record_info" class=" shortCut_btn"></span></h6>
+        <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Map Visualization<span id="map_record_info" class=" shortCut_btn"></span> <label class="adjust_font_size  opacity-75" > ( <span class="oneMonthFrom"></span> - <span class="oneMonthTo"></span> )</label></h6>
       </div>
       <div class=" card-body">
       <div id="map_container" class=" card  rounded-3 border-0 shadow-sm">
@@ -211,12 +209,16 @@ include('includes/sidebar.php');
 <!--Second-->
 <div class="row">
 
-  <div class="col-lg-6 card-group   col-sm-12">
-  <div class="card border-0 rounded-3 shadow-sm mb-4">
-  <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 diseases that has the most infected individuals</h6></div>
+  <div class="col-lg-6 card-group   col-sm-12 mb-4">
+  <div class="card border-0 rounded-3 shadow-sm ">
+  <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 diseases that has the most infected individuals in Oroquieta City</h6></div>
   <div class="card-body">
   <div class="container-fluid table-responsive">
   <div class="row">
+
+  <div class="px-3">
+  <p class="adjust_font_size  opacity-75" >One month ( <span class="oneMonthFrom"></span> - <span class="oneMonthTo"></span> )</p>
+  </div>
 
   <div class="table-responsive ">
   <table class="table table-condensed">
@@ -225,7 +227,7 @@ include('includes/sidebar.php');
         <th style="min-width:160px;" >
           Disease Name
         </th>
-        <th  class="text-center">
+        <th  class="text-center" style="min-width: 160px;" >
           Cases Percentage
         </th>
         <th style="min-width: 160px;"  class="text-center">
@@ -247,12 +249,16 @@ include('includes/sidebar.php');
   </div>
   </div>
 
-  <div class="col-lg-6 card-group col-sm-12">
-  <div class="card border-0 rounded-3 shadow-sm mb-4">
-  <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 barangays with the highest number of health cases</h6></div>
+  <div class="col-lg-6 card-group col-sm-12 mb-sm-3 mb-lg-4">
+  <div class="card border-0 rounded-3 shadow-sm ">
+  <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 barangays with the highest number of health cases in Oroquieta City</h6></div>
   <div class="card-body">
   <div class="container-fluid table-responsive">
   <div class="row">
+
+  <div class="px-3">
+  <p class="adjust_font_size opacity-75" >One month ( <span class="oneMonthFrom"></span> - <span class="oneMonthTo"></span> )</p>
+  </div>
 
   <div class="table-responsive ">
   <table class="table table-condensed">
@@ -261,7 +267,7 @@ include('includes/sidebar.php');
         <th style="min-width:160px;" >
           Barangay Name
         </th>
-        <th  class="text-center">
+        <th  class="text-center" style="min-width: 160px;">
           Cases Percentage
         </th>
         <th style="min-width: 160px;"  class="text-center">
@@ -277,6 +283,8 @@ include('includes/sidebar.php');
     </tbody>
   </table>
   </div>
+
+
 
   </div>
   </div>

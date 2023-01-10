@@ -16,7 +16,7 @@ include('includes/sidebar.php');
 <!-- if breadcrumb is single--><span>Barangay Admin</span>
 </li>
 <li class="breadcrumb-item active"><span>Manage Residents</span></li>
-<li class="breadcrumb-item active"><span>Barangay <?php echo ucwords(strtolower($admin_location)); ?> Residents</span></li>
+<li class="breadcrumb-item active"><span>Barangay <?php echo $admin_location; ?> Residents</span></li>
 </ol>
 </nav>
 </div>
@@ -41,7 +41,7 @@ include('includes/sidebar.php');
 <!-- filter resident end -->
 
 
-<div class="body flex-grow-1 px-5 pt-3  pb-3"> 
+<div class="body flex-grow-1 px-lg-5 px-sm-0 pt-3  pb-3"> 
 <div class="container-fluid">
 
 <!--Admins-->
@@ -50,7 +50,7 @@ include('includes/sidebar.php');
 <div class="card border-0 mb-4 shadow-sm ">
 
 <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-<button type="button" id="refresh_resident_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay <?php echo ucwords(strtolower($admin_location)); ?> Residents
+<button type="button" id="refresh_resident_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay <?php echo $admin_location; ?> Residents
 </div>
 
 <div class="card-body border-0 shadow-sm "  id="wrapper" >
@@ -134,7 +134,7 @@ include('includes/sidebar.php');
 
 <!--scripts-->
 <script>
-  var my_barangay_name = <?php echo json_encode(ucwords(strtolower($admin_location))); ?>;
+  var my_barangay_name = <?php echo json_encode($admin_location); ?>;
   var my_barangay_id = <?php echo json_encode($admin_brg_id); ?> 
 </script>
 

@@ -32,26 +32,26 @@ if(isset($_GET['total_hp']))
 
 if(isset($_GET['top_3_diseases']))
 {
-    $sql = "SELECT t.c AS number_of_diseases, GROUP_CONCAT(t.disease_name SEPARATOR ', ') AS disease_name
-    FROM (SELECT `hp`.`disease_id`, `d`.`disease_name`, COUNT(*) AS c
-          FROM `health_profiles` AS `hp` 
-          LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
-          LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
-          LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-          WHERE `barangay_id` = '$barangay_id' AND date BETWEEN '$top_from' AND '$top_to' 
-          GROUP BY `hp`.`disease_id`) t
-    GROUP BY t.c
-    ORDER BY t.c DESC
-    limit 3";
-
+    $sql = "SELECT t1.disease_id, t1.disease_name, t1.barangay_id, t1.c AS 'count within date range', t2.total AS 'total count' 
+            FROM ( SELECT `hp`.`disease_id`, `d`.`disease_name`, `r`.barangay_id, COUNT(*) AS c 
+            FROM `health_profiles` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
+            LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
+            LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
+            WHERE `barangay_id` = '$barangay_id' AND date BETWEEN '$top_from' AND '$top_to' GROUP BY `hp`.`disease_id` ) t1 
+            JOIN ( SELECT `hp`.`disease_id`, COUNT(*) AS total FROM `health_profiles` AS `hp` 
+            LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
+            WHERE barangay_id = '$barangay_id' GROUP BY `hp`.`disease_id` ) t2 
+            ON t1.disease_id = t2.disease_id ORDER BY t1.c DESC, t2.total ASC LIMIT 3";
+    
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
     $disease = str_replace(' ', '_', $row['disease_name']);
-    $total_disease_count = $row['number_of_diseases'];
+    $total_disease_count = $row['count within date range'];
+    $alltime_total_disease_count = $row['total count'];
 
-    $total_disease_number[] = $disease." ".$total_disease_count;
+    $total_disease_number[] = $disease." ".$total_disease_count." ".$alltime_total_disease_count;
 
     }
     }
@@ -64,7 +64,7 @@ if(isset($_GET['newCases']))
     LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
     LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
     LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-    WHERE `barangay_id` = '$barangay_id' AND date BETWEEN '$top_from' AND '$top_to'";
+    WHERE date = '$top_to'  AND `barangay_id` = '$barangay_id'";
 
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -85,38 +85,88 @@ if(isset($_GET['newCases']))
 
 if(isset($_GET['details_for_newCases']))
 {
-    $sql = "SELECT *, DATE_FORMAT(date,'%M %d, %Y') AS created_date FROM `health_profiles` AS `hp` 
+    $sql = "SELECT d.disease_name, b.barangay_name, `date`,  DATE_FORMAT(date,'%M %d, %Y') AS created_date, COUNT(*) AS new_cases FROM `health_profiles` AS `hp` 
     LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
     LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
-    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
-    WHERE `barangay_id` = '$barangay_id' AND date BETWEEN '$top_from' AND '$top_to' ORDER BY created_date DESC";
+    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
+    WHERE date = '$top_to'  AND `barangay_id` = '$barangay_id' GROUP BY `date`, disease_name, barangay_name ORDER BY date DESC";
 
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
-    $sql_disease_type = $row['disease_id'];
-    $sql_date = $row['date'];
-    $sql_barangay = $row['barangay_id'];
-
-    $sql2 = "SELECT * FROM `health_profiles` AS `hp` 
-    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
-    LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
-    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
-    WHERE date = '$sql_date' AND `disease_id` = '$sql_disease_type' AND `barangay_id` = ' $sql_barangay'  ORDER BY date DESC";
-    $result2 = $conn->query($sql2);
-    if($result2->num_rows > 0)
-    {
-        $result2 = mysqli_query($conn,$sql2);
-        $rowcount=mysqli_num_rows($result2);
-        $new_cases =  $rowcount;
-    }
-
-    $total_newCases_count =  number_format($new_cases, 0, '', ',');
+    $new_cases =  $row['new_cases'];
+    $total_newCases_count = number_format($new_cases, 0, '', ',');
     $disease_name = $row['disease_name'];
     $barangay_name = $row['barangay_name'];
     $date_created = $row['created_date'];
- 
+
+    if($total_newCases_count > 1)
+    {
+        $total_newCases_number[] = $total_newCases_count." new health cases caused by ".$disease_name." in barangay ".$barangay_name."";
+    }
+    else if($total_newCases_count < 1)
+    {
+        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
+    }
+    else
+    {
+        $total_newCases_number[] = $total_newCases_count." new health case caused by ".$disease_name." in barangay ".$barangay_name."";
+    }
+
+    }
+    }
+    else
+    {
+        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
+    }
+
+    $total_newCases_number = array_unique($total_newCases_number);
+    print json_encode($total_newCases_number);
+}
+
+if(isset($_GET['totalCases']))
+{
+    $sql = "SELECT COUNT(*) AS cases FROM `health_profiles` AS `hp` 
+    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
+    LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
+    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
+    WHERE date BETWEEN '$top_from' AND '$top_to' AND `barangay_id` = '$barangay_id'";
+
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+
+    $total_cases_count = $row['cases'];
+
+    $total_cases_number[] = $total_cases_count;
+
+    }
+    }
+    else
+    {
+        $total_cases_number[] = "0";
+    }
+    print json_encode($total_cases_number);
+}
+
+if(isset($_GET['details_for_totalCases']))
+{
+    $sql = "SELECT d.disease_name, b.barangay_name, `date`,  DATE_FORMAT(date,'%M %d, %Y') AS created_date, COUNT(*) AS new_cases FROM `health_profiles` AS `hp` 
+    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
+    LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
+    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
+    WHERE date BETWEEN '$top_from' AND '$top_to' AND `barangay_id` = '$barangay_id' GROUP BY `date`, disease_name, barangay_name ORDER BY date DESC";
+
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+
+    $new_cases =  $row['new_cases'];
+    $total_newCases_count = number_format($new_cases, 0, '', ',');
+    $disease_name = $row['disease_name'];
+    $barangay_name = $row['barangay_name'];
+    $date_created = $row['created_date'];
 
     if($total_newCases_count > 1)
     {
@@ -124,7 +174,7 @@ if(isset($_GET['details_for_newCases']))
     }
     else if($total_newCases_count < 1)
     {
-        $total_newCases_number[] = "There were no new health cases reported in barangay ".ucwords(strtolower($admin_location));
+        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
     }
     else
     {
@@ -135,183 +185,11 @@ if(isset($_GET['details_for_newCases']))
     }
     else
     {
-        $total_newCases_number[] = "There were no new health cases reported in barangay ".ucwords(strtolower($admin_location));
+        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
     }
 
     $total_newCases_number = array_unique($total_newCases_number);
     print json_encode($total_newCases_number);
-}
-
-if(isset($_GET['newDeaths']))
-{
-    $sql = "SELECT DISTINCT `hp`.`resident_id` cause_of_death FROM `health_profiles` AS `hp` 
-    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
-    LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
-    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-    WHERE `barangay_id` = '$barangay_id' AND  cause_of_death IS NOT NULL AND date_of_death BETWEEN '$top_from' AND '$top_to' ";
-
-    $result = $conn->query($sql);
-    if($result->num_rows > 0)
-    {
-        $result = mysqli_query($conn,$sql);
-        $rowcount=mysqli_num_rows($result);
-        $new_deaths =  $rowcount;
-
-
-        $total_newDeaths_count = $new_deaths;
-        $total_newDeaths_number[] = $total_newDeaths_count;
-    }
-    else
-    {
-        $total_newDeaths_number[] = "0";
-    }
-    print json_encode($total_newDeaths_number);
-}
-
-if(isset($_GET['details_for_newDeaths']))
-{
-    $sql = "SELECT *, COUNT(*), hp.resident_id, DATE_FORMAT(date_of_death,'%M %d, %Y') AS created_date 
-    FROM `health_profiles` AS `hp` 
-    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
-    LEFT JOIN `diseases` AS `d` ON (`hp`.`cause_of_death` = `d`.`id`) 
-    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
-    WHERE `barangay_id` = '$barangay_id' AND  cause_of_death IS NOT NULL AND date_of_death BETWEEN '$top_from' AND '$top_to' GROUP BY hp.resident_id ORDER BY created_date DESC";
-
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-
-    $sql_disease_type = $row['cause_of_death'];
-    $sql_date = $row['date_of_death'];
-    $sql_barangay = $row['barangay_id'];
-
-    $sql2 = "SELECT DISTINCT `hp`.`resident_id` FROM `health_profiles` AS `hp` 
-    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
-    LEFT JOIN `diseases` AS `d` ON (`hp`.`cause_of_death` = `d`.`id`) 
-    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
-    WHERE  `date_of_death` = '$sql_date' AND `cause_of_death` = '$sql_disease_type' AND `barangay_id` = ' $sql_barangay'  ORDER BY date_of_death DESC";
-    $result2 = $conn->query($sql2);
-    if($result2->num_rows > 0)
-    {
-        $result2 = mysqli_query($conn,$sql2);
-        $rowcount=mysqli_num_rows($result2);
-        $new_deaths =  $rowcount;
-    }
-    
-    $total_new_deaths_count =  number_format($new_deaths, 0, '', ',');
-    $cause_of_death_disease = $row['disease_name'];
-    $barangay_name = $row['barangay_name'];
-    $date_created = $row['created_date'];
-
-   
-    if($total_new_deaths_count > 1)
-    {
-        $total_new_deaths_number[] = $total_new_deaths_count." new health-related deaths caused by ".$cause_of_death_disease." on ".$date_created." in barangay ".$barangay_name."";
-    }
-    else if($total_new_deaths_count < 1)
-    {
-        $total_new_deaths_number[] = "There were no new health-related deaths reported in barangay ".ucwords(strtolower($admin_location));
-    }
-    else
-    {
-        $total_new_deaths_number[] = $total_new_deaths_count." new health-related death caused by ".$cause_of_death_disease." on ".$date_created." in barangay ".$barangay_name."";
-
-    }
-
-    }
-    }
-    else
-    {
-        $total_new_deaths_number[] = "There were no new health-related deaths reported in barangay ".ucwords(strtolower($admin_location));
-    }
-    $total_new_deaths_number = array_unique($total_new_deaths_number);
-    print json_encode($total_new_deaths_number);
-}
-
-if(isset($_GET['newRecoveries']))
-{
-    $sql = "SELECT COUNT(*) AS newRecoveries FROM `health_profiles` AS `hp` 
-    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
-    LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
-    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
-    WHERE `barangay_id` = '$barangay_id' AND  `recovery` IS NOT NULL AND date_of_recovery BETWEEN '$top_from' AND '$top_to'";
-
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-
-    $total_newRecoveries_count = $row['newRecoveries'];
-
-    $total_newRecoveries_number[] = $total_newRecoveries_count;
-
-    }
-    }
-    else
-    {
-        $total_newRecoveries_number[] = "0";
-    }
-    print json_encode($total_newRecoveries_number);
-}
-
-if(isset($_GET['details_for_recoveries']))
-{
-    $sql = "SELECT *, DATE_FORMAT(date_of_recovery,'%M %d, %Y') AS created_date 
-    FROM `health_profiles` AS `hp` 
-    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
-    LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
-    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
-    WHERE `barangay_id` = '$barangay_id' AND  `recovery` IS NOT NULL AND date_of_recovery BETWEEN '$top_from' AND '$top_to' ORDER BY created_date DESC";
-
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-
-    
-    $sql_disease_type = $row['disease_id'];
-    $sql_date = $row['date_of_recovery'];
-    $sql_barangay = $row['barangay_id'];
-
-    $sql2 = "SELECT * FROM `health_profiles` AS `hp` 
-    LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
-    LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
-    LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`) 
-    WHERE `recovery` IS NOT NULL AND date_of_recovery = '$sql_date' AND `disease_id` = '$sql_disease_type' AND `barangay_id` = ' $sql_barangay'  ORDER BY date_of_recovery DESC";
-    $result2 = $conn->query($sql2);
-    if($result2->num_rows > 0)
-    {
-        $result2 = mysqli_query($conn,$sql2);
-        $rowcount=mysqli_num_rows($result2);
-        $new_recoveries =  $rowcount;
-    }
-
-    $total_newRecoveries_count =  number_format($new_recoveries, 0, '', ',');
-    $disease_name = $row['disease_name'];
-    $barangay_name = $row['barangay_name'];
-    $date_created = $row['created_date'];
-
-   
-    if($total_newRecoveries_count > 1)
-    {
-        $total_newRecoveries_number[] = $total_newRecoveries_count." new health recoveries from ".$disease_name." on ".$date_created." in barangay ".$barangay_name."";
-    }
-    else if($total_newRecoveries_count < 1)
-    {
-        $total_newRecoveries_number[] = "There were no new recoveries from health-related issues in barangay ".ucwords(strtolower($admin_location));
-    }
-    else
-    {
-        $total_newRecoveries_number[] = $total_newRecoveries_count." new health recovery from ".$disease_name." on ".$date_created." in barangay ".$barangay_name."";
-
-    }
-
-    }
-    }
-    else
-    {
-        $total_newRecoveries_number[] = "There were no new recoveries from health-related issues in barangay ".ucwords(strtolower($admin_location));
-    }
-    $total_newRecoveries_number = array_unique($total_newRecoveries_number);
-    print json_encode($total_newRecoveries_number);
 }
 
 if(isset($_GET['display_total_residents']))
@@ -328,6 +206,42 @@ if(isset($_GET['display_total_residents']))
     }
     }
     print json_encode($total_resident);
+}
+
+if(isset($_GET['top_3_barangays']))
+{
+    $sql = "SELECT t1.barangay_id, t1.barangay_name, t1.c AS 'count within date range', t2.total AS 'total count'
+    FROM (
+      SELECT `r`.`barangay_id`, `b`.`barangay_name`, COUNT(*) AS c
+      FROM `health_profiles` AS `hp` 
+      LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
+      LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
+      LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
+      WHERE date BETWEEN '$top_from' AND '$top_to' 
+      GROUP BY `b`.`barangay_name`
+    ) t1
+    JOIN (
+      SELECT `r`.`barangay_id`, `b`.`barangay_name`, COUNT(*) AS total
+      FROM `health_profiles` AS `hp`
+      LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`)
+      LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)
+      GROUP BY `b`.`barangay_name`
+    ) t2
+    ON t1.barangay_id = t2.barangay_id
+    ORDER BY t1.c DESC, t2.total ASC, t1.barangay_name ASC limit 3;
+    ";
+
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+
+    $barangay = $row['barangay_name'];
+
+    $total_barangay_number[] = $barangay;
+
+    }
+    }
+    print json_encode($total_barangay_number);
 }
 
 

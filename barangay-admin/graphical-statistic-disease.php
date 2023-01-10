@@ -16,7 +16,7 @@ include('includes/sidebar.php');
 <!-- if breadcrumb is single--><span>Barangay Admin</span>
 </li>
 <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
-<li class="breadcrumb-item active"><span>Barangay <?php echo ucwords(strtolower($admin_location)); ?> Graphical Statistic</span></li>
+<li class="breadcrumb-item active"><span>Barangay <?php echo $admin_location; ?> Graphical Statistic</span></li>
 <li class="breadcrumb-item active"><span>Disease Statistic</span></li>
 </ol>
 </nav>
@@ -34,7 +34,7 @@ include('includes/sidebar.php');
 <!-- more details  end -->
 
 
-<div class="body flex-grow-1 px-5 pt-3  pb-3"> 
+<div class="body flex-grow-1 px-lg-5 px-sm-0 pt-3  pb-3"> 
 <div class="container-fluid">
 
 
@@ -110,7 +110,7 @@ include('includes/sidebar.php');
 
 <!--scripts-->
 <script>
-  var my_barangay_name = <?php echo json_encode(ucwords(strtolower($admin_location))); ?>;
+  var my_barangay_name = <?php echo json_encode($admin_location); ?>;
   var my_barangay_id = <?php echo json_encode($admin_brg_id); ?> 
 </script>
 
