@@ -49,22 +49,12 @@
         <label for="disease_select_gender" class="form-label">Gender:</label>
         <select id="disease_select_gender"  name="add_hp_select_diseases" class="form-control gender barangay-form shadow-sm"> 
         <option value="">All Gender</option>
-        <option value="M (Male)">M (Male)</option>
-        <option value="F (Female)">F (Female)</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
         </select>
         <div class="invalid-feedback">
         Invalid selection.
         </div>
-        </div>
-
-        <div class="mb-3 ms-1">
-        <a  class="btn text-dark text-opacity-75 rounded-1 border-0 p-0 text-start" id="disease_all_cases" type="button" style="min-width: 200px; font-weight:500;" >
-        <span id="span_check" class="fa-regular"></span><span class=" mx-2" id="disease_active only">Active Diseases Only</span>
-        </a>
-
-        <a  class="btn text-dark  d-none rounded-1 border-0 p-0  text-start" id="disease_active_only_btn" type="button"  style="min-width: 200px; font-weight:500;">
-        <span id="span_check" class="fa-solid"></span><span class=" mx-2" id="active only">Active Diseases Only</span>
-        </a>
         </div>
 
       </fieldset>

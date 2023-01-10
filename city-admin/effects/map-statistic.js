@@ -1,7 +1,6 @@
 var disease_type = "default";
 var date_range_from = "default";
 var date_range_to = "default";
-var active_inactive = "default"
 var query_click = "unclicked";
 var gender = "default";
 
@@ -23,10 +22,11 @@ var one_month_yyy = one_month.getFullYear();
 var current_year_from = one_month_yyy + '-' + one_month_mm + '-' + one_month_dd;
 var current_year_to = current_year_yyyy + '-' + current_year_mm + '-' + current_year_dd;
 
-var active_inactive_validator = "default"
 
 var min_age = "default";
 var max_age = "default";
+
+var map_center
 
 
 $(document).ready(function()
@@ -37,6 +37,13 @@ $(document).ready(function()
     date_range()
     select_list()
     select_for_disease()
+
+    var width = $(window).width();
+    if (width < 1003) {
+      map_center = [123.8006, 8.4595];
+    } else {
+      map_center = [123.765389, 8.465992];
+    }
     
     $( "#range_from" ).val(current_year_from);
     $( "#range_to" ).val(current_year_to);
@@ -187,14 +194,7 @@ function current_status()
         $("#map_disease").text("All "+tittle_disease_type+" ")   
     }
 
-    if(active_inactive === "default")
-    {
-        $("#map_cases").text("health cases, documented ")
-    }
-    else
-    {
-        $("#map_cases").text("health cases that are currently active, and were documented ") 
-    }
+    $("#map_cases").text("health cases, documented ")
 
     if(gender === "default")
     {
@@ -203,12 +203,12 @@ function current_status()
     }
     else
     {   
-        if(gender === "F (Female)")
+        if(gender === "Female")
         {
             $("#map_gender").text(", female records")
             $(".details_head_gender").text("Female records")
         }
-        else if(gender === "M (Male)")
+        else if(gender === "Male")
         {
             $("#map_gender").text(", male records")
             $(".details_head_gender").text("Male records")
@@ -338,7 +338,7 @@ function display_map()
     container: 'map', // container ID
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/light-v10', // style URL
-    center: [123.765389, 8.465992], // starting position [lng, lat]
+    center: map_center, // starting position [lng, lat]
     zoom: 12,
     pitch: 0,
     bearing: -17.6,
@@ -395,7 +395,6 @@ function display_map()
                  disease_type:disease_type,
                  date_range_from:date_range_from,
                  date_range_to:date_range_to,
-                 active_inactive:active_inactive,
                  gender:gender,
                  max_age:max_age,
                  min_age:min_age,
@@ -411,6 +410,8 @@ function display_map()
          
              var textArr = long_lat;
              var newObjectArr = [];
+
+            // console.log(long_lat)
 
          
              $.each(textArr,function(index,lat_long){
@@ -449,8 +450,8 @@ function display_map()
                  'type': 'FeatureCollection',
                  'features': newObjectArr
                  };
-              
-                 
+
+            var total = 0
              // initialization to display markers
              for (var i = 0; i < locations.features.length; i++ ) {
 
@@ -519,7 +520,16 @@ function display_map()
                     hpmarker.remove()
     
                 })
+
+                total += parseInt(feature.description)
              }
+
+             if(isNaN(total))
+             {
+              total=0;
+             }
+          
+             $("#map_totals").text(", ("+total.toLocaleString('en-US')+") in total")
 
              //showing popup on moouse enter
              $( '.mapboxgl-marker' ).mouseenter(function() {
@@ -547,22 +557,11 @@ function display_map()
                     mark= 'red';
                 }
 
-                if(active_inactive_validator === "default")
-                {
-                  var modified_label = parseInt(cont.description).toLocaleString('en-US')+" health cases in total"
+                var modified_label = parseInt(cont.description).toLocaleString('en-US')+" health cases in total"
                   if(cont.description == 1)
                   {
                     var modified_label = parseInt(cont.description).toLocaleString('en-US')+" health case in total."
                   }
-                }
-                else
-                {
-                  var modified_label = parseInt(cont.description).toLocaleString('en-US')+" currently active health cases in total"
-                  if(cont.description == 1)
-                  {
-                    var modified_label = parseInt(cont.description).toLocaleString('en-US')+" currently active health case in total"
-                  }
-                }
 
                 pops.setLngLat(cont.geometry).setHTML(
                     `<h6 class="mb-3 d-flex">`+cont.title+`<div class = "`+mark+` ms-2" style= "width:20px; height:20px; margin-top:-2px;"></div></h6>
@@ -612,46 +611,20 @@ function display_map()
 
                 $("#details_title").text("Barangay "+cont.title+" Health Statistic")
 
-                if(active_inactive === "default")
-                {
-                    $(".details_head_status").text("All documented health cases in barangay "+cont.title)
+                $(".details_head_status").text("All documented health cases in barangay "+cont.title)
             
-                    if(disease_type != "default")
-                    {
-                      $(".details_head_status").text("All documented health cases caused by "+tittle_disease_type+" in barangay "+cont.title)
-                    }
-                }
-                else
+                if(disease_type != "default")
                 {
-                    $(".details_head_status").text("All documented health cases that are currently active in barangay "+cont.title) 
-            
-                    if(disease_type != "default")
-                    {
-                      $(".details_head_status").text("All documented health cases that are currently active caused by "+tittle_disease_type+" in barangay "+cont.title)
-                    }
+                  $(".details_head_status").text("All documented health cases caused by "+tittle_disease_type+" in barangay "+cont.title)
                 }
 
-                if(active_inactive_validator === "default")
+                if(cont.description != 1)
                 {
-                    if(cont.description != 1)
-                    {
-                      details_title = "There are "+parseInt(cont.description).toLocaleString('en-US')+" health cases in total";
-                    }
-                    else
-                    {
-                      details_title = "There is only "+parseInt(cont.description).toLocaleString('en-US')+" health case in total";
-                    }
+                  details_title = "There are "+parseInt(cont.description).toLocaleString('en-US')+" health cases in total";
                 }
                 else
                 {
-                  if(cont.description != 1)
-                  {
-                    details_title = "There are "+parseInt(cont.description).toLocaleString('en-US')+" currently active health cases in total";
-                  }
-                  else
-                  {
-                    details_title = "There is only "+parseInt(cont.description).toLocaleString('en-US')+" currently active health case in total";
-                  }
+                  details_title = "There is only "+parseInt(cont.description).toLocaleString('en-US')+" health case in total";
                 }
 
                 $('.details_content_label').remove();
@@ -673,7 +646,6 @@ function display_map()
                     disease_type:disease_type,
                     date_range_from:date_range_from,
                     date_range_to:date_range_to,
-                    active_inactive:active_inactive,
                     gender:gender,
                     min_age:min_age,
                     max_age:max_age,
@@ -736,46 +708,20 @@ function display_map()
 
                 $("#details_title").text("Barangay "+cont.title+" Health Statistic")
 
-                if(active_inactive === "default")
-                {
-                    $(".details_head_status").text("All documented health cases in barangay "+cont.title)
+                $(".details_head_status").text("All documented health cases in barangay "+cont.title)
             
-                    if(disease_type != "default")
-                    {
-                      $(".details_head_status").text("All documented health cases caused by "+tittle_disease_type+" in barangay "+cont.title)
-                    }
-                }
-                else
+                if(disease_type != "default")
                 {
-                    $(".details_head_status").text("All documented health cases that are currently active in barangay "+cont.title) 
-            
-                    if(disease_type != "default")
-                    {
-                      $(".details_head_status").text("All documented health cases that are currently active caused by "+tittle_disease_type+" in barangay "+cont.title)
-                    }
+                  $(".details_head_status").text("All documented health cases caused by "+tittle_disease_type+" in barangay "+cont.title)
                 }
 
-                if(active_inactive_validator === "default")
+                if(cont.description != 1)
                 {
-                    if(cont.description != 1)
-                    {
-                      details_title = "There are "+parseInt(cont.description).toLocaleString('en-US')+" health cases in total";
-                    }
-                    else
-                    {
-                      details_title = "There is only "+parseInt(cont.description).toLocaleString('en-US')+" health case in total";
-                    }
+                  details_title = "There are "+parseInt(cont.description).toLocaleString('en-US')+" health cases in total";
                 }
                 else
                 {
-                  if(cont.description != 1)
-                  {
-                    details_title = "There are "+parseInt(cont.description).toLocaleString('en-US')+" currently active health cases in total";
-                  }
-                  else
-                  {
-                    details_title = "There is only "+parseInt(cont.description).toLocaleString('en-US')+" currently active health case in total";
-                  }
+                  details_title = "There is only "+parseInt(cont.description).toLocaleString('en-US')+" health case in total";
                 }
 
                 $('.details_content_label').remove();
@@ -797,7 +743,6 @@ function display_map()
                     disease_type:disease_type,
                     date_range_from:date_range_from,
                     date_range_to:date_range_to,
-                    active_inactive:active_inactive,
                     gender:gender,
                     min_age:min_age,
                     max_age:max_age,
@@ -936,14 +881,6 @@ function display_map()
 
                     $('#filter-map').modal('toggle');
 
-                    if(active_inactive === "default")
-                    {
-                     active_inactive_validator = "default"
-                    }
-                    else
-                    {
-                      active_inactive_validator = "(Active)"
-                    }
                     current_status()
                     markers()
                 }
@@ -953,10 +890,8 @@ function display_map()
            {
             $("#active_only_btn").addClass("d-none")
             $("#all_cases").removeClass("d-none")
-    
-                active_inactive = "default"
+
                 disease_type = "default"
-                active_inactive_validator = "default"
                 date_range_from = "default";
                 date_range_to = "default";
                 tittle_disease_type = "All Diseases"
@@ -981,25 +916,6 @@ function display_map()
     
                 current_status()
                 markers()
-    
-           })
-    
-           $("#active_only_btn").click(function()
-           {
-                $("#active_only_btn").addClass("d-none")
-                $("#all_cases").removeClass("d-none")
-    
-                active_inactive = "default"
-    
-           })
-    
-           $("#all_cases").click(function()
-           {
-             $("#active_only_btn").removeClass("d-none")
-             $("#all_cases").addClass("d-none")
-    
-    
-                active_inactive = "(Active)"
     
            })
         

@@ -35,7 +35,7 @@ include('includes/sidebar.php');
 <?php include('delete/delete-barangay.php') ?>
 <!--delete barangay modal end-->  
 
-<div class="body flex-grow-1 px-5 pt-3  pb-3"> 
+<div class="body flex-grow-1 px-lg-5 px-sm-0 pt-3  pb-3"> 
 <div class="container-fluid">
 
 

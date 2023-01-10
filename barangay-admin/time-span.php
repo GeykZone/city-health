@@ -56,7 +56,6 @@ include('includes/sidebar.php');
   <a style="padding-top: 7px; padding-bottom: 7px;" class=" me-2 mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder dropdown-toggle"  id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false" >TYPES <span class="fa-solid ms-1"></span></a>
   <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
     <li><a class="dropdown-item" href="graphical-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Disease Statistic</a></li>
-    <li><a class="dropdown-item" href="recoveries_and_deaths.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Recoveries & Deaths</a></li>
     <li><a class="dropdown-item" href="time-span.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Time Span</a></li>
   </ul> 
   </div>
@@ -87,7 +86,7 @@ include('includes/sidebar.php');
 <div class=" container-fluid mt-3">
   <div class="row ">
     <div class="col-12 d-flex text-dark" style=" opacity: 0.65;">
-    <span class="fa-regular me-3" style="margin-top: 2px;"></span><h6 class=""><span id="map_disease"></span><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_barangay"></span><span id="map_gender"></span><span id="map_min_age"></span><span id="map_max_age"></span><span></span></h6>
+    <span class="fa-regular me-3" style="margin-top: 2px;"></span><h6 class=""><span id="map_disease"></span><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_barangay"></span><span id="map_gender"></span><span id="map_min_age"></span><span id="map_max_age"></span><span id="map_totals"></span></h6>
     </div>
   </div>
 </div>

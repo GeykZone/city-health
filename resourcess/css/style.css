@@ -228,6 +228,10 @@ body {
   background: linear-gradient(45deg,#40a3ff,#73bbff);
 }
 
+.bg-c-metal_blue {
+  background: linear-gradient(45deg,#2979e2,#2979e2);
+}
+
 .bg-c-opposite_blue {
   background: linear-gradient(45deg,#73bbff,#40a3ff);
 }

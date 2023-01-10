@@ -2,7 +2,6 @@ var barangay_name = my_barangay_id;
 var disease_type = "default";
 var date_range_from = "default";
 var date_range_to = "default";
-var active_inactive = "default"
 var query_click = "unclicked";
 var gender = "default";
 
@@ -26,14 +25,11 @@ var xx_value =[];
 var x_y_value = "";
 var xValues = "";
 var yValues = ""; 
-var largets_total = Math.max(...y_value) //get the largest element of the brg resident array
-var myColors=[];
-var myPoints=[]
-var data_set_handler = [];
+var myColors;
+
 
 var barangay_title = my_barangay_name;
 var disease_title
-var active_inactive_validator = "default"
 var details_title;
 var date_range_title;
 
@@ -41,6 +37,8 @@ var sort = "names";
 
 var min_age = "default";
 var max_age = "default";
+
+var total
 
 
 $(document).ready(function()
@@ -109,14 +107,7 @@ function current_status()
         $("#map_disease").text("All "+disease_title+" ")   
     }
 
-    if(active_inactive === "default")
-    {
-        $("#map_cases").text("health cases, documented ")
-    }
-    else
-    {
-        $("#map_cases").text("health cases that are currently active, and were documented ") 
-    }
+    $("#map_cases").text("health cases, documented ")
     
     if(gender === "default")
     {
@@ -125,12 +116,12 @@ function current_status()
     }
     else
     {   
-        if(gender === "F (Female)")
+        if(gender === "Female")
         {
             $("#map_gender").text(", female records")
             $(".details_head_gender").text("Female records")
         }
-        else if(gender === "M (Male)")
+        else if(gender === "Male")
         {
             $("#map_gender").text(", male records")
             $(".details_head_gender").text("Male records")
@@ -271,7 +262,7 @@ function (data, textStatus, jqXHR)
   selectize_diseases = data;
 });
 
-if( selectize_diseases != undefined)
+if(selectize_diseases != undefined)
 {
 
   var selectize_diseases_data = selectize_diseases;
@@ -345,7 +336,6 @@ $(".selectize-control").removeClass("form-control barangay-form")
      barangay_name:barangay_name,
      date_range_from:date_range_from,
      date_range_to:date_range_to,
-     active_inactive:active_inactive,
      gender:gender,
      max_age:max_age,
      min_age:min_age,
@@ -483,7 +473,38 @@ $(".selectize-control").removeClass("form-control barangay-form")
  
    xValues = x_value;
    yValues = y_value; 
- 
+
+   
+    //generate a color base on percentage
+
+   total = 0; $.each(yValues, function(index, value) { total += parseInt(value); }); 
+
+   if(isNaN(total))
+   {
+    total=0;
+   }
+
+   if(parseInt(total) <= 100){
+    myColors="#b3e6ffff";
+   
+    }
+    else if(parseInt(total) <= 500)
+    {
+      myColors="#80d5ffff";
+     
+    }
+    else if(parseInt(total) <= 1000)
+    {
+      myColors="#4dc4ffff";
+      
+    }
+    else{
+      myColors="#07a3f1ff";
+      
+    }
+
+   $("#map_totals").text(", ("+total.toLocaleString('en-US')+") in total")
+
  }
   //initalize chart values end
  
@@ -493,30 +514,32 @@ $(".selectize-control").removeClass("form-control barangay-form")
    chart_array()
   // console.log(x_value)
 
-   const data_sets = [{
+   const data_sets = [
+
+    {
+     type: 'line', 
      label: "",
      data: yValues,
-     backgroundColor: "#67c2ff1a",
-     pointBackgroundColor: "#6cc4f0ff",
-     pointHoverBackgroundColor: "#6cc4f0ff",
-     borderColor: "#6cc4f0ff",
-     borderWidth: 2,
-     //borderRadius: 8,
-     pointRadius: 2,
+     backgroundColor: myColors,
+     pointBackgroundColor: myColors,
+     pointHoverBackgroundColor: myColors,
+     borderColor: "#6cc4f000",
+     borderWidth: 1,
+     borderRadius: 1,
+     pointRadius: 1.3,
      hoverRadius:5,
      borderSkipped: true,
      barPercentage: 0.8,
      categoryPercentage:0.8,
      fill: true,
-     tension: 0.3
-    // stepped: true,
-   },]
+     tension: 0.3,
+    //stepped: true,
+   }]
  
  
    //initialize chart
    const ctx = $('#hpChart');
    myChart = new Chart(ctx, {
-   type: 'line',
    options: {
     onClick: (e, elements) => {
 
@@ -530,73 +553,32 @@ $(".selectize-control").removeClass("form-control barangay-form")
         var display_diseases_that_occured = "";
         var details_title;
     
-        if(active_inactive === "default")
+        $(".details_head_status").text("All documented health cases on "+date_range_title)
+
+        if(disease_type != "default")
         {
-            $(".details_head_status").text("All documented health cases on "+date_range_title)
+          $(".details_head_status").text("All documented health cases caused by "+disease_title+" on "+date_range_title)
 
-            if(disease_type != "default")
-            {
-              $(".details_head_status").text("All documented health cases caused by "+disease_title+" on "+date_range_title)
+        }
+        else if(barangay_name != "default")
+        {
+          $(".details_head_status").text("All documented health cases on "+date_range_title+" in barangay "+barangay_title)
 
-            }
-            else if(barangay_name != "default")
-            {
-              $(".details_head_status").text("All documented health cases on "+date_range_title+" in barangay "+barangay_title)
+        }
 
-            }
+        if(barangay_name != "default" && disease_type != "default")
+        {
+          $(".details_head_status").text("All documented health cases caused by "+disease_title+" on "+date_range_title+" in barangay "+barangay_title)
 
-            if(barangay_name != "default" && disease_type != "default")
-            {
-              $(".details_head_status").text("All documented health cases caused by "+disease_title+" on "+date_range_title+" in barangay "+barangay_title)
+        }
 
-            }
-
+        if(yValues[current_index] != 1)
+        {
+          details_title = "There are "+parseInt(yValues[current_index]).toLocaleString('en-US')+" health cases in total";
         }
         else
         {
-
-            $(".details_head_status").text("All documented health cases that are currently active on "+date_range_title)
-
-            if(disease_type != "default")
-            {
-              $(".details_head_status").text("All documented health cases that are currently active caused by "+disease_title+" on "+date_range_title)
-
-            }
-            else if(barangay_name != "default")
-            {
-              $(".details_head_status").text("All documented health cases that are currently active on "+date_range_title+" in barangay "+barangay_title)
-
-            }
-
-            if(barangay_name != "default" && disease_type != "default")
-            {
-              $(".details_head_status").text("All documented health cases that are currently active caused by "+disease_title+" on "+date_range_title+" in barangay "+barangay_title)
-
-            }
-        }
-
-        if(active_inactive_validator === "default")
-        {
-            if(yValues[current_index] != 1)
-            {
-              details_title = "There are "+parseInt(yValues[current_index]).toLocaleString('en-US')+" health cases in total";
-            }
-            else
-            {
-              details_title = "There is only "+parseInt(yValues[current_index]).toLocaleString('en-US')+" health case in total";
-            }
-        }
-        else
-        {
-          if(yValues[current_index] != 1)
-          {
-            details_title = "There are "+parseInt(yValues[current_index]).toLocaleString('en-US')+" currently active health cases in total";
-          }
-          else
-          {
-            details_title = "There is only "+parseInt(yValues[current_index]).toLocaleString('en-US')+" currently active health case in total";
-          }
-          
+          details_title = "There is only "+parseInt(yValues[current_index]).toLocaleString('en-US')+" health case in total";
         }
         
 
@@ -612,7 +594,6 @@ $(".selectize-control").removeClass("form-control barangay-form")
           disease_type:disease_type,
           date_range_from:date_range_from,
           date_range_to:date_range_to,
-          active_inactive:active_inactive,
           gender:gender,
           max_age:max_age,
           min_age:min_age,
@@ -687,22 +668,11 @@ $(".selectize-control").removeClass("form-control barangay-form")
            callbacks: {
                label: function(context) { 
 
-                  if(active_inactive_validator === "default")
-                  {
-                    var modified_label = parseInt(context.parsed.y).toLocaleString('en-US')+" health cases in total"
-                    if(context.parsed.y == 1)
-                    {
-                      var modified_label = parseInt(context.parsed.y).toLocaleString('en-US')+" health case in total"
-                    }
-                  }
-                  else
-                  {
-                    var modified_label = parseInt(context.parsed.y).toLocaleString('en-US')+" currently active health cases in total"
-                    if(context.parsed.y == 1)
-                    {
-                      var modified_label = parseInt(context.parsed.y).toLocaleString('en-US')+" currently active health case in total"
-                    }
-                  }
+                var modified_label = parseInt(context.parsed.y).toLocaleString('en-US')+" health cases in total"
+                if(context.parsed.y == 1)
+                {
+                  var modified_label = parseInt(context.parsed.y).toLocaleString('en-US')+" health case in total"
+                }
                    
  
                  return modified_label           
@@ -749,7 +719,48 @@ function update_chart()
 chart_array();
 myChart.data.labels = x_value;
 myChart.data.datasets[0].data = y_value;
-myChart.update();
+myChart.update(function()
+{
+
+  if(parseInt(total) <= 100){
+    myColors="#b3e6ffff";
+    myChart.data.datasets[0].backgroundColor = '#b3e6ffff';
+    myChart.data.datasets[0].pointBackgroundColor = '#b3e6ffff';
+    myChart.data.datasets[0].pointHoverBackgroundColor = '#b3e6ffff';
+    myChart.data.datasets[0].borderColor = '#b3e6ffff';
+   
+    }
+    else if(parseInt(total) <= 500)
+    {
+      myColors="#80d5ffff";
+      myChart.data.datasets[0].backgroundColor = '#80d5ffff';
+      myChart.data.datasets[0].pointBackgroundColor = '#80d5ffff';
+      myChart.data.datasets[0].pointHoverBackgroundColor = '#80d5ffff';
+      myChart.data.datasets[0].borderColor = '#80d5ffff';
+     
+    }
+    else if(parseInt(total) <= 1000)
+    {
+      myColors="#4dc4ffff";
+      myChart.data.datasets[0].backgroundColor = '#4dc4ffff';
+      myChart.data.datasets[0].pointBackgroundColor = '#4dc4ffff';
+      myChart.data.datasets[0].pointHoverBackgroundColor = '#4dc4ffff';
+      myChart.data.datasets[0].borderColor = '#4dc4ffff';
+      
+    }
+    else{
+      myColors="#07a3f1ff";
+      myChart.data.datasets[0].backgroundColor = '#07a3f1ff';
+      myChart.data.datasets[0].pointBackgroundColor = '#07a3f1ff';
+      myChart.data.datasets[0].pointHoverBackgroundColor = '#07a3f1ff';
+      myChart.data.datasets[0].borderColor = '#07a3f1ff';
+      
+    }
+
+});
+
+
+
 }
 //update chart end
 
@@ -774,26 +785,6 @@ $("#sort_cases").click(function(e){
   })
   //sort chart end
 
-//active and all-time cases
-$("#disease_active_only_btn").click(function()
-{
-     $("#disease_active_only_btn").addClass("d-none")
-     $("#disease_all_cases").removeClass("d-none")
-
-     active_inactive = "default"
-
-})
-
-$("#disease_all_cases").click(function()
-{
-  $("#disease_active_only_btn").removeClass("d-none")
-  $("#disease_all_cases").addClass("d-none")
-
-
-     active_inactive = "(Active)"
-
-})
-//active and all-time cases end
 
 
 //filter chart
@@ -883,14 +874,6 @@ $("#disease_date_range_btn").click(function()
          date_range_to = to_input;
          $('#filter-time').modal('toggle');
 
-         if(active_inactive === "default")
-         {
-          active_inactive_validator = "default"
-         }
-         else
-         {
-           active_inactive_validator = "(Active)"
-         }
 
          current_status()
          update_chart()
@@ -901,11 +884,7 @@ $("#disease_date_range_btn").click(function()
 //back to default record
 $("#current_year").click(function()
 {
- $("#disease_active_only_btn").addClass("d-none")
- $("#disease_all_cases").removeClass("d-none")
 
-     active_inactive = "default"
-     active_inactive_validator = "default"
      date_range_from = "default";
      date_range_to = "default";
      gender = "default";

@@ -67,16 +67,6 @@
           </div>
         </div>
 
-        <div class="mb-3 ms-1">
-        <a  class="btn text-dark text-opacity-75 rounded-1 border-0 p-0 text-start" id="all_cases" type="button" style="min-width: 200px; font-weight:500;" >
-        <span id="span_check" class="fa-regular"></span><span class=" mx-2" id="active only">Active Cases Only</span>
-        </a>
-
-        <a  class="btn text-dark  d-none rounded-1 border-0 p-0  text-start" id="active_only_btn" type="button"  style="min-width: 200px; font-weight:500;">
-        <span id="span_check" class="fa-solid"></span><span class=" mx-2" id="active only">Active Cases Only</span>
-        </a>
-        </div>
-
       </fieldset>
       </form>
 

@@ -44,7 +44,7 @@ include('includes/sidebar.php');
 <?php include('update/deactivate-barangay-admin.php'); ?>
 <!--delete barangay admin modal end-->
 
-<div class="body flex-grow-1 px-5 pt-3 pb-3"> 
+<div class="body flex-grow-1 px-lg-5 px-sm-0 pt-3 pb-3"> 
 <div class="container-fluid">
 
 <!--Admins-->
