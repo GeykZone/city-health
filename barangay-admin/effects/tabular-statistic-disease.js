@@ -1,6 +1,6 @@
 
 var table = "";
-var select_brgy = "";
+var select_brgy = my_barangay_name;
 var disease_txt = "";
 var created_at = new Date();
 var dd = String(created_at.getDate()).padStart(2, '0');
@@ -113,7 +113,7 @@ function load_data_tables()
         }      
         
       },
-      order: [[4,'DESC']],
+      order: [[3,'DESC']],
 
       "language": {
         "info": "Showing _START_ to _END_ of _TOTAL_ entries",
@@ -135,13 +135,6 @@ function load_data_tables()
             }
       
           },
-          {
-              render: function(data)
-              {
-                return '<div class = "text-center pe-3">'+data+'</div>'
-              }
-        
-            },
         {
             render: function(data)
             {
@@ -166,7 +159,7 @@ function load_data_tables()
   
           title: 'Health Profile Clustering System',
   
-          messageTop: 'Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
+          messageTop: 'Barangay '+my_barangay_name+' Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
           //className: 'fa fa-solid fa-clipboard',
           
   
@@ -175,7 +168,7 @@ function load_data_tables()
               page: 'current'
           },
             //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-            columns: [0,1,2,3,4],
+            columns: [0,1,2,3],
             // optional space between columns
             columnGap: 1
           }
@@ -187,7 +180,7 @@ function load_data_tables()
   
           title: 'Health Profile Clustering System',
   
-          messageTop: 'Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
+               messageTop: 'Barangay '+my_barangay_name+' Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
           //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
           
   
@@ -196,7 +189,7 @@ function load_data_tables()
               page: 'current'
           },
             //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-            columns: [0,1,2,3,4],
+            columns: [0,1,2,3],
             // optional space between columns
             columnGap: 1
           }
@@ -208,7 +201,7 @@ function load_data_tables()
   
           title: 'Health Profile Clustering System',
   
-          messageTop: 'Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
+               messageTop: 'Barangay '+my_barangay_name+' Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
           //className: 'fa fa-print',
           
   
@@ -217,7 +210,7 @@ function load_data_tables()
               page: 'current'
           },
             //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-            columns: [0,1,2,3,4],
+            columns: [0,1,2,3],
             // optional space between columns
             columnGap: 1
           },
@@ -246,11 +239,6 @@ function load_data_tables()
         {
         
           $(this).html('<div class="text-center" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid me-2"></span>Gender</span></div>');
-        }
-        else if(title === "Barangay")
-        {
-        
-          $(this).html('<div class="text-center pe-2" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid me-2"></span>Barangay</span></div>');
         }
         else
         {
@@ -303,7 +291,6 @@ $("#disease_date_range_btn").click(function()
   var click_min_age = $("#age_min").val();
   var click_max_age = $("#age_max").val();
   var filter_gender = $("#disease_select_gender").val();
-  var filter_barangay = $("#disease_selecte_barangay").text();
 
   var d_from = new Date(from_input)
   var d_to = new  Date(to_input)
@@ -335,7 +322,6 @@ $("#disease_date_range_btn").click(function()
         min_age = click_min_age;
         max_age = click_max_age;
         gender = filter_gender;
-        select_brgy = filter_barangay;
         query_btn = "clicked";
       
 
@@ -346,12 +332,6 @@ $("#disease_date_range_btn").click(function()
         if(gender != "")
         {
           results[a] = "  Gender: "+gender+""
-          a+=1
-        }
-
-        if(select_brgy != "")
-        {
-          results[a] = "  Barangay: "+select_brgy+""
           a+=1
         }
 
@@ -432,9 +412,6 @@ $("#current_year").click(function()
   $("#age_min").val("");
   $("#age_max").val("");
   var $select = $('#disease_select_gender').selectize();
-  var control = $select[0].selectize;
-  control.clear();
-  var $select = $('#disease_selecte_barangay').selectize();
   var control = $select[0].selectize;
   control.clear();
   from_tittle="";

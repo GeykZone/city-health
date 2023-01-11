@@ -202,7 +202,7 @@ function load_data_tables()
         {
             render: function(data)
             {
-              return '<div class = "text-center">'+data+'</div>'
+              return '<div class = "text-center pe-3">'+data+'</div>'
             }
       
           },
