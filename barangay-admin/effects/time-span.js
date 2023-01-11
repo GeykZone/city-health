@@ -554,7 +554,7 @@ $(".selectize-control").removeClass("form-control barangay-form")
         var current_index = elements[0].index;
 
         date_range_title =  x_value[current_index];
-        $("#details_title").text(x_value[current_index]+" Health Statistic")
+        $("#details_title").text(x_value[current_index]+"")
         var all_dates = xx_value[current_index];
         var display_diseases_that_occured = "";
         var details_title;

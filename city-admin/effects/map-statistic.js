@@ -617,7 +617,7 @@ function display_map()
                     cluster = 'Critical'
                 }
 
-                $("#details_title").text("Barangay "+cont.title+" Health Statistic")
+                $("#details_title").text("Barangay "+cont.title+"")
 
                 $(".details_head_status").text("All documented health cases in barangay "+cont.title)
             
@@ -714,7 +714,7 @@ function display_map()
                     cluster = 'Critical'
                 }
 
-                $("#details_title").text("Barangay "+cont.title+" Health Statistic")
+                $("#details_title").text("Barangay "+cont.title+"")
 
                 $(".details_head_status").text("All documented health cases in barangay "+cont.title)
             

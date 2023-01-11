@@ -185,7 +185,7 @@ if ( ! $.fn.DataTable.isDataTable( '#diseases_table' ) ) { // check if data tabl
     },
 
 
-    "lengthMenu": [[10, 15, 20, 25, 50], [10, 15, 20, 25, 50]],
+    "lengthMenu": [[10, 50, 100, 500, 1000], [10, 50, 100, 500, 1000]],
 
 
       //disable the sorting of colomn

@@ -28,7 +28,6 @@ $(document).ready(function()
 
     select_list() 
     oneTip()
-    select_for_disease()
     date_range()
     load_data_tables()
 })
@@ -58,79 +57,23 @@ return date.toLocaleString('en-US', { month: 'long' });
 // selectize ordinary
 function select_list() 
 {
-  $('.select_list').selectize({
+  $('select').selectize({
       // maxItems: '1',
       sortField: 'text'
       });
 }
 // selectize ordinary end
   
-// for select diseases
-function select_for_disease()
-{  
-var selectize_diseases ;
-$.ajaxSetup({async:false});
-$.getJSON('functions/display-functions/select_diseases.php', 
-{
-}, 
-function (data, textStatus, jqXHR) 
-{
-selectize_diseases = data;
-});
-
-if(selectize_diseases != undefined)
-{
-var selectize_diseases_data = selectize_diseases;
-var items = selectize_diseases_data.map(function(x) 
-{ 
-    //remove the first words
-    var one = x.substr(x.indexOf(" ") + 1);
-
-    //remove last word
-    function removeLastWord(str) 
-    {
-        const lastIndexOfSpace = str.lastIndexOf(' ');
-    
-        if (lastIndexOfSpace === -1) {
-        return str;
-        }
-        return str.substring(0, lastIndexOfSpace);
-    }
-
-    var text_label = removeLastWord(x)
-    text_label = text_label.split('_').join(' ') 
-
-    return {
-        item: one,
-        field: text_label
-    };
-    
-});
-
-}
-
-$('#select_diseases').selectize
-({
-    options: items,
-    labelField: "field",
-    valueField: "item",
-    searchField: "field"
-});
-
-$(".selectize-control").removeClass("form-control barangay-form")
-}
-// for select diseases  end
-  
 //date picker
 function date_range()
 {
 
-$("#range_from").datepicker({
+$("#disease_range_from").datepicker({
     dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
     });
 
 
-    $("#range_to").datepicker({
+    $("#disease_range_to").datepicker({
         dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
         });
 
@@ -155,9 +98,9 @@ function load_data_tables()
       "ajax": {
           url: ajax_url,
           data: {
-            tabular_barangay:"set",
+            tabular_diseases:"set",
             gender:gender,
-            disease_txt:disease_txt,
+            select_brgy:select_brgy,
             date_range_from:date_range_from,
             date_range_to:date_range_to,
             query_btn:query_btn,
@@ -181,7 +124,7 @@ function load_data_tables()
         scrollCollapse: true,
   
       "dom": 'Brltip',      
- "lengthMenu": [[10, 50, 100, 500, 1000], [10, 50, 100, 500, 1000]],
+      "lengthMenu": [[10, 50, 100, 500, 1000], [10, 50, 100, 500, 1000]],
   
       "columns": [
         null,
@@ -223,7 +166,7 @@ function load_data_tables()
   
           title: 'Health Profile Clustering System',
   
-          messageTop: 'Barangay Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
+          messageTop: 'Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
           //className: 'fa fa-solid fa-clipboard',
           
   
@@ -244,7 +187,7 @@ function load_data_tables()
   
           title: 'Health Profile Clustering System',
   
-          messageTop: 'Barangay Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
+          messageTop: 'Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
           //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
           
   
@@ -265,7 +208,7 @@ function load_data_tables()
   
           title: 'Health Profile Clustering System',
   
-          messageTop: 'Barangay Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
+          messageTop: 'Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
           //className: 'fa fa-print',
           
   
@@ -304,10 +247,10 @@ function load_data_tables()
         
           $(this).html('<div class="text-center" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid me-2"></span>Gender</span></div>');
         }
-        else if(title === "Diagnosis")
+        else if(title === "Barangay")
         {
         
-          $(this).html('<div class="text-center pe-2" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid me-2"></span>Diagnosis</span></div>');
+          $(this).html('<div class="text-center pe-2" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid me-2"></span>Barangay</span></div>');
         }
         else
         {
@@ -353,14 +296,14 @@ function load_data_tables()
 //show data tables end
 
 //filter date range
-$("#date_range_btn").click(function()
+$("#disease_date_range_btn").click(function()
 {
-  var from_input = $("#range_from").val()
-  var to_input = $("#range_to").val()
+  var from_input = $("#disease_range_from").val()
+  var to_input = $("#disease_range_to").val()
   var click_min_age = $("#age_min").val();
   var click_max_age = $("#age_max").val();
-  var filter_gender = $("#select_gender").val();
-  var filter_disease = $("#select_diseases").text();
+  var filter_gender = $("#disease_select_gender").val();
+  var filter_barangay = $("#disease_selecte_barangay").text();
 
   var d_from = new Date(from_input)
   var d_to = new  Date(to_input)
@@ -392,7 +335,7 @@ $("#date_range_btn").click(function()
         min_age = click_min_age;
         max_age = click_max_age;
         gender = filter_gender;
-        disease_txt = filter_disease;
+        select_brgy = filter_barangay;
         query_btn = "clicked";
       
 
@@ -406,9 +349,9 @@ $("#date_range_btn").click(function()
           a+=1
         }
 
-        if(disease_txt != "")
+        if(select_brgy != "")
         {
-          results[a] = "  Diagnosis: "+disease_txt+""
+          results[a] = "  Barangay: "+select_brgy+""
           a+=1
         }
 
@@ -475,7 +418,7 @@ $("#date_range_btn").click(function()
         $(".dataTables_paginate ").remove();
 
         load_data_tables()
-        $("#filter-map").modal("toggle");
+        $("#filter-diseases").modal("toggle");
   }
 
 })
@@ -484,16 +427,14 @@ $("#date_range_btn").click(function()
 //refresh table back to current data
 $("#current_year").click(function()
 {
-  $("#range_from").val("");
-  $("#range_to").val("");
-  $("#range_from").val("");
-  $("#range_to").val("");
+  $("#disease_range_from").val("")
+  $("#disease_range_to").val("")
   $("#age_min").val("");
   $("#age_max").val("");
-  var $select = $('#select_gender').selectize();
+  var $select = $('#disease_select_gender').selectize();
   var control = $select[0].selectize;
   control.clear();
-  var $select = $('#select_diseases').selectize();
+  var $select = $('#disease_selecte_barangay').selectize();
   var control = $select[0].selectize;
   control.clear();
   from_tittle="";
@@ -519,48 +460,48 @@ $("#current_year").click(function()
 
 
 // cange color of date field when value is not 0
-$("#range_from").change(function()
+$("#disease_range_from").change(function()
 {
 
-if($("#range_from").val().trim().length === 0)
-{
-  $('#range_from').css(
-    {
-        'cssText': 'color:#818a99 !important'
-    }
+  if($("#disease_range_from").val().trim().length === 0)
+  {
+    $('#disease_range_from').css(
+      {
+          'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#disease_range_from').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
     );
-}
-else
-{
-  $('#range_from').css(
-    {
-        'cssText': 'color: #333 !important'
-    }
-  );
 
-}
+  }
 
 })
 
-$("#range_to").change(function()
+$("#disease_range_to").change(function()
 {
 
-if($("#range_to").val().trim().length === 0)
-{
-  $('#range_to').css(
-    {
-      'cssText': 'color:#818a99 !important'
-    }
-    );
-}
-else
-{
-  $('#range_to').css(
-    {
-        'cssText': 'color: #333 !important'
-    }
-    );
-}
+  if($("#disease_range_to").val().trim().length === 0)
+  {
+    $('#disease_range_to').css(
+      {
+        'cssText': 'color:#818a99 !important'
+      }
+      );
+  }
+  else
+  {
+    $('#disease_range_to').css(
+      {
+          'cssText': 'color: #333 !important'
+      }
+      );
+  }
 
 })
 // cange color of date field when value is not 0 end

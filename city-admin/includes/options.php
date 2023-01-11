@@ -16,5 +16,5 @@ id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false"
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header">Tabular Statistics</h6>
     <li><a class="dropdown-item" href="tabular-statistic-barangay.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Barangay Statistic Table</a></li>
-    <li><a class="dropdown-item" href="tabular-statistic-barangay.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Disease Statistic Table</a></li>
+    <li><a class="dropdown-item" href="tabular-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Disease Statistic Table</a></li>
 </ul>

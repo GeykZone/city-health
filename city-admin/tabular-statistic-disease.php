@@ -16,7 +16,7 @@ include('includes/sidebar.php');
 <!-- if breadcrumb is single--><span>City Admin</span>
 </li>
 <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
-<li class="breadcrumb-item active"><span>Barangay Statistic Table</span></li>
+<li class="breadcrumb-item active"><span>Disease Statistic Table</span></li>
 </ol>
 </nav>
 </div>
@@ -29,7 +29,7 @@ include('includes/sidebar.php');
 
 
 <!-- filter map hp -->
-<?php include "update/filter-map.php" ?>
+<?php include "update/filter-diseases.php" ?>
 <!-- filter map end -->
 
 
@@ -39,7 +39,7 @@ include('includes/sidebar.php');
 <div class="card border-0 mb-4  shadow-sm remove_rounded">
 
   <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-  <button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay Statistic Table
+  <button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Disease Statistic Table
   </div>  
 
   <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >
@@ -50,7 +50,7 @@ include('includes/sidebar.php');
         <div class="col-12 mb-lg-3 mb-sm-3 mt-lg-0 mt-sm-0 d-none" id="search_result"></div>
 
         <div class="col-lg-6 col-md-12 text-md-start align-content-center dropdown-center">
-        <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm mb-3 addbtn add-brgy px-3 fw-bolder" id="filter_graph" data-coreui-toggle="modal" href="#filter-map" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
+        <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm mb-3 addbtn add-brgy px-3 fw-bolder" id="filter_graph" data-coreui-toggle="modal" href="#filter-diseases" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
         </div>
 
         <div class="col-lg-6 col-md-12 text-lg-end text-md-start align-content-center dropdown-center">
@@ -64,8 +64,8 @@ include('includes/sidebar.php');
       <table class="table table-striped table-borderless table-condensed  mb-0 w-100" id="barangay_health_statistic"> 
         <thead class="table-info fw-semibold shadow-sm">
           <tr class="align-middle">
-          <th>Barangay</th>
-          <th class="text-center">Diagnosis</th>
+          <th>Diagnosis</th>
+          <th class="text-center">Barangay</th>
           <th class="text-center">Age Range</th>
           <th class="text-center">Gender</th>
           <th class="text-end px-4">Total Health Cases</th>
@@ -78,8 +78,8 @@ include('includes/sidebar.php');
         
         <tfoot class=" table-secondary fw-semibold shadow-sm" id="th_1">
           <tr class="align-middle" >
-            <td id="Barangay"  style="width:150px;"></td>
-            <td id="Diagnosis" style="min-width: 100px;"></td>
+            <td id="Diagnosis"  style="width:200px"></td>
+            <td id="Barangay" style="min-width: 100px;"></td>
             <td id="Age Range" style="min-width: 100px;"></td>
             <td id="Gender" style="min-width: 100px;"></td>
             <td id="Total Health Cases" style="width:165px;"></td>
@@ -109,7 +109,7 @@ include('includes/sidebar.php');
 <!--Footer end-->
 
 <!--scripts-->
-<script src="effects/tabular-statistic-barangay.js"></script>
+<script src="effects/tabular-statistic-disease.js"></script>
 <!--scripts end-->
 
 <!--scripts-->

@@ -327,7 +327,7 @@ function load_data_tables() {
         }
       ],
 
-      "lengthMenu": [[10, 15, 20, 25, 50], [10, 15, 20, 25, 50]],
+      "lengthMenu": [[10, 50, 100, 500, 1000], [10, 50, 100, 500, 1000]],
 
       //disable the sorting of colomn
       "columnDefs": [ {

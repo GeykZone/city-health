@@ -457,7 +457,7 @@ function number_of_resident_chart()
         var current_index = elements[0].index;
 
         title_diagnosis = x_value[current_index];
-        $("#details_title").text(x_value[current_index]+" Health Statistic")
+        $("#details_title").text(x_value[current_index]+"")
         var all_diseases_that_occured = xValues[current_index];
         var display_diseases_that_occured = "";
         var details_title;
