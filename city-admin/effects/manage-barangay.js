@@ -180,6 +180,11 @@ function load_data_tables() {
       "serverSide": true,
       "ajax": "functions/display-functions/show-barangay.php",  
       scrollCollapse: true,
+
+      "language": {
+        "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+        "infoFiltered":""
+      },
   
       "columns": [
   
@@ -408,6 +413,10 @@ function opentip_tooltip()
   var refresh_table_tooltip = $("#refresh_table")
   var myOpentip = new Opentip(refresh_table_tooltip, { showOn:"mouseover", tipJoint: "bottom", target:refresh_table_tooltip });
   myOpentip.setContent("Refresh Table"); // Updates Opentips content
+  $("body").click(function()
+  {
+    myOpentip.hide()
+  })
 }
 //generate a tooltip end
 

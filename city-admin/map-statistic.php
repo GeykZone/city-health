@@ -274,7 +274,7 @@ margin-top: 10px;
 <!-- if breadcrumb is single--><span>City Admin</span>
 </li>
 <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
-    <li class="breadcrumb-item active"><span>Map Visualization</span></li>
+<li class="breadcrumb-item active"><span>Map Visualization</span></li>
 </ol>
 </nav>
 </div>
@@ -308,12 +308,7 @@ margin-top: 10px;
   </div>
 
   <div class="col-lg-6 col-md-12 mt-3 text-lg-end align-content-center dropdown-center">
-  <a style="padding-top: 7px; padding-bottom: 7px;" class=" me-2 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder dropdown-toggle"  id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false">OPTIONS <span class="fa-solid ms-1"></span></a>
-  <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
-    <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Health Profiles</a></li>
-    <li><a class="dropdown-item" href="graphical-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Graphical Statistic</a></li>
-    <li><a class="dropdown-item" href="map-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Map Visualization</a></li>
-  </ul>
+  <?php include('includes/options.php'); ?>
   </div>
 
   </div>

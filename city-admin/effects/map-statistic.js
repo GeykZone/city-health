@@ -31,9 +31,11 @@ var map_center
 
 $(document).ready(function()
 {
-    current_status()
+    $("#hp_option").removeClass("mb-3")
+    $("#hp_option").addClass("mb-1")
     $(document).attr("title", "HPCS | Manage Health Profiles");
     $("#nav_hp").addClass("active");
+    current_status()
     date_range()
     select_list()
     select_for_disease()
@@ -48,7 +50,7 @@ $(document).ready(function()
     $( "#range_from" ).val(current_year_from);
     $( "#range_to" ).val(current_year_to);
 
-    display_map();
+   display_map();
 
     oneTip();
 
@@ -124,17 +126,23 @@ $(".selectize-control").removeClass("form-control barangay-form")
 function oneTip()
 {
     var current_year_tooltip = $("#current_year")
-    var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "bottom", target:current_year_tooltip, delay:0.50});
-    myOpentip.setContent("Back to current statistic."); // Updates Opentips content
+    current_year_tooltip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "bottom", target:current_year_tooltip, delay:0.50});
+    current_year_tooltip.setContent("Refresh Map"); // Updates Opentips content
 
     var show_overlay_tooltip = $("#show_overlay")
-    var myOpentip = new Opentip(show_overlay_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "bottom", target:show_overlay_tooltip, delay:0.50 });
-    myOpentip.setContent("Show map info."); // Updates Opentips content
+    show_overlay_tooltip = new Opentip(show_overlay_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "bottom", target:show_overlay_tooltip, delay:0.50 });
+    show_overlay_tooltip.setContent("Show Info"); // Updates Opentips content
   
     var hide_overlay_tooltip = $("#hide_overlay")
-    var myOpentip = new Opentip(hide_overlay_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "bottom", target:hide_overlay_tooltip, delay:0.50});
-    myOpentip.setContent("Hide map info."); // Updates Opentips content  
-    
+    hide_overlay_tooltip = new Opentip(hide_overlay_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "bottom", target:hide_overlay_tooltip, delay:0.50});
+    hide_overlay_tooltip.setContent("Hide Info"); // Updates Opentips content   
+
+    $("body").click(function()
+    {
+        current_year_tooltip.hide()
+        show_overlay_tooltip.hide()
+        hide_overlay_tooltip.hide()
+    })
 
 }
 

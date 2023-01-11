@@ -254,3 +254,4 @@ $("#close_update_username").click(function()
   $("#new_user").val("")
 })
 //clear fields when close end
+

@@ -107,7 +107,7 @@ if(isset($_GET['details_for_newCases']))
     }
     else if($total_newCases_count < 1)
     {
-        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
+        $total_newCases_number[] = "No Records Found";
     }
     else
     {
@@ -118,7 +118,7 @@ if(isset($_GET['details_for_newCases']))
     }
     else
     {
-        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
+        $total_newCases_number[] = "No Records Found";
     }
 
     $total_newCases_number = array_unique($total_newCases_number);
@@ -174,7 +174,7 @@ if(isset($_GET['details_for_totalCases']))
     }
     else if($total_newCases_count < 1)
     {
-        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
+        $total_newCases_number[] = "No Records Found";
     }
     else
     {
@@ -185,7 +185,7 @@ if(isset($_GET['details_for_totalCases']))
     }
     else
     {
-        $total_newCases_number[] = "There were no new health cases reported in Oroquieta City";
+        $total_newCases_number[] =  "No Records Found";
     }
 
     $total_newCases_number = array_unique($total_newCases_number);

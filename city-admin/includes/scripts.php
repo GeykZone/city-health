@@ -22,42 +22,56 @@
       $(document).ready(function()
       {
       var dashboard_icon_tooltip = $("#dashboard_icon")
-      var myOpentip = new Opentip(dashboard_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:dashboard_icon_tooltip, delay:0.50 });
-      myOpentip.setContent("Dashboard"); // Updates Opentips content
+      var myOpentip1 = new Opentip(dashboard_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:dashboard_icon_tooltip, delay:0.50 });
+      myOpentip1.setContent("Dashboard"); // Updates Opentips content
 
       var manage_barangay_icon_tooltip = $("#manage_barangay_icon")
-      var myOpentip = new Opentip(manage_barangay_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_barangay_icon_tooltip, delay:0.50 });
-      myOpentip.setContent("Manage Barangays"); // Updates Opentips content
+      var myOpentip2 = new Opentip(manage_barangay_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_barangay_icon_tooltip, delay:0.50 });
+      myOpentip2.setContent("Manage Barangays"); // Updates Opentips content
 
       var manage_residents_icon_tooltip = $("#manage_residents_icon")
-      var myOpentip = new Opentip(manage_residents_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_residents_icon_tooltip, delay:0.50 });
-      myOpentip.setContent("Manage Residents"); // Updates Opentips content
+      var myOpentip3 = new Opentip(manage_residents_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_residents_icon_tooltip, delay:0.50 });
+      myOpentip3.setContent("Manage Residents"); // Updates Opentips content
 
       var manage_users_icon_tooltip = $("#manage_users_icon")
-      var myOpentip = new Opentip(manage_users_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_users_icon_tooltip, delay:0.50 });
-      myOpentip.setContent("Manage Users"); // Updates Opentips content
+      var myOpentip4 = new Opentip(manage_users_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_users_icon_tooltip, delay:0.50 });
+      myOpentip4.setContent("Manage Users"); // Updates Opentips content
 
       var manage_diseases_Type_icon_tooltip = $("#manage_diseases_Type_icon")
-      var myOpentip = new Opentip(manage_diseases_Type_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_diseases_Type_icon_tooltip, delay:0.50 });
-      myOpentip.setContent("Manage Disease Types"); // Updates Opentips content
+      var myOpentip5 = new Opentip(manage_diseases_Type_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_diseases_Type_icon_tooltip, delay:0.50 });
+      myOpentip5.setContent("Manage Disease Types"); // Updates Opentips content
 
       var manage_hp_icon_tooltip = $("#manage_hp_icon")
-      var myOpentip = new Opentip(manage_hp_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_hp_icon_tooltip, delay:0.50 });
-      myOpentip.setContent("Manage Health Profiles"); // Updates Opentips content
+      var myOpentip6 = new Opentip(manage_hp_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_hp_icon_tooltip, delay:0.50 });
+      myOpentip6.setContent("Manage Health Profiles"); // Updates Opentips content
 
       var account_menu_tooltip = $("#account_menu")
-      var myOpentip = new Opentip(account_menu_tooltip, { showOn:"mouseover", tipJoint: "right", target:account_menu_tooltip, delay:0.50 });
-      myOpentip.setContent("Account Options"); // Updates Opentips content
+      var myOpentip7 = new Opentip(account_menu_tooltip, { showOn:"mouseover", tipJoint: "right", target:account_menu_tooltip, delay:0.50 });
+      myOpentip7.setContent("Account Options"); // Updates Opentips content
 
       var account_menu_tooltip = $(".sidebar-toggler")
-      var myOpentip = new Opentip(account_menu_tooltip, { showOn:"mouseover", tipJoint: "left", target:account_menu_tooltip, delay:0.50 }); 
-      myOpentip.setContent("Sidebar-toggler Minimize/Maximize"); // Updates Opentips content 
+      var myOpentip8 = new Opentip(account_menu_tooltip, { showOn:"mouseover", tipJoint: "left", target:account_menu_tooltip, delay:0.50 }); 
+      myOpentip8.setContent("Sidebar-toggler Minimize/Maximize"); // Updates Opentips content 
 
       var account_menu_tooltip = $(".header-toggler")
-      var myOpentip = new Opentip(account_menu_tooltip, { showOn:"mouseover", tipJoint: "left", target:account_menu_tooltip, delay:0.50 }); 
-      myOpentip.setContent("Sidebar-toggler Hide/Show"); // Updates Opentips content 
+      var myOpentip9 = new Opentip(account_menu_tooltip, { showOn:"mouseover", tipJoint: "left", target:account_menu_tooltip, delay:0.50 }); 
+      myOpentip9.setContent("Sidebar-toggler Hide/Show"); // Updates Opentips content 
+
+      $("body").click(function()
+      {
+        myOpentip1.hide()
+        myOpentip2.hide()
+        myOpentip3.hide()
+        myOpentip4.hide()
+        myOpentip5.hide()
+        myOpentip6.hide()
+        myOpentip7.hide()
+        myOpentip8.hide()
+        myOpentip9.hide()
+      })
 
       })
+    
     </script>
 
     <script type="module" src="../resourcess/js/sidebar.js"></script>

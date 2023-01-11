@@ -108,38 +108,38 @@ include('includes/sidebar.php');
 <div class="container-fluid">
 
 
-<div class="row">
+<div class="row pb-lg-0 pb-sm-4">
 
 <div  class="col-lg-4 col-sm-12 mb-4 ">
       <div class="card bg-c-light_blue  border-0 rounded-4 shadow-sm order-card"  >
       <div class="card-body adjust_font_size row ">
       <div  class="col-12 " id="hp_chart_row_brgy" >
       <canvas class=" bg-c-metal_blue rounded-4 p-3"  id="hpChart_brgy"   style="width:100%;  max-height:580px ;"></canvas> 
-      <div class="mt-2 row"><span class=" text-start col-6"><span class="shortCut_btn" id = "barangay_health_statistic_shorcut">Barangay Health Statistic</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
+      <div class="mt-2 row"><span class=" text-start col-6"><span class="shortCut_btn" id = "barangay_health_statistic_shorcut">Barangay Statistic Graph</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
       <div class="mt-1 fw-lighter opacity-75">One month ( <span class="oneMonthFrom mt-0"></span> - <span class="oneMonthTo mt-0"></span> )</div>
       </div>
       </div>
       </div>
     </div>
 
-      <div  class="col-lg-4 col-sm-12 mb-4 ">
+      <div  class="col-lg-4 col-sm-12 mb-4 mt-sm-2 mt-lg-0">
         <div class="card bg-c-light_blue border-0 rounded-4 shadow-sm order-card"  >
         <div class="card-body adjust_font_size row">
         <div  class="col-12" id="hp_chart_row_disease" >
         <canvas class="bg-c-metal_blue rounded-4 p-3"  id="hpChart_disease"   style="width:100%;  max-height:580px ;"></canvas> 
-        <div class="mt-2 row"><span class=" text-start col-6"><span class="shortCut_btn"  id = "disease_statistic_shorcut" >DIsease Statistic</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
+        <div class="mt-2 row"><span class=" text-start col-6"><span class="shortCut_btn"  id = "disease_statistic_shorcut" >Disease Statistic Graph</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
       <div class="mt-1 fw-lighter opacity-75">One month ( <span class="oneMonthFrom mt-0"></span> - <span class="oneMonthTo mt-0"></span> )</div>
         </div>
         </div>
         </div>
       </div>
 
-      <div  class="col-lg-4 col-sm-12 mb-4 ">
+      <div  class="col-lg-4 col-sm-12 mb-lg-4 mt-lg-0 mt-sm-2 mb-sm-3">
         <div class="card bg-c-light_blue border-0 rounded-4 shadow-sm order-card"  >
         <div class="card-body adjust_font_size row">
         <div  class="col-12" id="hp_chart_row_time" >
         <canvas class="bg-c-metal_blue rounded-4 p-3"  id="hpChart_time"   style="width:100%;  max-height:580px ;"></canvas> 
-        <div class="mt-2 row"><span class=" text-start col-6 " ><span class="shortCut_btn" id = "timespan_statistic_shorcut">Time Span</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
+        <div class="mt-2 row"><span class=" text-start col-6 " ><span class="shortCut_btn" id = "timespan_statistic_shorcut">Date-based Statistic Graph</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
       <div class="mt-1 fw-lighter opacity-75">One month ( <span class="oneMonthFrom mt-0"></span> - <span class="oneMonthTo mt-0"></span> )</div>
         </div>
         </div>
@@ -168,6 +168,7 @@ include('includes/sidebar.php');
           </div>
       </div>
     </div>
+    
     <div class="col-lg-12  col-sm-12 card-group  shortCut_btn" id="total_health_cases_btn">
       <div class="card  border-0 rounded-4 shadow-sm order-card" id="total_health_cases">
       <div class="card-body adjust_font_size row">
@@ -224,7 +225,7 @@ include('includes/sidebar.php');
   <table class="table table-condensed">
     <thead>
       <tr>
-        <th style="min-width:160px;" >
+        <th style="min-width:180px;" >
           Disease Name
         </th>
         <th  class="text-center" style="min-width: 160px;" >

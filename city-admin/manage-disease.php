@@ -44,7 +44,7 @@ include('includes/sidebar.php');
 <div class="card border-0 mb-4  shadow-sm remove_rounded">
 
   <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-  <button type="button" id="refresh_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Health Diseases
+  <button type="button" id="refresh_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Health Diseases
   </div>
 
   <div class="card-body border-0 shadow-sm  remove_rounded"  id="wrapper" >

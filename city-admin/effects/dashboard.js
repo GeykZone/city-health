@@ -470,7 +470,7 @@ function top_3_diseases_function()
     var current_year_tooltip = $("#top_3_disease_infect"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent(""+parseInt(top_3_diseases_results.total_diseases).toLocaleString('en-US')+" individuals in Oroquieta City were infected with "+disease_string+" from "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+""); // Updates Opentips content
+    myOpentip.setContent("A total of "+parseInt(top_3_diseases_results.total_diseases).toLocaleString('en-US')+" individuals in Oroquieta City were infected with "+disease_string+" from "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+""); // Updates Opentips content
 
     var current_year_tooltip = $("#top_3_disease_increase"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
@@ -617,28 +617,38 @@ function top_3_barangays_functions()
 function shurctuMenu()
 {
   var current_year_tooltip = $("#barangay_health_statistic_shorcut")
-  var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "Bottom", target:current_year_tooltip, delay:0.50});
-  myOpentip.setContent("View chart"); // Updates Opentips content
+  barangay_health_statistic_shorcut = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "Bottom", target:current_year_tooltip, delay:0.50});
+  barangay_health_statistic_shorcut.setContent("View Graph Chart"); // Updates Opentips content
+
   $("#barangay_health_statistic_shorcut").click(function()
   {
     location.href = 'graphical-statistic.php';
   })
 
   var current_year_tooltip = $("#disease_statistic_shorcut")
-  var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "Bottom", target:current_year_tooltip, delay:0.50});
-  myOpentip.setContent("View chart"); // Updates Opentips content
+  var disease_statistic_shorcut = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "Bottom", target:current_year_tooltip, delay:0.50});
+  disease_statistic_shorcut.setContent("View Graph Chart"); // Updates Opentips content
   $("#disease_statistic_shorcut").click(function()
   {
     location.href = 'graphical-statistic-disease.php';
   })
 
   var current_year_tooltip = $("#timespan_statistic_shorcut")
-  var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "Bottom", target:current_year_tooltip, delay:0.50});
-  myOpentip.setContent("View chart"); // Updates Opentips content
+  var timespan_statistic_shorcut = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "Bottom", target:current_year_tooltip, delay:0.50});
+  timespan_statistic_shorcut.setContent("View Graph Chart"); // Updates Opentips content
   $("#timespan_statistic_shorcut").click(function()
   {
     location.href = 'time-span.php';
   })
+
+  
+  $("body").click(function()
+  {
+    barangay_health_statistic_shorcut.hide()
+    disease_statistic_shorcut.hide()
+    timespan_statistic_shorcut.hide()
+  })
+
   
 }
 //shortcuts end

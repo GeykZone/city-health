@@ -97,7 +97,7 @@ function current_status()
         $("#map_barangay").text(" in barangay "+tittle_barangay)   
     }
 
-    $("#map_cases").text("All documented diseases, ")
+    $("#map_cases").text("All documented health cases, ")
     
     if(gender === "default")
     {
@@ -193,7 +193,12 @@ function objToString (obj) {
   {
       var current_year_tooltip = $("#current_year")
       var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "bottom", target:current_year_tooltip, delay:0.50});
-      myOpentip.setContent("Back to current statistic."); // Updates Opentips content
+      myOpentip.setContent("Refresh Graph Chart"); // Updates Opentips content
+
+      $("body").click(function()
+      {
+        myOpentip.hide()
+      })
   
   }
 //tooltp end

@@ -16,8 +16,7 @@ include('includes/sidebar.php');
 <!-- if breadcrumb is single--><span>City Admin</span>
 </li>
 <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
-<li class="breadcrumb-item active"><span>Graphical Statistic</span></li>
-<li class="breadcrumb-item active"><span> Barangay Health Statistic</span></li>
+<li class="breadcrumb-item active"><span> Barangay Statistic Graph</span></li>
 </ol>
 </nav>
 </div>
@@ -41,7 +40,7 @@ include('includes/sidebar.php');
 <div class="card border-0 mb-4 shadow-sm remove_rounded">
 
 <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-<button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay Health Statistic
+<button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay Statistic Graph
 </div>
 
   <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >
@@ -51,22 +50,10 @@ include('includes/sidebar.php');
 
   <div class="col-lg-6 col-md-12 text-md-start align-content-center dropdown-center">
   <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm  mb-3 me-2 addbtn add-brgy px-3 fw-bolder" id="sort_cases" role="button" >SORT <span class="fa-solid ms-1 fa-sort"></span></a>
-  
-  <a style="padding-top: 7px; padding-bottom: 7px;" class=" me-2 mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder dropdown-toggle"  id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false" >TYPES <span class="fa-solid ms-1"></span></a>
-  <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
-    <li><a class="dropdown-item" href="graphical-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Barangay Health Statistic</a></li>
-    <li><a class="dropdown-item" href="graphical-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Disease Statistic</a></li>
-    <li><a class="dropdown-item" href="time-span.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Time Span</a></li>
-  </ul> 
   </div>
 
   <div class="col-lg-6 col-md-12 text-lg-end text-md-start align-content-center dropdown-center">
-  <a style="padding-top: 7px; padding-bottom: 7px;" class=" me-2 mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder dropdown-toggle"  id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false" >OPTIONS <span class="fa-solid ms-1"></span></a>
-  <ul class="dropdown-menu align-content-center shadow border-0" id="hp_dropdown_options">
-    <li><a class="dropdown-item" href="manage-hp.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Health Profiles</a></li>
-    <li><a class="dropdown-item" href="graphical-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Graphical Statistic</a></li>
-    <li><a class="dropdown-item" href="map-statistic.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Map Visualization</a></li>
-  </ul>
+  <?php include('includes/options.php'); ?>
   <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm mb-3 addbtn add-brgy px-3 fw-bolder" id="filter_graph" data-coreui-toggle="modal" href="#filter-map" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
   </div>
 
@@ -87,7 +74,7 @@ include('includes/sidebar.php');
 <div class=" container-fluid mt-3">
   <div class="row ">
     <div class="col-12 d-flex text-dark" style=" opacity: 0.65;">
-    <span class="fa-regular me-3" style="margin-top: 2px;"></span><h6 class=""><span id="map_disease"></span><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_gender"></span><span id="map_min_age"></span><span id="map_totals"></span></h6>
+    <span class="fa-regular me-3" style="margin-top: 2px;"></span><h6 class=""><span id="map_disease"></span><span id="map_cases"></span><span id="map_from"></span><span id="map_to"></span><span id="map_gender"></span><span id="map_min_age"></span><span id="map_max_age"></span><span id="map_totals"></span></h6>
     </div>
   </div>
 </div>

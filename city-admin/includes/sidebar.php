@@ -30,6 +30,7 @@ if(!isset($_COOKIE["sidebar"])) {
         <li class="nav-item" ><a class="nav-link" href="manage-hp.php" id="nav_hp">
         <i id="manage_hp_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Health Profiles</a>
         </li>
+
       </ul>
       <button  class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
     </div>

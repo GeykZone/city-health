@@ -29,15 +29,16 @@
 <meta name="msapplication-TileImage" content="../resourcess/assets/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 
+
+<!-- Main styles for this application-->
+<link href="../resourcess/css/style.css" rel="stylesheet">
+
 <!-- Vendors styles-->
 <link rel="stylesheet" href="../resourcess/vendors/simplebar/css/simplebar.css">
 <link rel="stylesheet" href="../resourcess/css/vendors/simplebar.css">
 
 <!--jquery-->
 <script src="../resourcess/js/jquery.min.js"></script>
-
-  <!-- Main styles for this application-->
-<link href="../resourcess/css/style.css" rel="stylesheet">
 
 <!--usingjquery to create cokkie-->
 <script src="../resourcess/js-cookie/js.cookie.min.js"></script>
