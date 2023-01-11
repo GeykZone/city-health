@@ -74,7 +74,7 @@ include('includes/sidebar.php');
 <div class="row mb-1">
 
 <!--new-->
-  <div class="col-lg-12 col-sm-12 mb-lg-0 mb-sm-3">
+  <div class="col-lg-12 col-sm-12 mb-lg-0 mb-md-0 mb-sm-3">
   <div class="row ">
 
   <div  class="col-lg-6 col-sm-12 mb-4 ">
@@ -89,7 +89,7 @@ include('includes/sidebar.php');
         </div>
       </div>
 
-      <div  class="col-lg-6 col-sm-12 mb-4 mt-lg-0 mt-sm-3 ">
+      <div  class="col-lg-6 col-sm-12 mb-4 mt-lg-0 mt-md-0 mt-sm-3 ">
         <div class="card bg-c-light_blue border-0 rounded-4 shadow-sm order-card"  >
         <div class="card-body adjust_font_size row">
         <div  class="col-12" id="hp_chart_row_time" >
@@ -110,7 +110,7 @@ include('includes/sidebar.php');
   <div class="row">
 
   <div class="col-lg col-sm-12 card-group shortCut_btn" id="new_health_cases_btn">
-      <div class="card  border-0 rounded-4 shadow-sm order-card" id="new_health_cases">
+      <div class="card bg-c-dark_green  border-0 rounded-4 shadow-sm order-card" id="new_health_cases">
       <div class="card-body adjust_font_size row">
           <h4 >New Health Cases</h4>
           <p class="adjust_font_size fw-lighter opacity-75" >Current day ( <span class="today"></span> )</p>

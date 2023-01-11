@@ -108,9 +108,9 @@ include('includes/sidebar.php');
 <div class="container-fluid">
 
 
-<div class="row pb-lg-0 pb-sm-4">
+<div class="row" >
 
-<div  class="col-lg-4 col-sm-12 mb-4 ">
+      <div  class="col-lg-4 card-group mb-4 col-sm-12">
       <div class="card bg-c-light_blue  border-0 rounded-4 shadow-sm order-card"  >
       <div class="card-body adjust_font_size row ">
       <div  class="col-12 " id="hp_chart_row_brgy" >
@@ -122,7 +122,7 @@ include('includes/sidebar.php');
       </div>
     </div>
 
-      <div  class="col-lg-4 col-sm-12 mb-4 mt-sm-2 mt-lg-0">
+      <div  class="col-lg-4 card-group mb-4 col-sm-12">
         <div class="card bg-c-light_blue border-0 rounded-4 shadow-sm order-card"  >
         <div class="card-body adjust_font_size row">
         <div  class="col-12" id="hp_chart_row_disease" >
@@ -134,8 +134,8 @@ include('includes/sidebar.php');
         </div>
       </div>
 
-      <div  class="col-lg-4 col-sm-12 mb-lg-4 mt-lg-0 mt-sm-2 mb-sm-3">
-        <div class="card bg-c-light_blue border-0 rounded-4 shadow-sm order-card"  >
+      <div  class="col-lg-4 card-group mb-4 col-sm-12">
+        <div class="card bg-c-light_blue border-0 mb-lg-0 mb-sm-2 rounded-4 shadow-sm order-card"  >
         <div class="card-body adjust_font_size row">
         <div  class="col-12" id="hp_chart_row_time" >
         <canvas class="bg-c-metal_blue rounded-4 p-3"  id="hpChart_time"   style="width:100%;  max-height:580px ;"></canvas> 
@@ -145,20 +145,14 @@ include('includes/sidebar.php');
         </div>
         </div>
       </div>
-
 </div>
 
-<!--first-->
+<!--2-->
 <div class="row">
+
   <div class="col-lg-4 card-group col-sm-12">
-  <div class="row ">
-
-  <div class="col-lg-12 card-group col-sm-12">
-
-  <div class="row pb-4">
-
-  <div class="col-lg-12 col-sm-12  card-group mb-4 shortCut_btn" id="new_health_cases_btn">
-      <div class="card  border-0 rounded-4 shadow-sm order-card" id="new_health_cases">
+  <div class="col-lg-12 mb-4 col-sm-12 card-group shortCut_btn" id="new_health_cases_btn">
+      <div class="card bg-c-green border-0 rounded-4 shadow-sm order-card" id="new_health_cases">
       <div class="card-body adjust_font_size row">
           <h4 >New Health Cases</h4>
           <p class="adjust_font_size fw-lighter opacity-75" >Current day ( <span class="today"></span> )</p>
@@ -169,8 +163,8 @@ include('includes/sidebar.php');
       </div>
     </div>
     
-    <div class="col-lg-12  col-sm-12 card-group  shortCut_btn" id="total_health_cases_btn">
-      <div class="card  border-0 rounded-4 shadow-sm order-card" id="total_health_cases">
+    <div class="col-lg-12 mb-4 col-sm-12 card-group shortCut_btn" id="total_health_cases_btn">
+      <div class="card bg-c-green border-0 rounded-4 shadow-sm order-card" id="total_health_cases">
       <div class="card-body adjust_font_size row">
           <h4 >Total Health Cases</h4>
           <p class="adjust_font_size fw-lighter opacity-75" >One month ( <span class="oneMonthFrom"></span> - <span class="oneMonthTo"></span> )</p>
@@ -180,37 +174,30 @@ include('includes/sidebar.php');
           </div>
       </div>
     </div>
-
   </div>
 
-  </div>
 
-  </div>
-  </div>
-
-  <div class="col-lg-8 card-group mb-4">
+  <div class="col-lg-8 mb-4 col-sm-12 card-group">
     <div class="card border-0 rounded-3 shadow-sm">
     <div class=" card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card" >
-        <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Map Visualization<span id="map_record_info" class=" shortCut_btn"></span> <label class="adjust_font_size  opacity-75" > ( <span class="oneMonthFrom"></span> - <span class="oneMonthTo"></span> )</label></h6>
-      </div>
-      <div class=" card-body">
-      <div id="map_container" class=" card  rounded-3 border-0 shadow-sm">
-      <div id="map" class=" w-100 rounded-4"></div>
+    <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Map Visualization<span id="map_record_info" class=" shortCut_btn"></span> <label class="adjust_font_size  opacity-75" > ( <span class="oneMonthFrom"></span> - <span class="oneMonthTo"></span> )</label></h6>
+    </div>
+    <div class=" card-body">
+    <div id="map_container" class=" card  rounded-3 border-0 shadow-sm">
+    <div id="map" class=" w-100 rounded-4"></div>
 
-      </div>
-      </div>
-  </div>
-  </div>
-
-
+    </div>
+    </div>
+    </div>
   </div>
 
-<!--first-->
+  </div>
+<!--2-->
 
-<!--Second-->
+<!--3-->
 <div class="row">
 
-  <div class="col-lg-6 card-group   col-sm-12 mb-4">
+  <div class="col-lg-6 card-group col-sm-12 mb-4">
   <div class="card border-0 rounded-3 shadow-sm ">
   <div class="card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card"><h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Top 3 diseases that has the most infected individuals in Oroquieta City</h6></div>
   <div class="card-body">
@@ -294,7 +281,7 @@ include('includes/sidebar.php');
   </div>
 
 </div>
-<!--Second -->
+<!--3 -->
 </div>
 </div>
 

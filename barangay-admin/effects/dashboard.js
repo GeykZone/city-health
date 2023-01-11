@@ -326,6 +326,7 @@ function newCases()
 
   }
 
+  $("#new_health_cases").removeClass('bg-c-green')
   $("#new_health_cases").addClass(color_changer)
 
    

@@ -17,6 +17,8 @@ if(isset($_GET['tabular_barangay']))
     $gender_col = "Male and Female";
     $diseases_col = "All Diseases";
 
+    
+
     // DB table to use 
     $table = 'health_profiles'; 
 
@@ -132,12 +134,12 @@ if(isset($_GET['tabular_barangay']))
     }
     else
     {
-        $joinQuery = ", barangay_name FROM `{$table}` AS `hp` 
+        $joinQuery = "FROM `{$table}` AS `hp` 
         LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) 
         LEFT JOIN `diseases` AS `d` ON (`hp`.`disease_id` = `d`.`id`) 
         LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
         $where = "";
-        $group = "barangay_name";
+        $group = "`b`.`barangay_name`";
     }
 
 

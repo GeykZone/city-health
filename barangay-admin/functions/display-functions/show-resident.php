@@ -48,7 +48,7 @@ if($query_btn === "clicked")
     $date_range_to = $_GET['date_range_to'];
  
 
-    $joinQuery = ", DATE_FORMAT(birthdate,'%M %d, %Y') FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
+    $joinQuery = ", birthdate, DATE_FORMAT(birthdate,'%M %d, %Y') FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
     $where = "";
 
     $conditions = array();
@@ -86,7 +86,7 @@ if($query_btn === "clicked")
 }
 else
 {
-    $joinQuery = ", DATE_FORMAT(birthdate,'%M %d, %Y') FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
+    $joinQuery = ", birthdate, DATE_FORMAT(birthdate,'%M %d, %Y') FROM `{$table}` AS `r` LEFT JOIN `barangays` AS `b` ON (`b`.`id` = `r`.`barangay_id`)";
     $where = " `barangay_id` = '$admin_brg_id' ";
 }
 

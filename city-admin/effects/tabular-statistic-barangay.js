@@ -149,9 +149,7 @@ function load_data_tables()
       // "processing": true,
       "deferRender": true,
       "serverSide": true,
-      "aoColumns": [ 
-        { "sName": "death_cause", "bVisible": true }
-      ],
+
       "ajax": {
           url: ajax_url,
           data: {

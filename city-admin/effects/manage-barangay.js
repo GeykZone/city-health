@@ -194,7 +194,7 @@ function load_data_tables() {
         {
           "defaultContent": 
           '<div class="text-end px-3"><i class="shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit" data-coreui-toggle="modal" href="#update-barangay" id="edit_barangay_value" role="button" ></i> '+
-          '<i class="shadow-sm mt-sm-2 mt-2 mt-lg-0 mt-md-0 align-middle edit_barangay_value del_btn fa-solid fa-trash-can" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" ></i> '+
+          '<i class="shadow-sm mt-lg-0 mt-md-0 align-middle edit_barangay_value del_btn fa-solid fa-trash-can" href="#delete_barangay" data-coreui-toggle="modal" id="edit_barangay_value" role="button" ></i> '+
           '</div>',
         }
       ],

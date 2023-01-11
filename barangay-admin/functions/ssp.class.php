@@ -190,7 +190,7 @@ class SSP {
         }
 
         if ( $where !== '' ) {
-            $where = 'WHERE '.$where;
+            $where = 'HAVING '.$where;
         }
 
         return $where;
@@ -229,7 +229,7 @@ class SSP {
 
 		// IF Extra where set then set and prepare query
         if($extraWhere)
-            $extraWhere = ($where) ? ' AND '.$extraWhere : ' WHERE '.$extraWhere;
+            $extraWhere = ('')? $extraWhere : ' WHERE '.$extraWhere;
 
         $groupBy = ($groupBy) ? ' GROUP BY '.$groupBy .' ' : '';
 
@@ -240,19 +240,17 @@ class SSP {
             $col = SSP::pluck($columns, 'db', $joinQuery);
             $query =  "SELECT SQL_CALC_FOUND_ROWS ".implode(", ", $col)."
 			 $joinQuery
-			 $where
 			 $extraWhere
 			 $groupBy
-       $having
+             $where
 			 $order
 			 $limit";
         }else{
             $query =  "SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", SSP::pluck($columns, 'db'))."`
 			 FROM `$table`
-			 $where
 			 $extraWhere
 			 $groupBy
-       $having
+             $where
 			 $order
 			 $limit";
         }

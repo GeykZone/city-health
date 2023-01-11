@@ -692,6 +692,7 @@ function newCases()
 
   }
 
+  $("#new_health_cases").removeClass('bg-c-green')
   $("#new_health_cases").addClass(color_changer)
 
    
@@ -817,7 +818,7 @@ function totalCases()
     color_changer = 'bg-c-pink'
 
   }
-
+  $("#total_health_cases").removeClass('bg-c-green')
   $("#total_health_cases").addClass(color_changer)
 
   $("#total_cases").text(parseInt(totalCases_variable).toLocaleString('en-US'));

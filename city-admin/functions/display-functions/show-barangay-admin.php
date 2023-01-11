@@ -29,7 +29,7 @@ $columns = array(
 // Include SQL query processing class 
 require '../ssp.class.php'; 
 
-$joinQuery = ", (CASE WHEN activated = 1 THEN 'Admin Activated' WHEN activated = 0 THEN 'Admin Deactivated' END) FROM `users` ";
+$joinQuery = ", activated, (CASE WHEN activated = 1 THEN 'Admin Activated' WHEN activated = 0 THEN 'Admin Deactivated' END) FROM `users` ";
 $where = "`role`=2";
 
 
