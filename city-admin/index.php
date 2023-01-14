@@ -180,7 +180,7 @@ include('includes/sidebar.php');
   <div class="col-lg-8 mb-4 col-sm-12 card-group">
     <div class="card border-0 rounded-3 shadow-sm">
     <div class=" card-header py-0  bg-info border-0 rounded-top-3 shadow-sm order-card" >
-    <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card">Map Visualization<span id="map_record_info" class=" shortCut_btn"></span> <label class="adjust_font_size  opacity-75" > ( <span class="oneMonthFrom"></span> - <span class="oneMonthTo"></span> )</label></h6>
+    <h6 class="mt-2 mb-2  float-lg-start float-md-start adjust_font_size  order-card"><span id="view_map_btn" class="shortCut_btn">Map Visualization</span><span id="map_record_info"></span> <label class="adjust_font_size  opacity-75" > ( <span class="oneMonthFrom"></span> - <span class="oneMonthTo"></span> )</label></h6>
     </div>
     <div class=" card-body">
     <div id="map_container" class=" card  rounded-3 border-0 shadow-sm">

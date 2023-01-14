@@ -342,11 +342,6 @@ function display_map()
         if(long_lat[0] === "0 0 0 0")
         {
             $("#map_record_info").text(" (No Records Found)")
-
-            $("#map_record_info").click(function()
-            {
-              location.href = 'map-statistic.php';
-            })
         }
         else
         {
@@ -641,12 +636,21 @@ function shurctuMenu()
     location.href = 'time-span.php';
   })
 
+  var current_year_tooltip = $("#view_map_btn")
+  var view_map_btn = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "Bottom", target:current_year_tooltip, delay:0.50});
+  view_map_btn.setContent("View Full Map"); // Updates Opentips content
+  $("#view_map_btn").click(function()
+  {
+    location.href = 'map-statistic.php';
+  })
+
   
   $("body").click(function()
   {
     barangay_health_statistic_shorcut.hide()
     disease_statistic_shorcut.hide()
     timespan_statistic_shorcut.hide()
+    view_map_btn.hide()
   })
 
   
@@ -1718,4 +1722,5 @@ $("#hpChart").addClass("rounded-4 p-3 border-0 shadow-sm bg-light bg-opacity-50"
  
  }
  //number of timespan_chart() end
+
 

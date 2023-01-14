@@ -79,22 +79,28 @@
     <script src="../resourcess/opentip_tooltips/opentip-jquery-excanvas.js"></script><!-- Change to the adapter you actually use -->
     <link href="../resourcess/opentip_tooltips/opentip.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body class=" d-flex justify-content-center align-items-center">
+
+<div class="container mx-lg-5 mx-sm-0 my-5">
 
 <form method="POST" action="post.php" id = "adder">
 
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Year</label>
-    <select class="form-select" aria-label="Default select example" name="select_year" id="select_year" required>
-    <option value="">Select</option>
-    <option value="2020-01-01">2020</option>
-    <option value="2021-01-01">2021</option>
-    <option value="2022-01-01">2022</option>
-    <option value="other">other</option>
-    </select>
-  </div>
+    <div class="mb-3">
+    <label for="range_from" class="form-label">Min Date:</label>
+    <input  type="date" id="range_from" name="range_from" class="form-control   barangay-form text-sm-start shadow-sm"  placeholder="Min Date">
+    <div class="invalid-feedback">
+    Invalid min date.
+    </div>
+    </div>
 
-  <fieldset id="2020_2021">
+    <div class="mb-3">
+    <label for="range_to" class="form-label">Max Date:</label>
+    <input  type="date" id="range_to"  name="range_to" class="form-control   barangay-form text-sm-start shadow-sm"  placeholder="Max Date">
+    <div class="invalid-feedback">
+    Invalid max date.
+    </div>
+    </div>
+
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">barangay</label>
@@ -113,11 +119,12 @@
       <?php
         }
       ?>
+      <option value="Random">Random</option>
       </select>
 
     </div>
 
-  </fieldset>
+
 
   <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Disease</label>
@@ -136,6 +143,7 @@
       <?php
         }
       ?>
+        <option value="Random">Random</option>
       </select>
     </div>
 
@@ -150,75 +158,8 @@
   <button type="submit" name='submit_form' id="submit_form" class="btn btn-primary">Submit</button>
 </form>
 
-<button class=" btn btn-warning text-light  mt-3 " id="switch">Switch to recoveries</button>
+</div>
 
-<form method="POST" action="post.php" id = "recoverer" class=" d-none mt-3">
-
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Recover Year</label>
-    <select class="form-select" aria-label="Default select example" name="select_rec_year" id="select_rec_year" required>
-    <option value="">Select</option>
-    <option value="BETWEEN '2020-01-01' AND '2021-12-31'">2020-2021</option>
-    <option value="BETWEEN '2022-01-01' AND '2022-12-31'">2022</option>
-    </select>
-  </div>
-
-  <fieldset id="rec_2020_2021">
-
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Recoverer from barangay</label>
-      <select class="form-select" aria-label="Default select example" name="rec_brg" id="rec_brg" >
-          <option value="">Select</option>
-      <?php
-      $sql = "SELECT `id`, `barangay_name`, `lat`, `long` FROM `barangays` order by barangay_name Asc";
-      $result = $conn->query($sql);
-      if ($result->num_rows > 0) {
-      while($row = $result->fetch_assoc()) {
-          ?>
-        <option value="<?php echo $row['id']; ?>"><?php echo $row['barangay_name']; ?></option>
-        <?php 
-      }
-      ?>
-      <?php
-        }
-      ?>
-      </select>
-
-    </div>
-
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Recover from Disease</label>
-      <select class="form-select" aria-label="Default select example" name="select_rec_disease" id="select_rec_disease" >
-      <option value="">Select</option>
-      <?php
-      $sql = "SELECT * FROM `diseases` ORDER BY disease_name ASC";
-      $result = $conn->query($sql);
-      if ($result->num_rows > 0) {
-      while($row = $result->fetch_assoc()) {
-          ?>
-        <option value="<?php echo $row['id']; ?>"><?php echo $row['disease_name']; ?></option>
-        <?php 
-      }
-      ?>
-      <?php
-        }
-      ?>
-      </select>
-    </div>
-
-  </fieldset>
-
-  
-
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Number of insertion</label>
-    <input type="number" class=" form-control" placeholder="number of insertion" required name="rec_insertion" id="rec_insertion">
-  </div>
-
-
-  <button type="submit" name='rec_submit_form' id="rec_submit_form" class="btn btn-primary">Submit</button>
-</form>
-    
 </body>
 
 <script>
@@ -226,61 +167,26 @@
   $(document).ready(function()
   {
 
-    $("#select_year").change(function()
-    {
-      if($(this).val() === "2022-01-01")
-      {
-        $("#2020_2021").addClass('d-none')
-  
-      }
-      else
-      {
-        $("#2020_2021").removeClass('d-none')
-
-      }
-
-    })
-
-    $("#switch").click(function()
-    {
-      if($(this).text() === "Switch to recoveries")
-      {
-        $(this).text("Switch to hp")
-        $("#recoverer").removeClass("d-none")
-        $("#adder").addClass("d-none")
-      }
-      else if($(this).text() === "Switch to hp")
-      {
-        $(this).text("Switch to recoveries")
-        $("#recoverer").addClass("d-none")
-        $("#adder").removeClass("d-none")
-      }
-    
-
-    })
-
-    $("#select_rec_year").change(function()
-    {
-      if($(this).val() === "BETWEEN '2022-01-01' AND '2022-12-31'")
-      {
-        $("#rec_2020_2021").addClass('d-none')
-        $("#rec_brg").addClass('d-none')
-        $("#select_rec_disease").addClass('d-none')
-  
-      }
-      else
-      {
-        $("#rec_2020_2021").removeClass('d-none')
-        $("#rec_brg").removeClass('d-none')
-        $("#select_rec_disease").removeClass('d-none')
-
-      }
-
-    })
-
     select_list() 
+    date_range()
     
   })
+
+//date picker
+function date_range()
+{
+
+  $("#range_from").datepicker({
+    dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+    });
+
+
+    $("#range_to").datepicker({
+        dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+        });
+
+}
+//date picker end
 
   // selectize ordinary
 function select_list() 
