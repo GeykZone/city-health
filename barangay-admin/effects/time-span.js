@@ -547,6 +547,10 @@ $(".selectize-control").removeClass("form-control barangay-form")
    const ctx = $('#hpChart');
    myChart = new Chart(ctx, {
    options: {
+    onHover: (e, elements) => {
+      e.native.target.style.cursor = elements[0] ? 'pointer'
+      : 'default';
+    },
     onClick: (e, elements) => {
 
       if(elements.length > 0) 
@@ -716,6 +720,86 @@ $(".selectize-control").removeClass("form-control barangay-form")
  });
  
  $("#hpChart").addClass("rounded-4 pt-4 px-2 border-0 shadow-sm bg-light bg-opacity-50")
+
+ if(Cookies.get('index') != undefined)
+ {
+
+  
+  var current_index = Cookies.get('index');
+
+  date_range_title =  x_value[current_index];
+  $("#details_title").text(x_value[current_index]+"")
+  var all_dates = xx_value[current_index];
+  var display_diseases_that_occured = "";
+  var details_title;
+
+  $(".details_head_status").text("All documented health cases on "+date_range_title)
+
+  if(disease_type != "default")
+  {
+    $(".details_head_status").text("All documented health cases caused by "+disease_title+" on "+date_range_title)
+
+  }
+  else if(barangay_name != "default")
+  {
+    $(".details_head_status").text("All documented health cases on "+date_range_title+" in barangay "+barangay_title)
+
+  }
+
+  if(barangay_name != "default" && disease_type != "default")
+  {
+    $(".details_head_status").text("All documented health cases caused by "+disease_title+" on "+date_range_title+" in barangay "+barangay_title)
+
+  }
+
+  if(yValues[current_index] != 1)
+  {
+    details_title = "There are "+parseInt(yValues[current_index]).toLocaleString('en-US')+" health cases in total";
+  }
+  else
+  {
+    details_title = "There is only "+parseInt(yValues[current_index]).toLocaleString('en-US')+" health case in total";
+  }
+  
+
+  $('.details_content_label').remove();
+  $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
+  
+  $.ajaxSetup({async:false});
+  $.getJSON('functions/display-functions/get-time-span.php',
+  {
+    query_click:query_click,
+
+    barangay_name:barangay_name,
+    disease_type:disease_type,
+    date_range_from:date_range_from,
+    date_range_to:date_range_to,
+    gender:gender,
+    max_age:max_age,
+    min_age:min_age,
+
+    current_year_from:current_year_from,
+    current_year_to:current_year_to,
+
+    all_dates: all_dates
+      
+  },     
+  function (data, textStatus, jqXHR) 
+  {
+    display_diseases_that_occured = data
+  });
+  $('.details_list').remove();
+  $.each(display_diseases_that_occured, function( index,value ) {
+
+    $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 d-flex align-items-center text-white px-2"><label class="form-label">'+value+'</label></div>');
+
+  });
+
+  $('#show_details').modal('toggle');
+
+  Cookies.remove('index')
+ }
+
  }
  //number of residents chart end
 

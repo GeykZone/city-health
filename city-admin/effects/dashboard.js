@@ -1068,12 +1068,25 @@ function brgy_chart()
     //poinStyle: 'circle'
   },]
 
-
   //initialize chart
   const ctx = $('#hpChart_brgy');
-  myChart = new Chart(ctx, {
+  brgyChart = new Chart(ctx, {
   type: 'bar',
-  options: {
+  options: 
+  {
+    onClick: (e, elements) => {
+
+      if(elements.length > 0) 
+      {
+        var current_index = elements[0].index;
+        Cookies.set('index', current_index)
+        location.href = 'graphical-statistic.php';
+      }
+    },
+    onHover: (e, elements) => {
+      e.native.target.style.cursor = elements[0] ? 'pointer'
+      : 'default';
+    },
     indexAxis: 'x',
     scales: {
       x: {
@@ -1139,8 +1152,8 @@ function brgy_chart()
                 return modified_label           
              
             },
-            afterLabel: function(context) {            
-               return ""
+              afterLabel: function(context) {            
+               return "(click to see more details)"
              },
             labelPointStyle: function(context) {
               return {
@@ -1156,7 +1169,7 @@ function brgy_chart()
           borderColor: "#dee0e0",
           borderWidth: 1,
           bodySpacing: 1,
-          titleMarginBottom: 3
+          titleMarginBottom: 5
         }
     }
   },
@@ -1169,6 +1182,8 @@ function brgy_chart()
       datasets: data_sets
   },
 });
+
+
 
 }
 //number of brgy_chart() end
@@ -1303,9 +1318,23 @@ function  disease_chart()
 
   //initialize chart
   const ctx = $('#hpChart_disease');
-  myChart = new Chart(ctx, {
+  diseaseChart = new Chart(ctx, {
   type: 'line',
   options: {
+    onClick: (e, elements) => {
+
+      if(elements.length > 0) 
+      {
+        var current_index = elements[0].index;        
+        Cookies.set('index', current_index)
+        location.href = 'graphical-statistic-disease.php';
+
+      }
+    },
+    onHover: (e, elements) => {
+      e.native.target.style.cursor = elements[0] ? 'pointer'
+      : 'default';
+    },
     pointStyle: "circle",
     indexAxis: 'x',
     scales: {
@@ -1371,8 +1400,8 @@ function  disease_chart()
                 return modified_label           
              
             },
-            afterLabel: function(context) {            
-               return ""
+              afterLabel: function(context) {            
+               return "(click to see more details)"
              },
             labelPointStyle: function(context) {
               return {
@@ -1388,7 +1417,7 @@ function  disease_chart()
           borderColor: "#dee0e0",
           borderWidth: 1,
           bodySpacing: 1,
-          titleMarginBottom: 3
+          titleMarginBottom: 5
         }
     }
   },
@@ -1623,6 +1652,19 @@ $("#hpChart").addClass("rounded-4 p-3 border-0 shadow-sm bg-light bg-opacity-50"
    const ctx = $('#hpChart_time');
    myChart = new Chart(ctx, {
    options: {
+    onClick: (e, elements) => {
+
+      if(elements.length > 0) 
+      {
+        var current_index = elements[0].index;
+        Cookies.set('index', current_index)
+        location.href = 'time-span.php';
+      }
+    },
+    onHover: (e, elements) => {
+      e.native.target.style.cursor = elements[0] ? 'pointer'
+      : 'default';
+    },
      pointStyle: "circle",
      indexAxis: 'x',
      scales: {
@@ -1689,9 +1731,9 @@ $("#hpChart").addClass("rounded-4 p-3 border-0 shadow-sm bg-light bg-opacity-50"
                  return modified_label           
               
              },
-             afterLabel: function(context) {            
-                return ""
-              },
+              afterLabel: function(context) {            
+               return "(click to see more details)"
+             },
              labelPointStyle: function(context) {
                return {
                    pointStyle: 'rectRounded',
@@ -1706,7 +1748,7 @@ $("#hpChart").addClass("rounded-4 p-3 border-0 shadow-sm bg-light bg-opacity-50"
            borderColor: "#dee0e0",
            borderWidth: 1,
            bodySpacing: 1,
-           titleMarginBottom: 3
+          titleMarginBottom: 5
          }
      }
    },

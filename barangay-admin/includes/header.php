@@ -73,8 +73,8 @@
 <script src="../resourcess/chartjs/chart.min.js" ></script>
 
 <!--map-->
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+<link href="../resourcess/maps/mapbox-gl.css" rel="stylesheet">
+<script src="../resourcess/maps/mapbox-gl.js"></script>
 
 <!--tooltip-->
 <script src="../resourcess/opentip_tooltips/opentip-jquery-excanvas.js"></script><!-- Change to the adapter you actually use -->

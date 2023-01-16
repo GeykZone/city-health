@@ -166,7 +166,7 @@ function load_data_tables()
   
           title: 'Health Profile Clustering System',
   
-          messageTop: 'Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
+          messageTop: 'Health Statistics Categorized by Diseases '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
           //className: 'fa fa-solid fa-clipboard',
           
   
@@ -187,7 +187,7 @@ function load_data_tables()
   
           title: 'Health Profile Clustering System',
   
-          messageTop: 'Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
+          messageTop: 'Health Statistics Categorized by Diseases '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
           //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
           
   
@@ -208,7 +208,7 @@ function load_data_tables()
   
           title: 'Health Profile Clustering System',
   
-          messageTop: 'Disease Statistic '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
+          messageTop: 'Health Statistics Categorized by Diseases '+left+' '+from_tittle+dash+to_tittle+" "+right+"",
           //className: 'fa fa-print',
           
   

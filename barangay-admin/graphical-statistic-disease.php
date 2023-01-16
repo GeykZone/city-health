@@ -16,7 +16,7 @@ include('includes/sidebar.php');
 <!-- if breadcrumb is single--><span>Barangay Admin</span>
 </li>
 <li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
-<li class="breadcrumb-item active"><span>Disease Statistic Graph</span></li>
+<li class="breadcrumb-item active"><span>GHS Categorized by Diseases</span></li>
 </ol>
 </nav>
 </div>
@@ -43,7 +43,7 @@ include('includes/sidebar.php');
 <div class="card border-0 mb-4 shadow-sm remove_rounded">
 
 <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-<button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Disease Statistic Graph
+<button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Graphical Health Statistics Categorized by Diseases
 </div>
 
   <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >

@@ -518,6 +518,10 @@ function number_of_resident_chart()
         $('#show_details').modal('toggle');
       }
     },
+    onHover: (e, elements) => {
+      e.native.target.style.cursor = elements[0] ? 'pointer'
+      : 'default';
+    },
     pointStyle: "circle",
     indexAxis: 'x',
     scales: {
@@ -609,6 +613,75 @@ function number_of_resident_chart()
 });
 
 $("#hpChart").addClass("rounded-4 p-3 border-0 shadow-sm bg-light bg-opacity-50")
+
+if(Cookies.get('index') != undefined)
+{
+  var current_index = Cookies.get('index');
+  title_diagnosis = x_value[current_index];
+  $("#details_title").text(x_value[current_index]+"")
+  var all_diseases_that_occured = xValues[current_index];
+  var display_diseases_that_occured = "";
+  var details_title;
+
+  $(".details_head_status").text("All documented health cases caused by "+title_diagnosis+"")
+
+  if(barangay_name != "default")
+  {
+    $(".details_head_status").text("All documented health cases caused by "+title_diagnosis+" in barangay "+tittle_barangay)
+  }
+
+  if(yValues[current_index] != 1)
+  {
+    details_title = "There are "+parseInt(yValues[current_index]).toLocaleString('en-US')+" health cases in total";
+  }
+  else
+  {
+    details_title = "There is only "+parseInt(yValues[current_index]).toLocaleString('en-US')+" health case in total";
+  }
+  
+
+  $('.details_content_label').remove();
+  $("#details_content_titte").append('<div class="details_content_label border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 text-white px-2"><label class="form-label">'+details_title+'</label></div>');
+  
+
+  //to get the occuring diseases in that area
+
+  $.ajaxSetup({async:false});
+  $.getJSON('functions/display-functions/get-occuring-barangays.php',
+  {
+    query_click:query_click,
+
+    barangay_name:barangay_name,
+    date_range_from:date_range_from,
+    date_range_to:date_range_to,
+    gender:gender,
+    max_age:max_age,
+    min_age:min_age,
+
+    current_year_from:current_year_from,
+    current_year_to:current_year_to,
+
+    all_diseases_that_occured: all_diseases_that_occured
+      
+  },     
+  function (data, textStatus, jqXHR) 
+  {
+    display_diseases_that_occured = data
+  });
+  //to get the occuring diseases in that area end
+
+  $('.details_list').remove();
+  $.each(display_diseases_that_occured, function( index,value ) {
+
+    $("#details_form").append('<div class="details_list border-0 shadow-sm align-middle pt-2 bg-c-blue mb-3 rounded-2 d-flex align-items-center text-white px-2"><label class="form-label">'+value+'</label></div>');
+
+  });
+
+  $('#show_details').modal('toggle');
+
+  Cookies.remove('index')
+}
+
 }
 //number of residents chart end
 

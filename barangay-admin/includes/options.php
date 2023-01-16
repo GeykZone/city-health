@@ -8,10 +8,10 @@ id="hp_option" type="button" data-coreui-toggle="dropdown" aria-expanded="false"
 
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header">Graphical Statistics</h6>
-    <li><a class="dropdown-item" href="graphical-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Disease Statistic Graph</a></li>
-    <li><a class="dropdown-item" href="time-span.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Date-based Statistic Graph</a></li>
+    <li><a class="dropdown-item" href="graphical-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> GHS Categorized by Diseases</a></li>
+    <li><a class="dropdown-item" href="time-span.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> GHS Categorized by Dates</a></li>
 
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header">Tabular Statistics</h6>
-    <li><a class="dropdown-item" href="tabular-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> Disease Statistic Table</a></li>
+    <li><a class="dropdown-item" href="tabular-statistic-disease.php"><span class="fa-solid" style="margin-right: 10px; color: #294168bf;"></span> THS Categorized by Diseases</a></li>
 </ul>
