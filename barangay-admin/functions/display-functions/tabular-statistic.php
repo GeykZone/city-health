@@ -118,8 +118,8 @@ if(isset($_GET['tabular_diseases']))
 
         if (count($conditions) > 0) {
             $where = implode(' AND ', $conditions);
-            $group = "disease_name";
         }
+        $group = "disease_name";
 
     }
     else

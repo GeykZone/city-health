@@ -429,7 +429,7 @@ function monthly_period_hp_total()
       cluster = 'Low'
       tag = 'bg-c-green'
       indicator = 'bg-c-dark_green'
-      indicator_tag = 'Low'
+      indicator_tag = 'Cluster Green'
   }
   else if(parseInt(total_hp_count) <= 40)
   {
@@ -437,7 +437,7 @@ function monthly_period_hp_total()
       cluster = 'Moderate'
       tag = 'bg-c-yellow'
       indicator = 'bg-c-dark_yellow'
-      indicator_tag = 'Moderate'
+      indicator_tag = 'Cluster Yellow'
 
   }
   else if(parseInt(total_hp_count) <= 70)
@@ -446,7 +446,7 @@ function monthly_period_hp_total()
       cluster = 'High'
       tag = 'bg-c-orange'
       indicator = 'bg-c-dark_orange'
-      indicator_tag = 'High'
+      indicator_tag = 'Cluster Orange'
   }
   else
   {
@@ -454,7 +454,7 @@ function monthly_period_hp_total()
       cluster = 'Critical'
       tag = 'bg-c-pink'
       indicator = 'bg-c-dark_pink'
-      indicator_tag = 'Critical'
+      indicator_tag = 'Cluster Red'
   }
 
  
@@ -739,7 +739,7 @@ function  disease_chart()
     pointBackgroundColor: disease_chart_color,
     pointHoverBackgroundColor: disease_chart_color,
     borderColor: disease_chart_color,
-    borderWidth: 2,
+    borderWidth: 0,
     borderRadius: 8,
     pointRadius: disease_chart_points,
     hoverRadius:disease_chart_points,

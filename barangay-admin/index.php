@@ -131,7 +131,7 @@ include('includes/sidebar.php');
             <div style="width:20px; height:20px;" id="marker_type" class="green"></div>
             </div>
 
-            <label id="cluster" class="form-label ms-2 mt-2 bd-highlight"><span id="indicator_tag">Low</span> number of health cases </label>
+            <label id="cluster" class="form-label ms-2 mt-2 bd-highlight"><span id="indicator_tag">Low</span></label>
             <label id="rank" class="form-label ms-2 mt-2 bd-highlight ms-auto me-2 d-none shortCut_btn"></label>
              
           </div>

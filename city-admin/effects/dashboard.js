@@ -1303,7 +1303,7 @@ function  disease_chart()
     pointBackgroundColor: disease_chart_color,
     pointHoverBackgroundColor: disease_chart_color,
     borderColor: disease_chart_color,
-    borderWidth: 2,
+    borderWidth: 0,
     borderRadius: 8,
     pointRadius: disease_chart_points,
     hoverRadius:disease_chart_points,

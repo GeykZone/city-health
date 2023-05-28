@@ -465,6 +465,14 @@ $("#date_range_btn").click(function()
             dash = ""
           }
         }
+        else if(from_tittle != "" && to_tittle == "")
+        {
+          from_tittle = "Min Date: "+from_tittle+""
+        }
+        else if(from_tittle == "" && to_tittle != "")
+        {
+          to_tittle = "Max Date: "+to_tittle+""
+        }
 
 
         table.destroy()
@@ -474,6 +482,12 @@ $("#date_range_btn").click(function()
 
         load_data_tables()
         $("#filter-map").modal("toggle");
+
+        from_tittle="";
+        to_tittle="";
+        dash=""
+        left = ""
+        right = "";
   }
 
 })

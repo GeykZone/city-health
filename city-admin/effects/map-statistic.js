@@ -471,25 +471,25 @@ function display_map()
                  if(parseInt(feature.description) <= 10)
                  {
                      el.className = 'green';
-                     clusterCategory = "Low"
+                     clusterCategory = 'Cluster Green 1-10'
                      el.id = i
                  }
                  else if(parseInt(feature.description) <= 40)
                  {
                      el.className = 'yellow';
-                     clusterCategory = "Moderate"
+                     clusterCategory = 'Cluster Yellow 11-40'
                      el.id = i
                  }
                  else if(parseInt(feature.description) <= 70)
                  {
                      el.className = 'orange';
-                     clusterCategory = "Severe"
+                     clusterCategory = 'Cluster Orange 41-70'
                      el.id = i
                  }
                  else
                  {
                      el.className = 'red';
-                     clusterCategory = "Critical"
+                     clusterCategory = 'Cluster Red 71+'
                      el.id = i
  
                  }
@@ -598,23 +598,23 @@ function display_map()
                 if(parseInt(cont.description) <= 10)
                 {
                     mark= 'green';
-                    cluster = 'Low'
+                    cluster = 'Cluster Green 1-10'
                 }
                 else if(parseInt(cont.description) <= 40)
                 {
                     mark = 'yellow';
-                    cluster = 'Moderate'
+                    cluster = 'Cluster Yellow 11-40'
 
                 }
                 else if(parseInt(cont.description) <= 70)
                 {
                     mark = 'orange';
-                    cluster = 'Severe'
+                    cluster = 'Cluster Orange 41-70'
                 }
                 else
                 {
                     mark= 'red';
-                    cluster = 'Critical'
+                    cluster = 'Cluster Red 71+'
                 }
 
                 $("#details_title").text("Barangay "+cont.title+"")
@@ -695,23 +695,23 @@ function display_map()
                 if(parseInt(cont.description) <= 10)
                 {
                     mark= 'green';
-                    cluster = 'Low'
+                    cluster = 'Cluster Green 1-10'
                 }
                 else if(parseInt(cont.description) <= 40)
                 {
                     mark = 'yellow';
-                    cluster = 'Moderate'
+                    cluster = 'Cluster Yellow 11-40'
 
                 }
                 else if(parseInt(cont.description) <= 70)
                 {
                     mark = 'orange';
-                    cluster = 'Severe'
+                   cluster = 'Cluster Orange 41-70'
                 }
                 else
                 {
                     mark= 'red';
-                    cluster = 'Critical'
+                    cluster = 'Cluster Red 71+'
                 }
 
                 $("#details_title").text("Barangay "+cont.title+"")
@@ -929,10 +929,10 @@ function display_map()
         
             // define layer for legend
             const layers = [
-            'Low Number of Health Cases (1-10)',
-            'Moderate Number of Health Cases (11-40)',
-            'Severe Number of Health Cases (41-70)',
-            'Critical Number of Health Cases (71+)',
+            'Cluster Green (1-10 Total Health Cases)',
+            'Cluster Yellow (11-40 Total Health Cases)',
+            'Cluster Orange (41-70 Total Health Cases)',
+            'Cluster Red (71+ Total Health Cases)',
             ];
             const colors = [
             'yellowgreen',

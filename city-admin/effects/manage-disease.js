@@ -175,7 +175,7 @@ if ( ! $.fn.DataTable.isDataTable( '#diseases_table' ) ) { // check if data tabl
         "defaultContent": 
         '<div class="text-end px-2">'+
         '<i class="shadow-sm align-middle edit_barangay_value update edit_btn fas fa-edit" data-coreui-toggle="modal" href="#edit-disease" id="edit_disease_value" role="button"></i> '+
-        '<i class="shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can" href="#delete_disease" data-coreui-toggle="modal" id="delete_disease_value" role="button" ></i> '+'</div>'
+        '<i class="shadow-sm align-middle edit_barangay_value del_btn fa-solid fa-trash-can d-none" href="#delete_disease" data-coreui-toggle="modal" id="delete_disease_value" role="button" ></i> '+'</div>'
         }
     ],
 
