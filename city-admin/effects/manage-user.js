@@ -34,6 +34,25 @@ confirmation.registerListener(function(val) {
 });
 //set do some stuff when confiramtion variable is changed end
 
+function getCurrentDate() {
+  var dateObj = new Date();
+  var year = dateObj.getFullYear();
+  var month = ('0' + (dateObj.getMonth() + 1)).slice(-2); // Adding 1 and padding with zero if needed
+  var day = ('0' + dateObj.getDate()).slice(-2); // Padding with zero if needed
+  var currentDate = year + '-' + month + '-' + day;
+  return currentDate;
+}
+function date_into_words(data) {
+  var dateObj = new Date(data);
+  var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var month = monthNames[dateObj.getMonth()];
+  var day = dateObj.getDate();
+  var year = dateObj.getFullYear();
+  var currentDate = month + ' ' + day + ', ' + year;
+  return currentDate;
+}
+
+
 // for select
 function select_with_search_box()
 {
@@ -264,6 +283,9 @@ function alert_message()
 
 //show data tables
 function load_data_tables() {
+  
+  var today = getCurrentDate()
+  var today_date_into_words = date_into_words(today)
 
   if ( ! $.fn.DataTable.isDataTable( '#admin_table' ) ) { // check if data table is already exist
 
@@ -342,7 +364,7 @@ function load_data_tables() {
   
             title: 'Health Profile Clustering System',
   
-            messageTop: 'List of Barangay Admins',
+          messageTop: 'List of Barangay Admins\nAccessed: ' + today_date_into_words,
             //className: 'fa fa-solid fa-clipboard',
             
   
@@ -363,7 +385,7 @@ function load_data_tables() {
   
             title: 'Health Profile Clustering System',
   
-            messageTop: 'List of Barangay Admins',
+          messageTop: 'List of Barangay Admins City Accessed: ' + today_date_into_words,
             //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
             
   
@@ -384,7 +406,7 @@ function load_data_tables() {
   
             title: 'Health Profile Clustering System',
   
-            messageTop: 'List of Barangay Admins',
+          messageTop: 'List of Barangay Admins<br>Accessed: ' + today_date_into_words + "<br><br>",
             //className: 'fa fa-print',
             
   

@@ -12,7 +12,7 @@
       $("input").removeClass("is-invalid");
       $(".selectize-control").removeClass("is-invalid");
     });
-      //remove invalid class
+     //remove invalid class
 
       var cc_date = new Date();
       var cc_date_year = cc_date.getFullYear();
@@ -28,10 +28,6 @@
       var manage_barangay_icon_tooltip = $("#manage_barangay_icon")
       var myOpentip2 = new Opentip(manage_barangay_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_barangay_icon_tooltip, delay:0.50 });
       myOpentip2.setContent("Manage Barangays"); // Updates Opentips content
-
-      var manage_residents_icon_tooltip = $("#manage_residents_icon")
-      var myOpentip3 = new Opentip(manage_residents_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_residents_icon_tooltip, delay:0.50 });
-      myOpentip3.setContent("Manage Residents"); // Updates Opentips content
 
       var manage_users_icon_tooltip = $("#manage_users_icon")
       var myOpentip4 = new Opentip(manage_users_icon_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "left", target:manage_users_icon_tooltip, delay:0.50 });
@@ -61,7 +57,6 @@
       {
         myOpentip1.hide()
         myOpentip2.hide()
-        myOpentip3.hide()
         myOpentip4.hide()
         myOpentip5.hide()
         myOpentip6.hide()

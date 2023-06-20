@@ -26,23 +26,23 @@ if($query_click == "clicked")
 
     $conditions = array();
     
-    if($barangay_name != "default")
+    if($barangay_name != "")
     {
         $conditions[] = "`b`.`id`='$barangay_name'";
     }
-    if($disease_type != "default")
+    if($disease_type != "")
     {
-        $conditions[] = "`disease_id`='$disease_type'";
+        $conditions[] = "`disease_id` ='$disease_type'";
     }
-    if($gender != "default")
+    if($gender != "")
     {
         $conditions[] = "`gender`='$gender'";
     }
-    if($min_age != "default")
+    if($min_age != "NaN")
     {
         $conditions[] = "`age` >= '$min_age'";
     }
-    if($max_age != "default")
+    if($max_age != "NaN")
     {
         $conditions[] = "`age` <= '$max_age'";
     }

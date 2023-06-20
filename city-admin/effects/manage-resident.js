@@ -1,7 +1,6 @@
 var $resident_age = "";
 var i = 0;
 var table = "";
-var chart = "";
 
 var barangay_name = "";
 var first_name = "";
@@ -15,16 +14,9 @@ var contact = "";
 var email = "";
 var update_resident_age = "";
 
-var x_value = "";
-var y_value = "";
-var xValues = "";
-var yValues = "";
-var myColors=[];
-var sort = "names";
-var myChart ="";
+
 
 var res_id_value ="";
-
 var date_range_from = "";
 var date_range_to = "";
 var query_btn = "unclicked";
@@ -111,11 +103,11 @@ select_with_search_box()
 enable_form()
 generate_age()
 get_resident_table_cell_value()
-
 load_data_tables()
 opentip_tooltip()
 
-load_chart_from_dashboard()
+$("#sideBar_nav").addClass("show")
+$("#nav_a").addClass("active")
 });
 
 //set do some stuff when confiramtion variable is changed
@@ -262,6 +254,8 @@ res_id_value = this_value.substr(this_value.indexOf(" ") + 1);
 //show data tables
 function load_data_tables() {
   var ajax_url = "functions/display-functions/show-resident.php";
+  var today = getCurrentDate()
+  var today_date_into_words = date_into_words(today)
 
 if ( ! $.fn.DataTable.isDataTable( '#resident_table' ) ) { // check if data table is already exist
 
@@ -333,7 +327,7 @@ table = $('#resident_table').DataTable({
 
       title: 'Health Profile Clustering System',
 
-      messageTop: 'List of Residents in Oroquieta City',
+    messageTop: 'List of Residents in Oroquieta City\nAccessed: ' + today_date_into_words,
       //className: 'fa fa-solid fa-clipboard',
       
 
@@ -354,7 +348,7 @@ table = $('#resident_table').DataTable({
 
       title: 'Health Profile Clustering System',
 
-      messageTop: 'List of Residents in Oroquieta City',
+    messageTop: 'List of Residents in Oroquieta City Accessed: ' + today_date_into_words,
       //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
       
 
@@ -375,7 +369,7 @@ table = $('#resident_table').DataTable({
 
       title: 'Health Profile Clustering System',
 
-      messageTop: 'List of Residents in Oroquieta City',
+    messageTop: 'List of Residents in Oroquieta City<br>Accessed: ' + today_date_into_words + "<br><br>",
       //className: 'fa fa-print',
       
 
@@ -453,6 +447,25 @@ $(".form-select").addClass("shadow-sm");
 
 };
 //show data tables end
+
+function getCurrentDate() {
+  var dateObj = new Date();
+  var year = dateObj.getFullYear();
+  var month = ('0' + (dateObj.getMonth() + 1)).slice(-2); // Adding 1 and padding with zero if needed
+  var day = ('0' + dateObj.getDate()).slice(-2); // Padding with zero if needed
+  var currentDate = year + '-' + month + '-' + day;
+  return currentDate;
+}
+function date_into_words(data) {
+  var dateObj = new Date(data);
+  var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var month = monthNames[dateObj.getMonth()];
+  var day = dateObj.getDate();
+  var year = dateObj.getFullYear();
+  var currentDate = month + ' ' + day + ', ' + year;
+  return currentDate;
+}
+
 
 //enable the form when a barangay is picked
 function enable_form()
@@ -872,282 +885,6 @@ $("#update_email").val(col9);
 }
 //get the table cell value when selected end
 
-//initalize chart values
-function chart_array()
-{
-  $.ajaxSetup({async:false});
-  $.getJSON('functions/display-functions/show-number-of-resident.php', 
-  {
-    barangay_name:'set',
-    gender:gender,
-    date_range_from:date_range_from,
-    date_range_to:date_range_to,
-    query_btn:query_btn,
-    min_age:min_age,
-    max_age:max_age
-  }, 
-  
-  function (data, textStatus, jqXHR) 
-  {
-    x_value = data;
-    console.log(x_value)
-  });
-
-  $.getJSON('functions/display-functions/show-number-of-resident.php', 
-  {
-    total_residents_number:'set',
-    gender:gender,
-    date_range_from:date_range_from,
-    date_range_to:date_range_to,
-    query_btn:query_btn,
-    min_age:min_age,
-    max_age:max_age
-  }, 
-  
-  function (data, textStatus, jqXHR) 
-  {
-    y_value = data;
-    
-  });    
-
-  if(sort === "asc")
-  {
-      //sorting algorithm
-      arrayOfObj = x_value.map(function(d, i) {
-        return {
-          label: d,
-          data: y_value[i] || 0
-        };
-      });
-      
-      sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
-        return a.data - b.data;
-      });
-      
-      newArrayLabel = [];
-      newArrayData = [];
-      sortedArrayOfObj.forEach(function(d){
-        newArrayLabel.push(d.label);
-        newArrayData.push(d.data);
-      });
-      ////sorting algorithm
-  }
-  else if(sort === "desc")
-  {
-      //sorting algorithm
-      arrayOfObj = x_value.map(function(d, i) {
-        return {
-          label: d,
-          data: y_value[i] || 0
-        };
-      });
-      
-      sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
-        return b.data - a.data ;
-      });
-      
-      newArrayLabel = [];
-      newArrayData = [];
-      sortedArrayOfObj.forEach(function(d){
-        newArrayLabel.push(d.label);
-        newArrayData.push(d.data);
-      });
-      ////sorting algorithm
-  }
-  else
-  {
-          //sorting algorithm
-          arrayOfObj = x_value.map(function(d, i) {
-            return {
-              label: d,
-              data: y_value[i] || 0
-            };
-          });
-          
-          sortedArrayOfObj = arrayOfObj.sort(function(a, b) {
-            return a.data + b.data;
-          });
-          
-          newArrayLabel = [];
-          newArrayData = [];
-          sortedArrayOfObj.forEach(function(d){
-            newArrayLabel.push(d.label);
-            newArrayData.push(d.data);
-          });
-          ////sorting algorithm
-  }
-
-      x_value = newArrayLabel;
-      y_value = newArrayData;
-
-      xValues = x_value;
-      yValues = y_value; 
-
-  //generate a color base on percentage
-  $.each(yValues, function( index,value ) {
-
-    if(parseInt(value) <= 1000){
-       myColors[index]="#b3e6ffff";
-    }
-    else if(parseInt(value) <= 3000)
-    {
-      myColors[index]="#80d5ffff";
-    }
-    else if(parseInt(value) <= 5000)
-    {
-      myColors[index]="#4dc4ffff";
-    }
-    else{
-      myColors[index]="#07a3f1ff";
-    }
-    
-  });
-
-}
-//initalize chart values end
-
-//number of residents chart
-function number_of_resident_chart()
-{
-  
-  //initialize chart
-  const ctx = $('#myChart');
-  myChart = new Chart(ctx, {
-  type: 'bar',
-  options: {
-    indexAxis: 'x',
-    scales: {
-      x: {
-        beginAtZero: true,
-        grid: {
-          display: true,
-          drawBorder: false
-        },
-        ticks: {
-          display: true
-        }
-      },
-      y: {
-        beginAtZero: true,
-        grid: {
-          display: true,
-          drawBorder: true
-        },
-        ticks: {
-          display: true
-        },
-        type: 'linear',
-        grace: '5%'
-      }
-
-    },
-    plugins: {
-        responsive: true,
-        legend: {
-            display: false,
-        },
-        tooltip: {
-          enabled: true,
-          displayColors: false,
-          padding: 15,
-          caretSize: 10,
-          cornerRadius: 20,
-          caretPadding: 0,
-          usePointStyle: true,
-          backgroundColor: '#ffffff',
-          bodyColor: "#626464",
-          titleColor:  "#626464",
-          borderColor: "#dee0e0",
-          borderWidth: 1,
-          callbacks: {
-          labelPointStyle: function(context) {
-            return {
-                pointStyle: 'rectRounded',
-                rotation: 0,
-            };
-          }
-
-        },
-        }
-    }
-  },
-  
-  data: {
-      labels: xValues,
-      dataSorting: {
-        enabled: true
-      },
-      datasets: [{
-          label: 'Total Number of Residents ',
-          data: yValues,
-          backgroundColor: myColors,
-          borderColor: "#80d5ffff",
-          borderWidth: 1,
-          borderRadius: 8,
-          // pointRadius: myPoints,
-          borderSkipped: false,
-          barPercentage: 0.8,
-          categoryPercentage:0.8,
-          //poinStyle: 'circle'
-      }]
-  },
-});
-
-
-
-}
-//number of residents chart end
-
-//update chart
-function update_chart()
-{
-chart_array();
-myChart.data.labels = x_value;
-myChart.data.datasets[0].data = y_value;
-myChart.update();
-}
-//update chart end
-
-//show graph button
-var chart_show_variable = "close"
-var chart_shower = "firstime"
-$("#show_graph").click(function()
-{
-$("#show_graph_txt").text("ClOSE CHART")
-if(chart_show_variable === "close")
-{
-  if(chart_shower === "firstime")
-  {
-    chart_array()
-    number_of_resident_chart();
-    myChart.destroy();
-    $(".chart_container").slideDown("slow", function()
-    {
-
-    });
-    number_of_resident_chart();
-    
-  }
-  
-  $(".chart_container").slideDown("slow", function()
-  {
-  });
-  chart_show_variable = "open"
-  chart_shower = "!firstime"
-}
-else
-{
-  $("#show_graph_txt").text("OPEN CHART")
-  $(".chart_container").slideUp("slow", function()
-  {
-    chart_show_variable = "close"
-  })
-
-}
-
-})
-//show graph button end
-
 //refresh table back to current data
 $("#refresh_resident_table").click(function(e)
 {
@@ -1173,7 +910,6 @@ $(".dataTables_info").remove();
 $(".dataTables_paginate ").remove();
 
 load_data_tables()
-update_chart()
 })
 //refresh table back to current data end
 
@@ -1189,69 +925,6 @@ $("body").click(function()
 })
 }
 //generate a tooltip end
-
-//sort chart
-$("#sort_cases").click(function(e){
-
-if(sort === "names")
-{
-  sort = "asc"
-}
-else if(sort === "asc")
-{
-  sort = "desc"
-}
-else
-{
-  sort = "names"
-}
-update_chart()
-
-
-})
-//sort chart end
-
-//auto load chart from dashboard
-function load_chart_from_dashboard()
-{
-if (Cookies.get('dashboard_residentChart') != undefined) { 
-  
-  $("#show_graph_txt").text("ClOSE CHART")
-  if(chart_show_variable === "close")
-  {
-    if(chart_shower === "firstime")
-    {
-      chart_array()
-      number_of_resident_chart();
-      myChart.destroy();
-      $(".chart_container").slideDown("slow", function()
-      {
-
-      });
-      number_of_resident_chart();
-      
-    }
-    
-    $(".chart_container").slideDown("slow", function()
-    {
-    });
-    chart_show_variable = "open"
-    chart_shower = "!firstime"
-  }
-  else
-  {
-    $("#show_graph_txt").text("OPEN CHART")
-    $(".chart_container").slideUp("slow", function()
-    {
-      chart_show_variable = "close"
-    })
-
-  }
-
-  Cookies.remove('dashboard_residentChart')
-}
-}
-//auto load chart from dashboard end
 
 // cange color of birthdate field when value is not 0
 $("#birthdate").change(function()
@@ -1344,7 +1017,6 @@ $("#range_to").change(function()
 
 })
 // cange color of birthdate field when value is not 0 end'
-
 
 //go to filter button
 $("#filter_this_table").click(function()
@@ -1482,8 +1154,6 @@ $("#date_range_btn").click(function()
           $("#search_result").html("")
           $("#search_result").addClass("d-none")
         }
-
-        update_chart()
   }
 
 })

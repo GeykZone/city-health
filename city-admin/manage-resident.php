@@ -15,8 +15,9 @@ include('includes/sidebar.php');
 <li class="breadcrumb-item active">
 <!-- if breadcrumb is single--><span>City Admin</span>
 </li>
+<li class="breadcrumb-item active"><span>Profile & Stats</span></li>
+<li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
 <li class="breadcrumb-item active"><span>Manage Residents</span></li>
-<li class="breadcrumb-item active"><span>Barangay Residents</span></li>
 </ol>
 </nav>
 </div>
@@ -44,45 +45,6 @@ include('includes/sidebar.php');
 <div class="body flex-grow-1 px-lg-5 px-sm-0 pt-3  pb-3"> 
 <div class="container-fluid">
 
-
-<!--chart-->
-<div class="row chart_container mb-3" style="display: none;">
-<div class="col-md-12">
-<div class="card border-0 mb-4 shadow-sm remove_rounded">
-
-<div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-<span  id="refresh_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></span>Current Number of Residents in Each Barangays
-</div>
-
-  <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >
-
-    <!-- /.row-->
-
-  <div class="container-fluid mb-3 ">
-  <div class="row">
-  <div class="col-lg-6 col-md-12  text-md-start align-content-center dropdown-center">
-        <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="sort_cases" role="button" >SORT <span class="fa-solid ms-1 fa-sort"></span></a>
-  </div>
-  </div>
-  </div>
-
-      <div  class="container-fluid table-responsive">
-      <div class="row">
-
-      <div  class="mb-3" id="hp_chart_row" style="min-height: 300px;  min-width:1200px;">
-      <canvas class=" rounded-4 p-3 bg-light bg-opacity-50 border-0 shadow-sm"  id="myChart"  style="width:100%; max-height:500px ;"></canvas> 
-      </div>
-
-      </div>
-      </div>
-    
-  </div>
-  
-</div>
-</div>
-</div>
-<!--chart end-->
-
 <!--Admins-->
 <div class="row">
 <div class="col-md-12">
@@ -100,13 +62,13 @@ include('includes/sidebar.php');
   <div class="col-12 mb-lg-3 mb-sm-3 mt-lg-0 mt-sm-0 d-none" id="search_result"></div>
 
   <div class="col-lg-6  mb-lg-0  mb-sm-3 align-content-center hide_first_load dropdown-center">
-  <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" id="filter_this_table" data-coreui-toggle="modal" href="#filter_table" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
+   <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm addbtn add-brgy px-3 fw-bolder"  data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">NEW <span class="fa-solid ms-1 fa-circle-plus"></a>
   </div>
 
 
   <div class="col-lg-6 text-lg-end">
-      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 me-2 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" type="button" id="show_graph" role="button"><span id="show_graph_txt">OPEN CHART </span><span class=" ms-1 fa-solid"></span></a>
-      <a style="padding-top: 7px; padding-bottom: 7px;" class="mb-3 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder"  data-coreui-toggle="modal" href="#add-barangay-resident" id="add_resident" role="button">NEW <span class="fa-solid ms-1 fa-circle-plus"></a>
+      <a style="padding-top: 7px; padding-bottom: 7px;" href="manage-hp.php"  class="mb-3 me-2 border-0 shadow-sm addbtn add-brgy px-3 fw-bolder" type="button" id="show_graph" role="button"><span id="show_graph_txt">HEALTH PROFILES</span><span class=" ms-1 fa-solid"></span></a>
+       <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 mb-3 shadow-sm addbtn add-brgy px-3 fw-bolder" id="filter_this_table" data-coreui-toggle="modal" href="#filter_table" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
   </div>
 
   </div>

@@ -16,6 +16,8 @@ $table = 'health_profiles';
 // Table's primary key 
 $primaryKey = 'hp_id'; 
 $query_btn = $_GET['query_btn'];
+$current_year_from = $_GET['current_year_from'];
+$current_year_to = $_GET['current_year_to'];
 
 
  
@@ -47,6 +49,8 @@ if($query_btn === "clicked")
     $max_age = $_GET['max_age'];
     $date_range_from = $_GET['date_range_from'];
     $date_range_to = $_GET['date_range_to'];
+    $barangay_name = $_GET['barangay_name'];
+    $disease_type = $_GET['disease_type'];
  
 
     $joinQuery = ", date FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
@@ -65,6 +69,15 @@ if($query_btn === "clicked")
         $conditions[] = "`age` <= '$max_age'";
     }
 
+    if($barangay_name != "")
+    {
+        $conditions[] = "`b`.`id`='$barangay_name'";
+    }
+    if($disease_type != "")
+    {
+        $conditions[] = "`disease_id` ='$disease_type'";
+    }
+
     if($gender != "")
     {
         $conditions[] = "`gender` = '$gender'";
@@ -80,9 +93,12 @@ if($query_btn === "clicked")
         $conditions[] = "`date` <= '$date_range_to'";
     }
 
-
     if (count($conditions) > 0) {
         $where = implode(' AND ', $conditions);
+    }
+    else
+    {
+        $where = " `date` BETWEEN '$date_range_from' AND '$date_range_to' ";
     }
   
 }
@@ -90,7 +106,7 @@ else
 {
     $joinQuery = ", date FROM `{$table}` AS `hp` LEFT JOIN `residents` AS `r` ON (`hp`.`resident_id` = `r`.`resident_id`) LEFT JOIN `diseases` AS `d` 
     ON (`hp`.`disease_id` = `d`.`id`) LEFT JOIN `barangays` AS `b` ON (`r`.`barangay_id` = `b`.`id`)";
-    $where = "";
+    $where = " `date` BETWEEN '$current_year_from' AND '$current_year_to' ";
 }
  
 // Output data as json format 

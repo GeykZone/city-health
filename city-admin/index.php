@@ -25,7 +25,6 @@ include('includes/sidebar.php');
 <!--header end-->
 
 <style>
- 
 #map 
 { 
   position: absolute; 
@@ -115,7 +114,7 @@ include('includes/sidebar.php');
       <div class="card-body adjust_font_size row ">
       <div  class="col-12 " id="hp_chart_row_brgy" >
       <canvas class=" bg-c-metal_blue rounded-4 p-3"  id="hpChart_brgy"   style="width:100%;  max-height:580px ;"></canvas> 
-      <div class="mt-2 row"><span class=" text-start col-6"><span class="shortCut_btn" id = "barangay_health_statistic_shorcut">GHS Categorized by Barangays</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
+      <div class="mt-2 row"><span class=" text-start col-6"><span class="shortCut_btn" id = "barangay_health_statistic_shorcut">Barangay Health Stats</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
       <div class="mt-1 fw-lighter opacity-75">One month ( <span class="oneMonthFrom mt-0"></span> - <span class="oneMonthTo mt-0"></span> )</div>
       </div>
       </div>
@@ -127,7 +126,7 @@ include('includes/sidebar.php');
         <div class="card-body adjust_font_size row">
         <div  class="col-12" id="hp_chart_row_disease" >
         <canvas class="bg-c-metal_blue rounded-4 p-3"  id="hpChart_disease"   style="width:100%;  max-height:580px ;"></canvas> 
-        <div class="mt-2 row"><span class=" text-start col-6"><span class="shortCut_btn"  id = "disease_statistic_shorcut" >GHS Categorized by Diseases</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
+        <div class="mt-2 row"><span class=" text-start col-6"><span class="shortCut_btn"  id = "disease_statistic_shorcut" >Total Disease Stats</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
       <div class="mt-1 fw-lighter opacity-75">One month ( <span class="oneMonthFrom mt-0"></span> - <span class="oneMonthTo mt-0"></span> )</div>
         </div>
         </div>
@@ -139,7 +138,7 @@ include('includes/sidebar.php');
         <div class="card-body adjust_font_size row">
         <div  class="col-12" id="hp_chart_row_time" >
         <canvas class="bg-c-metal_blue rounded-4 p-3"  id="hpChart_time"   style="width:100%;  max-height:580px ;"></canvas> 
-        <div class="mt-2 row"><span class=" text-start col-6 " ><span class="shortCut_btn" id = "timespan_statistic_shorcut">GHS Categorized by Dates</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
+        <div class="mt-2 row"><span class=" text-start col-6 " ><span class="shortCut_btn" id = "timespan_statistic_shorcut">Time Series</span></span><span class=" text-end col-6 pe-4" ><li class="fa-solid"></li></span></div>
       <div class="mt-1 fw-lighter opacity-75">One month ( <span class="oneMonthFrom mt-0"></span> - <span class="oneMonthTo mt-0"></span> )</div>
         </div>
         </div>
@@ -219,10 +218,10 @@ include('includes/sidebar.php');
           Cases Percentage
         </th>
         <th style="min-width: 160px;"  class="text-center">
-          One Month Total
+          Health Cases
         </th>
-        <th style="min-width: 130px;"  class="text-end">
-          Total Increase
+        <th style="min-width: 160px;"  class="text-end">
+          Increase Percentage
         </th>
       </tr>
     </thead>
@@ -250,7 +249,7 @@ include('includes/sidebar.php');
 
   <div class="table-responsive ">
   <table class="table table-condensed">
-  <thead>
+  <thead >
       <tr>
         <th style="min-width:160px;" >
           Barangay Name
@@ -259,13 +258,12 @@ include('includes/sidebar.php');
           Cases Percentage
         </th>
         <th style="min-width: 160px;"  class="text-center">
-          One Month Total
+          Health Cases
         </th>
-        <th style="min-width: 130px;"  class="text-end">
-          Total Increase
+        <th style="min-width: 160px;"  class="text-end">
+          Increase Percentage
         </th>
       </tr>
-    </thead>
     </thead>
     <tbody id="top_three_barangays">
     </tbody>

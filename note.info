@@ -1,0 +1,21 @@
+
+Done
+> File export
+    - Barangay Health Stats 
+    - Manage Health Profiles
+    - Map Visualization
+    - Total Disease Stats
+
+> use encodeURIComponents in passing variable from 1 page to other
+> if e update nako ang table sa hc dapat ma update pd ang sa chart
+> GHS sa Dashboard Change Name
+> GHS date sa Dashboard dapat mo redirect sa time series
+> (Huna hunaon sa  kong butngan bag time series analysis)
+> Proceed Sa tota Disease Stats
+> check php that
+
+To Do
+> Barangay admin e fix
+> total resident Record e change in number of hp
+> dashboard sa unahon e fix ang mga color2 e base sa clstering
+

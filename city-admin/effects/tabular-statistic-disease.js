@@ -113,7 +113,7 @@ function load_data_tables()
         }      
         
       },
-      order: [[4,'DESC']],
+      order: [[1,'DESC']],
 
       "language": {
         "info": "Showing _START_ to _END_ of _TOTAL_ entries",
@@ -128,27 +128,6 @@ function load_data_tables()
   
       "columns": [
         null,
-        {
-            render: function(data)
-            {
-              return '<div class = "text-center pe-3" style="padding-top:2px; padding-bottom:2px;">'+data+'</div>'
-            }
-      
-          },
-          {
-              render: function(data)
-              {
-                return '<div class = "text-center pe-3">'+data+'</div>'
-              }
-        
-            },
-        {
-            render: function(data)
-            {
-              return '<div class = "text-center pe-3">'+data+'</div>'
-            }
-      
-          },
         {
             render: function(data)
             {
@@ -175,7 +154,7 @@ function load_data_tables()
               page: 'current'
           },
             //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-            columns: [0,1,2,3,4],
+            columns: [0,1],
             // optional space between columns
             columnGap: 1
           }
@@ -196,7 +175,7 @@ function load_data_tables()
               page: 'current'
           },
             //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-            columns: [0,1,2,3,4],
+            columns: [0,1],
             // optional space between columns
             columnGap: 1
           }
@@ -217,7 +196,7 @@ function load_data_tables()
               page: 'current'
           },
             //columns: [0, 1] //r.broj kolone koja se stampa u PDF
-            columns: [0,1,2,3,4],
+            columns: [0,1],
             // optional space between columns
             columnGap: 1
           },
@@ -237,24 +216,12 @@ function load_data_tables()
       $('#barangay_health_statistic #th_1 td').each(function () {
         var title = this.id;
   
-        if(title === "Age Range")
-        {
-        
-          $(this).html('<div class="text-center" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid me-2"></span>Age Range</span></div>');
-        }
-        else if(title === "Gender")
-        {
-        
-          $(this).html('<div class="text-center" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid me-2"></span>Gender</span></div>');
-        }
-        else if(title === "Barangay")
-        {
-        
-          $(this).html('<div class="text-center pe-2" ><span style = "color:#9eaaad; font-size:13px;" class="me-2"><span class="fa-solid me-2"></span>Barangay</span></div>');
+        if (title === "Total Health Cases") {
+          $(this).html('<input style="width: 180px;" type="text" class="form-control text-end table_search rounded-1 shadow-sm py-0"  placeholder="' + title + '" aria-controls="hp_table">');
         }
         else
         {
-          $(this).html('<input type="text" class="form-control table_search rounded-1 w-100 shadow-sm py-0"  placeholder="'+title+'" aria-controls="hp_table">');
+          $(this).html('<input type="text" style="width: 180px;" type="text" class="form-control text-start table_search rounded-1 shadow-sm py-0"  placeholder="'+title+'" aria-controls="hp_table">');
         }
       
     });

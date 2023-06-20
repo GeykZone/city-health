@@ -31,6 +31,23 @@ confirmation.registerListener(function(val) {
 });
 //set do some stuff when confiramtion variable is changed end
 
+function getCurrentDate() {
+  var dateObj = new Date();
+  var year = dateObj.getFullYear();
+  var month = ('0' + (dateObj.getMonth() + 1)).slice(-2); // Adding 1 and padding with zero if needed
+  var day = ('0' + dateObj.getDate()).slice(-2); // Padding with zero if needed
+  var currentDate = year + '-' + month + '-' + day;
+  return currentDate;
+}
+function date_into_words(data) {
+  var dateObj = new Date(data);
+  var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var month = monthNames[dateObj.getMonth()];
+  var day = dateObj.getDate();
+  var year = dateObj.getFullYear();
+  var currentDate = month + ' ' + day + ', ' + year;
+  return currentDate;
+}
 
 //submit new barangay
 $("#add_barangay_btn").click(function () {
@@ -170,6 +187,9 @@ else if(confirmation.a == 4)
 //show data tables
 function load_data_tables() {
 
+  var today = getCurrentDate()
+  var today_date_into_words = date_into_words(today)
+
   if ( ! $.fn.DataTable.isDataTable( '#barangay_table' ) ) { // check if data table is already exist
 
     table = $('#barangay_table').DataTable({
@@ -209,13 +229,14 @@ function load_data_tables() {
           "orderable": false
        }],
   
-       "buttons": [{
+       "buttons": [
+        {
              extend: 'copy',
              text: 'COPY',
   
              title: 'Health Profile Clustering System',
 
-             messageTop: 'Barangays in Oroquieta City',
+             messageTop: 'Barangays in Oroquieta City\nAccessed: ' + today_date_into_words,
              //className: 'fa fa-solid fa-clipboard',
   
   
@@ -234,10 +255,10 @@ function load_data_tables() {
              extend: 'excel',
              text: 'EXCEL',
   
-             title: 'Health Profile Clustering System',
-  
-             messageTop: 'Barangays in Oroquieta City',
-             //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
+            title: 'Health Profile Clustering System',
+
+            messageTop: 'Barangays in Oroquieta City Accessed: ' + today_date_into_words,
+             //className: 'fa fa-solid fa-clipboard',
   
   
              exportOptions: {
@@ -255,9 +276,10 @@ function load_data_tables() {
              extend: 'print',
              text: 'PDF',
   
-             title: 'Health Profile Clustering System',
-  
-             messageTop: 'Barangays in Oroquieta City',
+            title: 'Health Profile Clustering System',
+
+            messageTop: 'Barangays in Oroquieta City<br>Accessed: ' + today_date_into_words + "<br><br>",
+             //className: 'fa fa-solid fa-clipboard',
              //className: 'fa fa-print',
   
   

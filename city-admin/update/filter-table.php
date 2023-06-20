@@ -42,18 +42,18 @@
         </div>
 
       <div class="mb-3">
-        <label for="range_from" class="form-label">Min Date:</label>
+        <label for="range_from" class="form-label">Min Birth Date:</label>
         <input  type="date" id="range_from" class="form-control   barangay-form text-sm-start shadow-sm"  placeholder="From">
         <div class="invalid-feedback">
-        Invalid min date.
+        Invalid min birth date.
         </div>
         </div>
 
         <div class="mb-3">
-        <label for="range_to" class="form-label">Max Date:</label>
+        <label for="range_to" class="form-label">Max Birth Date:</label>
         <input  type="date" id="range_to" class="form-control  barangay-form text-sm-start shadow-sm"  placeholder="To">
         <div class="invalid-feedback">
-        Invalid max date.
+        Invalid max birth date.
         </div>
         </div>
 

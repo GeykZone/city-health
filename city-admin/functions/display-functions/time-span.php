@@ -23,35 +23,43 @@
 
         $conditions = array();
         
-        if($barangay_name != "default")
+        if($barangay_name != "")
         {
             $conditions[] = "`b`.`id`='$barangay_name'";
         }
-        if($disease_type != "default")
+        if($disease_type != "")
         {
-            $conditions[] = "`disease_id`='$disease_type'";
+            $conditions[] = "`disease_id` ='$disease_type'";
         }
-        if($gender != "default")
+        if($gender != "")
         {
             $conditions[] = "`gender`='$gender'";
         }
-        if($min_age != "default")
+        if($min_age != "NaN")
         {
             $conditions[] = "`age` >= '$min_age'";
         }
-        if($max_age != "default")
+        if($max_age != "NaN")
         {
             $conditions[] = "`age` <= '$max_age'";
         }
-        
+        if($date_range_from != "")
+        {
+          $conditions[] = "`date` >= '$date_range_from'";
+        }
+
+        if($date_range_to != "")
+        {
+            $conditions[] = "`date` <= '$date_range_to'";
+        }
 
         $sql = $query;
         if (count($conditions) > 0) {
-          $sql .= " WHERE `date` BETWEEN '$date_range_from' AND '$date_range_to' && " . implode(' AND ', $conditions) . " GROUP BY `date` ORDER BY `date` ASC ";
+          $sql .= " WHERE " . implode(' AND ', $conditions) . " GROUP BY `date` ORDER BY `date` ASC ";
         }
         else
         {
-            $sql .= " WHERE `date` BETWEEN '$date_range_from' AND '$date_range_to' GROUP BY `date` ORDER BY `date` ASC ";
+            $sql .= " WHERE `date` BETWEEN '$current_year_from' AND '$current_year_to' GROUP BY `date` ORDER BY `date` ASC ";
         }
 
     }

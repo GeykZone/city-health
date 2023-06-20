@@ -46,7 +46,7 @@
 
 <!--jquery data tables-->
 <link rel="stylesheet" type="text/css" href="../resourcess/DataTables/datatables.min.css"/>
-<script type="text/javascript" src="../resourcess/DataTables/datatables.min.js"></script>
+<script type="text/javascript" src="../resourcess/DataTables/datatables.js"></script>
 
 
 <!--icons-->
@@ -78,6 +78,15 @@
 <!--tooltip-->
 <script src="../resourcess/opentip_tooltips/opentip-jquery-excanvas.js"></script><!-- Change to the adapter you actually use -->
 <link href="../resourcess/opentip_tooltips/opentip.css" rel="stylesheet" type="text/css" />
+
+
+<!-- use xlsx.full.min.js from version 0.19.3 -->
+<script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+<script src="../resourcess/xlsx-js-style/dist/xlsx.bundle.js"></script>
+
+
+<!--file saver-->
+<script src="../resourcess/file-saver/src/FileSaver.js"></script>
 
 </head>
 <body >

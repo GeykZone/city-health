@@ -31,6 +31,24 @@ confirmation.registerListener(function(val) {
 });
 //set do some stuff when confiramtion variable is changed end
 
+function getCurrentDate() {
+  var dateObj = new Date();
+  var year = dateObj.getFullYear();
+  var month = ('0' + (dateObj.getMonth() + 1)).slice(-2); // Adding 1 and padding with zero if needed
+  var day = ('0' + dateObj.getDate()).slice(-2); // Padding with zero if needed
+  var currentDate = year + '-' + month + '-' + day;
+  return currentDate;
+}
+function date_into_words(data) {
+  var dateObj = new Date(data);
+  var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var month = monthNames[dateObj.getMonth()];
+  var day = dateObj.getDate();
+  var year = dateObj.getFullYear();
+  var currentDate = month + ' ' + day + ', ' + year;
+  return currentDate;
+}
+
 //submit new type of disease
 $("#add_disease_btn").click(function () {
 
@@ -156,6 +174,8 @@ else if(confirmation.a == 4)
 
 //show data tables
 function load_data_tables() {
+  var today = getCurrentDate()
+  var today_date_into_words = date_into_words(today)
 
 if ( ! $.fn.DataTable.isDataTable( '#diseases_table' ) ) { // check if data table is already exist
 
@@ -200,7 +220,7 @@ if ( ! $.fn.DataTable.isDataTable( '#diseases_table' ) ) { // check if data tabl
 
             title: 'Health Profile Clustering System',
 
-            messageTop: 'Health Diseases',
+        messageTop: 'Health Diseases\nAccessed: ' + today_date_into_words,
             //className: 'fa fa-solid fa-clipboard',
 
 
@@ -221,7 +241,7 @@ if ( ! $.fn.DataTable.isDataTable( '#diseases_table' ) ) { // check if data tabl
 
             title: 'Health Profile Clustering System',
 
-            messageTop: 'Health Diseases',
+          messageTop: 'Health Diseases Accessed: ' + today_date_into_words,
             //className: 'fa fa-solid fa-table',  //<i class="fa-solid fa-clipboard"></i>
 
 
@@ -242,7 +262,7 @@ if ( ! $.fn.DataTable.isDataTable( '#diseases_table' ) ) { // check if data tabl
 
             title: 'Health Profile Clustering System',
 
-            messageTop: 'Health Diseases',
+          messageTop: 'Health Diseases<br>Accessed: ' + today_date_into_words + "<br><br>",
             //className: 'fa fa-print',
 
 

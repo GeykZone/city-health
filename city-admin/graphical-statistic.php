@@ -15,8 +15,8 @@ include('includes/sidebar.php');
 <li class="breadcrumb-item active">
 <!-- if breadcrumb is single--><span>City Admin</span>
 </li>
-<li class="breadcrumb-item active"><span>Manage Health Profiles</span></li>
-<li class="breadcrumb-item active"><span>GHS Categorized by Barangays</span></li>
+<li class="breadcrumb-item active"><span>Profiles & Stats</span></li>
+<li class="breadcrumb-item active"><span>Barangay Health Stats</span></li>
 </ol>
 </nav>
 </div>
@@ -40,7 +40,7 @@ include('includes/sidebar.php');
 <div class="card border-0 mb-4 shadow-sm remove_rounded">
 
 <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
-<button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Graphical Health Statistics Categorized by Barangays
+<button type="button" id="current_year" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay Health Stats Graphical Format
 </div>
 
   <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >
@@ -53,7 +53,6 @@ include('includes/sidebar.php');
   </div>
 
   <div class="col-lg-6 col-md-12 text-lg-end text-md-start align-content-center dropdown-center">
-  <?php include('includes/options.php'); ?>
   <a style="padding-top: 7px; padding-bottom: 7px;" class=" border-0 shadow-sm mb-3 addbtn add-brgy px-3 fw-bolder" id="filter_graph" data-coreui-toggle="modal" href="#filter-map" role="button" >FILTER <span class="fa-solid ms-1 fa-filter"></span></a>
   </div>
 
@@ -85,6 +84,52 @@ include('includes/sidebar.php');
 </div>
 </div>
 <!--chart end-->
+
+<!--Admins-->
+<div class="row">
+<div class="col-md-12">
+<div class="card border-0 mb-4  shadow-sm remove_rounded">
+
+  <div class="bg-info card-header border-0 shadow-sm text-bg-primary" id="menu_tittle" style=" font-weight:500;">
+  <button type="button" id="current_year_table" style="margin-right: 10px;" class="border-0 bg-transparent"><span class="fa-solid text-light"></span></button>Barangay Health Stats Tabular Format
+  </div>  
+
+  <div class="card-body border-0 shadow-sm remove_rounded"  id="wrapper" >
+
+      <div class=" container-fluid mb-1">
+        <div class=" dataTables_wrapper dt-bootstrap5 row" id="buttons">
+        </div>
+      </div>
+
+      <div class="table-responsive container-fluid" >
+      <table class="table table-striped table-borderless table-condensed  mb-0 w-100" id="barangay_health_statistic"> 
+        <thead class="table-info fw-semibold shadow-sm">
+          <tr class="align-middle">
+          <th>Barangay</th>
+          <th class="text-end px-4">Total Health Cases</th>
+          </tr>
+        </thead>
+        <tbody class=" align-middle shadow-sm" id="show_barangay_health_statistic_table"> 
+        </tbody>
+        <tfoot class=" table-secondary fw-semibold shadow-sm" id="th_1">
+          <tr class="align-middle" >
+            <td id="Barangay"  style="width:150px;"></td>
+            <td id="Total Health Cases" class="d-flex justify-content-end" ></td>
+          </tr>
+        </tfoot>
+      </table>
+      </div>
+
+      <div class="table-responsive container-fluid" >
+        <div class="dataTables_wrapper dt-bootstrap5 row" id="table_page">
+        </div>
+      </div>
+    
+  </div>
+</div>
+</div>
+</div>
+<!--Admins end-->
 
 </div>
 </div>

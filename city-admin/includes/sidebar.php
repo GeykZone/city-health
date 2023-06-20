@@ -1,7 +1,5 @@
 <div class="sidebar sidebar-dark sidebar-fixed  ui-widget-shadow <?php
-if(!isset($_COOKIE["sidebar"])) {
-  
-} else {
+if(isset($_COOKIE["sidebar"])) {
   echo "sidebar-narrow-unfoldable";
 }
 ?>" id="sidebar">
@@ -18,20 +16,27 @@ if(!isset($_COOKIE["sidebar"])) {
         <li class="nav-item" ><a class="nav-link" href="manage-barangay.php" id="nav_barangay">
         <i id="manage_barangay_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Barangays</a>
         </li>
-        <li class="nav-item" ><a class="nav-link" href="manage-resident.php" id="nav_residents">
-        <i id="manage_residents_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Residents</a>
-        </li>
         <li class="nav-item" ><a class="nav-link" href="manage-user.php" id="nav_users">
         <i id="manage_users_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Users</a>
         </li>
         <li class="nav-item" ><a class="nav-link" href="manage-disease.php" id="nav_diseases">
         <i id="manage_diseases_Type_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Disease Types</a>
         </li>
-        <li class="nav-item" ><a class="nav-link" href="manage-hp.php" id="nav_hp">
-        <i id="manage_hp_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid"></i>Manage Health Profiles</a>
+        <li class="nav-group" id = "sideBar_nav">
+        <a class="nav-link nav-group-toggle" id="nav_hp">
+        <i id="manage_hp_icon" style="width: 20px; height:20px;" class=" nav-icon fa-solid">
+        
+        </i>Profiles & Stats
+        </a>
+        <ul class="nav-group-items">
+            <li class="nav-item"><a class="nav-link" id="nav_a" href="manage-hp.php"><span class="nav-icon"></span>Manage Health Profiles</a></li>
+            <li class="nav-item"><a class="nav-link" id="nav_b" href="map-statistic.php"><span class="nav-icon"></span>Map Visualization</a></li>
+            <li class="nav-item"><a class="nav-link" id="nav_c" href="graphical-statistic.php"><span class="nav-icon"></span>Barangay Health Stats</a></li>
+            <li class="nav-item"><a class="nav-link" id="nav_d" href="graphical-statistic-disease.php"><span class="nav-icon"></span>Total Disease Stats</a></li>
+          </ul>
         </li>
-
       </ul>
+      
       <button  class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
     </div>
 

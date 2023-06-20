@@ -4,18 +4,18 @@ var date_range_from = "default";
 var date_range_to = "default";
 var query_click = "unclicked";
 var gender = "default";
+var min_age = "default";
+var max_age = "default";
 
 var current_year = new Date();
 var current_year_dd = String(current_year.getDate()).padStart(2, '0');
 var current_year_mm = String(current_year.getMonth() + 1).padStart(2, '0');
 var current_year_yyyy = current_year.getFullYear();
-
 var one_month = new Date(current_year);
 one_month.setMonth(one_month.getMonth() - 1);
 var one_month_dd = String(one_month.getDate()).padStart(2, '0');
 var one_month_mm = String(one_month.getMonth() + 1).padStart(2, '0');
 var one_month_yyy = one_month.getFullYear();
-
 var current_year_from = one_month_yyy + '-' + one_month_mm + '-' + one_month_dd;
 var current_year_to = current_year_yyyy + '-' + current_year_mm + '-' + current_year_dd;
 
@@ -26,18 +26,11 @@ var x_y_value = "";
 var xValues = "";
 var yValues = ""; 
 var myColors;
-
-
 var barangay_title
 var disease_title
 var details_title;
 var date_range_title;
-
 var sort = "names";
-
-var min_age = "default";
-var max_age = "default";
-
 var total
 
 
@@ -46,7 +39,6 @@ $(document).ready(function()
     $( "#disease_range_from" ).val(current_year_from);
     $( "#disease_range_to" ).val(current_year_to);
     $(document).attr("title", "HPCS | Manage Health Profiles");
-    $("#nav_hp").addClass("active");
     select_list() 
     select_for_disease()
     oneTip()
@@ -63,7 +55,6 @@ function current_status()
     {
       $("#map_from").text("from "+getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy + " to ")
         $("#map_to").text(getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
-
     }
     else
     {
@@ -236,13 +227,13 @@ function removeLastWord(str) {
 }
 //remove last word from a string end
   
-  //convert month number into words
-  function getMonthName(monthNumber) {
-    const date = new Date();
-    date.setMonth(monthNumber - 1);
-    return date.toLocaleString('en-US', { month: 'long' });
-  }
-  //convert month number into words end
+//convert month number into words
+function getMonthName(monthNumber) {
+  const date = new Date();
+  date.setMonth(monthNumber - 1);
+  return date.toLocaleString('en-US', { month: 'long' });
+}
+//convert month number into words end
   
 // selectize ordinary
 function select_list() 
@@ -311,21 +302,21 @@ $(".selectize-control").removeClass("form-control barangay-form")
 }
 // for select diseases  end
   
-  //date picker
-  function date_range()
-  {
-  
-    $("#disease_range_from").datepicker({
-      dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
-      });
-  
-  
-      $("#disease_range_to").datepicker({
-          dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
-          });
-  
-  }
-  //date picker end
+//date picker
+function date_range()
+{
+
+  $("#disease_range_from").datepicker({
+    dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+    });
+
+
+    $("#disease_range_to").datepicker({
+        dateFormat: 'yy-mm-dd',changeMonth: true,changeYear: true,yearRange:"c-100:c+0"
+        });
+
+}
+//date picker end
 
  //initalize chart values
  function chart_array()
@@ -847,8 +838,6 @@ myChart.update(function()
     }
 
 });
-
-
 
 }
 //update chart end

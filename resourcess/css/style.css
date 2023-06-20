@@ -11567,6 +11567,11 @@ html:not([dir=rtl]) .text-center {
   color: rgba(var(--cui-danger-rgb), var(--cui-text-opacity)) !important;
 }
 
+.text-orange
+{
+  color: orangered;
+}
+
 .text-light {
   --cui-text-opacity: 1;
   color: rgba(var(--cui-light-rgb), var(--cui-text-opacity)) !important;

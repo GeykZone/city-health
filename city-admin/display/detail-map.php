@@ -18,14 +18,14 @@
         <div class="mb-1 opacity-75"><h6><span class="fa-solid me-2 ms-1"></span><span>Age Range</span></h6><p class="ms-1" style="margin-top: 7px;"><span class="details_head_age"></span></p></div>
         </div>
 
-        <div id="details_content_titte" class="bg-white  px-3 pt-3  pb-1 mb-3 rounded-3 shadow-sm border-0">
-        <div class="mb-1 opacity-75  d-flex align-items-center"><span class="fa-regular me-2 ms-1"></span><h6 style="margin-top: 7px;"> Total Health Cases</h6></div>
-        <div class="details_content_label"><label class="form-label"></label></div>
-        </div>
-
         <div id="details_category" class="bg-white px-3 pt-3  pb-1 mb-3 rounded-3 shadow-sm border-0">
         <div class="mb-1 opacity-75  d-flex align-items-center"><span class="fa-solid me-2 ms-1"></span><h6 style="margin-top: 7px;"> Cluster Category</h6></div>
         <div class="details_category_content"><label class="form-label"></label></div>
+        </div>
+        
+        <div id="details_content_titte" class="bg-white  px-3 pt-3  pb-1 mb-3 rounded-3 shadow-sm border-0">
+        <div class="mb-1 opacity-75  d-flex align-items-center"><span class="fa-regular me-2 ms-1"></span><h6 style="margin-top: 7px;"> Total Health Cases</h6></div>
+        <div class="details_content_label"><label class="form-label"></label></div>
         </div>
 
         <div id="details_form" class="bg-white  px-3 pt-3  pb-3 rounded-3 shadow-sm border-0">

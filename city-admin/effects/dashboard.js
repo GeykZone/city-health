@@ -5,43 +5,32 @@ var gender = "default";
 var barangay_name = "default";
 var min_age = "default";
 var max_age = "default";
-
 var current_year = new Date();
 var current_year_dd = String(current_year.getDate()).padStart(2, '0');
 var current_year_mm = String(current_year.getMonth() + 1).padStart(2, '0');
 var current_year_yyyy = current_year.getFullYear();
-
 var one_month = new Date(current_year);
 one_month.setMonth(one_month.getMonth() - 1);
 var one_month_dd = String(one_month.getDate()).padStart(2, '0');
 var one_month_mm = String(one_month.getMonth() + 1).padStart(2, '0');
 var one_month_yyy = one_month.getFullYear();
-
 var current_year_from = one_month_yyy + '-' + one_month_mm + '-' + one_month_dd;
 var current_year_to = current_year_yyyy + '-' + current_year_mm + '-' + current_year_dd;
-
 var date_range_from = current_year_from
 var date_range_to = current_year_to
-
-
 var sort = "names";
-
-
 var x_value = "";
 var y_value = "";
 var xValues = "";
 var yValues = "";
-
 var x_value_disease = "";
 var y_value_disease = "";
 var xValues_disease = "";
 var yValues_disease = "";
-
 var x_value_residents = "";
 var y_value_residents = "";
 var xValues_residents = "";
 var yValues_residents = "";
-
 var myColors = [];
 var disease_chart_color=[];
 var disease_chart_points=[]
@@ -49,25 +38,16 @@ var myColors_residents=[];
 var myColors_time;
 var myChart ="";
 var res_id_value ="";
-
-var total_hp_count;
-
-var top_3_disease_name_title;
-var top_3_total_disease_title;
-
-var top_3_barangay_name_title;
-var top_3_total_barangay_title;
-
 var currentDate = new Date(current_year);
 var past7Days = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000);
 var past7Days_dd = String(past7Days.getDate()).padStart(2, '0');
 var past7Days_mm = String(past7Days.getMonth() + 1).padStart(2, '0');
 var past7Days_yyy = past7Days.getFullYear();
-
 var past7Days_from = past7Days_yyy + '-' + past7Days_mm + '-' + past7Days_dd;
 var past7Days_to = current_year_yyyy + '-' + current_year_mm + '-' + current_year_dd;
-
 var map_center
+var diseases_clustered;
+var total_hp_count = total_hp_count_function()
 
 $(document).ready(function()
 {
@@ -79,24 +59,439 @@ $(document).ready(function()
     } else {
       map_center = [123.725389, 8.455992];
     }
-
     display_map()
-    total_hp_count_function()
-
-    top_3_diseases_function()
-    top_3_barangays_functions()
-
+    disease_cluster()
+    get_cases_for_past_months_days()
     shurctuMenu()
-    newCases()
-    totalCases()
-
-
     brgy_chart()
     disease_chart()
     timespan_chart()
     
 })
 
+ //kmeans
+ function clustering_v1(this_datapoints, centroids_num)
+ {
+
+  function getManualCentroids(data) {
+    const sortedData = data.sort((a, b) => a - b);
+    const lowest = sortedData[0];
+    const highest = sortedData[sortedData.length - 1];
+
+    var numbers = sortedData
+
+    var sum = numbers.reduce(function(a, b) {
+      return a + b;
+    }, 0);
+
+    const mean = sum / numbers.length;
+    
+    return [lowest, mean, highest];
+  }
+
+
+  function assignClusters(data, centroids) {
+    const clusters = new Array(centroids.length).fill().map(() => []);
+    
+    for (let i = 0; i < data.length; i++) {
+      let minDistance = Infinity;
+      let closestCentroidIndex = 0;
+      
+      for (let j = 0; j < centroids.length; j++) {
+        const distance = Math.abs(data[i] - centroids[j]);
+        
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestCentroidIndex = j;
+        }
+      }
+      
+      clusters[closestCentroidIndex].push(data[i]);
+    }
+    
+    return clusters;
+  }
+
+  function calculateNewCentroids(clusters) {
+    const centroids = [];
+    
+    for (let i = 0; i < clusters.length; i++) {
+      const cluster = clusters[i];
+      
+      if (cluster.length === 0) {
+        continue; // Skip empty clusters
+      }
+      
+      const sum = cluster.reduce((accumulator, currentValue) => accumulator + currentValue);
+      const mean = sum / cluster.length;
+      
+      centroids.push(mean);
+    }
+    
+    return centroids;
+  }
+
+  function kMeansClustering(data, k) {
+    let centroids = getManualCentroids(data);
+    var maxIterations = 100
+    
+    for (let i = 0; i < maxIterations; i++) {
+      const clusters = assignClusters(data, centroids);
+      const newCentroids = calculateNewCentroids(clusters);
+      
+      if (centroids.toString() === newCentroids.toString()) {
+        break; // Stop iteration if centroids do not change
+      }
+      
+      centroids = newCentroids;
+    }
+    
+    return {
+      centroids,
+      clusters: assignClusters(data, centroids)
+    };
+  }
+  const data_points = this_datapoints
+  const k = centroids_num
+  const v1_clsutering = kMeansClustering(data_points, k)
+
+  var clusters = v1_clsutering.clusters;
+  var centroids = v1_clsutering.centroids;
+  return { clusters: clusters, centroids: centroids};
+ }
+
+ function clusteing_v2(this_datapoints, centroids_num)
+ {
+      // Function to perform k-means clustering
+  function performClustering(data, k) {
+    // Step 1: Initialize centroids
+    var datap = data;
+    var cen_k = k;
+    var centroids = initializeCentroids(datap, cen_k);
+
+    var maxIterations = 100; // Maximum number of iterations
+    var iterations = 0;
+
+    while (iterations < maxIterations) {
+      var clusters = assignDataToCentroids(datap, centroids);
+      var newCentroids = updateCentroids(clusters, centroids);
+
+      // Check for convergence
+      if (areCentroidsEqual(centroids, newCentroids)) {
+        break;
+      }
+
+      centroids = newCentroids;
+      iterations++;
+    }
+
+    return { clusters: clusters, centroids: centroids };
+  }
+    
+// Function to initialize the centroids
+function initializeCentroids(dataPoints, k) {
+
+  var centroids =[]
+
+    // Set initial centroids
+    var c1 = { percent: Number.MAX_VALUE, healthCases: Number.MAX_VALUE }; // Cluster Green
+    var c2 = { percent: Number.MAX_VALUE, healthCases: Number.MAX_VALUE }; // Cluster Yellow
+    var c3 = { percent: Number.MIN_VALUE, healthCases: Number.MIN_VALUE }; // Cluster Orange
+
+    // Calculate combined values and identify initial centroids
+    var sumPercent = 0;
+    var sumHealthCases = 0;
+
+    for (var i = 0; i < dataPoints.length; i++) {
+    var dataPoint = dataPoints[i];
+    var combinedValue = dataPoint.percent + dataPoint.healthCases;
+    sumPercent += dataPoint.percent;
+    sumHealthCases += dataPoint.healthCases;
+
+    if (combinedValue < c1.percent + c1.healthCases) {
+      c1 = dataPoint;
+    } else if (combinedValue > c3.percent + c3.healthCases) {
+      c3 = dataPoint;
+    }
+    }
+
+    // Calculate centroid for Cluster 2 (Yellow)
+    var c2 = {
+    percent: sumPercent / dataPoints.length,
+    healthCases: sumHealthCases / dataPoints.length
+    };
+
+
+
+   
+
+  // Find the data point with the lowest sum of health cases and percentages
+  var centroidC1 = c1
+  centroids.push(centroidC1);
+
+  if(c2.healthCases < c3.healthCases)
+  {
+    // Find the data point that is not the lowest sum of health cases and percentages
+    var centroidC2 = c2
+    centroids.push(centroidC2);
+        
+    // Find the data point with the highest sum of health cases and percentages
+    var centroidC3 = c3;
+    centroids.push(centroidC3);
+  }
+  else
+  {
+        // Find the data point that is not the lowest sum of health cases and percentages
+    var centroidC2 = c3
+    centroids.push(centroidC2);
+        
+    // Find the data point with the highest sum of health cases and percentages
+    var centroidC3 = c2
+    centroids.push(centroidC3);
+  }
+
+
+
+ 
+
+  return centroids;
+}
+
+    // Function to assign data points to centroids
+  function assignDataToCentroids(data, centroids) {
+    var clusters = new Array(centroids.length).fill().map(() => []);
+
+    for (var i = 0; i < data.length; i++) {
+      var dataPoint = data[i];
+      var minDistance = Infinity;
+      var assignedCentroid = null;
+
+      for (var j = 0; j < centroids.length; j++) {
+        var centroid = centroids[j];
+        var distance = calculateDistance(dataPoint, centroid);
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          assignedCentroid = centroid;
+        }
+      }
+
+      clusters[centroids.indexOf(assignedCentroid)].push(dataPoint);
+    }
+
+    return clusters;
+  }
+
+    // Function to update centroids based on assigned data points
+  function updateCentroids(clusters, centroids) {
+    var newCentroids = [];
+
+    for (var i = 0; i < clusters.length; i++) {
+      var cluster = clusters[i];
+
+      if (cluster.length === 0) {
+        // If the cluster is empty, keep the same centroid
+        newCentroids.push(centroids[i]);
+        continue;
+      }
+
+      var sumHealthCases = 0;
+      var sumPercent = 0;
+      var sumIncrease = 0;
+
+      for (var j = 0; j < cluster.length; j++) {
+        var dataPoint = cluster[j];
+        sumHealthCases += dataPoint.healthCases;
+        sumPercent += dataPoint.percent;
+        sumIncrease += dataPoint.increase;
+      }
+
+      var averageHealthCases = sumHealthCases / cluster.length;
+      var averagePercent = sumPercent / cluster.length;
+      var averageIncrease = sumIncrease / cluster.length;
+
+      newCentroids.push({
+        healthCases: averageHealthCases,
+        percent: averagePercent,
+        increase: averageIncrease,
+      });
+    }
+
+    return newCentroids;
+  }
+
+    // Function to calculate the distance between two data points
+    function calculateDistance(dataPoint, centroid) {
+      var healthCasesDiff = dataPoint.healthCases - centroid.healthCases;
+      var percentDiff = dataPoint.percent - centroid.percent;
+
+      // Euclidean distance formula
+      var distance = Math.sqrt(
+        Math.pow(healthCasesDiff, 2) +
+        Math.pow(percentDiff, 2) 
+      );
+
+      return distance;
+    }
+
+    // Function to check if two arrays of centroids are equal
+    function areCentroidsEqual(centroidsA, centroidsB) {
+      if (centroidsA.length !== centroidsB.length) {
+        return false;
+      }
+
+    for (var i = 0; i < centroidsA.length; i++) {
+      if (
+        centroidsA[i].healthCases !== centroidsB[i].healthCases ||
+        centroidsA[i].percent !== centroidsB[i].percent ||
+        centroidsA[i].increase !== centroidsB[i].increase
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+    function generateClusterExplanations(clusters) {
+      var exp = []
+    for (var i = 0; i < clusters.length; i++) {
+      var cluster = clusters[i];
+      var clusterHealthCases = [];
+
+      // Extract the healthCases values from the cluster
+      for (var j = 0; j < cluster.length; j++) {
+        clusterHealthCases.push(cluster[j].healthCases);
+      }
+
+      // Calculate statistics for the cluster
+      var minHealthCases = Math.min(...clusterHealthCases);
+      var maxHealthCases = Math.max(...clusterHealthCases);
+      var minPercent = Math.min(...cluster.map((dataPoint) => dataPoint.percent));
+      var maxPercent = Math.max(...cluster.map((dataPoint) => dataPoint.percent));
+      var minIncrease = Math.min(...cluster.map((dataPoint) => dataPoint.increase));
+      var maxIncrease = Math.max(...cluster.map((dataPoint) => dataPoint.increase));
+      
+      var percent_label = minPercent.toFixed(1) + "% to " + maxPercent.toFixed(1)
+      var increase_label = minIncrease.toFixed(1) + "% to " + maxIncrease.toFixed(1)
+      var cases_label = minHealthCases + " to " + maxHealthCases
+
+      var ranging_from = "ranging from"
+      var ranges_from = "ranges from"
+
+      if(minHealthCases === maxHealthCases)
+      {
+        cases_label = minHealthCases+" "
+        ranging_from = "with"
+      }
+
+      if(minPercent === maxPercent)
+      {
+        percent_label = minPercent
+      }
+
+      if(minIncrease === maxIncrease)
+      {
+        increase_label = minIncrease
+        ranges_from = "is"
+      }
+
+      var clust_name
+
+      if(i===0)
+      {
+        clust_name = "<h6 class = 'text-success fw-bold'>Cluster Green</h6>"
+      }
+      else if(i===1)
+      {
+        clust_name = "<h6 class = 'text-warning fw-bold'>Cluster Yellow</h6>"
+      }
+      else if(i===2)
+      {
+        clust_name = "<h6 class = 'text-orange fw-bold'>Cluster Orange</h6>"
+      }
+
+      var only_clust = ''
+      var clusterHealthCases_case = 'cases'
+      var add_health_cases_exp = ", "+ranging_from+" " + cases_label + " newly added health cases. ";
+
+      if(clusterHealthCases.length < 2)
+      {
+        clusterHealthCases_case = "case. "
+        only_clust = "only "
+        add_health_cases_exp=''
+      }
+
+      // Generate explanation for the cluster
+      var explanation = clust_name+ " characteristics: ";
+      explanation += "This cluster represents "+only_clust+"" + clusterHealthCases.length + " health "+clusterHealthCases_case+add_health_cases_exp;
+      explanation += "The health cases in this cluster account for approximately " + percent_label + "% of the total health cases in Oroquieta City. ";
+      explanation += "The increase in health cases for this cluster "+ranges_from+" " + increase_label + "%. ";
+
+      var exp_v2 = explanation
+
+      // Additional information based on cluster position
+      if (i === 0) {
+        explanation += "This indicates that this cluster represents the lowest cluster among the three clusters, reflecting relatively lower health case numbers.";
+      } else if (i === 1) {
+        explanation += "This indicates that this cluster represents a cluster that is neither the lowest nor the highest, indicating intermediate health case numbers.";
+      } else if (i === 2) {
+        explanation += "This indicates that this cluster represents the highest cluster among the three clusters, reflecting relatively higher health case numbers.";
+      }
+      exp [i] = explanation
+
+      var clust_1 = clusters[0].length
+      var clust_2 = clusters[1].length
+      var clust_3 = clusters[2].length
+
+      if (clust_1 >= 1 && clust_2 >= 1 && clust_3 < 1) {
+          exp[0] = exp_v2 + "Since Cluster Orange is empty this indicates that this cluster represents the lower cluster compared to Cluster Yellow, reflecting relatively lower health case numbers.";
+          exp[1] = exp_v2+ "Since Cluster Orange is empty this indicates that this cluster represents the higher cluster compared to Cluster Green, reflecting relatively higher health case numbers.";
+          exp[2] = "The cluster Orange is empty, so its characteristics cannot be explained";
+        } else if (clust_1 >= 1 && clust_2 < 1 && clust_3 < 1) {
+          exp[0] = exp_v2+ "Since Cluster Yellow and Cluster Orange are empty, this indicates that these clusters represent data with no significant differences to compare in terms of being greater or lower";
+          exp[1] = "The cluster Yellow is empty, so its characteristics cannot be explained";
+          exp[2] = "The cluster Orange is empty, so its characteristics cannot be explained";
+        }else if (clust_1 >= 1 && clust_2 < 1 && clust_3 >= 1) {
+          exp[0] =  exp_v2+ "Since Cluster Yellow is empty this indicates that this cluster represents the lower cluster compared to Cluster Orange, reflecting relatively Lower health case numbers.";
+          exp[1] = "The cluster Yellow is empty, so its characteristics cannot be explained";
+          exp[2] =  exp_v2+ "Since Cluster Yellow is empty, it suggests that there is no middle number available for comparison. Instead, it will be compared to the lowest cluster, which is Cluster Green. This comparison reveals a relatively higher number of health cases";
+        } else if (clust_1 < 1 && clust_2 >= 1 && clust_3 < 1) {
+          exp[0] = "The cluster Green is empty, so its characteristics cannot be explained";
+          exp[1] = exp_v2+ "Due to the absence of recorded cases in Cluster Green and Cluster Orange, it can be inferred that this particular cluster does not exhibit the lowest or highest numbers of reported cases.";
+          exp[2] = "The cluster Orange is empty, so its characteristics cannot be explained";
+        } else if (clust_1 < 1 && clust_2 >= 1 && clust_3 >= 1) {
+          exp[0] = "The cluster Green is empty, so its characteristics cannot be explained";
+          exp[1] = exp_v2 + "Since only Cluster Green is empty, it indicates that this cluster is not the lowest. However, when compared to Cluster Orange, it can be considered lower, implying that this cluster is positioned below Cluster Orange but may not be the lowest among all clusters.";
+          exp[2] = exp_v2 + "Since Cluster Green is empty, it suggests that there is no lowest number available for comparison. As a result, the comparison is limited to the middle number, automatically indicating that this cluster represents the highest value. This observation also implies that this cluster has the highest number of cases";
+        } else if (clust_1 < 1 && clust_2 < 1 && clust_3 >= 1) {
+          exp[0] = "The cluster Green is empty, so its characteristics cannot be explained";
+          exp[1] = "The cluster Yellow is empty, so its characteristics cannot be explained";
+          exp[2] = exp_v2+ "Due to the absence of data in Cluster Green and Cluster Yellow, there is no middle number available for comparison, and no lower cluster to compare against. This suggests that the current cluster may have a higher number of health cases. Moreover, the presence of high case numbers across all barangays in the dataset is indicated.";
+        } else if (clust_1 < 1 && clust_2 < 1 && clust_3 < 1) {
+          exp[0] = "The cluster Green is empty, so its characteristics cannot be explained";
+          exp[1] = "The cluster Yellow is empty, so its characteristics cannot be explained";
+          exp[2] = "The cluster Orange is empty, so its characteristics cannot be explained";
+        }
+
+
+    }
+
+    return exp
+  }
+
+    // Set the number of clusters
+    var k = centroids_num;
+
+    // Perform clustering
+    var result = performClustering(this_datapoints, k);
+    var clusters = result.clusters;
+    var centroids = result.centroids;
+    var cluster_explain = generateClusterExplanations(clusters)
+
+     return { clusters: clusters, centroids: centroids, explain:cluster_explain };
+ }
+ //kmeans_v2
 
 //remove first word from string
 function removeFirstWord(str) {
@@ -200,44 +595,108 @@ function display_map()
              long_lat = data;
          });
      
-         var textArr = long_lat;
-         var newObjectArr = [];
+          var textArr = long_lat;
+          var newObjectArr = [];
+          var dataPoints = [];
+          var total_recorded_cases_in_range = 0;
+
+          // console.log(long_lat)
+
+          $.each(textArr, function(index, lat_long) {
+          hpTotal =  removeLastWord(lat_long)
+          hpTotal =  removeLastWord(hpTotal)
+          hpTotal =  removeLastWord(hpTotal)
+          hpTotal =  removeLastWord(hpTotal)
+          total_recorded_cases_in_range += parseInt(hpTotal)
+
+          })
      
          $.each(textArr,function(index,lat_long){
      
-         hpTotal =  removeLastWord(lat_long)
-         hpTotal =  removeLastWord(hpTotal)
-         hpTotal =  removeLastWord(hpTotal)
-         
-         barangay = removeLastWord(lat_long)
-         barangay = removeLastWord(barangay)
-         barangay = removeFirstWord(barangay)
-         barangay = barangay.split('_').join(' ') 
+          hpTotal =  removeLastWord(lat_long)
+          hpTotal =  removeLastWord(hpTotal)
+          hpTotal =  removeLastWord(hpTotal)
+          hpTotal =  removeLastWord(hpTotal)
+          
+          barangay = removeLastWord(lat_long)
+          barangay = removeLastWord(barangay)
+          barangay = removeLastWord(barangay)
+          barangay = removeFirstWord(barangay)
+          barangay = barangay.split('_').join(' ') 
+      
+          lat = removeLastWord(lat_long)
+          lat = removeFirstWord(lat)
+          lat = removeFirstWord(lat)
+          lat = removeFirstWord(lat)
+      
+          long = removeLastWord(lat_long)
+          long = removeLastWord(long)
+          long = removeFirstWord(long)
+          long = removeFirstWord(long)
+
+          allTime_hpTotal = removeFirstWord(lat_long)
+          allTime_hpTotal = removeFirstWord(allTime_hpTotal)
+          allTime_hpTotal = removeFirstWord(allTime_hpTotal)
+          allTime_hpTotal = removeFirstWord(allTime_hpTotal)
      
-         lat = removeFirstWord(lat_long)
-         lat = removeFirstWord(lat)
-         lat = removeFirstWord(lat)
-     
-         long = removeLastWord(lat_long)
-         long = removeFirstWord(long)
-         long = removeFirstWord(long)
-     
-         var single = {
-             'type': 'Feature',
-             'geometry': [long, lat],
-             'title': barangay,
-             'description': hpTotal,
-             'index': index
-             }
+           var previous_val = parseInt(allTime_hpTotal) - parseInt(hpTotal)
+
+          if(previous_val < 1)
+          {
+            var current_val = parseInt(previous_val) + parseInt(hpTotal)
+            all_time_total_percentage = undefined
+          }
+          else
+          {
+              var current_val = parseInt(previous_val) + parseInt(hpTotal)
+              var difference_val = parseInt(current_val) - parseInt(previous_val)
+
+              var all_time_total_percentage = (difference_val / previous_val) * 100;
+              all_time_total_percentage = Number(all_time_total_percentage.toFixed(1))
+          }
+
+          //console.log("current value: ",current_val," Previouse value: ", previous_val," difference value: ", difference_val, "Answer:", all_time_total_percentage)
+          
+          var percentage = (hpTotal / total_recorded_cases_in_range) * 100;
+          percentage = parseFloat(percentage);
+          percentage = Number(percentage.toFixed(1))
+
+          if (isNaN(percentage)) {
+            percentage = 0;
+          }
+
+          //console.log("total cases in that month: ",total_recorded_cases_in_range)
+
+          var single = {
+          'type': 'Feature',
+          'geometry': [long, lat],
+          'title': barangay,
+          'description': hpTotal,
+          'allTime_hpTotal':allTime_hpTotal,
+          'prev_rec': previous_val,
+          'current_val':current_val,
+          'index': index
+          }
+
+          var datasets = { "barangay": barangay, "healthCases": parseInt(hpTotal), "percent": parseFloat(percentage), "increase": parseFloat(all_time_total_percentage) }
+          dataPoints.push(datasets)     
      
          newObjectArr.push(single);
          });
+
+          const v2_clustering = clusteing_v2(dataPoints, 3)
+
+          top_3_barangays_functions(v2_clustering, newObjectArr)
      
          const locations = {
              'type': 'FeatureCollection',
              'features': newObjectArr
              };
-          
+
+          var total = 0
+
+          // Append new data to the DataTable
+          var newRow
              
          // initialization to display markers
          for (var i = 0; i < locations.features.length; i++ ) {
@@ -246,32 +705,47 @@ function display_map()
              var clusterCategory = "";
          
              // create a HTML element for each feature
+             var progressColor 
              const el = document.createElement('div');
-             if(parseInt(feature.description) <= 10)
-             {
-                 el.className = 'green';
-                 clusterCategory = "Low"
-                 el.id = i
-             }
-             else if(parseInt(feature.description) <= 40)
-             {
-                 el.className = 'yellow';
-                 clusterCategory = "Moderate"
-                 el.id = i
-             }
-             else if(parseInt(feature.description) <= 70)
-             {
-                 el.className = 'orange';
-                 clusterCategory = "Severe"
-                 el.id = i
-             }
-             else
-             {
-                 el.className = 'red';
-                 clusterCategory = "Critical"
-                 el.id = i
 
-             }
+
+            v2_clustering.clusters.forEach((cluster, index) => {
+                    cluster.forEach((dataPoint) => {
+                      const clusterHealthCases = dataPoint.barangay;
+                    if (clusterHealthCases === feature.title) {
+
+                    if(parseInt(feature.description) > 0)
+                    {
+                        if(index == 0)
+                          {
+                            el.className = 'green';
+                            progressColor = 'bg-c-green'
+                            clusterCategory = 'Cluster Green'
+                            el.id = i                         
+
+                          }
+                          else if(index == 1)
+                          {
+                            el.className = 'yellow';
+                            progressColor = 'bg-c-yellow'
+                            clusterCategory = 'Cluster Yellow'
+                            el.id = i 
+
+                          }
+                          else
+                          {
+                            el.className = 'orange';
+                            progressColor = 'bg-c-orange'
+                            clusterCategory = 'Cluster Orange'
+                            el.id = i  
+
+                          }
+                    }
+
+                    }
+
+                    });
+                  });
 
              var pops = new mapboxgl.Popup({ offset: 5, closeButton: false}) 
 
@@ -287,24 +761,32 @@ function display_map()
             var cont = locations.features[divId]
             var mark;
 
-            if(parseInt(cont.description) <= 10)
+            v2_clustering.clusters.forEach((cluster, index) => {
+            cluster.forEach((dataPoint) => {
+              const clusterHealthCases = dataPoint.barangay;
+
+            if (clusterHealthCases === cont.title) {
+
+            if(parseInt(cont.description) > 0)
             {
-                mark= 'green';
+                if(index == 0)
+                  {
+                    mark = 'green';
+                  }
+                  else if(index == 1)
+                  {
+                    mark = 'yellow';
+                  }
+                  else
+                  {
+                    mark = 'orange';
+                  }
             }
-            else if(parseInt(cont.description) <= 40)
-            {
-                mark = 'yellow';
 
             }
-            else if(parseInt(cont.description) <= 70)
-            {
-                mark = 'orange';
 
-            }
-            else
-            {
-                mark= 'red';
-            }
+            });
+          });
 
             var modified_label = parseInt(cont.description).toLocaleString('en-US')+" health cases in total."
             if(cont.description == 1)
@@ -332,12 +814,7 @@ function display_map()
 
             var divId = $(this).attr('id');
             divId = parseInt(divId)
-            var cont = locations.features[divId]
-            var mark;
-
-            Cookies.set('dashboard_map', divId)
-
-            location.href = 'map-statistic.php';
+          location.href = 'map-statistic.php?marker_id=' + encodeURIComponent(divId);
         });
         if(long_lat[0] === "0 0 0 0")
         {
@@ -357,21 +834,67 @@ function display_map()
         $(".mapboxgl-ctrl-group").addClass("d-none d-lg-block d-sm-none")
 
     });
-
 }
 //map
 
-//top 3 diseases
-function top_3_diseases_function()  
+//get cases of past months and days
+function get_cases_for_past_months_days()
 {
-  var top_3_diseases;
-  var top_3_diseases_date_start = getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy
-  var top_3_diseases_date_end = getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy
-
+  var pass_30_days_cases
   $.ajaxSetup({async:false});
   $.getJSON('functions/display-functions/get_top_3.php', 
   {
-    top_3_diseases:'set',
+    get_cases_for_past_months:'set',
+    top_from:current_year_from,
+    top_to:current_year_to
+  },     
+  function (data, textStatus, jqXHR) 
+  {
+    pass_30_days_cases = data;
+  });
+  var newObjectArr = []
+  $.each(pass_30_days_cases,function(index, elements){
+   newObjectArr.push(parseInt(elements));
+  });
+  var casese_for_past_months = clustering_v1(newObjectArr, 3)
+  totalCases(casese_for_past_months)
+  console.log(casese_for_past_months.centroids)
+  console.log(casese_for_past_months.clusters)
+  
+
+  var pass_days_cases
+  $.ajaxSetup({async:false});
+  $.getJSON('functions/display-functions/get_top_3.php', 
+  {
+    get_cases_for_past_days:'set',
+    top_from:past7Days_from,
+    top_to:past7Days_to
+  },     
+  function (data, textStatus, jqXHR) 
+  {
+    pass_days_cases = data;
+    
+  });
+  var newObjectArr1 = []
+  $.each(pass_days_cases,function(index, elements){
+   newObjectArr1.push(parseInt(elements));
+  });
+  var casese_for_past_days = clustering_v1(newObjectArr1, 3)
+  newCases(casese_for_past_days)
+   console.log(casese_for_past_days.centroids)
+  console.log(casese_for_past_days.clusters)
+}
+//get cases of past months and days
+
+//disease_cluster
+function disease_cluster()
+{
+  
+  var top_3_diseases;
+  $.ajaxSetup({async:false});
+  $.getJSON('functions/display-functions/get_top_3.php', 
+  {
+    total_diseases:'set',
     top_from:current_year_from,
     top_to:current_year_to
   },     
@@ -383,6 +906,7 @@ function top_3_diseases_function()
 
   var textArr = top_3_diseases;
   var newObjectArr = [];
+  var dataPoints = []
 
   $.each(textArr,function(index,top_3_diseases){
   
@@ -396,81 +920,164 @@ function top_3_diseases_function()
   all_time_total = removeFirstWord(top_3_diseases)
   all_time_total = removeFirstWord(all_time_total)
 
+  var previous_val = parseInt(all_time_total) - parseInt(total_diseases)
+
+  if(previous_val < 1)
+  {
+    var current_val = parseInt(previous_val) + parseInt(total_diseases)
+    var all_time_increase_of_disease = undefined
+  }
+  else
+  {
+      var current_val = parseInt(previous_val) + parseInt(total_diseases)
+      var difference_val = parseInt(current_val) - parseInt(previous_val)
+
+      var all_time_increase_of_disease = (difference_val / previous_val) * 100;
+      all_time_increase_of_disease = Number(all_time_increase_of_disease.toFixed(1))
+  }
+
+  var percentage = (total_diseases / total_hp_count) * 100;
+  percentage = parseFloat(percentage);
+  percentage = Number(percentage.toFixed(1))
+
+  if (isNaN(percentage)) {
+    percentage = 0;
+  }
+
   var new_output = {
       'disease_name': disease_name,
       'total_diseases': total_diseases,
       'all_time_total': all_time_total,
+      'current_val':current_val,
+      'previous_val':previous_val,
       'index': index
       }
+  
+  var datasets = { "barangay": disease_name, "healthCases": parseInt(total_diseases), "percent": parseFloat(percentage), "increase": parseFloat(all_time_increase_of_disease) }
+  dataPoints.push(datasets)     
 
   newObjectArr.push(new_output);
   });
 
-  const top_3_disease_object = {
-      'features': newObjectArr
-      };
+  const produced_clusters = dataPoints;
+  const v2_clustering = clusteing_v2(produced_clusters, 3);
+  
 
+  top_3_diseases_function(v2_clustering, newObjectArr)
 
+}
+//disease_cluster
+
+//top 3 diseases
+function top_3_diseases_function(cluster, diseaseElements)  
+{
+  var top_3_diseases_date_start = getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy
+  var top_3_diseases_date_end = getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy
+
+  const v2_clustering = cluster
+  const disease_elements = diseaseElements
+  var disease_percent_allocated
+  var total_cases_of_the_disease
+  var disease_increase_percent
+  var this_disease_name
+  var previous_disease_total
+  var current_total_diseases
 
   // initialization to display markers
-  for (var i = 0; i < top_3_disease_object.features.length; i++ ) 
+  for (var i = 0; i < 3; i++ ) 
   { 
-    const top_3_diseases_results = top_3_disease_object.features[i] 
+    const top_3_diseases_results = disease_elements[i]
+    var top_3_disease_name_title = top_3_diseases_results.disease_name;
 
-    var percentage = (top_3_diseases_results.total_diseases / total_hp_count) * 100;
-    var progress_color;
+    v2_clustering.clusters.forEach((cluster, index) => {
+    cluster.forEach((dataPoint) => {
+    const clusterHealthCases = dataPoint.barangay;
+    if (clusterHealthCases === top_3_disease_name_title) {
+    if(parseInt(top_3_diseases_results.total_diseases) > 0)
+    {
+        if(index == 0)
+          {
+            progress_color = "bg-c-green"                        
 
-    top_3_disease_name_title = top_3_diseases_results.disease_name;
+          }
+          else if(index == 1)
+          {
+            progress_color = "bg-c-yellow"  
 
-    var disease_array = top_3_disease_name_title.split(', ');
+          }
+          else
+          {
+           progress_color = "bg-c-orange"  
+          }
 
-    var all_time_total_percentage = (top_3_diseases_results.total_diseases / top_3_diseases_results.all_time_total) * 100;
+          disease_percent_allocated = dataPoint.percent
+          total_cases_of_the_disease = dataPoint.healthCases
+          disease_increase_percent = dataPoint.increase
+          this_disease_name = top_3_disease_name_title
+          previous_disease_total = top_3_diseases_results.previous_val
+          current_total_diseases = top_3_diseases_results.current_val
+    }
+    }
+    });
+    });
+
+    var cluser_from_to = top_3_diseases_date_start + " to " + top_3_diseases_date_end
+    var totals_of_the_city = total_hp_count;
+    var total_of_cases_case = "cases"
+    var toatal_of_cases_were = "were"
+    var added_rec_case = "cases"
+    var were_of_totals = "were"
+    var prev_rec_case = "cases"
+    var total_of_cases_case = "cases"
+    var total_cases_individuals = "individuals" 
+
+    if(parseInt(total_cases_of_the_disease) <= 1)
+    {
+      added_rec_case = "case"
+      were_of_totals = "was"
+      total_cases_individuals = "individual"
+    }
+    if(parseInt(previous_disease_total) <= 1)
+    {
+      prev_rec_case = "case"
+    }
+    if(parseInt(totals_of_the_city) <= 1)
+    {
+      total_of_cases_case = "case"
+      toatal_of_cases_were = "was"
+    }
     
-    // stored in a variable called "disease_array"
-    var disease_string = disease_array.join(', ');
-
-    // To add "and" between the last two elements in the array
-    disease_string = disease_string.replace(/,([^,]*)$/, ', and$1');
-
-    top_3_total_disease_title = parseInt(percentage);
-
-    if(parseInt(top_3_diseases_results.total_diseases) <= 10)
-    {
-      progress_color = 'bg-c-green';
-    }
-    else if (parseInt(top_3_diseases_results.total_diseases) <= 40)
-    {
-      progress_color = 'bg-c-yellow';
-    }
-    else if (parseInt(top_3_diseases_results.total_diseases) <= 70)
-    {
-      progress_color = 'bg-c-orange';
-    }
-    else
-    {
-      progress_color = 'bg-c-pink';
+    var increase_label = disease_increase_percent.toLocaleString('en-US')+"%"
+    var increase_label_for_tooltip = "has increased by "+increase_label.toLocaleString('en-US')+"% compared to the previous record of "+previous_disease_total.toLocaleString('en-US')+" total health "+prev_rec_case+"."
+    var difference_value_label_for_tooltip = ", with a difference value of "+total_cases_of_the_disease.toLocaleString('en-US')+" health "+added_rec_case+""
+    if (isNaN(disease_increase_percent)) {
+      increase_label = "Significant"
+      increase_label_for_tooltip = "has surged significantly compared to the previous record of "+previous_disease_total.toLocaleString('en-US')+" health "+prev_rec_case+"."
+      difference_value_label_for_tooltip = " total health "+added_rec_case
     }
 
     $("#top_three_diseases").append('<tr class=" align-middle "  >'+
-    '<td style="min-width:150px;" >'+top_3_diseases_results.disease_name+'</td>'+
-    '<td style="min-width:100px;"  class="text-center shortCut_btn" id="top_3_disease_progress'+i+'"><div  >'+parseInt(top_3_total_disease_title).toLocaleString('en-US')+'%</div></td>'+
-    '<td style="min-width:90px;"  class="text-center shortCut_btn" id="top_3_disease_infect'+i+'"><div class="'+progress_color+' rounded-3 text-light text-center" >'+parseInt(top_3_diseases_results.total_diseases).toLocaleString('en-US')+' Individuals</div></td>'+
-    '<td style="min-width:90px;"  class="text-end shortCut_btn" id="top_3_disease_increase'+i+'">'+parseInt(all_time_total_percentage).toLocaleString('en-US')+'% </td></tr>');
+    '<td style="min-width:150px;" >'+this_disease_name+'</td>'+
+    '<td style="min-width:100px;"  class="text-center shortCut_btn" id="top_3_disease_progress'+i+'"><div  >'+disease_percent_allocated.toLocaleString('en-US')+'%</div></td>'+
+    '<td style="min-width:90px;"  class="text-center shortCut_btn" id="top_3_disease_infect'+i+'"><div class="'+progress_color.toLocaleString('en-US')+' rounded-3 text-light text-center" >'+total_cases_of_the_disease+' Individuals</div></td>'+
+    '<td style="min-width:90px;"  class="text-end shortCut_btn" id="top_3_disease_increase'+i+'">'+increase_label+' </td></tr>');
 
     var current_year_tooltip = $("#top_3_disease_progress"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("From "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+", "+parseInt(top_3_total_disease_title).toLocaleString('en-US')+"% of health cases in Oroquieta City were caused by "+disease_string+""); // Updates Opentips content
+    myOpentip.setContent("From "+cluser_from_to+", "+disease_percent_allocated.toLocaleString('en-US')+"% of "+totals_of_the_city+" total  recorded health "+total_of_cases_case+" in Oroquieta City "+toatal_of_cases_were+" caused by "+this_disease_name+""); // Updates Opentips content
 
     var current_year_tooltip = $("#top_3_disease_infect"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("A total of "+parseInt(top_3_diseases_results.total_diseases).toLocaleString('en-US')+" individuals in Oroquieta City were infected with "+disease_string+" from "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+""); // Updates Opentips content
+    myOpentip.setContent("A total of "+total_cases_of_the_disease.toLocaleString('en-US')+" "+total_cases_individuals+" in Oroquieta City "+were_of_totals+" infected with "+this_disease_name+" from "+cluser_from_to+""); // Updates Opentips content
 
     var current_year_tooltip = $("#top_3_disease_increase"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("From "+top_3_diseases_date_start+" to "+top_3_diseases_date_end+", the number of health cases caused by "+disease_string+" in Oroquieta City, increased by "+parseInt(all_time_total_percentage).toLocaleString('en-US')+"%"); // Updates Opentips content
+    myOpentip.setContent("<div class= 'ps-1 pe-2'>From "+cluser_from_to+", the number of  health cases caused by "+this_disease_name+", in Oroquieta City, "+increase_label_for_tooltip+" The current count stands at "+current_total_diseases.toLocaleString('en-US')+difference_value_label_for_tooltip+".</div>"); // Updates Opentips content
+
+    
   }
 
 
@@ -480,6 +1087,7 @@ function top_3_diseases_function()
 //total hp count
 function total_hp_count_function()
 {
+  var total_hp_count;
   $.ajaxSetup({async:false});
   $.getJSON('functions/display-functions/get_top_3.php', 
   {
@@ -490,120 +1098,123 @@ function total_hp_count_function()
   function (data, textStatus, jqXHR) 
   {
     total_hp_count = data;
-    
   });
 
+  return total_hp_count
 }
 //total hp count end
 
 //top 3 barangays
-function top_3_barangays_functions()
+function top_3_barangays_functions(cluster, barangayElements)
 {
-  var top_3_barangays;
   var top_3_barangays_date_start = getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy
   var top_3_barangays_date_end = getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy
+  const v2_clustering = cluster;
+  const brgy_elements = barangayElements
 
-  $.ajaxSetup({async:false});
-  $.getJSON('functions/display-functions/get_top_3.php', 
-  {
-    top_3_barangays:'set',
-    top_from:current_year_from,
-    top_to:current_year_to
-  },     
-  function (data, textStatus, jqXHR) 
-  {
-    top_3_barangays = data;
-    
-  });
-
-  var textArr = top_3_barangays;
-  var newObjectArr = [];
-
-  $.each(textArr,function(index,top_3_barangays){
-  
-  barangay_name = removeLastWord(top_3_barangays)
-  barangay_name = removeLastWord(barangay_name)
-  barangay_name = barangay_name.split('_').join(' ') 
-
-  total_barangays = removeFirstWord(top_3_barangays)
-  total_barangays = removeLastWord(total_barangays)
-
-  all_time_barangay_total =  removeFirstWord(top_3_barangays)
-  all_time_barangay_total =  removeFirstWord(all_time_barangay_total)
-
-  var new_output = {
-      'barangay_name': barangay_name,
-      'total_barangays': total_barangays,
-      'all_time_barangay_total':all_time_barangay_total,
-      'index': index
-      }
-
-  newObjectArr.push(new_output);
-  });
-
-  const top_3_barangays_object = {
-      'features': newObjectArr
-      };
+  //"'type': 'Feature',
+  //'geometry': [long, lat],
+  //'title': barangay,
+  //'description': hpTotal,
+  //'allTime_hpTotal':allTime_hpTotal,
+  // 'prev_rec': previous_val,
+  // 'current_val':current_val,
+  // 'index': index"
 
   // initialization to display markers
-  for (var i = 0; i < top_3_barangays_object.features.length; i++ ) 
+  for (var i = 0; i < 3; i++ ) 
   { 
-    const top_3_barangays_results = top_3_barangays_object.features[i] 
-
-    var percentage = (top_3_barangays_results.total_barangays / total_hp_count) * 100;
     var progress_color;
-    top_3_barangay_name_title = top_3_barangays_results.barangay_name;
+    const top_3_barangays_results = brgy_elements[i]
+    var top_3_barangay_name_title = top_3_barangays_results.title;
 
-    var brgy_array = top_3_barangay_name_title.split(', ');
+    var total_percentagae_allocated
+    var percent_increases 
+    var current_total_in_brgy
+    var previous_total_in_brgy
     
-    // stored in a variable called "brgy_array"
-    var brgy_string = brgy_array.join(', ');
+    v2_clustering.clusters.forEach((cluster, index) => {
+    cluster.forEach((dataPoint) => {
+    const clusterHealthCases = dataPoint.barangay;
+    if (clusterHealthCases === top_3_barangay_name_title) {
 
-    // To add "and" between the last two elements in the array
-    brgy_string = brgy_string.replace(/,([^,]*)$/, ', and$1');
-
-    var all_time_total_percentage = (top_3_barangays_results.total_barangays / top_3_barangays_results.all_time_barangay_total) * 100;
-
-    top_3_total_barangay_title = parseInt(percentage);
-
-
-    if(parseInt(top_3_barangays_results.total_barangays) <= 10)
+    if(parseInt(top_3_barangays_results.description) > 0)
     {
-      progress_color = 'bg-c-green';
+        if(index == 0)
+          {
+            progress_color = 'bg-c-green';
+          }
+          else if(index == 1)
+          {
+            progress_color = 'bg-c-yellow';
+          }
+          else
+          {
+            progress_color = 'bg-c-orange';
+          }
+
+          total_percentagae_allocated = dataPoint.percent
+          percent_increases = dataPoint.increase
+          current_total_in_brgy = top_3_barangays_results.current_val
+          previous_total_in_brgy = top_3_barangays_results.prev_rec
     }
-    else if (parseInt(top_3_barangays_results.total_barangays) <= 40)
-    {
-      progress_color = 'bg-c-yellow';
+
     }
-    else if (parseInt(top_3_barangays_results.total_barangays) <= 70)
+
+    });
+    });
+
+    var cluser_from_to = top_3_barangays_date_start + " to " + top_3_barangays_date_end
+    var totals_of_the_city = total_hp_count;
+    var totals_in_barangays = top_3_barangays_results.description;
+    var added_rec_case = "cases"
+    var were_of_totals = "were"
+    var prev_rec_case = "cases"
+    var total_of_cases_case = "cases"
+
+    if(parseInt(totals_in_barangays) <= 1)
     {
-      progress_color = 'bg-c-orange';
+      added_rec_case = "case"
+      were_of_totals = "was"
     }
-    else
+    if(parseInt(previous_total_in_brgy) <= 1)
     {
-      progress_color = 'bg-c-pink';
+      prev_rec_case = "case"
+    }
+    if(parseInt(totals_of_the_city) <= 1)
+    {
+      total_of_cases_case = "case"
+    }
+
+    var increase_label_for_tooltip = "has increased by "+percent_increases.toLocaleString('en-US')+"% compared to the previous record of "+previous_total_in_brgy.toLocaleString('en-US')+" total health "+prev_rec_case+"."
+    var difference_value_label_for_tooltip = ", with a difference value of "+totals_in_barangays.toLocaleString('en-US')+" health "+added_rec_case+""
+    var increase_label = percent_increases.toLocaleString('en-US')+"%"
+    if (isNaN(percent_increases)) {
+      increase_label = "Significant"
+      increase_label_for_tooltip = "has surged significantly compared to the previous record of "+previous_total_in_brgy.toLocaleString('en-US')+" health "+prev_rec_case+"."
+      difference_value_label_for_tooltip = " total health "+added_rec_case
     }
 
     $("#top_three_barangays").append('<tr class=" align-middle "  >'+
-    '<td style="min-width:150px;" >'+top_3_barangays_results.barangay_name+'</td>'+
-    '<td style="min-width:100px;"  class="text-center shortCut_btn" id="top_3_barangay_progress'+i+'"><div  >'+parseInt(top_3_total_barangay_title).toLocaleString('en-US')+'%</div></td>'+
-    '<td style="min-width:90px;"  class="text-center shortCut_btn" id="top_3_barangay_infect'+i+'"><div class="'+progress_color+' rounded-3 text-light text-center" >'+parseInt(top_3_barangays_results.total_barangays).toLocaleString('en-US')+' Health Cases</div></td>'+
-    '<td style="min-width:90px;"  class="text-end shortCut_btn" id="top_3_barangay_increase'+i+'">'+parseInt(all_time_total_percentage).toLocaleString('en-US')+'% </td></tr>');
+    '<td style="min-width:150px;" >'+top_3_barangay_name_title+'</td>'+
+    '<td style="min-width:100px;"  class="text-center shortCut_btn" id="top_3_barangay_progress'+i+'"><div  >'+total_percentagae_allocated+'%</div></td>'+
+    '<td style="min-width:90px;"  class="text-center shortCut_btn" id="top_3_barangay_infect'+i+'"><div class="'+progress_color+' rounded-3 text-light text-center" >'+totals_in_barangays+' Health Cases</div></td>'+
+    '<td style="min-width:90px;"  class="text-end shortCut_btn" id="top_3_barangay_increase'+i+'">'+increase_label+' </td></tr>');
     
     var current_year_tooltip = $("#top_3_barangay_progress"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("From "+top_3_barangays_date_start+" to "+top_3_barangays_date_end+", "+parseInt(top_3_total_barangay_title).toLocaleString('en-US')+"% of health cases in Oroquieta City were reported in barangay "+brgy_string+""); // Updates Opentips content
+    myOpentip.setContent('<div class="ps-1 pe-2">From '+cluser_from_to+', '+total_percentagae_allocated.toLocaleString('en-US')+'% of '+totals_of_the_city.toLocaleString('en-US')+' total recorded health '+total_of_cases_case+' in Oroquieta City were reported in barangay '+top_3_barangay_name_title+'</div>');
 
     var current_year_tooltip = $("#top_3_barangay_infect"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("A total of "+parseInt(top_3_barangays_results.total_barangays).toLocaleString('en-US')+" health cases in Oroquieta City were reported in barangay "+brgy_string+" from "+top_3_barangays_date_start+" to "+top_3_barangays_date_end+""); // Updates Opentips content
+    myOpentip.setContent("<div class= 'ps-1 pe-2'>A total of "+totals_in_barangays.toLocaleString('en-US')+" health "+added_rec_case+" in Oroquieta City "+were_of_totals+" reported in barangay "+top_3_barangay_name_title+" from "+cluser_from_to+"</div>"); // Updates Opentips content
 
     var current_year_tooltip = $("#top_3_barangay_increase"+i+"")
     var myOpentip = new Opentip(current_year_tooltip, { showOn:"mouseover", hideOn: null, tipJoint: "top", target:current_year_tooltip, delay:0.01, 
     borderRadius:20,borderColor:'#fff',stemLength:10,stemBase:20,extends:"infor_details",hideDelay:0.01});
-    myOpentip.setContent("From "+top_3_barangays_date_start+" to "+top_3_barangays_date_end+", the number of health cases in barangay "+brgy_string+", Oroquieta City, increased by "+parseInt(all_time_total_percentage).toLocaleString('en-US')+"%"); // Updates Opentips content
+    myOpentip.setContent("<div class= 'ps-1 pe-2'>From "+cluser_from_to+", the number of  health cases in barangay "+top_3_barangay_name_title+", Oroquieta City, "+increase_label_for_tooltip+" The current count stands at "+current_total_in_brgy.toLocaleString('en-US')+difference_value_label_for_tooltip+".</div>"); // Updates Opentips content
   }
 }
 //top 3 barangays end
@@ -633,7 +1244,10 @@ function shurctuMenu()
   timespan_statistic_shorcut.setContent("View Graph Chart"); // Updates Opentips content
   $("#timespan_statistic_shorcut").click(function()
   {
-    location.href = 'time-span.php';
+    var starting_date = current_year_from
+    var end_date = current_year_to
+    //pass this variables to next page when clicked
+    location.href = 'manage-hp.php?current_month=' + encodeURIComponent("current month") + "&starting_date=" + encodeURIComponent(starting_date) + "&end_date=" + encodeURIComponent(end_date);
   })
 
   var current_year_tooltip = $("#view_map_btn")
@@ -658,7 +1272,7 @@ function shurctuMenu()
 //shortcuts end
 
 //new cases
-function newCases()
+function newCases(data_points)
 {
   
   $(".today").text(getMonthName(current_year_mm) + ' ' + current_year_dd + ", "+ current_year_yyyy)
@@ -675,26 +1289,28 @@ function newCases()
   {
     newCases_variable = data;
   });
-
   var color_changer
 
-  if (parseInt(newCases_variable) <= 10)
-  {
-    color_changer = 'bg-c-green'
-  }
-  else if(parseInt(newCases_variable) <= 40)
-  {
-    color_changer = 'bg-c-yellow'
-  }
-  else if(parseInt(newCases_variable) <= 70)
-  {
-    color_changer = 'bg-c-orange'
-  }
-  else
-  {
-    color_changer = 'bg-c-pink'
-
-  }
+  var data_points_for_total_cases = data_points.clusters
+  $.each(data_points_for_total_cases, function(index, subArray) {
+  $.each(subArray, function(subIndex, value) {
+    if(value === parseInt(newCases_variable))
+    {
+        if(index === 0)
+        {
+        color_changer = 'bg-c-green'; 
+        }
+        else if(index === 1)
+        {
+        color_changer = 'bg-c-yellow';  
+        }
+        else if(index === 2) 
+        {
+        color_changer = 'bg-c-orange'; 
+        }
+    }
+  });
+  });
 
   $("#new_health_cases").removeClass('bg-c-green')
   $("#new_health_cases").addClass(color_changer)
@@ -782,46 +1398,34 @@ function newCases()
 }
 //new cases end
 
-function totalCases()
+function totalCases(data_points)
 {
   $(".oneMonthFrom").text(getMonthName(one_month_mm) + ' ' + one_month_dd+', ' + one_month_yyy)
   $(".oneMonthTo").text(getMonthName(current_year_mm) + ' ' + current_year_dd+', ' + current_year_yyyy)
-
-
-  var totalCases_variable
-
-  $.ajaxSetup({async:false});
-  $.getJSON('functions/display-functions/get_top_3.php', 
-  {
-    totalCases:'set',
-    top_from:current_year_from,
-    top_to:current_year_to
-  },     
-  function (data, textStatus, jqXHR) 
-  {
-    totalCases_variable = data;
-  });
-
-  
+  var totalCases_variable = total_hp_count
   var color_changer
 
-  if (parseInt(totalCases_variable) <= 10)
-  {
-    color_changer = 'bg-c-green'
-  }
-  else if(parseInt(totalCases_variable) <= 40)
-  {
-    color_changer = 'bg-c-yellow'
-  }
-  else if(parseInt(totalCases_variable) <= 70)
-  {
-    color_changer = 'bg-c-orange'
-  }
-  else
-  {
-    color_changer = 'bg-c-pink'
+  var data_points_for_total_cases = data_points.clusters
+  $.each(data_points_for_total_cases, function(index, subArray) {
+  $.each(subArray, function(subIndex, value) {
+      if(value === parseInt(totalCases_variable))
+      {
+          if(index === 0)
+          {
+          color_changer = 'bg-c-green'
+          }
+          else if(index === 1)
+          {
+          color_changer = 'bg-c-yellow'
+          }
+          else if(index === 2)
+          {
+          color_changer = 'bg-c-orange'
+          }
+      }
+  });
+  });
 
-  }
   $("#total_health_cases").removeClass('bg-c-green')
   $("#total_health_cases").addClass(color_changer)
 
@@ -880,7 +1484,7 @@ function totalCases()
       details_for_totalCases = data;
     });
 
-    console.log(details_for_totalCases)
+    //console.log(details_for_totalCases)
 
     $("#report_lbl").text("List of Reported Health Cases")
     $(".dashboard_reports_modal").removeClass("bg-c-pink")
@@ -1079,8 +1683,7 @@ function brgy_chart()
       if(elements.length > 0) 
       {
         var current_index = elements[0].index;
-        Cookies.set('index', current_index)
-        location.href = 'graphical-statistic.php';
+        location.href = 'graphical-statistic.php?index='+ encodeURIComponent(current_index);
       }
     },
     onHover: (e, elements) => {
@@ -1299,35 +1902,28 @@ function  disease_chart()
   const data_sets_disease = [{
     label: "",
     data: yValues_disease,
-    backgroundColor: "#67c2ff00",
-    pointBackgroundColor: disease_chart_color,
-    pointHoverBackgroundColor: disease_chart_color,
-    borderColor: disease_chart_color,
-    borderWidth: 0,
+    backgroundColor: myColors,
+    borderColor: "#80d5ffff",
+    borderWidth: 1,
     borderRadius: 8,
-    pointRadius: disease_chart_points,
-    hoverRadius:disease_chart_points,
     borderSkipped: false,
     barPercentage: 0.8,
-    categoryPercentage:0.8,
-    tension: 0.3,
-    fill: true,
-   // stepped: true,
+    categoryPercentage: 0.8,
+    //poinStyle: 'circle'
   },]
 
-
+  
   //initialize chart
   const ctx = $('#hpChart_disease');
   diseaseChart = new Chart(ctx, {
-  type: 'line',
+  type: 'bar',
   options: {
     onClick: (e, elements) => {
 
       if(elements.length > 0) 
       {
         var current_index = elements[0].index;        
-        Cookies.set('index', current_index)
-        location.href = 'graphical-statistic-disease.php';
+        location.href = 'graphical-statistic-disease.php?index=' + encodeURIComponent(current_index);
 
       }
     },
@@ -1445,13 +2041,13 @@ $("#hpChart").addClass("rounded-4 p-3 border-0 shadow-sm bg-light bg-opacity-50"
  
      query_click:query_click,
      
-     disease_type:'default',
-     barangay_name:'default',
+     disease_type:'',
+     barangay_name:'',
      date_range_from:date_range_from,
      date_range_to:date_range_to,
-     gender:'default',
-     max_age:'default',
-     min_age:'default',
+     gender:'',
+     max_age:'NaN',
+     min_age:'NaN',
  
      current_year_from:current_year_from,
      current_year_to:current_year_to
@@ -1652,13 +2248,21 @@ $("#hpChart").addClass("rounded-4 p-3 border-0 shadow-sm bg-light bg-opacity-50"
    const ctx = $('#hpChart_time');
    myChart = new Chart(ctx, {
    options: {
+       interaction: {
+         intersect: false,
+         mode: 'index',
+       },
     onClick: (e, elements) => {
 
       if(elements.length > 0) 
       {
         var current_index = elements[0].index;
-        Cookies.set('index', current_index)
-        location.href = 'time-span.php';
+        var starting_date =  current_year_from
+        var end_date = current_year_to
+        var is_clicked = 'unclicked'
+
+        //pass this variables to next page when clicked
+        location.href = 'manage-hp.php?index=' + encodeURIComponent(current_index) + "&starting_date=" + encodeURIComponent(starting_date) + "&end_date=" + encodeURIComponent(end_date) + "&is_clicked=" + encodeURIComponent(is_clicked);
       }
     },
     onHover: (e, elements) => {
@@ -1760,6 +2364,7 @@ $("#hpChart").addClass("rounded-4 p-3 border-0 shadow-sm bg-light bg-opacity-50"
       },
        datasets: data_sets
    },
+
  });
  
  }
